@@ -1,22 +1,28 @@
 # Tajweed Modular Assessment
 
-Repository scaffold for a modular automatic Tajweed assessment system.
+Minimal but runnable scaffold for a modular Tajweed assessment system.
 
-## Design goals
-- Separate content verification from rule analysis.
-- Keep rule analysis modular by acoustic category.
-- Start with a BiLSTM baseline + CTC alignment + rule classification.
-- Preserve an upgrade path to wav2vec/HuBERT and additional specialist modules.
-- Produce a structured JSON diagnosis before generating learner-facing feedback.
+What is implemented now:
+- a working **MFCC + BiLSTM** duration-rule baseline
+- dual heads: **phoneme CTC** + **rule classification**
+- a simple **content-first aggregation** layer
+- lightweight transition and burst specialist modules
+- toy datasets so the repo runs immediately
+- tests for dataset, alignment, aggregation, and model forwards
 
-## Current intended implementation order
-1. Data manifests + Coloured Qur'an JSON parsing
-2. MFCC pipeline + BiLSTM duration baseline
-3. Shared encoder with dual heads (CTC + rule classification)
-4. Content verifier and alignment utilities
-5. Diagnosis aggregation
-6. Transition and burst specialists
-7. Feedback generation
+What is still a scaffold:
+- real Arabic wav2vec content verification
+- true CTC forced alignment / Viterbi
+- real Quran recitation manifests and JSON labels
+- production-grade feature routing
 
-## Quick tree
-See `docs/repo_tree.txt`.
+Quick start:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python scripts/train_duration.py
+python scripts/run_inference.py
+pytest -q
+```

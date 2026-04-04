@@ -1,10 +1,8 @@
-name: duration_bilstm
-input_features: mfcc_39
-hidden_dim: 256
-num_layers: 2
+input_dim: 39
+hidden_dim: 32
+num_layers: 1
 dropout: 0.1
-ctc_weight: 1.0
-rule_weight: 0.7
-rules:
-  - madd
-  - ghunnah
+num_phonemes: 11
+num_rules: 6
+lambda_ctc: 1.0
+lambda_rule: 0.7

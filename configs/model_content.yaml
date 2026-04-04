@@ -1,4 +1,4 @@
-name: content_wav2vec
-backbone: facebook/wav2vec2-large-xlsr-53
-head: ctc
-language: arabic
+ssl_model_name: WAV2VEC2_BASE
+hidden_dim: 64
+dropout: 0.1
+num_phonemes: 11

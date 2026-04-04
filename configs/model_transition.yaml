@@ -1,8 +1,6 @@
-name: transition_hybrid
-streams:
-  - mfcc
-  - ssl
-fusion: concat
-rules:
-  - idgham
-  - ikhfa
+mfcc_dim: 39
+ssl_dim: 64
+hidden_dim: 64
+num_layers: 1
+dropout: 0.1
+num_rules: 3

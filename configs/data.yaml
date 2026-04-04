@@ -1,7 +1,4 @@
 sample_rate: 16000
 n_mfcc: 13
-use_deltas: true
-hop_length: 160
-win_length: 400
-manifest_dir: data/manifests
-json_annotations: data/external/coloured_quran.json
+num_workers: 0
+use_toy_data: true
