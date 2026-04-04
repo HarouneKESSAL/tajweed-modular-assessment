@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+data/raw/
+data/interim/
+data/processed/
+outputs/
+checkpoints/
+wandb/
+.DS_Store

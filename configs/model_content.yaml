@@ -1,0 +1,4 @@
+name: content_wav2vec
+backbone: facebook/wav2vec2-large-xlsr-53
+head: ctc
+language: arabic

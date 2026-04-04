@@ -1,0 +1,4 @@
+name: burst_cnn
+input: spectrogram_or_mfcc
+rules:
+  - qalqalah

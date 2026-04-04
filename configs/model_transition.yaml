@@ -1,0 +1,8 @@
+name: transition_hybrid
+streams:
+  - mfcc
+  - ssl
+fusion: concat
+rules:
+  - idgham
+  - ikhfa

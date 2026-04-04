@@ -1,0 +1,81 @@
+tajweed-modular-assessment/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── configs/
+│   ├── data.yaml
+│   ├── model_burst.yaml
+│   ├── model_content.yaml
+│   ├── model_duration.yaml
+│   ├── model_transition.yaml
+│   └── train.yaml
+├── data/
+│   ├── raw/                # audio files
+│   ├── interim/            # extracted intermediate features / alignments
+│   ├── processed/          # train/val/test tensors or cached shards
+│   ├── manifests/          # csv/jsonl manifests with paths + labels
+│   └── external/           # coloured qur'an json and external resources
+├── docs/
+│   ├── repo_tree.txt
+│   ├── architecture_notes.md
+│   └── experiment_plan.md
+├── notebooks/
+│   └── 01_data_sanity.ipynb
+├── scripts/
+│   ├── build_manifests.py
+│   ├── extract_features.py
+│   ├── train_duration.py
+│   ├── train_content.py
+│   ├── train_transition.py
+│   ├── train_burst.py
+│   ├── run_inference.py
+│   └── evaluate.py
+├── src/
+│   └── tajweed_assessment/
+│       ├── __init__.py
+│       ├── settings.py
+│       ├── data/
+│       │   ├── dataset.py
+│       │   ├── audio.py
+│       │   ├── manifests.py
+│       │   ├── labels.py
+│       │   └── collate.py
+│       ├── features/
+│       │   ├── mfcc.py
+│       │   ├── ssl.py
+│       │   └── routing.py
+│       ├── models/
+│       │   ├── common/
+│       │   │   ├── bilstm_encoder.py
+│       │   │   ├── ctc_head.py
+│       │   │   ├── rule_head.py
+│       │   │   ├── losses.py
+│       │   │   └── decoding.py
+│       │   ├── content/
+│       │   │   ├── wav2vec_ctc.py
+│       │   │   └── aligner.py
+│       │   ├── duration/
+│       │   │   └── madd_ghunnah_module.py
+│       │   ├── transition/
+│       │   │   └── idgham_ikhfa_module.py
+│       │   ├── burst/
+│       │   │   └── qalqalah_cnn.py
+│       │   └── fusion/
+│       │       ├── aggregator.py
+│       │       ├── schemas.py
+│       │       └── feedback.py
+│       ├── training/
+│       │   ├── engine.py
+│       │   ├── metrics.py
+│       │   └── callbacks.py
+│       ├── inference/
+│       │   └── pipeline.py
+│       └── utils/
+│           ├── io.py
+│           ├── logging.py
+│           └── seed.py
+└── tests/
+    ├── test_dataset.py
+    ├── test_alignment.py
+    ├── test_aggregator.py
+    └── test_models.py
