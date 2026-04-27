@@ -1,0 +1,348 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_duration_alignment_corpus_torchaudio_strict.jsonl",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_module.pt",
+  "samples_analyzed": 973,
+  "focus_rules": [
+    "ghunnah",
+    "madd"
+  ],
+  "total_focus_positions": 1646,
+  "disagreements": 549,
+  "disagreement_rate": 0.3335358444714459,
+  "localized_supports_gold": 1600,
+  "localized_supports_gold_rate": 0.9720534629404617,
+  "localized_supports_sequence": 1607,
+  "localized_supports_sequence_rate": 0.9763061968408262,
+  "sequence_correct_localized_wrong": 309,
+  "sequence_wrong_localized_correct": 235,
+  "disagreement_pairs": {
+    "madd->ghunnah": 514,
+    "ghunnah->madd": 16,
+    "madd->none": 9,
+    "ghunnah->none": 10
+  },
+  "gold_conditioned_disagreements": {
+    "ghunnah|seq=madd|loc=ghunnah": 224,
+    "madd|seq=madd|loc=ghunnah": 290,
+    "madd|seq=ghunnah|loc=madd": 11,
+    "madd|seq=madd|loc=none": 6,
+    "ghunnah|seq=ghunnah|loc=none": 8,
+    "ghunnah|seq=madd|loc=none": 3,
+    "madd|seq=ghunnah|loc=none": 2,
+    "ghunnah|seq=ghunnah|loc=madd": 5
+  },
+  "top_disagreements": [
+    {
+      "sample_id": "retasy_train_005361",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "position": 1,
+      "char": "ا",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9937498569488525,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.8754770755767822,
+        "madd": 0.46578168869018555
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_000769",
+      "surah_name": "Al-Faatihah",
+      "verse_key": "verse_3",
+      "text": "الرحمن الرحيم",
+      "position": 5,
+      "char": "ن",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9915299415588379,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9374189972877502,
+        "madd": 0.6384420990943909
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_004884",
+      "surah_name": "Al-Faatihah",
+      "verse_key": "verse_3",
+      "text": "الرحمن الرحيم",
+      "position": 5,
+      "char": "ن",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9915299415588379,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9374189972877502,
+        "madd": 0.6384420990943909
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_002714",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "position": 17,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9897586703300476,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9155588150024414,
+        "madd": 0.7590005993843079
+      },
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_002920",
+      "surah_name": "Al-Faatihah",
+      "verse_key": "verse_3",
+      "text": "الرحمن الرحيم",
+      "position": 5,
+      "char": "ن",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9888234734535217,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9349428415298462,
+        "madd": 0.7548370957374573
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_000429",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "position": 13,
+      "char": "ا",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9887117743492126,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9729045629501343,
+        "madd": 0.655316174030304
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_006004",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "position": 13,
+      "char": "ا",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9877247214317322,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9468905925750732,
+        "madd": 0.7291986346244812
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_003158",
+      "surah_name": "Al-Faatihah",
+      "verse_key": "verse_5",
+      "text": "اياك نعبد واياك نستعين",
+      "position": 20,
+      "char": "ي",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "none",
+      "localized_predicted_labels": [],
+      "sequence_confidence": 0.9876384139060974,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.3546110689640045,
+        "madd": 0.345836341381073
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_002513",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "position": 17,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9874026775360107,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.997928261756897,
+        "madd": 0.929209291934967
+      },
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_006656",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "position": 17,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9873615503311157,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9491325616836548,
+        "madd": 0.8488249182701111
+      },
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000902",
+      "surah_name": "Al-Faatihah",
+      "verse_key": "verse_5",
+      "text": "اياك نعبد واياك نستعين",
+      "position": 20,
+      "char": "ي",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9870197176933289,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9617958068847656,
+        "madd": 0.6823157072067261
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_002714",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "position": 18,
+      "char": "ا",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9856711626052856,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9155588150024414,
+        "madd": 0.7590005993843079
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_003255",
+      "surah_name": "Al-Faatihah",
+      "verse_key": "verse_3",
+      "text": "الرحمن الرحيم",
+      "position": 12,
+      "char": "م",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9853331446647644,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9669129252433777,
+        "madd": 0.8564029932022095
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_000985",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "position": 13,
+      "char": "ا",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9827991724014282,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.9496946334838867,
+        "madd": 0.7234368920326233
+      },
+      "detail": ""
+    },
+    {
+      "sample_id": "retasy_train_004242",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "position": 15,
+      "char": "و",
+      "expected_rule": "madd",
+      "sequence_predicted_rule": "madd",
+      "localized_top_rule": "ghunnah",
+      "localized_predicted_labels": [
+        "ghunnah",
+        "madd"
+      ],
+      "sequence_confidence": 0.9825300574302673,
+      "localized_clip_probabilities": {
+        "ghunnah": 0.8672352433204651,
+        "madd": 0.6016016006469727
+      },
+      "detail": ""
+    }
+  ]
+}

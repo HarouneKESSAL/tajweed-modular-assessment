@@ -12,6 +12,9 @@ class ContentVerificationModule(nn.Module):
         self.encoder = BiLSTMEncoder(input_dim=feature_dim, hidden_dim=hidden_dim, num_layers=1, dropout=0.1)
         self.ctc_head = CTCHead(self.encoder.output_dim, num_phonemes)
 
+    def forward(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
+        return self.forward_features(x, lengths)
+
     def forward_features(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
         encoded = self.encoder(x, lengths)
         return self.ctc_head.log_probs(encoded)

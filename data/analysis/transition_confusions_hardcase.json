@@ -1,0 +1,201 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_transition_subset.jsonl",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\transition_module_hardcase.pt",
+  "samples_analyzed": 690,
+  "accuracy": 0.9014492753623189,
+  "confusion_matrix": {
+    "none": {
+      "none": 371,
+      "ikhfa": 28,
+      "idgham": 15
+    },
+    "ikhfa": {
+      "none": 18,
+      "ikhfa": 209,
+      "idgham": 0
+    },
+    "idgham": {
+      "none": 6,
+      "ikhfa": 1,
+      "idgham": 42
+    }
+  },
+  "confidence_buckets": {
+    "none->none": {
+      "0.6-0.8": 74,
+      "0.4-0.6": 18,
+      "0.8-1.0": 279
+    },
+    "ikhfa->ikhfa": {
+      "0.8-1.0": 186,
+      "0.4-0.6": 13,
+      "0.6-0.8": 10
+    },
+    "none->ikhfa": {
+      "0.6-0.8": 7,
+      "0.4-0.6": 13,
+      "0.8-1.0": 8
+    },
+    "idgham->idgham": {
+      "0.8-1.0": 28,
+      "0.6-0.8": 13,
+      "0.4-0.6": 1
+    },
+    "ikhfa->none": {
+      "0.6-0.8": 4,
+      "0.8-1.0": 11,
+      "0.4-0.6": 2,
+      "0.2-0.4": 1
+    },
+    "none->idgham": {
+      "0.8-1.0": 3,
+      "0.4-0.6": 8,
+      "0.6-0.8": 4
+    },
+    "idgham->none": {
+      "0.8-1.0": 2,
+      "0.4-0.6": 1,
+      "0.6-0.8": 3
+    },
+    "idgham->ikhfa": {
+      "0.4-0.6": 1
+    }
+  },
+  "top_mismatches": [
+    {
+      "sample_id": "retasy_train_006351",
+      "surah_name": "Al-Falaq",
+      "verse_key": "verse_2",
+      "text": "من شر ما خلق",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.999479353427887
+    },
+    {
+      "sample_id": "retasy_train_005788",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_1",
+      "text": "قل اعوذ برب الناس",
+      "expected_rule": "none",
+      "predicted_rule": "ikhfa",
+      "confidence": 0.9976734519004822
+    },
+    {
+      "sample_id": "retasy_train_005190",
+      "surah_name": "Al-Falaq",
+      "verse_key": "verse_3",
+      "text": "ومن شر غاسق اذا وقب",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9903272986412048
+    },
+    {
+      "sample_id": "retasy_train_005290",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "expected_rule": "none",
+      "predicted_rule": "ikhfa",
+      "confidence": 0.9880010485649109
+    },
+    {
+      "sample_id": "retasy_train_006451",
+      "surah_name": "Al-Falaq",
+      "verse_key": "verse_5",
+      "text": "ومن شر حاسد اذا حسد",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9858766794204712
+    },
+    {
+      "sample_id": "retasy_train_005422",
+      "surah_name": "Al-Falaq",
+      "verse_key": "verse_2",
+      "text": "من شر ما خلق",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9834995269775391
+    },
+    {
+      "sample_id": "retasy_train_001329",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_2",
+      "text": "ملك الناس",
+      "expected_rule": "none",
+      "predicted_rule": "ikhfa",
+      "confidence": 0.9818981289863586
+    },
+    {
+      "sample_id": "retasy_train_001162",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "expected_rule": "none",
+      "predicted_rule": "ikhfa",
+      "confidence": 0.9529199004173279
+    },
+    {
+      "sample_id": "retasy_train_006002",
+      "surah_name": "Al-Falaq",
+      "verse_key": "verse_2",
+      "text": "من شر ما خلق",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9517847299575806
+    },
+    {
+      "sample_id": "retasy_train_005998",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_2",
+      "text": "ملك الناس",
+      "expected_rule": "none",
+      "predicted_rule": "ikhfa",
+      "confidence": 0.9497094750404358
+    },
+    {
+      "sample_id": "retasy_train_004560",
+      "surah_name": "Al-Asr",
+      "verse_key": "verse_1",
+      "text": "والعصر",
+      "expected_rule": "none",
+      "predicted_rule": "idgham",
+      "confidence": 0.9406055212020874
+    },
+    {
+      "sample_id": "retasy_train_003282",
+      "surah_name": "Al-Falaq",
+      "verse_key": "verse_2",
+      "text": "من شر ما خلق",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9372947216033936
+    },
+    {
+      "sample_id": "retasy_train_006656",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9342249035835266
+    },
+    {
+      "sample_id": "retasy_train_006056",
+      "surah_name": "Al-Falaq",
+      "verse_key": "verse_3",
+      "text": "ومن شر غاسق اذا وقب",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9138758182525635
+    },
+    {
+      "sample_id": "retasy_train_000404",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "expected_rule": "ikhfa",
+      "predicted_rule": "none",
+      "confidence": 0.9130154848098755
+    }
+  ]
+}

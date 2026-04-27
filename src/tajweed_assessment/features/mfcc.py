@@ -1,16 +1,22 @@
 from pathlib import Path
 import torch
 from tajweed_assessment.data.audio import load_audio
+from tajweed_assessment.data.speed import SpeedNormalizationConfig
 
 try:
     import torchaudio
 except Exception:
     torchaudio = None
 
-def extract_mfcc_features(path: str | Path, sample_rate: int = 16000, n_mfcc: int = 13) -> torch.Tensor:
+def extract_mfcc_features(
+    path: str | Path,
+    sample_rate: int = 16000,
+    n_mfcc: int = 13,
+    speed_config: SpeedNormalizationConfig | None = None,
+) -> torch.Tensor:
     if torchaudio is None:
         raise ImportError("torchaudio is required for MFCC extraction")
-    waveform, sr = load_audio(path, sample_rate=sample_rate)
+    waveform, sr = load_audio(path, sample_rate=sample_rate, speed_config=speed_config)
     transform = torchaudio.transforms.MFCC(
         sample_rate=sr,
         n_mfcc=n_mfcc,

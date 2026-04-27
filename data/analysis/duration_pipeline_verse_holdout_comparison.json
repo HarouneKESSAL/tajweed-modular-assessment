@@ -1,0 +1,20 @@
+{
+  "gate": "verse_held_out_duration_pipeline",
+  "promote_learned_fusion": true,
+  "baseline": {
+    "samples": 387,
+    "accuracy": 0.954337899543379,
+    "ghunnah_accuracy": 0.7446808510638298,
+    "madd_accuracy": 0.979539641943734,
+    "clean_samples": 367,
+    "samples_with_errors": 20
+  },
+  "learned": {
+    "samples": 387,
+    "accuracy": 0.9726027397260274,
+    "ghunnah_accuracy": 0.8723404255319149,
+    "madd_accuracy": 0.9846547314578005,
+    "clean_samples": 375,
+    "samples_with_errors": 12
+  }
+}

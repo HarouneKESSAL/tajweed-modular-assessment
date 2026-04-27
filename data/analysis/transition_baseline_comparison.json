@@ -1,0 +1,96 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\alignment\\transition_time_projection_strict.jsonl",
+  "split": "val",
+  "whole_verse": {
+    "samples": 61,
+    "accuracy": 0.819672131147541,
+    "confusion_matrix": [
+      [
+        31,
+        6,
+        4
+      ],
+      [
+        0,
+        13,
+        0
+      ],
+      [
+        1,
+        0,
+        6
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 41,
+        "correct": 31,
+        "accuracy": 0.7560975609756098
+      },
+      "ikhfa": {
+        "total": 13,
+        "correct": 13,
+        "accuracy": 1.0
+      },
+      "idgham": {
+        "total": 7,
+        "correct": 6,
+        "accuracy": 0.8571428571428571
+      }
+    }
+  },
+  "localized": {
+    "samples": 61,
+    "accuracy": 0.819672131147541,
+    "confusion_matrix": [
+      [
+        34,
+        5,
+        2
+      ],
+      [
+        0,
+        13,
+        0
+      ],
+      [
+        4,
+        0,
+        3
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 41,
+        "correct": 34,
+        "accuracy": 0.8292682926829268
+      },
+      "ikhfa": {
+        "total": 13,
+        "correct": 13,
+        "accuracy": 1.0
+      },
+      "idgham": {
+        "total": 7,
+        "correct": 3,
+        "accuracy": 0.42857142857142855
+      }
+    },
+    "decoder_thresholds": {
+      "idgham": 0.7,
+      "ikhfa": 0.75
+    },
+    "span_activation": {
+      "idgham": {
+        "clips": 5,
+        "total_spans": 5,
+        "avg_spans_per_positive_clip": 1.0
+      },
+      "ikhfa": {
+        "clips": 18,
+        "total_spans": 20,
+        "avg_spans_per_positive_clip": 1.1111111111111112
+      }
+    }
+  }
+}

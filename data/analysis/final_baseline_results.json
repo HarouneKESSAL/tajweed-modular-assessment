@@ -1,0 +1,98 @@
+{
+  "project": "tajweed-modular-assessment",
+  "source_architecture": {
+    "pdf": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\Conceptual_Framework.pdf",
+    "extracted_text": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\Conceptual_Framework.extracted.txt",
+    "components": [
+      "Feature Extraction",
+      "Content Verification",
+      "Rule Analysis Modules",
+      "Diagnosis Aggregation",
+      "Feedback Generation"
+    ],
+    "routing_included_in_pdf": true,
+    "content_verification_included_in_pdf": true
+  },
+  "official_baseline": {
+    "duration": {
+      "base_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_module.pt",
+      "fusion_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_fusion_calibrator_approved.pt",
+      "strict_validation": {
+        "type": "verse_held_out_duration_pipeline",
+        "baseline_accuracy": 0.954337899543379,
+        "learned_accuracy": 0.9726027397260274,
+        "baseline_ghunnah_accuracy": 0.7446808510638298,
+        "learned_ghunnah_accuracy": 0.8723404255319149,
+        "baseline_madd_accuracy": 0.979539641943734,
+        "learned_madd_accuracy": 0.9846547314578005
+      }
+    },
+    "transition": {
+      "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\transition_module_hardcase.pt",
+      "accuracy": 0.9014492753623189,
+      "class_accuracy": {
+        "none": 0.8961352657004831,
+        "ikhfa": 0.920704845814978,
+        "idgham": 0.8571428571428571
+      }
+    },
+    "burst": {
+      "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\burst_module.pt",
+      "accuracy": 0.8741390106449592,
+      "class_accuracy": {
+        "none": 0.9144050104384134,
+        "qalqalah": 0.8137715179968701
+      }
+    },
+    "content": {
+      "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt",
+      "decoder_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_decoder.json",
+      "decoder": "lexicon",
+      "exact_match": 0.7377892030848329,
+      "char_accuracy": 0.8037586663550671,
+      "edit_distance": 1.3701799485861184,
+      "strict_text_split_exact_match": 0.9064748201438849,
+      "strict_text_split_char_accuracy": 0.9319544364508394,
+      "strict_text_split_edit_distance": 0.4676258992805755
+    }
+  },
+  "best_current_suite_snapshot": {
+    "source": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\modular_suite_content_lexicon.json",
+    "duration_accuracy": 0.9927095990279465,
+    "duration_ghunnah_accuracy": 0.9835164835164835,
+    "duration_madd_accuracy": 0.9953198127925117,
+    "transition_accuracy": 0.9014492753623189,
+    "burst_accuracy": 0.8741390106449592,
+    "content_exact_match": 0.7377892030848329,
+    "content_char_accuracy": 0.8037586663550671,
+    "content_edit_distance": 1.3701799485861184
+  },
+  "rejected_experiments": {
+    "chunked_content_hardcase_retrain": {
+      "source": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\chunked_content_hardcase_comparison.json",
+      "exact_match": 0.30077120822622105,
+      "char_accuracy": 0.6947838906212499,
+      "edit_distance": 2.1491002570694087
+    },
+    "chunked_content_larger_model_textsplit": {
+      "source": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\chunked_content_textsplit_comparison.json",
+      "exact_match": 0.0,
+      "char_accuracy": 0.23703092874265683,
+      "edit_distance": 5.177458033573142
+    },
+    "chunked_content_beam_search": {
+      "source": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\chunked_content_beam_comparison.json",
+      "best_beam_exact_match": 0.0,
+      "best_beam_char_accuracy": 0.29456147965145385,
+      "best_beam_edit_distance": 5.290488431876606
+    }
+  },
+  "key_result_files": [
+    "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\duration_pipeline_verse_holdout_comparison.json",
+    "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\transition_confusions_hardcase.json",
+    "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\chunked_content_lexicon_comparison.json",
+    "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\chunked_content_textsplit_lexicon_comparison.json",
+    "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\modular_suite_content_lexicon.json"
+  ],
+  "main_remaining_bottleneck": "generalization_beyond_closed_chunk_lexicon"
+}

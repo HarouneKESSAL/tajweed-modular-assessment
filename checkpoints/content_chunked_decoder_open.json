@@ -1,0 +1,9 @@
+{
+  "mode": "open_recognition",
+  "blank_penalty": 1.2,
+  "use_cleanup": false,
+  "decoder": "greedy",
+  "beam_width": 1,
+  "lexicon_source": "train",
+  "notes": "Open content mode: no fixed phrase-list constraint is used during decoding. lexicon_source is kept only for coverage reporting."
+}

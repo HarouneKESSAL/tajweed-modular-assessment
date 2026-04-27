@@ -1,0 +1,70 @@
+{
+  "open_bp10": {
+    "artifact": "data/analysis/modular_suite_content_open_textsplit.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": {
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1,
+      "decoder_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_decoder_open.json",
+      "lexicon_source": "train",
+      "lexicon_size": 11,
+      "eval_unique_text_count": 6,
+      "eval_texts_in_lexicon": 0,
+      "eval_text_coverage": 0.0
+    },
+    "exact_match": 0.5899280575539568,
+    "char_accuracy": 0.8631523352746368,
+    "edit_distance": 0.9328537170263789
+  },
+  "open_bp12": {
+    "artifact": "data/analysis/modular_suite_content_open_textsplit_bp12.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": {
+      "blank_penalty": 1.2,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1,
+      "decoder_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_decoder_open.json",
+      "lexicon_source": "train",
+      "lexicon_size": 11,
+      "eval_unique_text_count": 6,
+      "eval_texts_in_lexicon": 0,
+      "eval_text_coverage": 0.0
+    },
+    "exact_match": 0.60431654676259,
+    "char_accuracy": 0.8641229873244254,
+    "edit_distance": 0.9256594724220624
+  },
+  "known_lexicon": {
+    "artifact": "data/analysis/modular_suite_content_lexicon.json",
+    "samples": 389,
+    "split": "val",
+    "split_mode": null,
+    "decoder": {
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1,
+      "lexicon_size": 17
+    },
+    "exact_match": 0.7377892030848329,
+    "char_accuracy": 0.8037586663550671,
+    "edit_distance": 1.3701799485861184
+  },
+  "open_delta_bp12_minus_bp10": {
+    "exact_match": 0.014388489208633115,
+    "char_accuracy": 0.000970652049788634,
+    "edit_distance": -0.007194244604316502
+  },
+  "decision": {
+    "promoted_open_decoder_config": "checkpoints/content_chunked_decoder_open.json",
+    "reason": "blank_penalty=1.2 improves open text-held-out exact match, character accuracy, and edit distance while keeping lexicon coverage at 0.0.",
+    "not_promoted": "beam search, because tested beam settings collapsed on open text-held-out evaluation."
+  }
+}

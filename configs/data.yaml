@@ -2,3 +2,7 @@ sample_rate: 16000
 n_mfcc: 13
 num_workers: 0
 use_toy_data: true
+normalize_speed: true
+target_speech_rate: 12.0
+min_speed_factor: 1.0
+max_speed_factor: 1.35

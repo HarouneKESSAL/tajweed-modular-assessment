@@ -1,0 +1,33 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_duration_alignment_corpus_torchaudio_strict.jsonl",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_module.pt",
+  "samples_analyzed": 973,
+  "focus_rules": [
+    "madd",
+    "ghunnah"
+  ],
+  "total_focus_positions": 1646,
+  "correct_focus_positions": 1646,
+  "focus_accuracy": 1.0,
+  "confusion_matrix": {
+    "madd": {
+      "madd": 1282
+    },
+    "ghunnah": {
+      "ghunnah": 364
+    }
+  },
+  "confidence_buckets": {
+    "madd->madd": {
+      "0.8-1.0": 1134,
+      "0.6-0.8": 117,
+      "0.4-0.6": 31
+    },
+    "ghunnah->ghunnah": {
+      "0.6-0.8": 128,
+      "0.4-0.6": 50,
+      "0.8-1.0": 186
+    }
+  },
+  "top_mismatches": []
+}

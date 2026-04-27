@@ -1,0 +1,42 @@
+{
+  "known_verse_phrase_list_mode": {
+    "artifact": "data\\analysis\\modular_suite_content_lexicon.json",
+    "split": "val",
+    "split_mode": null,
+    "decoder": {
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1,
+      "lexicon_size": 17
+    },
+    "exact_match": 0.7377892030848329,
+    "char_accuracy": 0.8037586663550671,
+    "edit_distance": 1.3701799485861184
+  },
+  "open_phrase_list_independent_mode": {
+    "artifact": "data\\analysis\\modular_suite_content_open_textsplit.json",
+    "split": "val",
+    "split_mode": "text",
+    "decoder": {
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1,
+      "decoder_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_decoder_open.json",
+      "lexicon_source": "train",
+      "lexicon_size": 11,
+      "eval_unique_text_count": 6,
+      "eval_texts_in_lexicon": 0,
+      "eval_text_coverage": 0.0
+    },
+    "exact_match": 0.5899280575539568,
+    "char_accuracy": 0.8631523352746368,
+    "edit_distance": 0.9328537170263789
+  },
+  "interpretation": {
+    "known_mode": "Best for assessment when the expected verse/chunk is known; uses a lexicon constraint.",
+    "open_mode": "More independent and defensible for unseen phrase recognition; does not require the correct phrase to exist in the decoder list.",
+    "next_research_target": "Improve open exact match without returning to a fixed answer list, likely with stronger CTC training, data augmentation, and language-model-free beam tuning."
+  }
+}

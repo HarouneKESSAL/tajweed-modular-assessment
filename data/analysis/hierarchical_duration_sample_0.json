@@ -1,0 +1,74 @@
+{
+  "id": "retasy_train_000020",
+  "surah_name": "Al-Faatihah",
+  "verse_key": "verse_3",
+  "ayah_text": "الرَّحْمَنِ الرَّحِيمِ",
+  "gold_duration_rules": [
+    "madd_2",
+    "madd_246"
+  ],
+  "coarse_head": {
+    "predicted_labels": [
+      "has_madd"
+    ],
+    "scored_labels": [
+      {
+        "label": "ghunnah",
+        "probability": 0.0008428141591139138,
+        "threshold": 0.5,
+        "predicted": false
+      },
+      {
+        "label": "has_madd",
+        "probability": 0.9881951808929443,
+        "threshold": 0.5,
+        "predicted": true
+      }
+    ]
+  },
+  "madd_subtype_head": {
+    "ran": true,
+    "predicted_labels": [
+      "madd_2",
+      "madd_246"
+    ],
+    "scored_labels": [
+      {
+        "label": "madd_2",
+        "probability": 0.9875738024711609,
+        "threshold": 0.5,
+        "predicted": true
+      },
+      {
+        "label": "madd_246",
+        "probability": 0.9515926241874695,
+        "threshold": 0.5,
+        "predicted": true
+      },
+      {
+        "label": "madd_munfasil",
+        "probability": 0.09489481151103973,
+        "threshold": 0.5,
+        "predicted": false
+      },
+      {
+        "label": "madd_muttasil",
+        "probability": 0.0010253447107970715,
+        "threshold": 0.5,
+        "predicted": false
+      }
+    ]
+  },
+  "final_duration_diagnosis": {
+    "ghunnah_present": false,
+    "has_madd": true,
+    "madd_subtypes": [
+      "madd_2",
+      "madd_246"
+    ],
+    "final_labels": [
+      "madd_2",
+      "madd_246"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "samples": 389,
+  "split": "val",
+  "use_cleanup": false,
+  "exact_match": 0.38303341902313626,
+  "char_accuracy": 0.7089665475912257,
+  "edit_distance": 2.0874035989717226,
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt"
+}

@@ -1,0 +1,133 @@
+{
+  "duration": {
+    "samples": 973,
+    "route_counts": {
+      "duration": 973
+    },
+    "total_positions": 1646,
+    "correct_positions": 1374,
+    "accuracy": 0.8347509113001215,
+    "rule_summary": {
+      "ghunnah": {
+        "total": 364,
+        "correct": 116,
+        "accuracy": 0.31868131868131866
+      },
+      "madd": {
+        "total": 1282,
+        "correct": 1258,
+        "accuracy": 0.9812792511700468
+      }
+    }
+  },
+  "transition": {
+    "available": true,
+    "samples": 690,
+    "accuracy": 0.7695652173913043,
+    "confusion_matrix": [
+      [
+        306,
+        42,
+        66
+      ],
+      [
+        33,
+        192,
+        2
+      ],
+      [
+        16,
+        0,
+        33
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 414,
+        "correct": 306,
+        "accuracy": 0.7391304347826086
+      },
+      "ikhfa": {
+        "total": 227,
+        "correct": 192,
+        "accuracy": 0.8458149779735683
+      },
+      "idgham": {
+        "total": 49,
+        "correct": 33,
+        "accuracy": 0.673469387755102
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 308,
+      "localized_same_as_whole_verse": 249,
+      "localized_same_rate": 0.8084415584415584,
+      "localized_supports_gold": 112,
+      "localized_supports_gold_rate": 0.36363636363636365,
+      "localized_supports_whole_verse": 107,
+      "localized_supports_whole_verse_rate": 0.3474025974025974,
+      "localized_disagrees_with_whole_verse": 59,
+      "gold_supported_by_class": {
+        "idgham": {
+          "supported": 35,
+          "total": 39,
+          "rate": 0.8974358974358975
+        },
+        "ikhfa": {
+          "supported": 77,
+          "total": 78,
+          "rate": 0.9871794871794872
+        },
+        "none": {
+          "supported": 0,
+          "total": 191,
+          "rate": 0.0
+        }
+      },
+      "whole_verse_supported_by_class": {
+        "idgham": {
+          "supported": 33,
+          "total": 51,
+          "rate": 0.6470588235294118
+        },
+        "ikhfa": {
+          "supported": 74,
+          "total": 92,
+          "rate": 0.8043478260869565
+        },
+        "none": {
+          "supported": 0,
+          "total": 165,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "burst": {
+    "available": true,
+    "samples": 1597,
+    "accuracy": 0.8741390106449592,
+    "confusion_matrix": [
+      [
+        876,
+        82
+      ],
+      [
+        119,
+        520
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 958,
+        "correct": 876,
+        "accuracy": 0.9144050104384134
+      },
+      "qalqalah": {
+        "total": 639,
+        "correct": 520,
+        "accuracy": 0.8137715179968701
+      }
+    }
+  }
+}

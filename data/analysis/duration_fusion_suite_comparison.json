@@ -1,0 +1,22 @@
+{
+  "baseline_suite": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\modular_suite_conservative_duration_fusion_rerun.json",
+  "experimental_suite": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\modular_suite_experimental_duration_fusion_verse.json",
+  "duration": {
+    "baseline_accuracy": 0.8517618469015796,
+    "experimental_accuracy": 0.9927095990279465,
+    "baseline_ghunnah_accuracy": 0.3956043956043956,
+    "experimental_ghunnah_accuracy": 0.9835164835164835,
+    "baseline_madd_accuracy": 0.9812792511700468,
+    "experimental_madd_accuracy": 0.9953198127925117
+  },
+  "other_modules_unchanged": {
+    "transition_accuracy_baseline": 0.9014492753623189,
+    "transition_accuracy_experimental": 0.9014492753623189,
+    "burst_accuracy_baseline": 0.8741390106449592,
+    "burst_accuracy_experimental": 0.8741390106449592,
+    "content_exact_match_baseline": 0.38303341902313626,
+    "content_exact_match_experimental": 0.38303341902313626,
+    "content_char_accuracy_baseline": 0.7089665475912257,
+    "content_char_accuracy_experimental": 0.7089665475912257
+  }
+}

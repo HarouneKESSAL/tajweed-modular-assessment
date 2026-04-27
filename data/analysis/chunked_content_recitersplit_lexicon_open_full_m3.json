@@ -1,0 +1,19 @@
+{
+  "samples": 389,
+  "split": "val",
+  "split_mode": "reciter",
+  "use_cleanup": false,
+  "blank_penalty": 1.0,
+  "decoder": "lexicon-open",
+  "beam_width": 5,
+  "open_fallback_margin": 3.0,
+  "lexicon_source": "full",
+  "lexicon_size": 17,
+  "eval_unique_text_count": 17,
+  "eval_texts_in_lexicon": 389,
+  "eval_text_coverage": 1.0,
+  "exact_match": 0.609254498714653,
+  "char_accuracy": 0.759237527682257,
+  "edit_distance": 1.699228791773779,
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt"
+}

@@ -1,0 +1,142 @@
+{
+  "split": "val",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt",
+  "results": [
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7164746992510481,
+      "edit_distance": 2.017994858611825,
+      "blank_penalty": 1.0,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7164746992510481,
+      "edit_distance": 2.017994858611825,
+      "blank_penalty": 1.0,
+      "use_cleanup": true
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7137406937535467,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.4,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7135459442014707,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.5,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7135459442014707,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.5,
+      "use_cleanup": true
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7128837957244124,
+      "edit_distance": 2.051413881748072,
+      "blank_penalty": 0.4,
+      "use_cleanup": true
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39588688946015427,
+      "char_accuracy": 0.7140689858556176,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.3,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39588688946015427,
+      "char_accuracy": 0.7132120878264834,
+      "edit_distance": 2.051413881748072,
+      "blank_penalty": 0.3,
+      "use_cleanup": true
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.390745501285347,
+      "char_accuracy": 0.7137546044358376,
+      "edit_distance": 2.0411311053984575,
+      "blank_penalty": 0.7,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.390745501285347,
+      "char_accuracy": 0.7137546044358376,
+      "edit_distance": 2.0411311053984575,
+      "blank_penalty": 0.7,
+      "use_cleanup": true
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.3856041131105398,
+      "char_accuracy": 0.7112061674401,
+      "edit_distance": 2.0668380462724936,
+      "blank_penalty": 0.2,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.3856041131105398,
+      "char_accuracy": 0.7099208203963984,
+      "edit_distance": 2.0745501285347046,
+      "blank_penalty": 0.2,
+      "use_cleanup": true
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.38303341902313626,
+      "char_accuracy": 0.710417431754192,
+      "edit_distance": 2.0745501285347046,
+      "blank_penalty": 0.1,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.38303341902313626,
+      "char_accuracy": 0.7089665475912257,
+      "edit_distance": 2.0874035989717226,
+      "blank_penalty": 0.0,
+      "use_cleanup": false
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.38303341902313626,
+      "char_accuracy": 0.7087036356959231,
+      "edit_distance": 2.0848329048843186,
+      "blank_penalty": 0.1,
+      "use_cleanup": true
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.38303341902313626,
+      "char_accuracy": 0.7072527515329566,
+      "edit_distance": 2.0976863753213366,
+      "blank_penalty": 0.0,
+      "use_cleanup": true
+    }
+  ],
+  "best": {
+    "samples": 389,
+    "exact_match": 0.39845758354755784,
+    "char_accuracy": 0.7164746992510481,
+    "edit_distance": 2.017994858611825,
+    "blank_penalty": 1.0,
+    "use_cleanup": false
+  }
+}

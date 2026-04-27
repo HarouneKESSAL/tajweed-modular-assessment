@@ -1,0 +1,29 @@
+{
+  "baseline_tuned_decoder": {
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "use_cleanup": false,
+    "blank_penalty": 1.0,
+    "exact_match": 0.5899280575539568,
+    "char_accuracy": 0.8631523352746368,
+    "edit_distance": 0.9328537170263789,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt"
+  },
+  "larger_model_textsplit": {
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "use_cleanup": false,
+    "blank_penalty": 1.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.23691047162270207,
+    "edit_distance": 5.177458033573141,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_textsplit_hd96.pt"
+  },
+  "delta": {
+    "exact_match": -0.5899280575539568,
+    "char_accuracy": -0.6262418636519347,
+    "edit_distance": 4.244604316546763
+  }
+}

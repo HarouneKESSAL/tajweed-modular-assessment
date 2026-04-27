@@ -1,0 +1,217 @@
+{
+  "split": "val",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt",
+  "split_mode": "reciter",
+  "results": [
+    {
+      "samples": 389,
+      "exact_match": 0.7377892030848329,
+      "char_accuracy": 0.8041871153696343,
+      "edit_distance": 1.3676092544987146,
+      "blank_penalty": 0.7,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7377892030848329,
+      "char_accuracy": 0.8041871153696343,
+      "edit_distance": 1.3676092544987146,
+      "blank_penalty": 0.7,
+      "use_cleanup": true,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7377892030848329,
+      "char_accuracy": 0.8037586663550671,
+      "edit_distance": 1.3701799485861184,
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7377892030848329,
+      "char_accuracy": 0.8037586663550671,
+      "edit_distance": 1.3701799485861184,
+      "blank_penalty": 1.0,
+      "use_cleanup": true,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7352185089974294,
+      "char_accuracy": 0.8017235335358728,
+      "edit_distance": 1.3830334190231361,
+      "blank_penalty": 0.5,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7352185089974294,
+      "char_accuracy": 0.8017235335358728,
+      "edit_distance": 1.3830334190231361,
+      "blank_penalty": 0.5,
+      "use_cleanup": true,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7326478149100257,
+      "char_accuracy": 0.8011879722676636,
+      "edit_distance": 1.3907455012853471,
+      "blank_penalty": 0.0,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7326478149100257,
+      "char_accuracy": 0.8011879722676636,
+      "edit_distance": 1.3907455012853471,
+      "blank_penalty": 0.0,
+      "use_cleanup": true,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7326478149100257,
+      "char_accuracy": 0.7994741762093945,
+      "edit_distance": 1.4010282776349614,
+      "blank_penalty": 0.3,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.7326478149100257,
+      "char_accuracy": 0.7994741762093945,
+      "edit_distance": 1.4010282776349614,
+      "blank_penalty": 0.3,
+      "use_cleanup": true,
+      "decoder": "lexicon",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7164746992510481,
+      "edit_distance": 2.017994858611825,
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7164746992510481,
+      "edit_distance": 2.017994858611825,
+      "blank_penalty": 1.0,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7135459442014707,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.5,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7135459442014707,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.5,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39588688946015427,
+      "char_accuracy": 0.7140689858556176,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.3,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39588688946015427,
+      "char_accuracy": 0.7132120878264834,
+      "edit_distance": 2.051413881748072,
+      "blank_penalty": 0.3,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.390745501285347,
+      "char_accuracy": 0.7137546044358376,
+      "edit_distance": 2.0411311053984575,
+      "blank_penalty": 0.7,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.390745501285347,
+      "char_accuracy": 0.7137546044358376,
+      "edit_distance": 2.0411311053984575,
+      "blank_penalty": 0.7,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.38303341902313626,
+      "char_accuracy": 0.7089665475912257,
+      "edit_distance": 2.0874035989717226,
+      "blank_penalty": 0.0,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.38303341902313626,
+      "char_accuracy": 0.7072527515329566,
+      "edit_distance": 2.0976863753213366,
+      "blank_penalty": 0.0,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    }
+  ],
+  "best": {
+    "samples": 389,
+    "exact_match": 0.7377892030848329,
+    "char_accuracy": 0.8041871153696343,
+    "edit_distance": 1.3676092544987146,
+    "blank_penalty": 0.7,
+    "use_cleanup": false,
+    "decoder": "lexicon",
+    "beam_width": 1
+  }
+}

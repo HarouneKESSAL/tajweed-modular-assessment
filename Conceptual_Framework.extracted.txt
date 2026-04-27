@@ -1,0 +1,1012 @@
+
+--- PAGE 1 ---
+A Modular Architecture for
+Automatic Tajweed Assessment
+of Quranic Recitation
+March 17, 2026
+
+--- PAGE 2 ---
+Contents
+1 Conceptual Framework 3
+1.1 The Multi-Faceted Nature of Recitation Errors . . . . . . . . 4
+1.1.1 A Taxonomy of Recitation Errors . . . . . . . . . . . . 4
+1.1.2 Why a Monolithic Approach is Insuﬀicient . . . . . . . 5
+1.1.3 Requirements for a Comprehensive System . . . . . . . 5
+1.2 Modular Architecture Overview . . . . . . . . . . . . . . . . . 7
+1.2.1 Core Principles . . . . . . . . . . . . . . . . . . . . . . 7
+1.2.2 System Components . . . . . . . . . . . . . . . . . . . 7
+1.2.3 Overall System Flow . . . . . . . . . . . . . . . . . . . 8
+1.2.4 Modular Rule Analysis: Specialisation by Acoustic
+Category . . . . . . . . . . . . . . . . . . . . . . . . . 9
+1.3 Feature Representation . . . . . . . . . . . . . . . . . . . . . . 11
+1.3.1 The Role of Features in Tajweed Assessment . . . . . . 11
+1.3.2 Hand-Crafted Acoustic Features . . . . . . . . . . . . . 11
+1.3.3 Self-Supervised Learning Representations . . . . . . . 12
+1.3.4 Comparison and Hybrid Approaches . . . . . . . . . . 13
+1.3.5 Feature Choices per Module . . . . . . . . . . . . . . . 15
+1.4 Temporal Modelling for Rule Detection . . . . . . . . . . . . . 16
+1.4.1 Temporal Requirements of Tajweed Rules . . . . . . . 16
+1.4.2 Comparative Analysis of Architectural Options . . . . 16
+1.4.3 Baseline Choice: Bidirectional LSTM . . . . . . . . . . 18
+1.4.4 Sequence Alignment: CTC Loss and Viterbi Decoding 18
+1.4.5 Exploiting the Coloured Qur’an JSON: Multi-Task Su-
+pervision . . . . . . . . . . . . . . . . . . . . . . . . . 19
+1.4.6 Adapting Temporal Modelling to Rule Categories . . . 22
+1.4.7 Upgrade Path: Transformer-Based Architecture . . . . 22
+1.5 Diagnosis Aggregation and Feedback Generation . . . . . . . . 23
+1.5.1 The Need for Aggregation . . . . . . . . . . . . . . . . 23
+1.5.2 Aggregation Strategy . . . . . . . . . . . . . . . . . . . 23
+1.5.3 From Diagnosis to Feedback . . . . . . . . . . . . . . . 24
+1
+
+--- PAGE 3 ---
+1.5.4 Two-Level Feedback Architecture . . . . . . . . . . . . 25
+1.6 Chapter Summary . . . . . . . . . . . . . . . . . . . . . . . . 26
+Bibliography 27
+2
+
+--- PAGE 4 ---
+Chapter 1
+Conceptual Framework
+The preceding chapter established the theoretical and linguistic foundations
+of Tajweed, surveyed the state of the art in automated recitation assessment,
+and identified the key limitations of existing systems. Building on that foun-
+dation, this chapter translates the identified requirements into a concrete
+system design.
+The central argument of this chapter is that automated Tajweed assess-
+ment cannot be treated as a single, monolithic classification problem. Errors
+in Quranic recitation are heterogeneous in nature: some arise from deviat-
+ing from the canonical text, others from failing to apply rules that govern
+duration, assimilation, or articulation. Each error category presents distinct
+acoustic characteristics and calls for a different modelling strategy. Acknowl-
+edging this heterogeneity from the outset is what motivates the modular
+architecture proposed here.
+The chapter is organised as follows. Section 1.1 analyses the multi-faceted
+nature of recitation errors and derives the essential capabilities a comprehen-
+sive system must possess. Section 1.2 introduces the modular architecture as
+a response to those requirements, describing each component and the over-
+all information flow. Section 1.3 examines feature representation strategies,
+explaining how different acoustic views of the signal serve different mod-
+ules. Section 1.4 addresses temporal modelling, justifying the choice of a
+Bidirectional LSTM as the baseline and discussing the upgrade path toward
+Transformer-based architectures. Section 1.5 describes the diagnosis aggrega-
+tion and feedback generation pipeline. Section 1.6 summarises the chapter’s
+contributions and anticipates the implementation work that follows.
+3
+
+--- PAGE 5 ---
+1.1 The Multi-Faceted Nature of Recitation
+Errors
+Before proposing a solution, it is necessary to clearly delineate the problem
+space. Errors in Quranic recitation are not monolithic; they arise from dis-
+tinct cognitive and articulatory sources and manifest in qualitatively different
+ways. A robust assessment system must account for this heterogeneity.
+1.1.1 A Taxonomy of Recitation Errors
+Three fundamental categories of errors can be identified, each requiring a
+different treatment.
+1. Content Errors (Lexical/Phonemic). The learner deviates from
+the canonical text itself. This includes word substitution (saying a
+different word), word omission or insertion, and phoneme substitution
+that changes word identity. For example, confusingڢَْܹص (qalb — heart)
+with၍ (kalb — dog) constitutes a content error that carries seman-
+tic consequences. Such errors are discrete and categorical: the learner
+either said the correct word or they did not. Detection requires com-
+paring what was said to what should have been said .
+2. Tajweed Rule Misapplications (Prosodic/Articulatory). The
+learner recites the correct words but fails to apply the proper Tajweed
+rules. This category itself contains significant acoustic diversity:
+• Temporal rules. Madd (elongation) requires sustaining a vowel
+for a specific duration (2, 4, or 6 counts). Inﭐܳݱّ֟؇ (Aṣ-Ṣākhah),
+the Alif after the Ṣād must be elongated. Ghunnah (nasalisation)
+has a similar temporal component: inِ݆݁ﺭّ֟ (min rabbihim), the
+Noon of min should be nasalised for two counts. These errors are
+gradient — a Madd may be slightly too short or correctly sus-
+tained — and their detection requires measuring acoustic proper-
+ties against learned duration patterns.
+• Articulatory rules. Qalqalah (echo) involves an abrupt release
+burst on specific letters when they carry a sukoon. The Qāf inﭐْܳڰَ 
+(Al-Falaq) at verse end must produce a characteristic bouncing
+sound.
+4
+
+--- PAGE 6 ---
+• Assimilation rules. Idgham (merging) involves the complete or
+partial dissolution of one sound into the following sound. Inَ݆݁
+لَأَْ݄ܭْ (man yaʿmal ), the Noon merges into the Yā with a nasal
+quality. Ikhfa’ (concealment) requires a specific nasal transition,
+as inِ݆݁ڢَٴْܭُ (min qablu ).
+3. Co-Occurring Errors. A learner may mispronounce a word and mis-
+apply a Tajweed rule on that same word — for instance, reciting the
+wrong word but with an otherwise correct Madd elongation. The sys-
+tem must be capable of disentangling these concurrent error sources so
+that each can be reported and addressed independently.
+1.1.2 Why a Monolithic Approach is Insuﬀicient
+A single model trained to output a binary correct/incorrectlabel for an entire
+recitation cannot provide useful feedback. It cannot distinguish a wrong word
+from a misapplied rule, nor can it pinpoint the location or nature of the error.
+More fundamentally, the three error categories described above require
+different input representations and modelling strategies:
+• Content errors are best detected by an ASR-like system that transcribes
+the audio and compares it to a reference.
+• Temporal rule errors require sequence models — such as LSTMs or
+Transformers — that can track duration and state across time.
+• Articulatory burst errors benefit from high-resolution time-frequency
+analysis capable of capturing transient events.
+• Assimilation rules require models that understand transition dynamics
+between adjacent sounds.
+A model designed to measure duration is not, by construction, suited to
+detecting a sudden burst; a model specialised for phoneme substitution is not
+adapted to assimilation dynamics. Forcing a single architecture to address
+all of these tasks simultaneously introduces competing inductive biases that
+degrade performance across the board.
+1.1.3 Requirements for a Comprehensive System
+From this analysis, the following capabilities emerge as necessary for any
+comprehensive Tajweed assessment system:
+5
+
+--- PAGE 7 ---
+1. Transcription capability — producing a phoneme-level hypothesis
+of what was recited, enabling comparison with the canonical text.
+2. Temporal sensitivity — modelling duration and state transitions to
+evaluate rules such as Madd and Ghunnah.
+3. Articulatory discrimination — distinguishing subtle phonetic con-
+trasts, including pharyngeal versus non-pharyngeal consonants and
+nasalised versus non-nasalised sounds.
+4. Multi-task output — reporting simultaneously on content accuracy
+and rule application at the phoneme or word level.
+5. Explainability — providing a diagnostic report that identifies error
+locations and types, not merely a correctness score.
+These requirements motivate the modular architecture introduced in the
+following section, where specialised components each address a coherent sub-
+set of the problem and their outputs are combined to produce a comprehen-
+sive assessment.
+6
+
+--- PAGE 8 ---
+1.2 Modular Architecture Overview
+Based on the analysis of error types in the preceding section, this chapter
+proposes a system built from specialised modules that collaborate to produce
+a comprehensive recitation assessment. This section gives a high-level view
+of the components and their interactions.
+1.2.1 Core Principles
+The architecture is guided by four principles:
+1. Separation of concerns. Each module addresses one well-defined
+sub-problem — content verification, temporal rule detection, articula-
+tory analysis — so that components can be developed, evaluated, and
+improved independently.
+2. Reference awareness. The system must know the canonical text and
+the Tajweed rules that apply to each position within it. This knowl-
+edge is encoded in the Coloured Qur’an JSON, a resource that maps
+every character to its applicable rule and an associated colour identi-
+fier. It plays three distinct roles across the pipeline: as an auxiliary
+supervision signal during model training, as the knowledge source for
+rule-specific feedback, and as a visualisation layer that makes system
+output interpretable to learners.
+3. Multi-level output. Assessment is produced at multiple granularities
+— global, per-word, per-phoneme, and per-rule — to support both
+coarse correctness judgments and fine-grained feedback.
+4. Pedagogical grounding. The modular structure mirrors how Tajweed
+is traditionally taught: rules are introduced individually and then in-
+tegrated. This alignment makes the system’s outputs naturally inter-
+pretable by teachers and learners alike.
+1.2.2 System Components
+Table 1.1 summarises the five main components of the proposed system and
+their respective roles.
+7
+
+--- PAGE 9 ---
+Table 1.1: System components and their roles.
+Component Role
+Feature Extrac-
+tion
+Transforms the raw audio waveform into numeri-
+cal representations suitable for downstream mod-
+ules. Different modules may consume different fea-
+ture types depending on the acoustic properties they
+target.
+Content Verifica-
+tion
+Produces a phoneme-level transcription of what was
+recited and aligns it with the canonical text, identi-
+fying substitutions, deletions, and insertions.
+Rule Analysis
+Modules
+A set of specialised detectors, each responsible for one
+rule or a group of acoustically similar rules (e.g., a
+Madd duration module, a Ghunnah nasalisation mod-
+ule, a Qalqalah burst module).
+Diagnosis Aggre-
+gation
+Collects all module outputs, resolves interactions be-
+tween content errors and rule judgments, and pro-
+duces a structured, phoneme-level error report.
+Feedback Genera-
+tion
+Translates the structured error report into human-
+readable corrective guidance for the learner.
+1.2.3 Overall System Flow
+Figure 1.1 illustrates the sequential flow of information through the pipeline.
+Raw
+Audio
+F eature
+Extraction
+Content
+V erification
+Rule
+Analysis
+Modules
+Diagnosis
+Aggregation
+F eedback
+Generation
+MFCC / SSL ASR + Viterbi JSON er-
+ror object
+Coloured
+Qur’an
+JSON
+Figure 1.1: Overall information flow of the proposed system. The Coloured
+Qur’an JSON (dashed) provides reference annotations to the content verifi-
+cation, rule analysis, and feedback generation components.
+The system operates in eight steps:
+8
+
+--- PAGE 10 ---
+1. Audio input. The learner’s recitation is recorded and passed to the
+feature extraction module.
+2. Feature extraction. The waveform is converted into multiple feature
+representations that are distributed to downstream modules according
+to their requirements.
+3. Content verification. An ASR-based module produces a phoneme-
+level transcription and aligns it with the canonical text derived from the
+Coloured Qur’an JSON.
+4. Content error marking. Substitutions, deletions, and insertions rel-
+ative to the canonical text are recorded as content errors.
+5. Segment routing. Using the alignment from Step 3, the system iden-
+tifies which audio segments correspond to positions where Tajweed rules
+apply and routes each segment to the appropriate rule module.
+6. Rule analysis. Each rule module examines its assigned segment and re-
+turns a judgment (correct / incorrect) with supporting diagnostic details
+where available (e.g., measured versus expected duration for a Madd
+rule).
+7. Diagnosis aggregation. The aggregator collects all judgments, re-
+solves interactions between content errors and rule assessments, and
+produces a complete structured error report.
+8. Feedback generation. The error report is translated into learner-
+facing corrective guidance, referencing the specific Tajweed rules in-
+volved.
+1.2.4 Modular Rule Analysis: Specialisation by Acous-
+tic Category
+A key design decision is that the rule analysis stage is not a single detector
+but a collection of specialist modules, each responsible for an acoustically
+coherent group of rules. Figure 1.2 illustrates this internal structure.
+9
+
+--- PAGE 11 ---
+Aligned
+Audio
+Segments
+Module A
+Duration
+Rules
+(Madd,
+Ghunnah)
+MFCC + BiLSTM
+Module B
+T ransition
+Rules
+(Idgham,
+Ikhfa’)
+Hybrid stream
+Module C
+Burst Rules
+(Qalqalah)
+F usion
+Layer
+Structured
+Error
+Report
+Figure 1.2: Internal structure of the rule analysis stage. Each specialist
+module handles an acoustically homogeneous group of Tajweed rules; the
+fusion layer consolidates their outputs into a single structured error report.
+Three acoustic categories are identified:
+• Duration rules (Module A). Rules such as Madd and Ghunnah
+require tracking a sustained acoustic state across many frames. A se-
+quence model with long-range memory — specifically a BiLSTM — is
+well suited to this task and is used in conjunction with MFCC features.
+• Transition rules (Module B). Rules such as Idgham and Ikhfa’ in-
+volve acoustic dynamics that unfold across a phoneme boundary. These
+rules benefit from both contextual representations (for understanding
+what sounds are involved) and local spectral detail (for verifying correct
+execution), motivating a hybrid MFCC and SSL stream.
+• Burst rules (Module C). Rules such as Qalqalah involve a brief,
+abrupt acoustic event. A CNN-based detector with high temporal res-
+olution is appropriate here.
+This specialisation by acoustic category means that each module can be
+independently configured, trained, and evaluated. New rules can be added
+by assigning them to an existing category or by creating a new module —
+without modifying the rest of the system. The fusion layer then aggregates
+all module outputs into the unified structured error report that feeds the
+diagnosis and feedback stages.
+10
+
+--- PAGE 12 ---
+1.3 Feature Representation
+Before any analysis can take place, raw audio must be converted into a form
+that machine learning models can process. This transformation is critical:
+the choice of feature representation determines what information is available
+to downstream modules and directly impacts their performance. Different
+error types benefit from different feature representations, and the modular
+architecture accommodates this flexibility by allowing each module to con-
+sume the features best suited to its task.
+1.3.1 The Role of Features in Tajweed Assessment
+Features serve as the bridge between the raw waveform and the abstract
+concepts to be detected: phonemes, words, and Tajweed rule applications.
+A good feature representation should preserve the information needed for
+these tasks while suppressing irrelevant variation such as background noise,
+recording volume, or speaker differences.
+For Tajweed assessment, three types of analysis must be supported:
+• Phoneme recognition for content verification — identifying which
+sounds were actually produced.
+• Duration measurement for temporal rules like Madd and Ghunnah
+— tracking how long a sound is sustained.
+• Fine-grained articulatory discrimination for rules like Qalqalah
+and Ikhfa’ — detecting subtle differences in how sounds are produced.
+No single feature representation is optimal for all three purposes. As
+noted in the literature, different speech tasks benefit from different acoustic
+representations [ 6, 13]. The following subsections describe the two princi-
+pal families of features considered in this work and explain when each is
+appropriate.
+1.3.2 Hand-Crafted Acoustic Features
+The most established approach in speech processing is to design features
+based on knowledge of human auditory perception and speech production.
+These features are computed through fixed mathematical transformations
+that require no training data.
+Mel-Frequency Cepstral Coeﬀicients (MFCCs) are the most widely
+used hand-crafted speech feature and have been successfully applied in mul-
+tiple Tajweed detection systems [ 2, 1, 12]. The extraction pipeline segments
+11
+
+--- PAGE 13 ---
+the waveform into short overlapping frames (typically 20–40 ms), maps en-
+ergy onto the Mel perceptual scale, and compresses the result into a compact
+coeﬀicient vector (commonly 13 coeﬀicients per frame). Appending first-
+and second-order delta coeﬀicients ( ∆, ∆2) additionally captures the tempo-
+ral dynamics of articulation — how sounds change and transition — yielding
+a 39-dimensional feature vector per frame [ 1].
+The Mel scale approximates the non-linear frequency sensitivity of the
+human auditory system, making MFCCs particularly effective for speech
+tasks [ 6]. For Tajweed assessment, MFCCs are well suited to:
+• Phoneme recognition, as they capture spectral distinctions between
+different sounds.
+• Duration measurement, since the frame-by-frame representation allows
+temporal length to be directly observed.
+• Distinguishing emphatic from non-emphatic consonants and other spec-
+trally distinct contrasts relevant to Arabic phonology.
+1.3.3 Self-Supervised Learning Representations
+A more recent and powerful approach uses representations learned by deep
+neural networks trained on large quantities of unlabelled speech. Models such
+as wav2vec 2.0 [ 4], HuBERT [ 10], and Whisper [ 11] are pre-trained on hun-
+dreds of thousands to millions of hours of audio, developing rich hierarchical
+representations without any labelled data.
+Pre-training objectives. During pre-training, these models learn to
+predict hidden aspects of the speech signal — for example, wav2vec 2.0 uses
+contrastive learning to identify true speech representations among distrac-
+tors. Through this process the models develop internal representations that
+capture low-level acoustic structure (formant frequencies, pitch), mid-level
+phonetic patterns (typical phoneme sequences), and high-level linguistic con-
+tent (word boundaries, speaker characteristics).
+Output representation. Like MFCCs, these models produce one vector
+per frame of audio; however, these vectors are considerably richer (typically
+hundreds to thousands of dimensions) and encode not only local acoustic
+information but also contextual relationships spanning the entire utterance.
+Advantages for Tajweed assessment. Several properties make SSL
+representations particularly valuable in the Quranic recitation domain:
+• Effectiveness with limited labelled data. The models learn gen-
+eral speech representations during pre-training; fine-tuning on a small
+12
+
+--- PAGE 14 ---
+labelled Tajweed dataset can therefore yield strong performance [ 3].
+This is critical given the scarcity of large annotated Quranic recitation
+corpora.
+• Robustness to speaker and recording variation. Pre-training on
+thousands of speakers and diverse acoustic conditions produces repre-
+sentations that generalise well to unseen voices and environments.
+• Contextual awareness. Transformer-based encoders incorporate sur-
+rounding context, helping to disambiguate similar phonemes and un-
+derstand transitions — essential for assimilation rules such as Idgham
+and Ikhfa’ .
+• A vailability of Arabic-specific models. Multilingual models such
+as XLSR-53 include Arabic, and versions fine-tuned specifically on Ara-
+bic speech are publicly available, providing an excellent foundation for
+Quranic audio analysis [ 3].
+1.3.4 Comparison and Hybrid Approaches
+Table 1.2 summarises the trade-offs between the two feature families across
+the dimensions most relevant to Tajweed assessment.
+13
+
+--- PAGE 15 ---
+Table 1.2: Comparison of hand-crafted and self-supervised feature represen-
+tations.
+Aspect Hand-crafted
+(MFCC)
+Self-Supervised
+(wav2vec 2.0)
+Information captured Spectral envelope per
+frame; local dynamics
+via ∆ coeﬀicients.
+Hierarchical represen-
+tations from low-level
+acoustics to linguistic
+content, with full ut-
+terance context.
+Data requirements None — computed via
+fixed transformations.
+Large unlabelled cor-
+pora for pre-training;
+modest labelled data
+for fine-tuning.
+Robustness Sensitive to noise and
+speaker variation.
+Highly robust due to di-
+verse pre-training data.
+Contextual scope Local frame transitions
+only.
+Full utterance context
+via self-attention.
+Computational cost Low — computable on
+CPU.
+High — requires GPU
+acceleration.
+Interpretability High — coeﬀicients
+correspond to specific
+spectral properties.
+Low — representations
+are learned and opaque.
+Primary Tajweed use Duration measurement;
+basic phoneme discrim-
+ination.
+Phoneme recognition;
+context-dependent
+rules (Idgham, Ikhfa’).
+The two feature families are not mutually exclusive; indeed, combining
+them can leverage the strengths of each while mitigating their respective
+weaknesses [ 8]. In a multi-stream configuration, hand-crafted and SSL
+features are processed in parallel by separate pathways and their outputs
+are fused at a later stage — typically through concatenation or an attention
+mechanism. The MFCC stream contributes precise local measurements; the
+SSL stream contributes robust, context-aware representations. For rules that
+require both — such as Idgham, which demands contextual knowledge of
+which sounds are involved and acoustic verification that merging occurred
+— this hybrid approach is particularly appropriate.
+14
+
+--- PAGE 16 ---
+1.3.5 Feature Choices per Module
+Given the modular architecture, feature representation is a per-module de-
+cision:
+• The content verification module uses an SSL encoder (specifically a
+wav2vec 2.0 model fine-tuned on Arabic speech) to maximise phoneme
+recognition accuracy with limited labelled data [ 3].
+• The temporal rule modules (Madd, Ghunnah) use MFCCs with
+delta coeﬀicients, which have been validated for duration-based tasks
+in prior work [ 2] and are computationally lightweight.
+• The articulatory and assimilation rule modules (Qalqalah, Ikhfa’,
+Idgham) are to be developed in later iterations, with the option of
+incorporating hybrid multi-stream features if preliminary evaluation
+indicates this is necessary.
+This staged approach allows the core architecture to be validated with
+well-understood features before investing in more complex representations
+for specialised modules.
+15
+
+--- PAGE 17 ---
+1.4 Temporal Modelling for Rule Detection
+Many Tajweed rules are inherently temporal in nature. Rules such as Madd
+(elongation) and Ghunnah (nasalisation) require sustaining a sound for a
+specific duration, while rules such as Idgham (assimilation) involve smooth
+transitions between sounds over time. Detecting these rules therefore requires
+models that can capture and represent temporal dependencies within the
+speech signal.
+This section examines the architectural choices for temporal modelling,
+justifies the selection of a Bidirectional LSTM as the baseline, and then ad-
+dresses two interconnected questions: how the model resolves the alignment
+between audio frames and phoneme labels, and — more importantly — how
+the Coloured Qur’an JSON can be exploited not merely as a post-hoc refer-
+ence but as an active supervision signal during training.
+1.4.1 Temporal Requirements of Tajweed Rules
+Different categories of Tajweed rules impose distinct requirements on tem-
+poral modelling:
+• Duration-based rules (Madd, Ghunnah) require measuring how long
+a stable acoustic state persists. The model must track the continua-
+tion of a sound across multiple frames and compare its duration to an
+expected value.
+• Transition-based rules (Idgham, Ikhfa’) require understanding how
+acoustic features evolve from one sound to the next. These rules call for
+modelling the trajectory of change rather than static frame properties.
+• Burst rules (Qalqalah) involve brief acoustic events that must be
+precisely localised within the temporal sequence.
+As demonstrated by Al Harere and Al Jallad [ 2], models that treat each
+frame independently perform significantly worse than those that explicitly
+model temporal structure, confirming that temporal modelling is not optional
+but essential for accurate Tajweed assessment.
+1.4.2 Comparative Analysis of Architectural Options
+Table 1.3 presents a comparative analysis of the main architectural families
+across evaluation criteria relevant to Tajweed assessment, synthesising results
+from the reviewed literature.
+16
+
+--- PAGE 18 ---
+Table 1.3: Comparative evaluation of temporal modelling architectures for
+Tajweed assessment.
+Criterion CNN LSTM / BiLSTM Transformer
+Local pattern
+modelling
+Excellent — con-
+volutions inherently
+capture local spec-
+tral structure [ 12].
+Good — sequential
+processing learns lo-
+cal patterns.
+Good — attention
+can focus on local
+context.
+Long-range de-
+pendencies
+Limited — recep-
+tive field grows
+slowly; struggles
+with sustained
+Madd [ 12].
+Strong — gated
+memory maintains
+information across
+many frames [ 9].
+Excellent — self-
+attention directly
+relates any two
+positions [ 4].
+Bidirectional
+context
+Requires two-pass
+processing.
+Native — BiLSTM
+processes forward
+and backward si-
+multaneously [7].
+Native — self-
+attention accesses
+all positions.
+Data eﬀiciency High — effec-
+tive with limited
+data [ 12].
+Moderate — re-
+quires more data
+than CNN but less
+than Transformers
+from scratch [ 2].
+Low to Moderate
+— pre-training re-
+duces labelled data
+needs [ 3].
+Empirical
+performance
+(Arabic)
+89% accuracy on 6-
+class Tajweed [ 12].
+95–96% on Tajweed
+rules [ 2, 1].
+PER as low as 3.1%
+on Arabic phoneme
+recognition [ 3].
+Suitability for
+duration rules
+Moderate. Excellent — cell
+state can track
+frame-level dura-
+tion.
+Good — can learn
+duration via atten-
+tion patterns.
+Suitability for
+transition rules
+Limited. Excellent — bidi-
+rectional context
+captures how
+sounds evolve into
+each other.
+Excellent — at-
+tention models
+cross-phoneme rela-
+tionships.
+Suitability for
+burst rules
+Good — learns local
+burst patterns.
+Good — sequen-
+tial context localises
+events.
+Excellent — at-
+tention precisely
+identifies event
+positions.
+17
+
+--- PAGE 19 ---
+1.4.3 Baseline Choice: Bidirectional LSTM
+Based on the analysis in Table 1.3, a Bidirectional LSTM (BiLSTM) is se-
+lected as the primary temporal modelling architecture for the initial proto-
+type. This choice is motivated by four considerations:
+1. Direct empirical validation. LSTMs have been specifically vali-
+dated for Tajweed detection, achieving 95–96% accuracy on rules with
+temporal components [ 2]. This provides a stronger foundation than ar-
+chitectures whose Tajweed-specific performance remains unconfirmed.
+2. Architectural suitability across rule types. The gated memory
+mechanism aligns naturally with duration-based rules, as the cell state
+can maintain activation while acoustic features remain stable. Bidi-
+rectional processing provides access to both past and future context,
+which is essential for transition-based rules such as Idgham.
+3. Practical feasibility. BiLSTMs offer an effective balance between
+representational power and computational requirements, making them
+trainable on datasets of modest size — an important consideration
+given the limited availability of labelled Tajweed data.
+4. Balanced performance. As shown in Table 1.3, BiLSTMs perform
+competitively across all three rule categories, making them a robust
+baseline before any rule-specific specialisation is introduced.
+1.4.4 Sequence Alignment: CTC Loss and Viterbi De-
+coding
+Before the model can predict anything at the phoneme level, it must solve a
+more fundamental problem: the input sequence and the output sequence are
+not the same length and are not aligned in advance.
+A recording of the wordَ݁؇(Mālik) produces, say, 120 audio frames, yet
+the phoneme sequence contains only 5 labels: [m, a￿, l, i, k] . The model
+must learn which frames correspond to which phoneme — but manually
+annotating frame boundaries for every training utterance is prohibitively
+expensive.
+Connectionist Temporal Classification (CTC) resolves this by re-
+framing the training objective. Rather than requiring the model to predict
+the correct phoneme at each individual frame, CTC asks only that the model
+produce the correct phoneme sequence somewhere across the full recording.
+Internally, CTC marginalises over all possible ways of distributing 5 labels
+18
+
+--- PAGE 20 ---
+across 120 frames, and guides the model toward whichever distributions best
+explain the audio. The model therefore learns what was said without needing
+to be told exactly when each phoneme occurs.
+Viterbi decoding recovers that timing information at inference time.
+Given the frame-level probability scores produced by the trained model,
+Viterbi finds the single most probable path through the sequence — yielding
+not just the phoneme labels but their frame boundaries. Knowing that frames
+t1 to t2 correspond to the vowel a￿, for instance, allows the system to mea-
+sure its duration precisely and determine whether a Madd elongation meets
+the required count. As Xie et al. [ 14] demonstrated, this alignment is supe-
+rior to simple edit-distance matching because it can incorporate phonetically
+informed transition probabilities, producing more accurate error localisation.
+In summary, CTC and Viterbi together serve a single purpose: they
+provide the frame-to-phoneme alignment that all downstream analysis
+— duration measurement, rule checking, error reporting — depends on. They
+say nothing about which rule was active at each position. That is where the
+Coloured Qur’an JSON enters.
+1.4.5 Exploiting the Coloured Qur’an JSON: Multi-
+Task Supervision
+The Limitation of Audio-Only Training
+A model trained with CTC alone learns to transcribe what it hears. It
+becomes good at recovering the phoneme sequence but remains entirely ag-
+nostic about Tajweed rules: it has no internal representation of whether a
+given vowel should be a Madd, or whether the nasal sound it just decoded
+should be a Ghunnah. Rule violations can only be detected after the fact, by
+comparing the decoded sequence against the canonical reference.
+This is a missed opportunity. The Coloured Qur’an JSON already en-
+codes, for every character in the canonical text, the exact Tajweed rule that
+applies at that position. If the audio can be aligned with the text — which
+CTC and Viterbi provide — then this rule information can be injected di-
+rectly into training as a second supervision signal.
+The Multi-Task Principle
+The proposed solution is to equip the model with two output heads that
+are trained simultaneously on the same shared BiLSTM representation:
+• Head 1 — Phoneme recognition , trained with CTC loss to produce
+19
+
+--- PAGE 21 ---
+the phoneme sequence from the audio. This head is responsible for the
+alignment problem described above.
+• Head 2 — Rule classification , trained with cross-entropy loss to pre-
+dict, at each phoneme position, which Tajweed rule is active. The su-
+pervision labels come directly from the Coloured Qur’an JSON, mapped
+to the audio via the frame boundaries recovered by Viterbi.
+The two losses are combined into a single joint objective:
+L = λctc Lctc + λrule Lrule (1.1)
+where λctc and λrule are weighting hyperparameters that balance the two
+objectives.
+A Concrete Example
+Consider the phraseِْ݆݁ڢَٴْܭُ (min qablu ). The Coloured Qur’an JSON an-
+notates the Noon of min with the rule Ikhfa’, indicating that it must be
+partially concealed with a nasal quality before the Qāf.
+During training on a correct recitation of this phrase:
+1. CTC aligns the audio frames to the phoneme sequence [m, i, n ikhfa,
+q, a, b, l, u] .
+2. Viterbi recovers the frame boundaries — for instance, the Noon occu-
+pies frames 40–65.
+3. Head 1 is supervised to output n at those frames.
+4. Head 2 is supervised to output Ikhfa' at those same frames, with the
+label drawn from the JSON.
+During inference on a learner’s recitation, if the Noon at that position is
+decoded by Head 2 as Izhar (clear pronunciation) instead of Ikhfa', the sys-
+tem immediately flags a rule error — without needing any separate post-hoc
+comparison step. The model has learned to be rule-aware by construction ,
+not just phoneme-aware.
+Figure 1.3 illustrates this dual-head architecture.
+20
+
+--- PAGE 22 ---
+F eature
+Sequence
+(MFCC
+/ SSL)
+Shared
+BiLSTM
+Encoder
+Head 1
+Phoneme
+Recognition
+Head 2
+Rule
+Classification
+CTC Loss
+audio only
+Cross-
+Entropy
+JSON labels
+Coloured
+Qur’an
+JSON
+Joint Loss
+L =
+λctcLctc+λruleLrule
+Figure 1.3: Dual-head multi-task architecture. The shared BiLSTM encoder
+feeds two output heads trained simultaneously: Head 1 learns phoneme recog-
+nition from the audio via CTC loss; Head 2 learns rule classification from the
+Coloured Qur’an JSON labels via cross-entropy loss. The combined objective
+forces the shared representation to be informative for both tasks.
+Why This is a Better Use of the JSON
+Prior approaches treat the canonical text purely as a post-hoc reference: the
+system decodes the audio, then compares the result to the reference to find
+errors. The Coloured Qur’an JSON is used only at the comparison step, after
+all learning has already occurred.
+The multi-task approach moves the JSON inside the learning process.
+The shared BiLSTM representation must now be simultaneously useful for
+recognising phonemes from audio and for predicting rule labels from the
+JSON. This creates a strong inductive bias: the model cannot simply learn
+spectral patterns in isolation; it must also learn what those patterns mean
+in terms of Tajweed rules. Three practical benefits follow:
+• Rule-aware representations. The shared encoder develops inter-
+nal features that are sensitive to rule-relevant acoustic properties —
+the duration of a vowel, the nasality of a transition — because these
+properties are exactly what the rule head is trained to predict.
+• Direct rule output at inference. Head 2 produces a rule prediction
+for every phoneme position without any additional comparison step.
+Deviations from the expected rule are flagged immediately, providing
+richer error information than a simple correct/incorrect label.
+• Compensation for data scarcity. The JSON annotation is effec-
+tively free: it requires no additional audio recording, only alignment.
+21
+
+--- PAGE 23 ---
+It therefore provides a dense supervision signal that partially compen-
+sates for the limited size of available labelled Tajweed datasets.
+1.4.6 Adapting Temporal Modelling to Rule Categories
+Within the modular architecture, the BiLSTM can be configured differently
+per rule category:
+• Madd and Ghunnah modules rely on the LSTM cell state to main-
+tain activation while the relevant acoustic features persist, effectively
+tracking duration across the required counts.
+• Idgham and Ikhfa’ modules exploit bidirectional processing to model
+how one sound transitions into the next, with both past and future con-
+text contributing to the assimilation judgment.
+• Qalqalah modules use the sequential context to confirm that an
+abrupt burst event occurs at the correct position on a saakin letter,
+reducing false positives from burst-like events elsewhere in the signal.
+1.4.7 Upgrade Path: Transformer-Based Architecture
+The modular design accommodates future upgrades at the level of individual
+modules. Where performance is found to be insuﬀicient after initial evalua-
+tion, a BiLSTM module can be replaced by a Transformer encoder — such
+as a fine-tuned wav2vec 2.0 or HuBERT — without altering the rest of the
+system. The multi-task supervision scheme described in Section 1.4.5 trans-
+fers directly to this upgrade: the same dual-head design applies, with the
+Transformer encoder replacing the BiLSTM as the shared backbone. Such
+models have demonstrated state-of-the-art results on Arabic mispronuncia-
+tion detection [ 3] and represent a natural next step as additional training
+data becomes available or as the rule coverage of the system expands.
+22
+
+--- PAGE 24 ---
+1.5 Diagnosis Aggregation and Feedback Gen-
+eration
+The preceding modules — feature extraction, content verification, and rule
+analysis — each produce specialised outputs. The final stage of the archi-
+tecture consolidates these outputs into a coherent diagnosis and translates it
+into actionable feedback for the learner. This section describes the design of
+the diagnosis aggregation and feedback generation components.
+1.5.1 The Need for Aggregation
+The modular architecture produces two streams of information that must be
+reconciled:
+• The content verification module provides a phoneme-level align-
+ment indicating substitutions, deletions, and insertions relative to the
+canonical text.
+• Each rule analysis module provides a judgment (correct/incorrect)
+at every position where its rule applies, along with supporting diagnos-
+tic details such as measured duration or confidence score.
+These outputs are not independent. A rule judgment may be meaningless
+when applied to a word that was misrecited: if the learner substituted an
+entirely different word, the Tajweed rules expected for the original word
+cannot be fairly assessed. The aggregation module resolves such interactions
+to produce a consistent overall diagnosis.
+1.5.2 Aggregation Strategy
+The aggregation module follows a hierarchical decision process:
+1. Content verification first. The phoneme-level alignment establishes
+what was actually said. Positions flagged as content errors (substitu-
+tion, deletion, or insertion) are recorded as such.
+2. Rule judgment collection. For positions without content errors, the
+judgments from each active rule module are collected. Where multiple
+rules apply to the same position, all relevant judgments are preserved.
+3. Conflict handling. Where rule modules produce conflicting informa-
+tion on the same segment, all judgments are retained in the diagnosis
+object, as multiple errors can co-occur.
+23
+
+--- PAGE 25 ---
+The output of aggregation is a structured error object in JSON format,
+for example:
+{
+" word ": " Malik ",
+" canonical_phonemes ": ["m", "a:", "l", "i", "k"],
+" predicted_phonemes ": ["m", "a", "l", "i", "k"],
+" errors ": [
+{
+" position ": 1,
+" type ": " rule_error ",
+" rule ": " Madd ",
+" detail ": " vowel duration insufficient (1 count ,
+expected 2)"
+}
+]
+}
+This structured representation is technology-agnostic: it can be produced
+by any underlying acoustic model and consumed by any feedback generator,
+preserving the modularity of the overall system.
+1.5.3 From Diagnosis to Feedback
+Every automated Tajweed assessment system reviewed in the literature stops
+at detection [ 5]. Systems output a correctness label but provide no guidance
+on how to correct the mistake. The feedback generation module is designed
+to close this gap.
+The module receives the JSON error object and must produce human-
+readable corrective guidance that is clear, actionable, and grounded in the
+specific Tajweed rule violated. Several properties are required:
+• Clarity — feedback must be understandable to learners with varying
+levels of Tajweed knowledge.
+• Actionability — feedback should state what to do differently, not
+merely what was wrong.
+• Rule specificity — feedback should reference the applicable Tajweed
+rule and, where relevant, the articulatory mechanism involved (makhraj,
+duration count, etc.).
+• Selective presentation — not all errors need to be presented simul-
+taneously; the system should prioritise the most significant issues in a
+given recitation.
+24
+
+--- PAGE 26 ---
+1.5.4 Two-Level Feedback Architecture
+The feedback generation pipeline is structured in two levels, following the
+approach proposed by Xie et al. [ 14]:
+1. Level 1 — Error summarisation. A small fine-tuned language
+model converts the structured JSON error object into a concise natural-
+language description of the error. For example: “In the word Mālik,
+the long vowel after Mīm was held for one count instead of the required
+two. ”
+2. Level 2 — Corrective guidance. A second stage generates the
+actionable corrective message, grounding the explanation in Tajweed
+terminology and articulatory guidance. For example: “This is a Madd
+error. The Alif vowel must be sustained for two full counts. Maintain
+the open mouth position throughout the elongation without interrup-
+tion. ”
+25
+
+--- PAGE 27 ---
+1.6 Chapter Summary
+This chapter has presented the conceptual framework for an automatic Tajweed
+assessment system built on a modular architecture.
+The chapter opened by establishing that recitation errors are not homo-
+geneous: content errors (deviations from the canonical text), Tajweed rule
+misapplications (temporal, articulatory, and assimilation errors), and co-
+occurring combinations of the two each require distinct detection strategies.
+This heterogeneity makes a single monolithic model unsuitable and moti-
+vates a design in which specialist components address acoustically coherent
+subsets of the problem.
+The proposed architecture comprises five components — feature extrac-
+tion, content verification, rule analysis modules, diagnosis aggregation, and
+feedback generation — connected by a clear information flow. The rule anal-
+ysis stage is itself modular: duration rules, transition rules, and burst rules
+are handled by separate modules, each configured for the acoustic properties
+of its category. New rules can be added to the system by assigning them to
+an existing module or creating a new one, without modifying the rest of the
+pipeline.
+Feature representation is treated as a per-module decision. Hand-crafted
+MFCC features are adopted for temporal rule modules, where interpretability
+and computational eﬀiciency are priorities. SSL-based representations are
+adopted for the content verification module, where robustness and contextual
+awareness are required and where the pre-training transfer compensates for
+limited labelled data. Hybrid multi-stream approaches remain available for
+modules that require both.
+Temporal modelling is anchored by a Bidirectional LSTM baseline, val-
+idated on Tajweed tasks in the literature and well suited across all three
+rule categories. CTC loss and Viterbi decoding provide the sequence align-
+ment mechanism that enables fine-grained, phoneme-level error localisation.
+A clear upgrade path to Transformer-based architectures is preserved within
+the modular structure.
+Finally, the diagnosis and feedback components translate technical detec-
+tion outputs into structured error reports and, ultimately, into learner-facing
+corrective guidance. The feedback generation pipeline is described at the
+conceptual level; its detailed design is deferred to a later stage of develop-
+ment, once the detection modules are operational and their outputs can be
+characterised empirically.
+The following chapter details the implementation of this framework: the
+datasets employed, the training protocols, and the experimental configura-
+tions to be evaluated.
+26
+
+--- PAGE 28 ---
+Bibliography
+[1] Abdelfatah Ahmed, Mohamed Bader, Ismail Shahin, Ali Bou Nassif,
+Naoufel Werghi, and Mohammad Basel. Arabic mispronunciation recog-
+nition system using lstm network. Information, 14(7):413, 2023. doi:
+10.3390/info14070413.
+[2] Ahmad Al Harere and Khloud Al Jallad. Mispronunciation detection
+of basic quranic recitation rules using deep learning. arXiv preprint
+arXiv:2305.06429, 2023. URL https://arxiv.org/abs/2305.06429.
+[3] Norah Alrashoudi, Hend Al-Khalifa, and Yousef Alotaibi. Improving
+mispronunciation detection and diagnosis for non-native learners of the
+arabic language. Discover Computing , 28(1):1, 2025. doi: 10.1007/
+s10791-024-09489-8.
+[4] Alexei Baevski, Yuhao Zhou, Abdelrahman Mohamed, and Michael Auli.
+wav2vec 2.0: A framework for self-supervised learning of speech repre-
+sentations. Advances in Neural Information Processing Systems , 33:
+12449–12460, 2020.
+[5] Sener Birgun. A review of automated quranic recitation assessment
+systems. Journal of Islamic Studies and Technology , 2026.
+[6] Steven Davis and Paul Mermelstein. Comparison of parametric rep-
+resentations for monosyllabic word recognition in continuously spoken
+sentences. IEEE Transactions on Acoustics, Speech, and Signal Process-
+ing, 28(4):357–366, 1980. doi: 10.1109/TASSP.1980.1163420.
+[7] Alex Graves and Jürgen Schmidhuber. Framewise phoneme classification
+with bidirectional lstm and other neural network architectures. Neural
+Networks, 18(5-6):602–610, 2005. doi: 10.1016/j.neunet.2005.06.042.
+[8] Esraa Hassan, Abeer Saber, Omar Alqahtani, Nora El-Rashidy, and
+Samar Elbedwehy. An innovative approach to advanced voice classifica-
+27
+
+--- PAGE 29 ---
+tion of sacred quranic recitations through multimodal fusion. Egyptian
+Informatics Journal , 30:100640, 2025. doi: 10.1016/j.eij.2025.100640.
+[9] Sepp Hochreiter and Jürgen Schmidhuber. Long short-term memory.
+Neural Computation, 9(8):1735–1780, 1997. doi: 10.1162/neco.1997.9.8.
+1735.
+[10] Wei-Ning Hsu, Benjamin Bolte, Yao-Hung Tsai, Kushal Lakhotia,
+Ruslan Salakhutdinov, and Abdelrahman Mohamed. Hubert: Self-
+supervised speech representation learning by masked prediction of hid-
+den units. In ICASSP, pages 706–710. IEEE, 2021. doi: 10.1109/
+ICASSP39728.2021.9414231.
+[11] Alec Radford, Jong Wook Kim, Tao Xu, Greg Brockman, Christine
+McLeavey, and Ilya Sutskever. Robust speech recognition via large-scale
+weak supervision. Proceedings of ICML, pages 28492–28518, 2023.
+[12] Mas Muhammad Aqil Salim, Ani Dijah Rahajoe, and Anggraini Puspita
+Sari. Dataset ratio experiment for tajweed law recognition using mfcc
+and cnn features. JEEMECS, 8(2):91–97, 2025. doi: 10.26905/jeemecs.
+v8i2.14789.
+[13] Vibha Tiwari. Mfcc and its applications in speaker recognition. Inter-
+national Journal on Emerging Technologies , 1(1):19–22, 2010.
+[14] Yanlu Xie, Huihang Zhong, Xuhui Lan, and Wenwei Dong. Mispronunci-
+ation detection and diagnosis based on large language models. Computer
+Speech & Language, 99:101942, 2026. doi: 10.1016/j.csl.2026.101942.
+28

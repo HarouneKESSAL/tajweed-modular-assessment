@@ -1,0 +1,4456 @@
+{
+  "split": "train",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt",
+  "blank_penalty": 1.0,
+  "use_cleanup": false,
+  "weights": {
+    "retasy_train_000029_chunk_01": 2.0,
+    "retasy_train_000039_chunk_01": 2.5,
+    "retasy_train_000065_chunk_00": 2.0,
+    "retasy_train_000150_chunk_00": 2.0,
+    "retasy_train_000184_chunk_00": 2.0,
+    "retasy_train_000184_chunk_01": 1.5,
+    "retasy_train_000218_chunk_01": 2.5,
+    "retasy_train_000225_chunk_01": 2.0,
+    "retasy_train_000259_chunk_01": 2.5,
+    "retasy_train_000272_chunk_00": 2.0,
+    "retasy_train_000292_chunk_00": 2.0,
+    "retasy_train_000292_chunk_01": 2.5,
+    "retasy_train_000318_chunk_01": 2.5,
+    "retasy_train_000319_chunk_01": 2.0,
+    "retasy_train_000331_chunk_01": 2.0,
+    "retasy_train_000341_chunk_01": 2.0,
+    "retasy_train_000356_chunk_01": 2.5,
+    "retasy_train_000359_chunk_01": 2.5,
+    "retasy_train_000382_chunk_00": 2.0,
+    "retasy_train_000383_chunk_00": 2.0,
+    "retasy_train_000404_chunk_01": 2.0,
+    "retasy_train_000406_chunk_00": 3.0,
+    "retasy_train_000429_chunk_01": 2.5,
+    "retasy_train_000447_chunk_00": 2.0,
+    "retasy_train_000489_chunk_00": 2.0,
+    "retasy_train_000490_chunk_01": 4.5,
+    "retasy_train_000499_chunk_00": 2.0,
+    "retasy_train_000499_chunk_01": 1.5,
+    "retasy_train_000501_chunk_01": 1.5,
+    "retasy_train_000516_chunk_01": 1.5,
+    "retasy_train_000537_chunk_01": 2.5,
+    "retasy_train_000547_chunk_01": 2.5,
+    "retasy_train_000575_chunk_01": 1.5,
+    "retasy_train_000579_chunk_00": 2.0,
+    "retasy_train_000579_chunk_01": 2.0,
+    "retasy_train_000582_chunk_01": 2.5,
+    "retasy_train_000586_chunk_01": 3.5,
+    "retasy_train_000587_chunk_01": 2.5,
+    "retasy_train_000611_chunk_00": 2.0,
+    "retasy_train_000611_chunk_01": 4.5,
+    "retasy_train_000624_chunk_01": 2.5,
+    "retasy_train_000630_chunk_00": 2.0,
+    "retasy_train_000635_chunk_00": 2.0,
+    "retasy_train_000635_chunk_01": 1.5,
+    "retasy_train_000662_chunk_00": 2.5,
+    "retasy_train_000664_chunk_01": 2.5,
+    "retasy_train_000671_chunk_00": 2.0,
+    "retasy_train_000682_chunk_00": 2.0,
+    "retasy_train_000682_chunk_01": 3.0,
+    "retasy_train_000707_chunk_00": 2.0,
+    "retasy_train_000735_chunk_01": 2.5,
+    "retasy_train_000737_chunk_00": 2.0,
+    "retasy_train_000737_chunk_01": 3.0,
+    "retasy_train_000758_chunk_01": 2.5,
+    "retasy_train_000766_chunk_01": 2.5,
+    "retasy_train_000776_chunk_01": 3.0,
+    "retasy_train_000782_chunk_00": 2.0,
+    "retasy_train_000789_chunk_01": 2.5,
+    "retasy_train_000797_chunk_01": 4.0,
+    "retasy_train_000809_chunk_01": 2.5,
+    "retasy_train_000811_chunk_00": 1.5,
+    "retasy_train_000812_chunk_01": 2.5,
+    "retasy_train_000843_chunk_01": 1.5,
+    "retasy_train_000847_chunk_01": 2.5,
+    "retasy_train_000859_chunk_00": 2.0,
+    "retasy_train_000860_chunk_00": 2.5,
+    "retasy_train_000860_chunk_01": 2.5,
+    "retasy_train_000888_chunk_01": 3.0,
+    "retasy_train_000891_chunk_00": 1.5,
+    "retasy_train_000891_chunk_01": 2.5,
+    "retasy_train_000902_chunk_00": 2.0,
+    "retasy_train_000902_chunk_01": 2.0,
+    "retasy_train_000906_chunk_00": 2.0,
+    "retasy_train_000912_chunk_00": 2.0,
+    "retasy_train_000918_chunk_01": 1.5,
+    "retasy_train_000921_chunk_01": 2.5,
+    "retasy_train_000927_chunk_00": 2.0,
+    "retasy_train_000927_chunk_01": 3.5,
+    "retasy_train_000928_chunk_01": 2.5,
+    "retasy_train_000942_chunk_01": 2.5,
+    "retasy_train_000986_chunk_00": 2.5,
+    "retasy_train_000986_chunk_01": 2.0,
+    "retasy_train_000993_chunk_00": 2.0,
+    "retasy_train_000993_chunk_01": 3.5,
+    "retasy_train_001006_chunk_01": 2.5,
+    "retasy_train_001052_chunk_01": 2.5,
+    "retasy_train_001065_chunk_01": 2.5,
+    "retasy_train_001101_chunk_00": 2.0,
+    "retasy_train_001101_chunk_01": 1.5,
+    "retasy_train_001106_chunk_01": 3.5,
+    "retasy_train_001129_chunk_01": 1.5,
+    "retasy_train_001143_chunk_00": 2.0,
+    "retasy_train_001143_chunk_01": 2.0,
+    "retasy_train_001156_chunk_01": 1.5,
+    "retasy_train_001185_chunk_00": 2.5,
+    "retasy_train_001185_chunk_01": 4.0,
+    "retasy_train_001211_chunk_00": 2.0,
+    "retasy_train_001230_chunk_01": 2.5,
+    "retasy_train_001240_chunk_01": 2.5,
+    "retasy_train_001244_chunk_00": 2.0,
+    "retasy_train_001305_chunk_00": 2.0,
+    "retasy_train_001308_chunk_01": 3.0,
+    "retasy_train_001310_chunk_00": 4.0,
+    "retasy_train_001355_chunk_01": 2.0,
+    "retasy_train_001357_chunk_00": 2.0,
+    "retasy_train_001371_chunk_01": 2.5,
+    "retasy_train_001373_chunk_00": 2.0,
+    "retasy_train_001373_chunk_01": 2.0,
+    "retasy_train_001397_chunk_01": 2.0,
+    "retasy_train_001402_chunk_01": 2.0,
+    "retasy_train_001405_chunk_00": 2.0,
+    "retasy_train_001405_chunk_01": 4.0,
+    "retasy_train_001442_chunk_01": 2.5,
+    "retasy_train_001495_chunk_01": 1.5,
+    "retasy_train_001516_chunk_00": 2.0,
+    "retasy_train_001516_chunk_01": 2.5,
+    "retasy_train_001526_chunk_01": 2.5,
+    "retasy_train_001530_chunk_01": 2.0,
+    "retasy_train_001551_chunk_01": 2.5,
+    "retasy_train_001580_chunk_00": 2.0,
+    "retasy_train_001598_chunk_00": 2.0,
+    "retasy_train_001634_chunk_00": 1.5,
+    "retasy_train_001634_chunk_01": 3.5,
+    "retasy_train_001659_chunk_01": 2.0,
+    "retasy_train_001696_chunk_00": 2.0,
+    "retasy_train_001702_chunk_00": 1.5,
+    "retasy_train_001702_chunk_01": 2.5,
+    "retasy_train_001805_chunk_00": 2.5,
+    "retasy_train_001805_chunk_01": 2.5,
+    "retasy_train_001820_chunk_01": 2.5,
+    "retasy_train_001862_chunk_01": 2.5,
+    "retasy_train_001889_chunk_01": 2.5,
+    "retasy_train_001895_chunk_01": 2.5,
+    "retasy_train_001920_chunk_00": 2.0,
+    "retasy_train_001923_chunk_01": 2.5,
+    "retasy_train_001957_chunk_01": 2.5,
+    "retasy_train_001979_chunk_01": 2.5,
+    "retasy_train_002000_chunk_00": 2.0,
+    "retasy_train_002000_chunk_01": 2.0,
+    "retasy_train_002027_chunk_00": 1.5,
+    "retasy_train_002064_chunk_00": 2.5,
+    "retasy_train_002076_chunk_01": 2.0,
+    "retasy_train_002099_chunk_01": 2.0,
+    "retasy_train_002115_chunk_01": 2.5,
+    "retasy_train_002159_chunk_01": 2.0,
+    "retasy_train_002161_chunk_01": 2.5,
+    "retasy_train_002163_chunk_01": 2.5,
+    "retasy_train_002167_chunk_01": 2.5,
+    "retasy_train_002174_chunk_01": 2.5,
+    "retasy_train_002179_chunk_01": 2.5,
+    "retasy_train_002187_chunk_00": 2.0,
+    "retasy_train_002187_chunk_01": 2.5,
+    "retasy_train_002187_chunk_02": 2.0,
+    "retasy_train_002188_chunk_01": 3.0,
+    "retasy_train_002205_chunk_01": 2.0,
+    "retasy_train_002232_chunk_01": 3.5,
+    "retasy_train_002237_chunk_00": 2.0,
+    "retasy_train_002248_chunk_01": 2.5,
+    "retasy_train_002254_chunk_01": 2.5,
+    "retasy_train_002258_chunk_01": 2.5,
+    "retasy_train_002263_chunk_01": 2.5,
+    "retasy_train_002268_chunk_01": 1.5,
+    "retasy_train_002269_chunk_01": 2.5,
+    "retasy_train_002279_chunk_01": 2.5,
+    "retasy_train_002283_chunk_01": 2.5,
+    "retasy_train_002294_chunk_00": 3.0,
+    "retasy_train_002303_chunk_00": 2.0,
+    "retasy_train_002332_chunk_01": 2.5,
+    "retasy_train_002355_chunk_01": 2.5,
+    "retasy_train_002366_chunk_00": 2.0,
+    "retasy_train_002393_chunk_01": 2.5,
+    "retasy_train_002416_chunk_01": 3.0,
+    "retasy_train_002420_chunk_00": 2.5,
+    "retasy_train_002420_chunk_01": 3.0,
+    "retasy_train_002430_chunk_00": 2.0,
+    "retasy_train_002445_chunk_01": 2.5,
+    "retasy_train_002446_chunk_01": 2.5,
+    "retasy_train_002454_chunk_01": 2.5,
+    "retasy_train_002456_chunk_01": 2.0,
+    "retasy_train_002470_chunk_01": 2.0,
+    "retasy_train_002480_chunk_00": 2.0,
+    "retasy_train_002494_chunk_00": 2.0,
+    "retasy_train_002494_chunk_01": 2.5,
+    "retasy_train_002513_chunk_01": 2.0,
+    "retasy_train_002550_chunk_01": 2.0,
+    "retasy_train_002611_chunk_01": 2.5,
+    "retasy_train_002620_chunk_00": 2.5,
+    "retasy_train_002620_chunk_01": 2.0,
+    "retasy_train_002639_chunk_00": 2.5,
+    "retasy_train_002669_chunk_01": 2.5,
+    "retasy_train_002671_chunk_00": 2.0,
+    "retasy_train_002671_chunk_01": 2.0,
+    "retasy_train_002696_chunk_01": 2.0,
+    "retasy_train_002701_chunk_01": 4.0,
+    "retasy_train_002703_chunk_00": 1.5,
+    "retasy_train_002703_chunk_01": 2.5,
+    "retasy_train_002719_chunk_00": 1.5,
+    "retasy_train_002728_chunk_00": 2.0,
+    "retasy_train_002731_chunk_00": 2.0,
+    "retasy_train_002731_chunk_01": 4.5,
+    "retasy_train_002735_chunk_00": 2.0,
+    "retasy_train_002735_chunk_01": 2.0,
+    "retasy_train_002735_chunk_02": 2.0,
+    "retasy_train_002760_chunk_01": 3.5,
+    "retasy_train_002776_chunk_00": 2.0,
+    "retasy_train_002776_chunk_01": 1.5,
+    "retasy_train_002873_chunk_01": 2.5,
+    "retasy_train_002914_chunk_01": 3.5,
+    "retasy_train_002943_chunk_01": 2.5,
+    "retasy_train_002953_chunk_00": 2.0,
+    "retasy_train_002985_chunk_01": 2.5,
+    "retasy_train_003012_chunk_00": 2.0,
+    "retasy_train_003012_chunk_01": 2.0,
+    "retasy_train_003040_chunk_00": 2.5,
+    "retasy_train_003040_chunk_01": 1.5,
+    "retasy_train_003062_chunk_01": 2.5,
+    "retasy_train_003065_chunk_00": 2.5,
+    "retasy_train_003065_chunk_01": 2.5,
+    "retasy_train_003065_chunk_02": 2.0,
+    "retasy_train_003104_chunk_01": 2.5,
+    "retasy_train_003126_chunk_00": 2.0,
+    "retasy_train_003126_chunk_01": 2.5,
+    "retasy_train_003142_chunk_01": 2.5,
+    "retasy_train_003153_chunk_00": 2.0,
+    "retasy_train_003158_chunk_01": 2.5,
+    "retasy_train_003191_chunk_01": 2.5,
+    "retasy_train_003229_chunk_01": 1.5,
+    "retasy_train_003250_chunk_02": 2.0,
+    "retasy_train_003252_chunk_01": 2.5,
+    "retasy_train_003285_chunk_01": 1.5,
+    "retasy_train_003298_chunk_00": 2.5,
+    "retasy_train_003298_chunk_01": 1.5,
+    "retasy_train_003298_chunk_02": 1.5,
+    "retasy_train_003319_chunk_01": 2.5,
+    "retasy_train_003332_chunk_01": 1.5,
+    "retasy_train_003335_chunk_01": 3.5,
+    "retasy_train_003360_chunk_01": 3.0,
+    "retasy_train_003384_chunk_01": 2.5,
+    "retasy_train_003388_chunk_01": 2.5,
+    "retasy_train_003389_chunk_01": 2.0,
+    "retasy_train_003452_chunk_00": 2.0,
+    "retasy_train_003452_chunk_01": 2.0,
+    "retasy_train_003459_chunk_00": 2.0,
+    "retasy_train_003459_chunk_01": 3.5,
+    "retasy_train_003486_chunk_01": 2.0,
+    "retasy_train_003494_chunk_00": 2.0,
+    "retasy_train_003494_chunk_01": 2.5,
+    "retasy_train_003505_chunk_01": 2.5,
+    "retasy_train_003509_chunk_01": 2.5,
+    "retasy_train_003510_chunk_01": 2.5,
+    "retasy_train_003524_chunk_01": 2.5,
+    "retasy_train_003531_chunk_00": 2.5,
+    "retasy_train_003577_chunk_01": 2.5,
+    "retasy_train_003595_chunk_01": 2.0,
+    "retasy_train_003599_chunk_00": 2.5,
+    "retasy_train_003635_chunk_01": 1.5,
+    "retasy_train_003665_chunk_01": 2.5,
+    "retasy_train_003705_chunk_00": 2.0,
+    "retasy_train_003733_chunk_01": 2.5,
+    "retasy_train_003781_chunk_00": 2.5,
+    "retasy_train_003781_chunk_01": 1.5,
+    "retasy_train_003781_chunk_02": 1.5,
+    "retasy_train_003785_chunk_01": 2.5,
+    "retasy_train_003795_chunk_01": 2.0,
+    "retasy_train_003813_chunk_00": 2.0,
+    "retasy_train_003813_chunk_01": 2.0,
+    "retasy_train_003832_chunk_00": 1.5,
+    "retasy_train_003832_chunk_01": 2.5,
+    "retasy_train_003840_chunk_00": 2.0,
+    "retasy_train_003840_chunk_02": 1.5,
+    "retasy_train_003852_chunk_00": 2.0,
+    "retasy_train_003853_chunk_00": 2.0,
+    "retasy_train_003853_chunk_01": 2.0,
+    "retasy_train_003897_chunk_00": 1.5,
+    "retasy_train_003897_chunk_01": 3.5,
+    "retasy_train_003926_chunk_00": 2.0,
+    "retasy_train_003928_chunk_00": 4.0,
+    "retasy_train_003932_chunk_00": 2.0,
+    "retasy_train_003971_chunk_00": 2.0,
+    "retasy_train_003975_chunk_01": 3.0,
+    "retasy_train_004028_chunk_01": 2.0,
+    "retasy_train_004032_chunk_01": 3.5,
+    "retasy_train_004040_chunk_00": 2.0,
+    "retasy_train_004041_chunk_01": 2.5,
+    "retasy_train_004065_chunk_01": 2.5,
+    "retasy_train_004094_chunk_00": 3.0,
+    "retasy_train_004094_chunk_01": 1.5,
+    "retasy_train_004096_chunk_00": 1.5,
+    "retasy_train_004096_chunk_01": 2.5,
+    "retasy_train_004129_chunk_01": 3.0,
+    "retasy_train_004152_chunk_01": 2.5,
+    "retasy_train_004157_chunk_01": 2.0,
+    "retasy_train_004160_chunk_01": 2.0,
+    "retasy_train_004200_chunk_01": 2.5,
+    "retasy_train_004214_chunk_00": 3.5,
+    "retasy_train_004227_chunk_01": 2.5,
+    "retasy_train_004242_chunk_00": 2.0,
+    "retasy_train_004268_chunk_01": 2.0,
+    "retasy_train_004316_chunk_01": 2.5,
+    "retasy_train_004333_chunk_00": 1.5,
+    "retasy_train_004333_chunk_01": 5.0,
+    "retasy_train_004341_chunk_01": 2.0,
+    "retasy_train_004351_chunk_01": 2.5,
+    "retasy_train_004359_chunk_01": 2.5,
+    "retasy_train_004385_chunk_01": 2.5,
+    "retasy_train_004412_chunk_00": 2.0,
+    "retasy_train_004424_chunk_01": 2.5,
+    "retasy_train_004431_chunk_01": 2.5,
+    "retasy_train_004465_chunk_01": 2.0,
+    "retasy_train_004475_chunk_01": 2.0,
+    "retasy_train_004557_chunk_00": 2.0,
+    "retasy_train_004557_chunk_01": 3.0,
+    "retasy_train_004601_chunk_01": 2.5,
+    "retasy_train_004694_chunk_00": 2.0,
+    "retasy_train_004720_chunk_01": 2.5,
+    "retasy_train_004722_chunk_01": 2.5,
+    "retasy_train_004746_chunk_01": 2.5,
+    "retasy_train_004759_chunk_01": 3.0,
+    "retasy_train_004761_chunk_00": 2.0,
+    "retasy_train_004782_chunk_00": 2.0,
+    "retasy_train_004797_chunk_00": 2.5,
+    "retasy_train_004868_chunk_01": 1.5,
+    "retasy_train_004878_chunk_00": 4.0,
+    "retasy_train_004913_chunk_01": 2.5,
+    "retasy_train_004919_chunk_01": 2.0,
+    "retasy_train_004958_chunk_01": 3.0,
+    "retasy_train_004961_chunk_01": 3.0,
+    "retasy_train_004998_chunk_01": 4.5,
+    "retasy_train_005006_chunk_02": 3.5,
+    "retasy_train_005039_chunk_01": 2.5,
+    "retasy_train_005093_chunk_01": 2.5,
+    "retasy_train_005109_chunk_01": 3.0,
+    "retasy_train_005132_chunk_00": 2.0,
+    "retasy_train_005132_chunk_01": 1.5,
+    "retasy_train_005147_chunk_00": 3.0,
+    "retasy_train_005147_chunk_01": 3.5,
+    "retasy_train_005148_chunk_01": 2.5,
+    "retasy_train_005153_chunk_01": 2.5,
+    "retasy_train_005154_chunk_00": 2.5,
+    "retasy_train_005154_chunk_01": 2.5,
+    "retasy_train_005167_chunk_00": 2.0,
+    "retasy_train_005167_chunk_01": 2.5,
+    "retasy_train_005167_chunk_02": 2.0,
+    "retasy_train_005204_chunk_01": 2.5,
+    "retasy_train_005223_chunk_01": 2.5,
+    "retasy_train_005244_chunk_01": 2.5,
+    "retasy_train_005294_chunk_01": 2.5,
+    "retasy_train_005304_chunk_01": 2.5,
+    "retasy_train_005307_chunk_01": 2.5,
+    "retasy_train_005350_chunk_00": 2.0,
+    "retasy_train_005350_chunk_02": 2.0,
+    "retasy_train_005351_chunk_00": 1.5,
+    "retasy_train_005351_chunk_01": 1.5,
+    "retasy_train_005357_chunk_00": 2.0
+  },
+  "hardcases": [
+    {
+      "sample_id": "retasy_train_000029_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000039_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000065_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000150_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000184_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000184_chunk_01",
+      "weight": 1.5,
+      "gold": "ماتعبدون",
+      "pred": "ماتععبدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000218_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنتعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000225_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000259_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000272_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000292_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000292_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000318_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000319_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستتعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000331_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "وايالكنستعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000341_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستتين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000356_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000359_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000382_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملكلناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000383_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000404_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000406_chunk_00",
+      "weight": 3.0,
+      "gold": "ملكالناس",
+      "pred": "ملناس",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000429_chunk_01",
+      "weight": 2.5,
+      "gold": "والناس",
+      "pred": "الناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000447_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000489_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000490_chunk_01",
+      "weight": 4.5,
+      "gold": "واياكنستعين",
+      "pred": "اياكحنسين",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000499_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000499_chunk_01",
+      "weight": 1.5,
+      "gold": "عابدما",
+      "pred": "عاببدما",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000501_chunk_01",
+      "weight": 1.5,
+      "gold": "الوسواس",
+      "pred": "الوسوواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000516_chunk_01",
+      "weight": 1.5,
+      "gold": "والناس",
+      "pred": "والخناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000537_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000547_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000575_chunk_01",
+      "weight": 1.5,
+      "gold": "الوسواس",
+      "pred": "الووسواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000579_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000579_chunk_01",
+      "weight": 2.0,
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000582_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000586_chunk_01",
+      "weight": 3.5,
+      "gold": "الوسواس",
+      "pred": "الرحون",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000587_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000611_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000611_chunk_01",
+      "weight": 4.5,
+      "gold": "ماتعبدون",
+      "pred": "عابدحعبمن",
+      "edit_distance": 6,
+      "categories": [
+        "mismatch",
+        "wrong_prefix"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000624_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000630_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000635_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000635_chunk_01",
+      "weight": 1.5,
+      "gold": "ماتعبدون",
+      "pred": "ماتعبددون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000662_chunk_00",
+      "weight": 2.5,
+      "gold": "لااعبد",
+      "pred": "لابد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000664_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000671_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملكلناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000682_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000682_chunk_01",
+      "weight": 3.0,
+      "gold": "ماتعبدون",
+      "pred": "ماتبو",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000707_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000735_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000737_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000737_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "وايالكنسسعيس",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000758_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000766_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000776_chunk_01",
+      "weight": 3.0,
+      "gold": "هوالابتر",
+      "pred": "والبتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000782_chunk_00",
+      "weight": 2.0,
+      "gold": "الرحمن",
+      "pred": "الرحم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000789_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000797_chunk_01",
+      "weight": 4.0,
+      "gold": "والناس",
+      "pred": "الرحبد",
+      "edit_distance": 5,
+      "categories": [
+        "mismatch",
+        "wrong_prefix"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000809_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000811_chunk_00",
+      "weight": 1.5,
+      "gold": "الرحمن",
+      "pred": "الرحيمن",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000812_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000843_chunk_01",
+      "weight": 1.5,
+      "gold": "الوسواس",
+      "pred": "الوسوواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000847_chunk_01",
+      "weight": 2.5,
+      "gold": "والناس",
+      "pred": "الناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000859_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000860_chunk_00",
+      "weight": 2.5,
+      "gold": "اياكنعبد",
+      "pred": "اكنعبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000860_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000888_chunk_01",
+      "weight": 3.0,
+      "gold": "ماتعبدون",
+      "pred": "اعبدون",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000891_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنععبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000891_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000902_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000902_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستععين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000906_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملكاناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000912_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000918_chunk_01",
+      "weight": 1.5,
+      "gold": "الوسواس",
+      "pred": "الووسواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000921_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000927_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000927_chunk_01",
+      "weight": 3.5,
+      "gold": "واياكنستعين",
+      "pred": "اياكنستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000928_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000942_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000986_chunk_00",
+      "weight": 2.5,
+      "gold": "لااعبد",
+      "pred": "الاعبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000986_chunk_01",
+      "weight": 2.0,
+      "gold": "ماتعبدون",
+      "pred": "ماعبددون",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000993_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_000993_chunk_01",
+      "weight": 3.5,
+      "gold": "ماتعبدون",
+      "pred": "اتعبد",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001006_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001052_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستعععين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001065_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001101_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001101_chunk_01",
+      "weight": 1.5,
+      "gold": "ماتعبدون",
+      "pred": "ماتععبدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001106_chunk_01",
+      "weight": 3.5,
+      "gold": "واياكنستعين",
+      "pred": "اياكنستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001129_chunk_01",
+      "weight": 1.5,
+      "gold": "الرحيم",
+      "pred": "الرحيمن",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001143_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001143_chunk_01",
+      "weight": 2.0,
+      "gold": "عابدما",
+      "pred": "عبدما",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001156_chunk_01",
+      "weight": 1.5,
+      "gold": "الرحيم",
+      "pred": "الرحيمن",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001185_chunk_00",
+      "weight": 2.5,
+      "gold": "لااعبد",
+      "pred": "الاعبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001185_chunk_01",
+      "weight": 4.0,
+      "gold": "ماتعبدون",
+      "pred": "عاتبوس",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001211_chunk_00",
+      "weight": 2.0,
+      "gold": "انشانيك",
+      "pred": "اشانيك",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001230_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001240_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001244_chunk_00",
+      "weight": 2.0,
+      "gold": "منالجنة",
+      "pred": "منالنة",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001305_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001308_chunk_01",
+      "weight": 3.0,
+      "gold": "هوالابتر",
+      "pred": "هواكبةر",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001310_chunk_00",
+      "weight": 4.0,
+      "gold": "لااعبد",
+      "pred": "علبد",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001355_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001357_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملالناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001371_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "هولابر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001373_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001373_chunk_01",
+      "weight": 2.0,
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001397_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنوستعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001402_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001405_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001405_chunk_01",
+      "weight": 4.0,
+      "gold": "واياكنستعين",
+      "pred": "اياكنعين",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001442_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "وايالكستعين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001495_chunk_01",
+      "weight": 1.5,
+      "gold": "الرحيم",
+      "pred": "الرحين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001516_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001516_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001526_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001530_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001551_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001580_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001598_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001634_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "ايالكنعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001634_chunk_01",
+      "weight": 3.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسيس",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001659_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001696_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001702_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنععبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001702_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001805_chunk_00",
+      "weight": 2.5,
+      "gold": "انشانيك",
+      "pred": "انارنين",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001805_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "والاابتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001820_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001862_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001889_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001895_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001920_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملالناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001923_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001957_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_001979_chunk_01",
+      "weight": 2.5,
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002000_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002000_chunk_01",
+      "weight": 2.0,
+      "gold": "ماتعبدون",
+      "pred": "ماتعدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002027_chunk_00",
+      "weight": 1.5,
+      "gold": "منالجنة",
+      "pred": "منكالجنة",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002064_chunk_00",
+      "weight": 2.5,
+      "gold": "ملكالناس",
+      "pred": "ملاناس",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002076_chunk_01",
+      "weight": 2.0,
+      "gold": "هوالابتر",
+      "pred": "هوالاتر",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002099_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002115_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002159_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002161_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "هوابتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002163_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002167_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستعععين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002174_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "هالبتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002179_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002187_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002187_chunk_01",
+      "weight": 2.5,
+      "gold": "عابدما",
+      "pred": "عادوا",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002187_chunk_02",
+      "weight": 2.0,
+      "gold": "عبدتم",
+      "pred": "عبدبمد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002188_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنتتيمن",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002205_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسستعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002232_chunk_01",
+      "weight": 3.5,
+      "gold": "واياكنستعين",
+      "pred": "اياكنستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002237_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002248_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002254_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002258_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002263_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002268_chunk_01",
+      "weight": 1.5,
+      "gold": "والناس",
+      "pred": "والخناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002269_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002279_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002283_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002294_chunk_00",
+      "weight": 3.0,
+      "gold": "لااعبد",
+      "pred": "اعبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002303_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002332_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002355_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002366_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملالناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002393_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002416_chunk_01",
+      "weight": 3.0,
+      "gold": "هوالابتر",
+      "pred": "هالبتتر",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002420_chunk_00",
+      "weight": 2.5,
+      "gold": "لااعبد",
+      "pred": "لابد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002420_chunk_01",
+      "weight": 3.0,
+      "gold": "ماتعبدون",
+      "pred": "اعبدون",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002430_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002445_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002446_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002454_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002456_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002470_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002480_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002494_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002494_chunk_01",
+      "weight": 2.5,
+      "gold": "ماتعبدون",
+      "pred": "ماتدون",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002513_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الخنوسواس",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002550_chunk_01",
+      "weight": 2.0,
+      "gold": "الرحيم",
+      "pred": "الرحم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002611_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "هالاتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002620_chunk_00",
+      "weight": 2.5,
+      "gold": "انشانيك",
+      "pred": "انشريك",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002620_chunk_01",
+      "weight": 2.0,
+      "gold": "هوالابتر",
+      "pred": "هوالبتر",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002639_chunk_00",
+      "weight": 2.5,
+      "gold": "ولاانا",
+      "pred": "ولاا",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002669_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "وايالكنستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002671_chunk_00",
+      "weight": 2.0,
+      "gold": "انشانيك",
+      "pred": "انانيك",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002671_chunk_01",
+      "weight": 2.0,
+      "gold": "هوالابتر",
+      "pred": "هوالبتر",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002696_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستععين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002701_chunk_01",
+      "weight": 4.0,
+      "gold": "واياكنستعين",
+      "pred": "واكحستين",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002703_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنععبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002703_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002719_chunk_00",
+      "weight": 1.5,
+      "gold": "لااعبد",
+      "pred": "لاااعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002728_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملالناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002731_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002731_chunk_01",
+      "weight": 4.5,
+      "gold": "ماتعبدون",
+      "pred": "عادبمن",
+      "edit_distance": 5,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002735_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002735_chunk_01",
+      "weight": 2.0,
+      "gold": "عابدما",
+      "pred": "عابما",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002735_chunk_02",
+      "weight": 2.0,
+      "gold": "عبدتم",
+      "pred": "عبدم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002760_chunk_01",
+      "weight": 3.5,
+      "gold": "واياكنستعين",
+      "pred": "اياكنستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002776_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002776_chunk_01",
+      "weight": 1.5,
+      "gold": "عابدما",
+      "pred": "عاببدما",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002873_chunk_01",
+      "weight": 2.5,
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002914_chunk_01",
+      "weight": 3.5,
+      "gold": "هوالابتر",
+      "pred": "وابتر",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002943_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002953_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_002985_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003012_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003012_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "وايالكنستعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003040_chunk_00",
+      "weight": 2.5,
+      "gold": "لااعبد",
+      "pred": "الاعبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003040_chunk_01",
+      "weight": 1.5,
+      "gold": "ماتعبدون",
+      "pred": "ماتععبدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003062_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003065_chunk_00",
+      "weight": 2.5,
+      "gold": "ولاانا",
+      "pred": "ولاا",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003065_chunk_01",
+      "weight": 2.5,
+      "gold": "عابدما",
+      "pred": "عادم",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003065_chunk_02",
+      "weight": 2.0,
+      "gold": "عبدتم",
+      "pred": "عبدم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003104_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003126_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "ايالكنبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003126_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003142_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003153_chunk_00",
+      "weight": 2.0,
+      "gold": "الرحمن",
+      "pred": "الرحم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003158_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003191_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "والابتر",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003229_chunk_01",
+      "weight": 1.5,
+      "gold": "الوسواس",
+      "pred": "الحسواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003250_chunk_02",
+      "weight": 2.0,
+      "gold": "عبدتم",
+      "pred": "عبدم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003252_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسسسعين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003285_chunk_01",
+      "weight": 1.5,
+      "gold": "والناس",
+      "pred": "والخناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003298_chunk_00",
+      "weight": 2.5,
+      "gold": "ولاانا",
+      "pred": "ولاا",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003298_chunk_01",
+      "weight": 1.5,
+      "gold": "عابدما",
+      "pred": "عاببدما",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003298_chunk_02",
+      "weight": 1.5,
+      "gold": "عبدتم",
+      "pred": "عبديم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003319_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003332_chunk_01",
+      "weight": 1.5,
+      "gold": "الرحيم",
+      "pred": "الرحيمن",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003335_chunk_01",
+      "weight": 3.5,
+      "gold": "هوالابتر",
+      "pred": "والبار",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003360_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "اياكنستعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003384_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003388_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "هالبتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003389_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003452_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003452_chunk_01",
+      "weight": 2.0,
+      "gold": "ماتعبدون",
+      "pred": "ماتعبدمد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003459_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003459_chunk_01",
+      "weight": 3.5,
+      "gold": "ماتعبدون",
+      "pred": "عبتبدون",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003486_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003494_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "اياكنبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003494_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003505_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003509_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003510_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003524_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003531_chunk_00",
+      "weight": 2.5,
+      "gold": "لااعبد",
+      "pred": "لابد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003577_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003595_chunk_01",
+      "weight": 2.0,
+      "gold": "هوالابتر",
+      "pred": "هوالبتر",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003599_chunk_00",
+      "weight": 2.5,
+      "gold": "لااعبد",
+      "pred": "لابد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003635_chunk_01",
+      "weight": 1.5,
+      "gold": "الوسواس",
+      "pred": "الوسوواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003665_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003705_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003733_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003781_chunk_00",
+      "weight": 2.5,
+      "gold": "ولاانا",
+      "pred": "ولاا",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003781_chunk_01",
+      "weight": 1.5,
+      "gold": "عابدما",
+      "pred": "عابددما",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003781_chunk_02",
+      "weight": 1.5,
+      "gold": "عبدتم",
+      "pred": "عببدتم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003785_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003795_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003813_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003813_chunk_01",
+      "weight": 2.0,
+      "gold": "ماتعبدون",
+      "pred": "ماتععبددون",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003832_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنععبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003832_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003840_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003840_chunk_02",
+      "weight": 1.5,
+      "gold": "عبدتم",
+      "pred": "عبدتمن",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003852_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003853_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاابد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003853_chunk_01",
+      "weight": 2.0,
+      "gold": "ماتعبدون",
+      "pred": "مابتبدون",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003897_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنععبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003897_chunk_01",
+      "weight": 3.5,
+      "gold": "واياكنستعين",
+      "pred": "اياكنستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003926_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003928_chunk_00",
+      "weight": 4.0,
+      "gold": "ولاانا",
+      "pred": "ارحان",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003932_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003971_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_003975_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "اياكنستعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004028_chunk_01",
+      "weight": 2.0,
+      "gold": "والناس",
+      "pred": "والاس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004032_chunk_01",
+      "weight": 3.5,
+      "gold": "واياكنستعين",
+      "pred": "وايالكنسين",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004040_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملكالنا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004041_chunk_01",
+      "weight": 2.5,
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004065_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004094_chunk_00",
+      "weight": 3.0,
+      "gold": "لااعبد",
+      "pred": "علرحعبد",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "wrong_prefix"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004094_chunk_01",
+      "weight": 1.5,
+      "gold": "ماتعبدون",
+      "pred": "ماتعببدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004096_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنععبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004096_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004129_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنعين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004152_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004157_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستععين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004160_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004200_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "والابتر",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004214_chunk_00",
+      "weight": 3.5,
+      "gold": "اياكنعبد",
+      "pred": "ايالكنن",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004227_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "وايالكنستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004242_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004268_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستععين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004316_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004333_chunk_00",
+      "weight": 1.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنععبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004333_chunk_01",
+      "weight": 5.0,
+      "gold": "واياكنستعين",
+      "pred": "الكحستين",
+      "edit_distance": 5,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004341_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004351_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004359_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004385_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسعيمن",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004412_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004424_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004431_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004465_chunk_01",
+      "weight": 2.0,
+      "gold": "واياكنستعين",
+      "pred": "وايالكنستعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004475_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004557_chunk_00",
+      "weight": 2.0,
+      "gold": "اياكنعبد",
+      "pred": "الارنعبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004557_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "واكنستعين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004601_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004694_chunk_00",
+      "weight": 2.0,
+      "gold": "ملكالناس",
+      "pred": "ملكلناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004720_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004722_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004746_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004759_chunk_01",
+      "weight": 3.0,
+      "gold": "هوالابتر",
+      "pred": "ولابتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "wrong_prefix",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004761_chunk_00",
+      "weight": 2.0,
+      "gold": "الرحمن",
+      "pred": "الرحم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004782_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004797_chunk_00",
+      "weight": 2.5,
+      "gold": "اياكنعبد",
+      "pred": "ايالنبد",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004868_chunk_01",
+      "weight": 1.5,
+      "gold": "والناس",
+      "pred": "والرناس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004878_chunk_00",
+      "weight": 4.0,
+      "gold": "ملكالناس",
+      "pred": "مالرنين",
+      "edit_distance": 5,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004913_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنوستين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004919_chunk_01",
+      "weight": 2.0,
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004958_chunk_01",
+      "weight": 3.0,
+      "gold": "هوالابتر",
+      "pred": "هالبتار",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004961_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنسين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_004998_chunk_01",
+      "weight": 4.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنياس",
+      "edit_distance": 5,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005006_chunk_02",
+      "weight": 3.5,
+      "gold": "الخناس",
+      "pred": "الرحبمد",
+      "edit_distance": 5,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005039_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005093_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005109_chunk_01",
+      "weight": 3.0,
+      "gold": "واياكنستعين",
+      "pred": "واياكنعين",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005132_chunk_00",
+      "weight": 2.0,
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005132_chunk_01",
+      "weight": 1.5,
+      "gold": "ماتعبدون",
+      "pred": "ماععبدون",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005147_chunk_00",
+      "weight": 3.0,
+      "gold": "لااعبد",
+      "pred": "لربد",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005147_chunk_01",
+      "weight": 3.5,
+      "gold": "ماتعبدون",
+      "pred": "ملعبدتس",
+      "edit_distance": 4,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005148_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005153_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "هالبتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005154_chunk_00",
+      "weight": 2.5,
+      "gold": "اياكنعبد",
+      "pred": "اياكنحعمن",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005154_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005167_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005167_chunk_01",
+      "weight": 2.5,
+      "gold": "عابدما",
+      "pred": "عالبحمد",
+      "edit_distance": 3,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005167_chunk_02",
+      "weight": 2.0,
+      "gold": "عبدتم",
+      "pred": "ععبدم",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005204_chunk_01",
+      "weight": 2.5,
+      "gold": "هوالابتر",
+      "pred": "هالبتر",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005223_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنتعين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005244_chunk_01",
+      "weight": 2.5,
+      "gold": "الوسواس",
+      "pred": "الساس",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005294_chunk_01",
+      "weight": 2.5,
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "edit_distance": 2,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005304_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005307_chunk_01",
+      "weight": 2.5,
+      "gold": "واياكنستعين",
+      "pred": "واياكنستين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "long_chunk",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005350_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005350_chunk_02",
+      "weight": 2.0,
+      "gold": "عبدتم",
+      "pred": "عبدم",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005351_chunk_00",
+      "weight": 1.5,
+      "gold": "الرحمن",
+      "pred": "الرحمس",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005351_chunk_01",
+      "weight": 1.5,
+      "gold": "الرحيم",
+      "pred": "الرحين",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch"
+      ]
+    },
+    {
+      "sample_id": "retasy_train_005357_chunk_00",
+      "weight": 2.0,
+      "gold": "ولاانا",
+      "pred": "ولانا",
+      "edit_distance": 1,
+      "categories": [
+        "mismatch",
+        "deletion_bias"
+      ]
+    }
+  ],
+  "stats": {
+    "rows": 1555,
+    "boosted_rows": 354,
+    "mean_weight": 2.3361581920903953,
+    "max_weight": 5.0,
+    "categories": {
+      "mismatch": 354,
+      "deletion_bias": 270,
+      "long_chunk": 132,
+      "wrong_prefix": 34
+    }
+  },
+  "hardest_phrases": [
+    {
+      "text": "ولاانا",
+      "count": 29,
+      "error_rate": 0.8620689655172413,
+      "mean_edit_distance": 1.103448275862069
+    },
+    {
+      "text": "لااعبد",
+      "count": 43,
+      "error_rate": 0.8604651162790697,
+      "mean_edit_distance": 1.2093023255813953
+    },
+    {
+      "text": "واياكنستعين",
+      "count": 219,
+      "error_rate": 0.6027397260273972,
+      "mean_edit_distance": 0.8036529680365296
+    },
+    {
+      "text": "هوالابتر",
+      "count": 37,
+      "error_rate": 0.5675675675675675,
+      "mean_edit_distance": 1.1081081081081081
+    },
+    {
+      "text": "ماتعبدون",
+      "count": 43,
+      "error_rate": 0.5348837209302325,
+      "mean_edit_distance": 1.186046511627907
+    },
+    {
+      "text": "الوسواس",
+      "count": 65,
+      "error_rate": 0.47692307692307695,
+      "mean_edit_distance": 0.6153846153846154
+    },
+    {
+      "text": "عابدما",
+      "count": 29,
+      "error_rate": 0.3103448275862069,
+      "mean_edit_distance": 0.4482758620689655
+    },
+    {
+      "text": "عبدتم",
+      "count": 29,
+      "error_rate": 0.3103448275862069,
+      "mean_edit_distance": 0.3793103448275862
+    },
+    {
+      "text": "ملكالناس",
+      "count": 63,
+      "error_rate": 0.19047619047619047,
+      "mean_edit_distance": 0.30158730158730157
+    },
+    {
+      "text": "اياكنعبد",
+      "count": 219,
+      "error_rate": 0.1324200913242009,
+      "mean_edit_distance": 0.1735159817351598
+    },
+    {
+      "text": "والناس",
+      "count": 64,
+      "error_rate": 0.125,
+      "mean_edit_distance": 0.1875
+    },
+    {
+      "text": "انشانيك",
+      "count": 37,
+      "error_rate": 0.10810810810810811,
+      "mean_edit_distance": 0.1891891891891892
+    },
+    {
+      "text": "منالجنة",
+      "count": 64,
+      "error_rate": 0.03125,
+      "mean_edit_distance": 0.03125
+    },
+    {
+      "text": "الرحيم",
+      "count": 242,
+      "error_rate": 0.024793388429752067,
+      "mean_edit_distance": 0.024793388429752067
+    },
+    {
+      "text": "الرحمن",
+      "count": 242,
+      "error_rate": 0.02066115702479339,
+      "mean_edit_distance": 0.02066115702479339
+    },
+    {
+      "text": "الخناس",
+      "count": 65,
+      "error_rate": 0.015384615384615385,
+      "mean_edit_distance": 0.07692307692307693
+    },
+    {
+      "text": "منشر",
+      "count": 65,
+      "error_rate": 0.0,
+      "mean_edit_distance": 0.0
+    }
+  ]
+}

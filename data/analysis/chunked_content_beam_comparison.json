@@ -1,0 +1,27 @@
+{
+  "best_greedy": {
+    "samples": 389,
+    "exact_match": 0.39845758354755784,
+    "char_accuracy": 0.7164746992510481,
+    "edit_distance": 2.017994858611825,
+    "blank_penalty": 1.0,
+    "use_cleanup": false,
+    "decoder": "greedy",
+    "beam_width": 1
+  },
+  "best_beam": {
+    "samples": 389,
+    "exact_match": 0.0,
+    "char_accuracy": 0.29456147965145385,
+    "edit_distance": 5.290488431876606,
+    "blank_penalty": 0.4,
+    "use_cleanup": true,
+    "decoder": "beam",
+    "beam_width": 8
+  },
+  "delta": {
+    "exact_match": -0.39845758354755784,
+    "char_accuracy": -0.42191321959959427,
+    "edit_distance": 3.2724935732647813
+  }
+}

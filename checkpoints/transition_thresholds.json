@@ -1,0 +1,28 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_transition_subset.jsonl",
+  "thresholds": {
+    "ikhfa": 0.4,
+    "idgham": 0.45
+  },
+  "metrics": {
+    "accuracy": 0.7482014298439026,
+    "macro_accuracy": 0.7996722259712715,
+    "confusion": [
+      [
+        58,
+        10,
+        14
+      ],
+      [
+        10,
+        36,
+        0
+      ],
+      [
+        1,
+        0,
+        10
+      ]
+    ]
+  }
+}

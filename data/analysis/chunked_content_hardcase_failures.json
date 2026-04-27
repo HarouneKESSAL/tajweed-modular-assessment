@@ -1,0 +1,369 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_content_chunks.jsonl",
+  "split": "val",
+  "samples": 389,
+  "use_cleanup": false,
+  "blank_penalty": 1.0,
+  "overall": {
+    "count": 389,
+    "exact_match": 0.30077120822622105,
+    "char_accuracy": 0.6948224440512358,
+    "edit_distance": 2.1491002570694087,
+    "repeated_errors": 0.04884318766066838
+  },
+  "by_length_bucket": {
+    "04-05": {
+      "count": 23,
+      "exact_match": 0.08695652173913043,
+      "char_accuracy": 0.3934782608695652,
+      "edit_distance": 3.0434782608695654,
+      "repeated_errors": 0.043478260869565216
+    },
+    "06-08": {
+      "count": 302,
+      "exact_match": 0.33774834437086093,
+      "char_accuracy": 0.6943393251340272,
+      "edit_distance": 2.0827814569536423,
+      "repeated_errors": 0.04966887417218543
+    },
+    "09-12": {
+      "count": 64,
+      "exact_match": 0.203125,
+      "char_accuracy": 0.8053977272727273,
+      "edit_distance": 2.140625,
+      "repeated_errors": 0.046875
+    }
+  },
+  "by_edit_distance_bucket": {
+    "0": {
+      "count": 117,
+      "exact_match": 1.0,
+      "char_accuracy": 1.0,
+      "edit_distance": 0.0,
+      "repeated_errors": 0.0
+    },
+    "1": {
+      "count": 88,
+      "exact_match": 0.0,
+      "char_accuracy": 0.8588916765053128,
+      "edit_distance": 1.0,
+      "repeated_errors": 0.09090909090909091
+    },
+    "2": {
+      "count": 41,
+      "exact_match": 0.0,
+      "char_accuracy": 0.704978354978355,
+      "edit_distance": 2.0,
+      "repeated_errors": 0.04878048780487805
+    },
+    "3-4": {
+      "count": 77,
+      "exact_match": 0.0,
+      "char_accuracy": 0.45202395007589813,
+      "edit_distance": 3.6233766233766236,
+      "repeated_errors": 0.06493506493506493
+    },
+    "5+": {
+      "count": 66,
+      "exact_match": 0.0,
+      "char_accuracy": 0.21202282565918928,
+      "edit_distance": 5.863636363636363,
+      "repeated_errors": 0.06060606060606061
+    }
+  },
+  "error_type_counts": {
+    "deletion": 368,
+    "substitution": 373,
+    "insertion": 95
+  },
+  "top_deleted_chars": [
+    [
+      "ع",
+      58
+    ],
+    [
+      "ا",
+      53
+    ],
+    [
+      "ل",
+      37
+    ],
+    [
+      "ح",
+      33
+    ],
+    [
+      "و",
+      31
+    ],
+    [
+      "ي",
+      27
+    ],
+    [
+      "ك",
+      23
+    ],
+    [
+      "ت",
+      19
+    ],
+    [
+      "ن",
+      19
+    ],
+    [
+      "س",
+      17
+    ]
+  ],
+  "top_inserted_chars": [
+    [
+      "و",
+      17
+    ],
+    [
+      "ا",
+      12
+    ],
+    [
+      "ب",
+      11
+    ],
+    [
+      "ن",
+      10
+    ],
+    [
+      "ي",
+      6
+    ],
+    [
+      "ل",
+      6
+    ],
+    [
+      "ح",
+      5
+    ],
+    [
+      "ع",
+      5
+    ],
+    [
+      "ت",
+      5
+    ],
+    [
+      "ة",
+      3
+    ]
+  ],
+  "top_substitutions": [
+    [
+      "م->ن",
+      11
+    ],
+    [
+      "س->ن",
+      10
+    ],
+    [
+      "ب->ل",
+      9
+    ],
+    [
+      "ن->ر",
+      9
+    ],
+    [
+      "د->ر",
+      9
+    ],
+    [
+      "ا->ن",
+      7
+    ],
+    [
+      "م->ي",
+      7
+    ],
+    [
+      "ك->ل",
+      7
+    ],
+    [
+      "م->ر",
+      6
+    ],
+    [
+      "ر->ن",
+      6
+    ]
+  ],
+  "hardest_phrases": [
+    {
+      "text": "عبدتم",
+      "count": 10,
+      "exact_match": 0.0,
+      "char_accuracy": 0.27999999999999997,
+      "edit_distance": 4.0,
+      "repeated_errors": 0.1
+    },
+    {
+      "text": "ماتعبدون",
+      "count": 7,
+      "exact_match": 0.14285714285714285,
+      "char_accuracy": 0.375,
+      "edit_distance": 5.0,
+      "repeated_errors": 0.14285714285714285
+    },
+    {
+      "text": "عابدما",
+      "count": 10,
+      "exact_match": 0.0,
+      "char_accuracy": 0.4,
+      "edit_distance": 3.6,
+      "repeated_errors": 0.2
+    },
+    {
+      "text": "انشانيك",
+      "count": 10,
+      "exact_match": 0.1,
+      "char_accuracy": 0.4142857142857143,
+      "edit_distance": 4.2,
+      "repeated_errors": 0.0
+    },
+    {
+      "text": "لااعبد",
+      "count": 7,
+      "exact_match": 0.2857142857142857,
+      "char_accuracy": 0.42857142857142855,
+      "edit_distance": 3.4285714285714284,
+      "repeated_errors": 0.0
+    },
+    {
+      "text": "الوسواس",
+      "count": 13,
+      "exact_match": 0.07692307692307693,
+      "char_accuracy": 0.46153846153846156,
+      "edit_distance": 3.8461538461538463,
+      "repeated_errors": 0.07692307692307693
+    },
+    {
+      "text": "هوالابتر",
+      "count": 10,
+      "exact_match": 0.1,
+      "char_accuracy": 0.475,
+      "edit_distance": 4.2,
+      "repeated_errors": 0.0
+    },
+    {
+      "text": "منشر",
+      "count": 13,
+      "exact_match": 0.15384615384615385,
+      "char_accuracy": 0.4807692307692308,
+      "edit_distance": 2.3076923076923075,
+      "repeated_errors": 0.0
+    },
+    {
+      "text": "ولاانا",
+      "count": 10,
+      "exact_match": 0.0,
+      "char_accuracy": 0.5666666666666667,
+      "edit_distance": 2.6,
+      "repeated_errors": 0.0
+    },
+    {
+      "text": "منالجنة",
+      "count": 10,
+      "exact_match": 0.1,
+      "char_accuracy": 0.5714285714285714,
+      "edit_distance": 3.0,
+      "repeated_errors": 0.2
+    }
+  ],
+  "representative_failures": [
+    {
+      "gold": "واياكنستعين",
+      "pred": "الريم",
+      "edit_distance": 9,
+      "char_accuracy": 0.18181818181818177,
+      "repeated_errors": 0,
+      "length": 11
+    },
+    {
+      "gold": "ماتعبدون",
+      "pred": "ولااس",
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "repeated_errors": 1,
+      "length": 8
+    },
+    {
+      "gold": "الوسواس",
+      "pred": "واياكنسععن",
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "repeated_errors": 1,
+      "length": 7
+    },
+    {
+      "gold": "انشانيك",
+      "pred": "واياكنتعبد",
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 7
+    },
+    {
+      "gold": "الرحمن",
+      "pred": "منياكنستر",
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 6
+    },
+    {
+      "gold": "عبدتم",
+      "pred": "واياكنعبدبر",
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 5
+    },
+    {
+      "gold": "واياكنستعين",
+      "pred": "هانان",
+      "edit_distance": 8,
+      "char_accuracy": 0.2727272727272727,
+      "repeated_errors": 0,
+      "length": 11
+    },
+    {
+      "gold": "الرحيم",
+      "pred": "وياكنستين",
+      "edit_distance": 7,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 6
+    },
+    {
+      "gold": "اياكنعبد",
+      "pred": "الريمن",
+      "edit_distance": 7,
+      "char_accuracy": 0.125,
+      "repeated_errors": 0,
+      "length": 8
+    },
+    {
+      "gold": "ماتعبدون",
+      "pred": "ااس",
+      "edit_distance": 7,
+      "char_accuracy": 0.125,
+      "repeated_errors": 0,
+      "length": 8
+    }
+  ]
+}

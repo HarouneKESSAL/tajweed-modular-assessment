@@ -1,0 +1,160 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\duration_verse_holdout_val.jsonl",
+  "samples_evaluated": 387,
+  "clean_samples": 375,
+  "samples_with_errors": 12,
+  "route_counts": {
+    "duration": 387
+  },
+  "module_summary": {
+    "duration": {
+      "total": 438,
+      "correct": 426,
+      "accuracy": 0.9726027397260274
+    }
+  },
+  "rule_summary": {
+    "ghunnah": {
+      "total": 47,
+      "correct": 41,
+      "accuracy": 0.8723404255319149
+    },
+    "madd": {
+      "total": 391,
+      "correct": 385,
+      "accuracy": 0.9846547314578005
+    }
+  },
+  "error_examples": [
+    {
+      "sample_id": "retasy_train_000611",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "source_module": "duration",
+      "position": 15,
+      "char": "و",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.981244683265686,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_002294",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "source_module": "duration",
+      "position": 15,
+      "char": "و",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.9593639373779297,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_002506",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "source_module": "duration",
+      "position": 15,
+      "char": "و",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.9586854577064514,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_003599",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "source_module": "duration",
+      "position": 15,
+      "char": "و",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.9668126106262207,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_004242",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "source_module": "duration",
+      "position": 15,
+      "char": "و",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.9825300574302673,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_005361",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "source_module": "duration",
+      "position": 15,
+      "char": "و",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.910505473613739,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_000973",
+      "surah_name": "Al-Kauthar",
+      "verse_key": "verse_3",
+      "text": "ان شانيك هو الابتر",
+      "source_module": "duration",
+      "position": 1,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.867059588432312,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_001371",
+      "surah_name": "Al-Kauthar",
+      "verse_key": "verse_3",
+      "text": "ان شانيك هو الابتر",
+      "source_module": "duration",
+      "position": 1,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.6242116093635559,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_001829",
+      "surah_name": "Al-Kauthar",
+      "verse_key": "verse_3",
+      "text": "ان شانيك هو الابتر",
+      "source_module": "duration",
+      "position": 1,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.778455913066864,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_002161",
+      "surah_name": "Al-Kauthar",
+      "verse_key": "verse_3",
+      "text": "ان شانيك هو الابتر",
+      "source_module": "duration",
+      "position": 1,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.5156376361846924,
+      "detail": "expected ghunnah but got madd"
+    }
+  ]
+}

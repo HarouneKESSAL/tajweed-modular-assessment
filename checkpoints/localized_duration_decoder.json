@@ -1,0 +1,54 @@
+{
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\localized_duration_model.pt",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\alignment\\duration_time_projection_strict.jsonl",
+  "split": "val",
+  "iou_threshold": 0.1,
+  "gold_pad_sec": 0.03,
+  "gold_min_span_sec": 0.08,
+  "decoder_config": {
+    "ghunnah": {
+      "threshold": 0.85
+    },
+    "madd": {
+      "threshold": 0.45
+    }
+  },
+  "clip_macro_f1": 0.8953512907028198,
+  "span_macro_f1": 0.4036567727112298,
+  "per_label_clip": {
+    "ghunnah": {
+      "f1": 0.8205128312110901,
+      "precision": 0.7868852615356445,
+      "recall": 0.8571428656578064,
+      "tp": 48,
+      "fp": 13,
+      "fn": 8
+    },
+    "madd": {
+      "f1": 0.9701896905899048,
+      "precision": 0.9572192430496216,
+      "recall": 0.9835164546966553,
+      "tp": 179,
+      "fp": 8,
+      "fn": 3
+    }
+  },
+  "per_label_span": {
+    "ghunnah": {
+      "f1": 0.3318777292576419,
+      "precision": 0.2331288343558282,
+      "recall": 0.5757575757575758,
+      "tp": 38,
+      "fp": 125,
+      "fn": 28
+    },
+    "madd": {
+      "f1": 0.4754358161648177,
+      "precision": 0.3875968992248062,
+      "recall": 0.6147540983606558,
+      "tp": 150,
+      "fp": 237,
+      "fn": 94
+    }
+  }
+}

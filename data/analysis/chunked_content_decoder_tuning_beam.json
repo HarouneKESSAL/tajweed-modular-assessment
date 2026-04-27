@@ -1,0 +1,337 @@
+{
+  "split": "val",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt",
+  "split_mode": "reciter",
+  "results": [
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7164746992510481,
+      "edit_distance": 2.017994858611825,
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7164746992510481,
+      "edit_distance": 2.017994858611825,
+      "blank_penalty": 1.0,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7137406937535467,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.4,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7135459442014707,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.5,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7135459442014707,
+      "edit_distance": 2.0462724935732646,
+      "blank_penalty": 0.5,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.39845758354755784,
+      "char_accuracy": 0.7128837957244124,
+      "edit_distance": 2.051413881748072,
+      "blank_penalty": 0.4,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.390745501285347,
+      "char_accuracy": 0.7137546044358376,
+      "edit_distance": 2.0411311053984575,
+      "blank_penalty": 0.7,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.390745501285347,
+      "char_accuracy": 0.7137546044358376,
+      "edit_distance": 2.0411311053984575,
+      "blank_penalty": 0.7,
+      "use_cleanup": true,
+      "decoder": "greedy",
+      "beam_width": 1
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.29456147965145385,
+      "edit_distance": 5.290488431876606,
+      "blank_penalty": 0.4,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.29420119298011316,
+      "edit_distance": 5.290488431876606,
+      "blank_penalty": 0.4,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.29316902035411024,
+      "edit_distance": 5.29305912596401,
+      "blank_penalty": 0.4,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 3
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.2921465852057111,
+      "edit_distance": 5.308483290488432,
+      "blank_penalty": 0.5,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.29171813619114384,
+      "edit_distance": 5.316195372750642,
+      "blank_penalty": 0.5,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.2892350794021744,
+      "edit_distance": 5.32904884318766,
+      "blank_penalty": 0.5,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 3
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.28507773289264277,
+      "edit_distance": 5.375321336760925,
+      "blank_penalty": 0.7,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.28409424765465885,
+      "edit_distance": 5.383033419023136,
+      "blank_penalty": 0.7,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.2830231251182407,
+      "edit_distance": 5.390745501285347,
+      "blank_penalty": 0.7,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 3
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.27541092155488034,
+      "edit_distance": 5.4832904884318765,
+      "blank_penalty": 1.0,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.2751744399559308,
+      "edit_distance": 5.4832904884318765,
+      "blank_penalty": 1.0,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.27433979901846217,
+      "edit_distance": 5.4858611825192805,
+      "blank_penalty": 1.0,
+      "use_cleanup": true,
+      "decoder": "beam",
+      "beam_width": 3
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.14349091354232735,
+      "edit_distance": 6.820051413881748,
+      "blank_penalty": 0.4,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.14141683081271764,
+      "edit_distance": 6.832904884318766,
+      "blank_penalty": 0.4,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.14059888269399828,
+      "edit_distance": 6.832904884318766,
+      "blank_penalty": 0.4,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 3
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.13754131472640466,
+      "edit_distance": 6.889460154241645,
+      "blank_penalty": 0.5,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.13679152895091193,
+      "edit_distance": 6.897172236503856,
+      "blank_penalty": 0.5,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.13428899720673496,
+      "edit_distance": 6.915167095115681,
+      "blank_penalty": 0.5,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 3
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.12851244727851413,
+      "edit_distance": 7.010282776349614,
+      "blank_penalty": 0.7,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.1266331141009804,
+      "edit_distance": 7.038560411311054,
+      "blank_penalty": 0.7,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.12445191911772885,
+      "edit_distance": 7.059125964010283,
+      "blank_penalty": 0.7,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 3
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.1113577938770741,
+      "edit_distance": 7.249357326478149,
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 8
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.11084170756407263,
+      "edit_distance": 7.254498714652956,
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 5
+    },
+    {
+      "samples": 389,
+      "exact_match": 0.0,
+      "char_accuracy": 0.1094297733115214,
+      "edit_distance": 7.26478149100257,
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "beam",
+      "beam_width": 3
+    }
+  ],
+  "best": {
+    "samples": 389,
+    "exact_match": 0.39845758354755784,
+    "char_accuracy": 0.7164746992510481,
+    "edit_distance": 2.017994858611825,
+    "blank_penalty": 1.0,
+    "use_cleanup": false,
+    "decoder": "greedy",
+    "beam_width": 1
+  }
+}

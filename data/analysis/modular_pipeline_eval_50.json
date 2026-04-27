@@ -1,0 +1,160 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_duration_alignment_corpus_torchaudio_strict.jsonl",
+  "samples_evaluated": 50,
+  "clean_samples": 35,
+  "samples_with_errors": 15,
+  "route_counts": {
+    "duration": 50
+  },
+  "module_summary": {
+    "duration": {
+      "total": 86,
+      "correct": 69,
+      "accuracy": 0.8023255813953488
+    }
+  },
+  "rule_summary": {
+    "ghunnah": {
+      "total": 19,
+      "correct": 4,
+      "accuracy": 0.21052631578947367
+    },
+    "madd": {
+      "total": 67,
+      "correct": 65,
+      "accuracy": 0.9701492537313433
+    }
+  },
+  "error_examples": [
+    {
+      "sample_id": "retasy_train_000029",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "source_module": "duration",
+      "position": 17,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.8495647311210632,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000043",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_2",
+      "text": "ملك الناس",
+      "source_module": "duration",
+      "position": 7,
+      "char": "ا",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.5072560906410217,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_000057",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "source_module": "duration",
+      "position": 12,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.7925218939781189,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000073",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_2",
+      "text": "ملك الناس",
+      "source_module": "duration",
+      "position": 6,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.680864155292511,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000158",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "source_module": "duration",
+      "position": 6,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.750206470489502,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000158",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "source_module": "duration",
+      "position": 12,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.916852593421936,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000184",
+      "surah_name": "Al-Kafiroon",
+      "verse_key": "verse_2",
+      "text": "لا اعبد ما تعبدون",
+      "source_module": "duration",
+      "position": 1,
+      "char": "ا",
+      "expected_rule": "madd",
+      "predicted_rule": "ghunnah",
+      "confidence": 0.5218325257301331,
+      "detail": "expected madd but got ghunnah"
+    },
+    {
+      "sample_id": "retasy_train_000225",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "source_module": "duration",
+      "position": 17,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.8493210077285767,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000321",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_6",
+      "text": "من الجنة والناس",
+      "source_module": "duration",
+      "position": 12,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.6210361123085022,
+      "detail": "expected ghunnah but got madd"
+    },
+    {
+      "sample_id": "retasy_train_000355",
+      "surah_name": "An-Nas",
+      "verse_key": "verse_4",
+      "text": "من شر الوسواس الخناس",
+      "source_module": "duration",
+      "position": 17,
+      "char": "ن",
+      "expected_rule": "ghunnah",
+      "predicted_rule": "madd",
+      "confidence": 0.9935387372970581,
+      "detail": "expected ghunnah but got madd"
+    }
+  ]
+}

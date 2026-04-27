@@ -27,3 +27,21 @@ def encode_phonemes(symbols: List[str]) -> List[int]:
 
 def encode_rules(symbols: List[str]) -> List[int]:
     return [rule_to_id[s] for s in symbols]
+
+def normalize_rule_name(symbol: str) -> str:
+    symbol = str(symbol).strip().lower()
+    if not symbol:
+        return "none"
+    if symbol in rule_to_id:
+        return symbol
+    if symbol.startswith("madd"):
+        return "madd"
+    if "ghunnah" in symbol:
+        return "ghunnah"
+    if "ikhfa" in symbol:
+        return "ikhfa"
+    if "idgham" in symbol or "idghaam" in symbol:
+        return "idgham"
+    if "qalqalah" in symbol:
+        return "qalqalah"
+    return "none"

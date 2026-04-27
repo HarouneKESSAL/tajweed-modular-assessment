@@ -1,0 +1,49 @@
+{
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\real_duration_classifier.pt",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_duration_subset.jsonl",
+  "thresholds": {
+    "ghunnah": 0.3,
+    "madd_2": 0.45,
+    "madd_246": 0.15,
+    "madd_munfasil": 0.85,
+    "madd_muttasil": 0.9
+  },
+  "baseline_metrics_at_0_5": {
+    "macro_f1": 0.6494938135147095,
+    "micro_f1": 0.752212405204773,
+    "exact_match": 0.47038328647613525,
+    "per_label_f1": [
+      0.8019801378250122,
+      0.682758629322052,
+      0.8551724553108215,
+      0.675000011920929,
+      0.23255816102027893
+    ],
+    "support": [
+      108,
+      115,
+      242,
+      56,
+      7
+    ]
+  },
+  "tuned_metrics": {
+    "macro_f1": 0.748746931552887,
+    "micro_f1": 0.8358975052833557,
+    "exact_match": 0.5400696992874146,
+    "per_label_f1": [
+      0.8533332943916321,
+      0.70322585105896,
+      0.9285714030265808,
+      0.8141593337059021,
+      0.4444444477558136
+    ],
+    "support": [
+      108,
+      115,
+      242,
+      56,
+      7
+    ]
+  }
+}

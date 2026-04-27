@@ -6,3 +6,12 @@ num_phonemes: 11
 num_rules: 6
 lambda_ctc: 1.0
 lambda_rule: 0.7
+phoneme_score_weight: 0.7
+rule_score_weight: 0.3
+rule_class_weights:
+  none: 1.0
+  madd: 1.0
+  ghunnah: 4.0
+  ikhfa: 1.0
+  idgham: 1.0
+  qalqalah: 1.0

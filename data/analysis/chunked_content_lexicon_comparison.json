@@ -1,0 +1,26 @@
+{
+  "baseline_greedy": {
+    "samples": 389,
+    "split": "val",
+    "use_cleanup": false,
+    "blank_penalty": 1.0,
+    "exact_match": 0.39845758354755784,
+    "char_accuracy": 0.7164746992510481,
+    "edit_distance": 2.017994858611825,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt"
+  },
+  "lexicon": {
+    "samples": 389,
+    "split": "val",
+    "split_mode": "reciter",
+    "use_cleanup": false,
+    "blank_penalty": 1.0,
+    "decoder": "lexicon",
+    "beam_width": 5,
+    "lexicon_size": 17,
+    "exact_match": 0.7377892030848329,
+    "char_accuracy": 0.8037586663550671,
+    "edit_distance": 1.3701799485861184,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module.pt"
+  }
+}

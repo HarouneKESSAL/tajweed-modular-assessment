@@ -1,0 +1,191 @@
+{
+  "duration": {
+    "samples": 973,
+    "route_counts": {
+      "duration": 973
+    },
+    "total_positions": 1646,
+    "correct_positions": 1634,
+    "accuracy": 0.9927095990279465,
+    "rule_summary": {
+      "ghunnah": {
+        "total": 364,
+        "correct": 358,
+        "accuracy": 0.9835164835164835
+      },
+      "madd": {
+        "total": 1282,
+        "correct": 1276,
+        "accuracy": 0.9953198127925117
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 1646,
+      "localized_same_as_sequence": 1607,
+      "localized_same_rate": 0.9763061968408262,
+      "localized_supports_gold": 1600,
+      "localized_supports_gold_rate": 0.9720534629404617,
+      "localized_supports_sequence": 1607,
+      "localized_supports_sequence_rate": 0.9763061968408262,
+      "localized_disagrees_with_sequence": 39,
+      "gold_supported_by_class": {
+        "ghunnah": {
+          "supported": 328,
+          "total": 364,
+          "rate": 0.9010989010989011
+        },
+        "madd": {
+          "supported": 1272,
+          "total": 1282,
+          "rate": 0.9921996879875195
+        }
+      },
+      "sequence_supported_by_class": {
+        "ghunnah": {
+          "supported": 115,
+          "total": 140,
+          "rate": 0.8214285714285714
+        },
+        "madd": {
+          "supported": 1492,
+          "total": 1506,
+          "rate": 0.9907038512616202
+        }
+      }
+    }
+  },
+  "transition": {
+    "available": true,
+    "samples": 690,
+    "accuracy": 0.9014492753623189,
+    "confusion_matrix": [
+      [
+        371,
+        28,
+        15
+      ],
+      [
+        18,
+        209,
+        0
+      ],
+      [
+        6,
+        1,
+        42
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 414,
+        "correct": 371,
+        "accuracy": 0.8961352657004831
+      },
+      "ikhfa": {
+        "total": 227,
+        "correct": 209,
+        "accuracy": 0.920704845814978
+      },
+      "idgham": {
+        "total": 49,
+        "correct": 42,
+        "accuracy": 0.8571428571428571
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 308,
+      "localized_same_as_whole_verse": 261,
+      "localized_same_rate": 0.8474025974025974,
+      "localized_supports_gold": 112,
+      "localized_supports_gold_rate": 0.36363636363636365,
+      "localized_supports_whole_verse": 105,
+      "localized_supports_whole_verse_rate": 0.3409090909090909,
+      "localized_disagrees_with_whole_verse": 47,
+      "gold_supported_by_class": {
+        "idgham": {
+          "supported": 35,
+          "total": 39,
+          "rate": 0.8974358974358975
+        },
+        "ikhfa": {
+          "supported": 77,
+          "total": 78,
+          "rate": 0.9871794871794872
+        },
+        "none": {
+          "supported": 0,
+          "total": 191,
+          "rate": 0.0
+        }
+      },
+      "whole_verse_supported_by_class": {
+        "idgham": {
+          "supported": 31,
+          "total": 38,
+          "rate": 0.8157894736842105
+        },
+        "ikhfa": {
+          "supported": 74,
+          "total": 89,
+          "rate": 0.8314606741573034
+        },
+        "none": {
+          "supported": 0,
+          "total": 181,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "burst": {
+    "available": true,
+    "samples": 1597,
+    "accuracy": 0.8741390106449592,
+    "confusion_matrix": [
+      [
+        876,
+        82
+      ],
+      [
+        119,
+        520
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 958,
+        "correct": 876,
+        "accuracy": 0.9144050104384134
+      },
+      "qalqalah": {
+        "total": 639,
+        "correct": 520,
+        "accuracy": 0.8137715179968701
+      }
+    }
+  },
+  "content": {
+    "available": true,
+    "mode": "chunked",
+    "samples": 389,
+    "split": "val",
+    "decoder": {
+      "blank_penalty": 1.0,
+      "use_cleanup": false
+    },
+    "exact_match": 0.39845758354755784,
+    "char_accuracy": 0.7164746992510481,
+    "edit_distance": 2.017994858611825
+  },
+  "content_reference_full_verse": {
+    "available": true,
+    "mode": "full_verse",
+    "samples": 426,
+    "split": "val",
+    "exact_match": 0.01643192488262911,
+    "char_accuracy": 0.5359713564208723,
+    "edit_distance": 6.868544600938967
+  },
+  "duration_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_module.pt",
+  "transition_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\transition_module_hardcase.pt"
+}

@@ -1,0 +1,6 @@
+{
+  "blank_penalty": 1.0,
+  "use_cleanup": false,
+  "decoder": "lexicon",
+  "beam_width": 1
+}

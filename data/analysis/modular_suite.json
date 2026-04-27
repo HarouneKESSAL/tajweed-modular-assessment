@@ -1,0 +1,89 @@
+{
+  "duration": {
+    "samples": 973,
+    "route_counts": {
+      "duration": 973
+    },
+    "total_positions": 1646,
+    "correct_positions": 1374,
+    "accuracy": 0.8347509113001215,
+    "rule_summary": {
+      "ghunnah": {
+        "total": 364,
+        "correct": 116,
+        "accuracy": 0.31868131868131866
+      },
+      "madd": {
+        "total": 1282,
+        "correct": 1258,
+        "accuracy": 0.9812792511700468
+      }
+    }
+  },
+  "transition": {
+    "available": true,
+    "samples": 690,
+    "accuracy": 0.7695652173913043,
+    "confusion_matrix": [
+      [
+        306,
+        42,
+        66
+      ],
+      [
+        33,
+        192,
+        2
+      ],
+      [
+        16,
+        0,
+        33
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 414,
+        "correct": 306,
+        "accuracy": 0.7391304347826086
+      },
+      "ikhfa": {
+        "total": 227,
+        "correct": 192,
+        "accuracy": 0.8458149779735683
+      },
+      "idgham": {
+        "total": 49,
+        "correct": 33,
+        "accuracy": 0.673469387755102
+      }
+    }
+  },
+  "burst": {
+    "available": true,
+    "samples": 1597,
+    "accuracy": 0.8741390106449592,
+    "confusion_matrix": [
+      [
+        876,
+        82
+      ],
+      [
+        119,
+        520
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 958,
+        "correct": 876,
+        "accuracy": 0.9144050104384134
+      },
+      "qalqalah": {
+        "total": 639,
+        "correct": 520,
+        "accuracy": 0.8137715179968701
+      }
+    }
+  }
+}

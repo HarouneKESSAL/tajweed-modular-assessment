@@ -1,0 +1,9 @@
+{
+  "mode": "open_recognition",
+  "blank_penalty": 1.6,
+  "use_cleanup": false,
+  "decoder": "greedy",
+  "beam_width": 1,
+  "lexicon_source": "train",
+  "notes": "Open content mode tuned for content_chunked_module_hd96_reciter.pt. No fixed phrase-list constraint is used during decoding."
+}

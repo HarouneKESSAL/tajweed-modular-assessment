@@ -1,0 +1,53 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\alignment\\transition_time_projection_strict.jsonl",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\localized_transition_model.pt",
+  "split": "val",
+  "threshold": 0.5,
+  "iou_threshold": 0.1,
+  "clip": {
+    "macro_f1": 0.6062500476837158,
+    "micro_f1": 0.6315789222717285,
+    "exact_match": 0.6557377049180327,
+    "per_label": {
+      "idgham": {
+        "f1": 0.40000003576278687,
+        "precision": 0.2777777777777778,
+        "recall": 0.7142857142857143,
+        "tp": 5,
+        "fp": 13,
+        "fn": 2
+      },
+      "ikhfa": {
+        "f1": 0.8125,
+        "precision": 0.6842105263157895,
+        "recall": 1.0,
+        "tp": 13,
+        "fp": 6,
+        "fn": 0
+      }
+    }
+  },
+  "spans": {
+    "macro_f1": 0.35135135135135137,
+    "per_label": {
+      "idgham": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "tp": 0,
+        "fp": 19,
+        "fn": 7,
+        "mean_iou": 0.0
+      },
+      "ikhfa": {
+        "f1": 0.7027027027027027,
+        "precision": 0.5416666666666666,
+        "recall": 1.0,
+        "tp": 13,
+        "fp": 11,
+        "fn": 0,
+        "mean_iou": 0.47268098826534016
+      }
+    }
+  }
+}

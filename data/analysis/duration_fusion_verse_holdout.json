@@ -1,0 +1,21 @@
+{
+  "split_mode": "verse",
+  "train_rows": 586,
+  "val_rows": 387,
+  "train_examples": 1208,
+  "val_examples": 438,
+  "baseline_metrics": {
+    "sequence_accuracy": 0.954337899543379,
+    "conservative_accuracy": 0.954337899543379,
+    "total": 438
+  },
+  "best_val_metrics": {
+    "accuracy": 0.9726027397260274,
+    "class_accuracy": {
+      "madd": 0.9846547314578005,
+      "ghunnah": 0.8723404255319149
+    },
+    "total": 438
+  },
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_fusion_calibrator_experimental_verse.pt"
+}
