@@ -1,0 +1,23 @@
+{
+  "audio_path": "data\\raw\\retasy_train_audio\\000020_al_faatihah.wav",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_hd96_reciter.pt",
+  "decoder_config": {
+    "decoder": "greedy",
+    "beam_width": 1,
+    "blank_penalty": 1.6,
+    "use_cleanup": false,
+    "path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_decoder_open_hd96.json"
+  },
+  "start_sec": 0.1504921875,
+  "end_sec": 1.7346484375000002,
+  "predicted_text": "الرحمن",
+  "expected_text": "الرحمن",
+  "exact_match": true,
+  "char_accuracy": 1.0,
+  "edit_distance": 0,
+  "sample": {
+    "id": "retasy_train_000020_chunk_00",
+    "surah_name": "Al-Faatihah",
+    "quranjson_verse_key": "verse_3"
+  }
+}

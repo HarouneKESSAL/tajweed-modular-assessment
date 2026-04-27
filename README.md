@@ -165,6 +165,7 @@ Scripts for content-recognition experiments.
 - `train_content.py`: trains the older full-verse content model.
 - `train_chunked_content.py`: trains the chunked content CTC model.
 - `evaluate_chunked_content.py`: evaluates chunked content using greedy, beam, lexicon, or open decoding.
+- `predict_chunked_content.py`: predicts text for one chunk from a manifest row or a direct audio path.
 - `tune_chunked_content_decoder.py`: tunes decoder settings.
 - `analyze_content_failures.py`: analyzes full-verse content failures.
 - `analyze_chunked_content_failures.py`: analyzes chunked content failures.
@@ -300,6 +301,20 @@ Train/evaluate individual modules:
 .\.venv\Scripts\python scripts\transition\train_transition.py --manifest data\manifests\retasy_transition_subset.jsonl
 .\.venv\Scripts\python scripts\burst\train_burst.py
 .\.venv\Scripts\python scripts\content\train_chunked_content.py
+```
+
+Predict content for one chunk:
+
+```powershell
+.\.venv\Scripts\python scripts\content\predict_chunked_content.py --sample-index 0
+```
+
+Predict content for a direct audio file:
+
+```powershell
+.\.venv\Scripts\python scripts\content\predict_chunked_content.py `
+  --audio-path data\raw\my_recording.wav `
+  --expected-text "الرحمن"
 ```
 
 ## Current Evaluation Notes

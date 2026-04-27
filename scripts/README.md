@@ -11,3 +11,9 @@ The flat script layer has been split by responsibility:
 
 Root-level `scripts/*.py` files are compatibility wrappers.
 They forward to the new module folders so existing commands still work.
+
+Useful entry points:
+
+- `system/run_inference.py`: single-sample modular Tajweed diagnosis
+- `system/evaluate_modular_suite.py`: full duration/transition/burst/content scorecard
+- `content/predict_chunked_content.py`: single-chunk content transcription from a manifest row or audio path
