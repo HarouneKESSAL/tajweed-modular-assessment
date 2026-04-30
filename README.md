@@ -171,6 +171,8 @@ Scripts for content-recognition experiments.
 - `analyze_chunked_content_failures.py`: analyzes chunked content failures.
 - `mine_chunked_content_hardcases.py`: mines difficult content examples.
 - `build_chunked_content_manifest.py`: builds chunk-level content data.
+- `build_subchunk_content_manifest.py`: creates shorter word/character-window content examples from chunk manifests.
+- `build_textsplit_train_manifest.py`: builds a leakage-safe training manifest that excludes held-out source texts.
 
 ### `scripts/system/`
 
@@ -325,6 +327,7 @@ Some key artifacts:
 
 - `modular_suite_content_open_hd96_textsplit.json`: open content recognition with no phrase-list coverage.
 - `content_open_model_side_comparison.json`: before/after comparison for open content improvements.
+- `chunked_content_subchunk_texttrain_comparison.json`: leakage-safe subchunk training experiment and rejection decision.
 - `modular_suite_content_lexicon.json`: known-verse/lexicon-constrained content benchmark.
 - `duration_pipeline_verse_holdout_comparison.json`: held-out duration fusion comparison.
 - `transition_confusions_hardcase.json`: transition hardcase/confusion analysis.

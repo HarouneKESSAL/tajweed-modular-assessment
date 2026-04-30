@@ -1,0 +1,78 @@
+{
+  "open_hd96_reciter_trained": {
+    "artifact": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.6,
+    "lexicon_source": "train",
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_hd96_reciter.pt"
+  },
+  "leakage_safe_subchunk_texttrain_bp10": {
+    "artifact": "data/analysis/chunked_content_open_subchunk_texttrain_hd96_textsplit_bp10.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.0,
+    "lexicon_source": "train",
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.2567089185794222,
+    "edit_distance": 4.779376498800959,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_subchunk_texttrain_hd96.pt"
+  },
+  "leakage_safe_subchunk_texttrain_bp14": {
+    "artifact": "data/analysis/chunked_content_open_subchunk_texttrain_hd96_textsplit_bp14.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.4,
+    "lexicon_source": "train",
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.2541966426858514,
+    "edit_distance": 4.820143884892087,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_subchunk_texttrain_hd96.pt"
+  },
+  "leakage_safe_subchunk_texttrain_bp16": {
+    "artifact": "data/analysis/chunked_content_open_subchunk_texttrain_hd96_textsplit_bp16.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.6,
+    "lexicon_source": "train",
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.25148452666438287,
+    "edit_distance": 4.853717026378897,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_subchunk_texttrain_hd96.pt"
+  },
+  "leakage_safe_subchunk_texttrain_bp20": {
+    "artifact": "data/analysis/chunked_content_open_subchunk_texttrain_hd96_textsplit_bp20.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 2.0,
+    "lexicon_source": "train",
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.2478160328879755,
+    "edit_distance": 4.911270983213429,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_subchunk_texttrain_hd96.pt"
+  },
+  "decision": {
+    "do_not_promote": "checkpoints/content_chunked_module_subchunk_texttrain_hd96.pt",
+    "reason": "Leakage-safe subchunk training preserved held-out phrase isolation but failed to compose unseen full phrases; exact match stayed 0.0.",
+    "keep_current_open_experiment_baseline": "checkpoints/content_chunked_module_hd96_reciter.pt + checkpoints/content_chunked_decoder_open_hd96.json",
+    "next_candidate": "Try curriculum/pretraining on subchunks followed by fine-tuning on full train chunks, still excluding held-out source texts."
+  }
+}

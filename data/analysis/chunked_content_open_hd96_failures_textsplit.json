@@ -1,0 +1,399 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_content_chunks.jsonl",
+  "split": "val",
+  "split_mode": "text",
+  "samples": 417,
+  "use_cleanup": false,
+  "blank_penalty": 1.6,
+  "overall": {
+    "count": 417,
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734498,
+    "edit_distance": 0.7314148681055156,
+    "repeated_errors": 0.03597122302158273
+  },
+  "by_length_bucket": {
+    "04-05": {
+      "count": 78,
+      "exact_match": 0.8333333333333334,
+      "char_accuracy": 0.8846153846153846,
+      "edit_distance": 0.6410256410256411,
+      "repeated_errors": 0.02564102564102564
+    },
+    "06-08": {
+      "count": 339,
+      "exact_match": 0.6696165191740413,
+      "char_accuracy": 0.89401601348504,
+      "edit_distance": 0.7522123893805309,
+      "repeated_errors": 0.038348082595870206
+    }
+  },
+  "by_edit_distance_bucket": {
+    "0": {
+      "count": 292,
+      "exact_match": 1.0,
+      "char_accuracy": 1.0,
+      "edit_distance": 0.0,
+      "repeated_errors": 0.0
+    },
+    "1": {
+      "count": 74,
+      "exact_match": 0.0,
+      "char_accuracy": 0.8392857142857143,
+      "edit_distance": 1.0,
+      "repeated_errors": 0.16216216216216217
+    },
+    "2": {
+      "count": 8,
+      "exact_match": 0.0,
+      "char_accuracy": 0.7157738095238095,
+      "edit_distance": 2.0,
+      "repeated_errors": 0.25
+    },
+    "3-4": {
+      "count": 18,
+      "exact_match": 0.0,
+      "char_accuracy": 0.501984126984127,
+      "edit_distance": 3.4444444444444446,
+      "repeated_errors": 0.0
+    },
+    "5+": {
+      "count": 25,
+      "exact_match": 0.0,
+      "char_accuracy": 0.1280952380952381,
+      "edit_distance": 6.12,
+      "repeated_errors": 0.04
+    }
+  },
+  "error_type_counts": {
+    "substitution": 135,
+    "insertion": 64,
+    "deletion": 106
+  },
+  "top_deleted_chars": [
+    [
+      "ا",
+      41
+    ],
+    [
+      "و",
+      20
+    ],
+    [
+      "ل",
+      14
+    ],
+    [
+      "م",
+      9
+    ],
+    [
+      "س",
+      8
+    ],
+    [
+      "ك",
+      5
+    ],
+    [
+      "ت",
+      5
+    ],
+    [
+      "ع",
+      3
+    ],
+    [
+      "ب",
+      1
+    ]
+  ],
+  "top_inserted_chars": [
+    [
+      "ا",
+      13
+    ],
+    [
+      "و",
+      9
+    ],
+    [
+      "ع",
+      7
+    ],
+    [
+      "ن",
+      6
+    ],
+    [
+      "ر",
+      5
+    ],
+    [
+      "ل",
+      5
+    ],
+    [
+      "ك",
+      5
+    ],
+    [
+      "ي",
+      5
+    ],
+    [
+      "ت",
+      3
+    ],
+    [
+      "س",
+      2
+    ],
+    [
+      "ج",
+      2
+    ],
+    [
+      "خ",
+      1
+    ],
+    [
+      "ب",
+      1
+    ]
+  ],
+  "top_substitutions": [
+    [
+      "س->ن",
+      7
+    ],
+    [
+      "ن->س",
+      5
+    ],
+    [
+      "م->ا",
+      5
+    ],
+    [
+      "و->ا",
+      5
+    ],
+    [
+      "د->ن",
+      5
+    ],
+    [
+      "م->و",
+      4
+    ],
+    [
+      "و->ن",
+      4
+    ],
+    [
+      "ك->و",
+      4
+    ],
+    [
+      "ر->س",
+      3
+    ],
+    [
+      "ن->ح",
+      3
+    ],
+    [
+      "و->س",
+      3
+    ],
+    [
+      "ل->ا",
+      3
+    ],
+    [
+      "ا->ب",
+      3
+    ],
+    [
+      "ل->و",
+      3
+    ],
+    [
+      "و->ي",
+      3
+    ]
+  ],
+  "hardest_phrases": [
+    {
+      "text": "لااعبد",
+      "count": 50,
+      "exact_match": 0.18,
+      "char_accuracy": 0.79,
+      "edit_distance": 1.26,
+      "repeated_errors": 0.0
+    },
+    {
+      "text": "الوسواس",
+      "count": 78,
+      "exact_match": 0.5769230769230769,
+      "char_accuracy": 0.8791208791208791,
+      "edit_distance": 0.8846153846153846,
+      "repeated_errors": 0.1282051282051282
+    },
+    {
+      "text": "منشر",
+      "count": 78,
+      "exact_match": 0.8333333333333334,
+      "char_accuracy": 0.8846153846153846,
+      "edit_distance": 0.6410256410256411,
+      "repeated_errors": 0.02564102564102564
+    },
+    {
+      "text": "ماتعبدون",
+      "count": 50,
+      "exact_match": 0.74,
+      "char_accuracy": 0.885,
+      "edit_distance": 0.92,
+      "repeated_errors": 0.06
+    },
+    {
+      "text": "ملكالناس",
+      "count": 87,
+      "exact_match": 0.7931034482758621,
+      "char_accuracy": 0.9109195402298851,
+      "edit_distance": 0.7126436781609196,
+      "repeated_errors": 0.0
+    },
+    {
+      "text": "والناس",
+      "count": 74,
+      "exact_match": 0.9054054054054054,
+      "char_accuracy": 0.9662162162162162,
+      "edit_distance": 0.20270270270270271,
+      "repeated_errors": 0.0
+    }
+  ],
+  "representative_failures": [
+    {
+      "gold": "الوسواس",
+      "pred": "واياكنسسعون",
+      "edit_distance": 9,
+      "char_accuracy": 0.0,
+      "repeated_errors": 1,
+      "length": 7
+    },
+    {
+      "gold": "الوسواس",
+      "pred": "واياكنوعبد",
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 7
+    },
+    {
+      "gold": "منشر",
+      "pred": "والوساس",
+      "edit_distance": 7,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 4
+    },
+    {
+      "gold": "منشر",
+      "pred": "منكالجنية",
+      "edit_distance": 7,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 4
+    },
+    {
+      "gold": "ماتعبدون",
+      "pred": "والنعياس",
+      "edit_distance": 7,
+      "char_accuracy": 0.125,
+      "repeated_errors": 0,
+      "length": 8
+    },
+    {
+      "gold": "ماتعبدون",
+      "pred": "الكاناس",
+      "edit_distance": 7,
+      "char_accuracy": 0.125,
+      "repeated_errors": 0,
+      "length": 8
+    },
+    {
+      "gold": "ماتعبدون",
+      "pred": "اياس",
+      "edit_distance": 7,
+      "char_accuracy": 0.125,
+      "repeated_errors": 0,
+      "length": 8
+    },
+    {
+      "gold": "ماتعبدون",
+      "pred": "واكناس",
+      "edit_distance": 7,
+      "char_accuracy": 0.125,
+      "repeated_errors": 0,
+      "length": 8
+    },
+    {
+      "gold": "والناس",
+      "pred": "الرنبيمن",
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 6
+    },
+    {
+      "gold": "لااعبد",
+      "pred": "واياكنباس",
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 6
+    },
+    {
+      "gold": "لااعبد",
+      "pred": "واياكنعان",
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 6
+    },
+    {
+      "gold": "منشر",
+      "pred": "منالجناس",
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 4
+    },
+    {
+      "gold": "منشر",
+      "pred": "الرحمن",
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 4
+    },
+    {
+      "gold": "منشر",
+      "pred": "الرحمن",
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "repeated_errors": 0,
+      "length": 4
+    },
+    {
+      "gold": "ملكالناس",
+      "pred": "والنعبا",
+      "edit_distance": 6,
+      "char_accuracy": 0.25,
+      "repeated_errors": 0,
+      "length": 8
+    }
+  ]
+}

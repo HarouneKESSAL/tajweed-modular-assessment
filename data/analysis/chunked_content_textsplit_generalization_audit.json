@@ -1,0 +1,139 @@
+{
+  "split_mode": "text",
+  "train_rows": 1527,
+  "val_rows": 417,
+  "train_unique_text_count": 11,
+  "val_unique_text_count": 6,
+  "train_unique_texts": [
+    "الخناس",
+    "الرحمن",
+    "الرحيم",
+    "انشانيك",
+    "اياكنعبد",
+    "عابدما",
+    "عبدتم",
+    "منالجنة",
+    "هوالابتر",
+    "واياكنستعين",
+    "ولاانا"
+  ],
+  "val_unique_texts": [
+    "الوسواس",
+    "لااعبد",
+    "ماتعبدون",
+    "ملكالناس",
+    "منشر",
+    "والناس"
+  ],
+  "train_char_count": 19,
+  "val_char_count": 13,
+  "val_chars_missing_from_train": [],
+  "val_phrase_ngram_coverage": [
+    {
+      "text": "الوسواس",
+      "count": 78,
+      "length": 7,
+      "unseen_chars": [],
+      "unseen_bigrams": [
+        "سو",
+        "لو",
+        "وس"
+      ],
+      "unseen_trigrams": [
+        "الو",
+        "سوا",
+        "لوس",
+        "واس",
+        "وسو"
+      ],
+      "bigram_coverage": 0.5,
+      "trigram_coverage": 0.0
+    },
+    {
+      "text": "منشر",
+      "count": 78,
+      "length": 4,
+      "unseen_chars": [],
+      "unseen_bigrams": [
+        "شر"
+      ],
+      "unseen_trigrams": [
+        "منش",
+        "نشر"
+      ],
+      "bigram_coverage": 0.6666666666666667,
+      "trigram_coverage": 0.0
+    },
+    {
+      "text": "ملكالناس",
+      "count": 87,
+      "length": 8,
+      "unseen_chars": [],
+      "unseen_bigrams": [
+        "كا",
+        "لك",
+        "لن",
+        "مل"
+      ],
+      "unseen_trigrams": [
+        "الن",
+        "كال",
+        "لكا",
+        "لنا",
+        "ملك"
+      ],
+      "bigram_coverage": 0.4285714285714286,
+      "trigram_coverage": 0.16666666666666663
+    },
+    {
+      "text": "ماتعبدون",
+      "count": 50,
+      "length": 8,
+      "unseen_chars": [],
+      "unseen_bigrams": [
+        "ات",
+        "دو",
+        "ون"
+      ],
+      "unseen_trigrams": [
+        "اتع",
+        "بدو",
+        "تعب",
+        "دون",
+        "مات"
+      ],
+      "bigram_coverage": 0.5714285714285714,
+      "trigram_coverage": 0.16666666666666663
+    },
+    {
+      "text": "لااعبد",
+      "count": 50,
+      "length": 6,
+      "unseen_chars": [],
+      "unseen_bigrams": [
+        "اع"
+      ],
+      "unseen_trigrams": [
+        "ااع",
+        "اعب"
+      ],
+      "bigram_coverage": 0.8,
+      "trigram_coverage": 0.5
+    },
+    {
+      "text": "والناس",
+      "count": 74,
+      "length": 6,
+      "unseen_chars": [],
+      "unseen_bigrams": [
+        "لن"
+      ],
+      "unseen_trigrams": [
+        "الن",
+        "لنا"
+      ],
+      "bigram_coverage": 0.8,
+      "trigram_coverage": 0.5
+    }
+  ]
+}
