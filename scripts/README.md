@@ -16,6 +16,7 @@ Useful entry points:
 
 - `system/run_inference.py`: single-sample modular Tajweed diagnosis
 - `system/evaluate_modular_suite.py`: full duration/transition/burst/content scorecard
+- `system/generate_demo_report.py`: presentation-ready summary of promoted baselines and experimental findings
 - `content/predict_chunked_content.py`: single-chunk content transcription from a manifest row or audio path
 - `content/build_subchunk_content_manifest.py`: creates shorter content subchunks
 - `content/build_textsplit_train_manifest.py`: creates leakage-safe text-split training manifests

@@ -1,0 +1,103 @@
+{
+  "project": "tajweed-modular-assessment",
+  "generated_at": "2026-05-01T17:36:48",
+  "purpose": "Presentation-friendly final demo/evaluation report.",
+  "official_baseline": {
+    "duration": {
+      "status": "promoted",
+      "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_module.pt",
+      "suite_accuracy": 0.9927095990279465,
+      "suite_ghunnah_accuracy": 0.9835164835164835,
+      "suite_madd_accuracy": 0.9953198127925117,
+      "strict_verse_holdout_accuracy": 0.9726027397260274,
+      "strict_verse_holdout_ghunnah_accuracy": 0.8723404255319149,
+      "strict_verse_holdout_madd_accuracy": 0.9846547314578005,
+      "note": "Use the verse-held-out score when explaining generalization."
+    },
+    "transition": {
+      "status": "promoted",
+      "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\transition_module_hardcase.pt",
+      "accuracy": 0.9014492753623189,
+      "class_accuracy": {
+        "none": 0.8961352657004831,
+        "ikhfa": 0.920704845814978,
+        "idgham": 0.8571428571428571
+      }
+    },
+    "burst": {
+      "status": "baseline",
+      "checkpoint": "checkpoints/burst_module.pt",
+      "accuracy": 0.8741390106449592,
+      "class_accuracy": {
+        "none": 0.9144050104384134,
+        "qalqalah": 0.8137715179968701
+      }
+    },
+    "content": {
+      "status": "official_chunked_open_baseline",
+      "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_hd96_reciter.pt",
+      "decoder": "greedy",
+      "blank_penalty": 1.6,
+      "lexicon_coverage": 0.0,
+      "exact_match": 0.7002398081534772,
+      "char_accuracy": 0.8922576224734483,
+      "edit_distance": 0.7314148681055156,
+      "full_verse_reference": {
+        "exact_match": 0.01643192488262911,
+        "char_accuracy": 0.5359713564208723,
+        "edit_distance": 6.868544600938967
+      },
+      "note": "Content is still chunk-based; learner-level open content recognition is not promoted."
+    }
+  },
+  "experimental_findings": {
+    "distilled_content_bridge": {
+      "decision": "do_not_promote_yet",
+      "strict_exact_match": 0.7002398081534772,
+      "strict_char_accuracy": 0.8909872102318129,
+      "new_aligned_chunk_exact_match": 0.06766917293233082,
+      "new_aligned_chunk_char_accuracy": 0.22443205995181728,
+      "interpretation": "Preserved old behavior, but did not learn new aligned chunks enough."
+    },
+    "learner_level_content": {
+      "status": "not_ready",
+      "answer": "Not yet for open content recognition. The system can evaluate tajweed rule modules on learner recordings, but the content-recognition path still needs chunk/segment-level supervision because open recognition of new text is not reliable enough.",
+      "expanded_recognizer_validation_exact": 0.018518518518518517,
+      "expanded_recognizer_validation_char_accuracy": 0.2762345679012346,
+      "promotion_gate": {
+        "minimum_chunk_level_gate": [
+          "Open decoder, zero held-out lexicon coverage",
+          "Strict text-held-out exact match >= current tuned baseline",
+          "Strict text-held-out char accuracy >= current tuned baseline",
+          "New aligned chunk held-out char accuracy should be substantially above the current failed probes"
+        ],
+        "next_gate_after_chunk_level": [
+          "Sliding or segmentation inference over full learner audio",
+          "Aggregate chunk predictions into a verse/phrase-level transcript",
+          "Evaluate on learner recordings whose text was not in the training phrase list"
+        ]
+      }
+    }
+  },
+  "recommended_demo_commands": [
+    ".\\.venv\\Scripts\\python scripts\\system\\generate_demo_report.py",
+    ".\\.venv\\Scripts\\python scripts\\system\\run_inference.py --manifest data\\manifests\\retasy_transition_subset.jsonl --sample-index 1 --show-matches",
+    ".\\.venv\\Scripts\\python scripts\\system\\evaluate_modular_suite.py --chunked-content-checkpoint content_chunked_module_hd96_reciter.pt --content-split-mode text --content-decoder-config checkpoints\\content_chunked_decoder_open_hd96.json --output-json data\\analysis\\demo_modular_suite_open_hd96.json"
+  ],
+  "talk_track": [
+    "We implemented the PDF architecture as a modular Tajweed assessment pipeline.",
+    "Routing chooses the correct specialist module: duration, transition, burst, or content.",
+    "MFCC features support rule modules; wav2vec-style SSL features support content recognition.",
+    "We promoted only changes that passed explicit comparison gates.",
+    "Duration, transition, and burst are usable specialist baselines.",
+    "Content improved from weak full-verse recognition to a stronger chunked open baseline.",
+    "Learner-level open content recognition remains future work because expanded recognizers do not yet generalize enough."
+  ],
+  "source_files": {
+    "suite": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\modular_suite_content_open_hd96_textsplit.json",
+    "duration_gate": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\duration_pipeline_verse_holdout_comparison.json",
+    "content_open": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "distillation": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\chunked_content_distillation_comparison.json",
+    "learner_readiness": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\analysis\\content_learner_readiness_report.json"
+  }
+}
