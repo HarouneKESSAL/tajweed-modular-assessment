@@ -1,0 +1,152 @@
+{
+  "input": "data\\manifests\\retasy_quranjson_train.jsonl",
+  "clean_filter": {
+    "match_status": "matched_unique",
+    "excluded_final_labels": [
+      "in_complete",
+      "multiple_aya",
+      "not_match_aya",
+      "not_related_quran"
+    ]
+  },
+  "raw_summary": {
+    "rows": 6828,
+    "unique_verse_ids": 54,
+    "unique_texts": 164,
+    "unique_surahs": 39,
+    "unique_reciters": 1289
+  },
+  "clean_summary": {
+    "rows": 2081,
+    "unique_verse_ids": 28,
+    "unique_texts": 28,
+    "unique_surahs": 13,
+    "unique_reciters": 592
+  },
+  "skipped": {
+    "match_status:unmatched": 4150,
+    "match_status:matched_ambiguous": 517,
+    "label:not_related_quran": 42,
+    "label:multiple_aya": 24,
+    "label:not_match_aya": 10,
+    "label:in_complete": 4
+  },
+  "candidate_rule_summary": {
+    "duration": {
+      "candidate_rows_with_duration_rules": 1415,
+      "rule_positions": {
+        "madd": 2035,
+        "ghunnah": 632
+      }
+    },
+    "transition": {
+      "candidate_rows_by_label": {
+        "none": 1805,
+        "ikhfa": 227,
+        "idgham": 49
+      },
+      "ambiguous_multi_transition_rows": 0
+    },
+    "burst": {
+      "candidate_rows_by_label": {
+        "none": 1456,
+        "qalqalah": 625
+      }
+    }
+  },
+  "official_manifest_summary": {
+    "duration": {
+      "path": "data\\manifests\\retasy_duration_alignment_corpus_torchaudio_strict.jsonl",
+      "rows": 973,
+      "unique_verse_ids": 8,
+      "unique_texts": 8,
+      "unique_surahs": 4,
+      "unique_reciters": 0,
+      "label_counts": {}
+    },
+    "transition": {
+      "path": "data\\manifests\\retasy_transition_subset.jsonl",
+      "rows": 690,
+      "unique_verse_ids": 27,
+      "unique_texts": 27,
+      "unique_surahs": 13,
+      "unique_reciters": 278,
+      "label_counts": {
+        "none": 414,
+        "ikhfa": 227,
+        "idgham": 49
+      }
+    },
+    "burst": {
+      "path": "data\\manifests\\retasy_burst_subset.jsonl",
+      "rows": 1597,
+      "unique_verse_ids": 29,
+      "unique_texts": 28,
+      "unique_surahs": 14,
+      "unique_reciters": 528,
+      "label_counts": {
+        "none": 958,
+        "qalqalah": 639
+      }
+    },
+    "content_chunks": {
+      "path": "data\\manifests\\retasy_content_chunks.jsonl",
+      "rows": 1944,
+      "unique_verse_ids": 8,
+      "unique_texts": 17,
+      "unique_surahs": 4,
+      "unique_reciters": 1,
+      "label_counts": {}
+    }
+  },
+  "expansion_room": {
+    "duration": {
+      "official_parent_rows_in_clean_pool": 964,
+      "clean_pool_rows_not_in_official_manifest": 1117
+    },
+    "transition": {
+      "official_parent_rows_in_clean_pool": 681,
+      "clean_pool_rows_not_in_official_manifest": 1400
+    },
+    "burst": {
+      "official_parent_rows_in_clean_pool": 1565,
+      "clean_pool_rows_not_in_official_manifest": 516
+    }
+  },
+  "content_alignment_artifacts": {
+    "scaled250": {
+      "manifest": "data/manifests/retasy_content_alignment_corpus_scaled250.jsonl",
+      "summary": {
+        "rows": 250,
+        "unique_verse_ids": 25,
+        "unique_texts": 143,
+        "unique_surahs": 25,
+        "unique_reciters": 0
+      }
+    },
+    "correct200": {
+      "manifest": "data/manifests/retasy_content_alignment_corpus_correct200.jsonl",
+      "summary": {
+        "rows": 126,
+        "unique_verse_ids": 14,
+        "unique_texts": 59,
+        "unique_surahs": 14,
+        "unique_reciters": 0
+      }
+    }
+  },
+  "recommendation": {
+    "decision": "expand_with_gates_not_blind_training",
+    "why": [
+      "Transition and burst already cover most of the clean matched rule pool.",
+      "Content has the largest need for more text diversity, but previous scaled alignment experiments did not beat the tuned chunked baseline.",
+      "Duration is already strong, so expansion should be verse-held-out and promotion-gated before replacing the baseline."
+    ],
+    "next_experiment": [
+      "Create a stricter content expansion split from clean matched rows.",
+      "Train content with a capped/curriculum mix so diverse aligned chunks do not overpower the stable baseline chunks.",
+      "Compare only against the tuned chunked open baseline.",
+      "Promote only if strict text-held-out exact and char accuracy improve."
+    ]
+  }
+}
