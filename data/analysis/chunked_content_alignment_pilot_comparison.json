@@ -1,0 +1,51 @@
+{
+  "experiment": "content_alignment_pilot_partial_init",
+  "goal": "Create cleaner, more diverse content chunks using MMS forced alignment instead of weak uniform timing, then compare against the tuned chunked baseline.",
+  "decision": "do_not_promote_yet",
+  "reason": "The clean alignment pilot proves the data path works and improves over weak timing, but it does not beat the tuned chunked baseline yet.",
+  "baseline": {
+    "name": "current_tuned_chunked_open_decoder",
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.6,
+    "lexicon_coverage": 0.0,
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156
+  },
+  "pilot_data": {
+    "alignment_corpus": "data/manifests/retasy_content_alignment_corpus_pilot.jsonl",
+    "forced_alignment": "data/alignment/content_torchaudio_forced_alignment_pilot.jsonl",
+    "time_projection": "data/alignment/content_time_projection_pilot.jsonl",
+    "safe_chunks": "data/manifests/retasy_content_chunks_alignment_pilot_no_textsplit_val.jsonl",
+    "aligned_rows": 37,
+    "safe_chunk_rows": 71,
+    "safe_unique_chunk_texts": 66,
+    "safe_unique_source_texts": 31
+  },
+  "candidate": {
+    "name": "alignment_pilot_hd96_partial_init",
+    "checkpoint": "checkpoints/content_chunked_module_alignment_pilot_hd96_partial.pt",
+    "training_manifest": "data/manifests/retasy_content_chunks_train_plus_alignment_pilot.jsonl",
+    "training_rows": 1598,
+    "training_unique_chunk_texts": 70,
+    "partial_init_checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "best_evaluation": "data/analysis/chunked_content_open_alignment_pilot_hd96_partial_textsplit_bp10.json",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.0,
+    "lexicon_coverage": 0.0,
+    "exact_match": 0.35251798561151076,
+    "char_accuracy": 0.7806750622746813,
+    "edit_distance": 1.4676258992805755
+  },
+  "interpretation": [
+    "Weak uniform timing failed because the audio slices often did not match the target text.",
+    "MMS forced alignment produced clean Arabic character timings for 37/40 diverse pilot rows, with exact romanized-to-Arabic projection for all 37 successful rows.",
+    "Partial initialization is important when expanding the content vocabulary: shared encoder weights and shared character rows are reused, while new characters are learned from the new aligned chunks.",
+    "The pilot is too small to replace the current content baseline, but it is the correct route for leaving the fixed chunk phrase list."
+  ],
+  "next_step": "Scale the MMS forced-alignment corpus from 40 pilot rows to a larger diverse set, then retrain with partial initialization and evaluate against the same tuned chunked baseline."
+}

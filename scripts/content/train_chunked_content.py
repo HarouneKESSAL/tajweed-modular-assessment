@@ -192,6 +192,51 @@ def build_chunked_sample_weights(rows, indices, hardcase_weight_map: dict[str, f
     return weights
 
 
+def load_partial_content_checkpoint(model, init_state: dict, target_char_to_id: dict[str, int]) -> dict[str, int]:
+    source_state = init_state["model_state_dict"]
+    target_state = model.state_dict()
+
+    copied_tensors = 0
+    skipped_tensors = 0
+    for key, value in source_state.items():
+        if key.startswith("ctc_head.proj."):
+            continue
+        if key in target_state and target_state[key].shape == value.shape:
+            target_state[key] = value
+            copied_tensors += 1
+        else:
+            skipped_tensors += 1
+
+    source_char_to_id = init_state.get("char_to_id", {})
+    source_weight = source_state.get("ctc_head.proj.weight")
+    source_bias = source_state.get("ctc_head.proj.bias")
+    target_weight = target_state.get("ctc_head.proj.weight")
+    target_bias = target_state.get("ctc_head.proj.bias")
+    copied_output_rows = 0
+    if source_weight is not None and source_bias is not None and target_weight is not None and target_bias is not None:
+        target_weight[BLANK_ID] = source_weight[BLANK_ID]
+        target_bias[BLANK_ID] = source_bias[BLANK_ID]
+        copied_output_rows = 1
+        for ch, source_id in source_char_to_id.items():
+            target_id = target_char_to_id.get(ch)
+            if target_id is None:
+                continue
+            target_weight[int(target_id)] = source_weight[int(source_id)]
+            target_bias[int(target_id)] = source_bias[int(source_id)]
+            copied_output_rows += 1
+        target_state["ctc_head.proj.weight"] = target_weight
+        target_state["ctc_head.proj.bias"] = target_bias
+
+    model.load_state_dict(target_state)
+    return {
+        "copied_tensors": copied_tensors,
+        "skipped_tensors": skipped_tensors,
+        "copied_output_rows": copied_output_rows,
+        "source_vocab_size": len(source_char_to_id),
+        "target_vocab_size": len(target_char_to_id),
+    }
+
+
 def augment_content_features(
     x: torch.Tensor,
     lengths: torch.Tensor,
@@ -283,6 +328,11 @@ def main():
     parser.add_argument("--feature-cache-dir", default="data/interim/content_chunk_ssl_cache")
     parser.add_argument("--checkpoint", default="checkpoints/content_chunked_module.pt")
     parser.add_argument("--init-checkpoint", default="", help="Optional checkpoint to initialize model weights before training.")
+    parser.add_argument(
+        "--allow-partial-init",
+        action="store_true",
+        help="Allow loading shared encoder and shared character rows when the init checkpoint vocabulary is smaller.",
+    )
     parser.add_argument("--hardcase-json", default="")
     parser.add_argument("--split-mode", choices=["reciter", "text"], default="reciter")
     parser.add_argument("--hidden-dim", type=int, default=0)
@@ -398,9 +448,13 @@ def main():
         init_state = load_checkpoint(PROJECT_ROOT / args.init_checkpoint)
         init_char_to_id = init_state.get("char_to_id", {})
         if init_char_to_id != full_dataset.char_to_id:
-            raise ValueError("init-checkpoint character vocabulary does not match the training manifest vocabulary")
-        model.load_state_dict(init_state["model_state_dict"])
-        print(f"Initialized model from {PROJECT_ROOT / args.init_checkpoint}")
+            if not args.allow_partial_init:
+                raise ValueError("init-checkpoint character vocabulary does not match the training manifest vocabulary")
+            stats = load_partial_content_checkpoint(model, init_state, full_dataset.char_to_id)
+            print(f"Partially initialized model from {PROJECT_ROOT / args.init_checkpoint}: {stats}")
+        else:
+            model.load_state_dict(init_state["model_state_dict"])
+            print(f"Initialized model from {PROJECT_ROOT / args.init_checkpoint}")
     device = train_cfg.get("device", "cpu")
     model = model.to(device)
 

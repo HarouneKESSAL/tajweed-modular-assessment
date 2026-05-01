@@ -1,0 +1,166 @@
+{
+  "input": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_content_weak_chunks_no_textsplit_val.jsonl",
+  "output": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_content_weak_chunks_agree_hd96.jsonl",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_hd96_reciter.pt",
+  "decoder": "greedy",
+  "blank_penalty": 1.6,
+  "min_char_accuracy": 1.0,
+  "max_edit_distance": 0,
+  "input_rows": 14924,
+  "candidate_rows": 8814,
+  "accepted_rows": 333,
+  "unique_accepted_texts": 7,
+  "unique_accepted_source_texts": 4,
+  "skipped": {
+    "unknown_checkpoint_chars": 6110
+  },
+  "score_buckets": {
+    "<0.50": 7331,
+    "0.50-0.74": 804,
+    "0.75-0.89": 280,
+    "1.00": 333,
+    "0.90-0.99": 66
+  },
+  "examples": [
+    {
+      "id": "retasy_train_000002_weakchunk_00",
+      "target": "مالكيوم",
+      "prediction": "ملكالنعبة",
+      "char_accuracy": 0.1428571428571429,
+      "edit_distance": 6
+    },
+    {
+      "id": "retasy_train_000002_weakchunk_01",
+      "target": "الدين",
+      "prediction": "مالرحيم",
+      "char_accuracy": 0.19999999999999996,
+      "edit_distance": 4
+    },
+    {
+      "id": "retasy_train_000003_weakchunk_02",
+      "target": "الرجيم",
+      "prediction": "اكحيم",
+      "char_accuracy": 0.5,
+      "edit_distance": 3
+    },
+    {
+      "id": "retasy_train_000004_weakchunk_00",
+      "target": "ولاانتم",
+      "prediction": "الارحمن",
+      "char_accuracy": 0.2857142857142857,
+      "edit_distance": 5
+    },
+    {
+      "id": "retasy_train_000004_weakchunk_01",
+      "target": "عبدونما",
+      "prediction": "عانبدمد",
+      "char_accuracy": 0.2857142857142857,
+      "edit_distance": 5
+    },
+    {
+      "id": "retasy_train_000004_weakchunk_02",
+      "target": "اعبد",
+      "prediction": "عاعبدم",
+      "char_accuracy": 0.5,
+      "edit_distance": 2
+    },
+    {
+      "id": "retasy_train_000007_weakchunk_02",
+      "target": "الرجيم",
+      "prediction": "عالرحمن",
+      "char_accuracy": 0.33333333333333337,
+      "edit_distance": 4
+    },
+    {
+      "id": "retasy_train_000008_weakchunk_00",
+      "target": "مالكيوم",
+      "prediction": "اياكنتعبدن",
+      "char_accuracy": 0.0,
+      "edit_distance": 9
+    },
+    {
+      "id": "retasy_train_000008_weakchunk_01",
+      "target": "الدين",
+      "prediction": "ايانية",
+      "char_accuracy": 0.19999999999999996,
+      "edit_distance": 4
+    },
+    {
+      "id": "retasy_train_000010_weakchunk_00",
+      "target": "انالانسن",
+      "prediction": "انشالجنان",
+      "char_accuracy": 0.625,
+      "edit_distance": 3
+    },
+    {
+      "id": "retasy_train_000011_weakchunk_02",
+      "target": "الرجيم",
+      "prediction": "الرحيم",
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1
+    },
+    {
+      "id": "retasy_train_000012_weakchunk_00",
+      "target": "الحمدلله",
+      "prediction": "الرحمن",
+      "char_accuracy": 0.375,
+      "edit_distance": 5
+    },
+    {
+      "id": "retasy_train_000012_weakchunk_01",
+      "target": "ربالعالمين",
+      "prediction": "الرحعيم",
+      "char_accuracy": 0.30000000000000004,
+      "edit_distance": 7
+    },
+    {
+      "id": "retasy_train_000013_weakchunk_00",
+      "target": "حيعلي",
+      "prediction": "واكنعبدا",
+      "char_accuracy": 0.0,
+      "edit_distance": 7
+    },
+    {
+      "id": "retasy_train_000014_weakchunk_00",
+      "target": "لهالملك",
+      "prediction": "الاكرحعبمد",
+      "char_accuracy": 0.0,
+      "edit_distance": 9
+    },
+    {
+      "id": "retasy_train_000014_weakchunk_01",
+      "target": "ولهالحمد",
+      "prediction": "مارحيم",
+      "char_accuracy": 0.25,
+      "edit_distance": 6
+    },
+    {
+      "id": "retasy_train_000016_weakchunk_00",
+      "target": "مالكيوم",
+      "prediction": "الارحنعيم",
+      "char_accuracy": 0.0,
+      "edit_distance": 7
+    },
+    {
+      "id": "retasy_train_000016_weakchunk_01",
+      "target": "الدين",
+      "prediction": "الرحيم",
+      "char_accuracy": 0.4,
+      "edit_distance": 3
+    },
+    {
+      "id": "retasy_train_000017_weakchunk_00",
+      "target": "ولمكن",
+      "prediction": "الكاكنعبد",
+      "char_accuracy": 0.0,
+      "edit_distance": 6
+    },
+    {
+      "id": "retasy_train_000017_weakchunk_02",
+      "target": "احد",
+      "prediction": "والوعباس",
+      "char_accuracy": 0.0,
+      "edit_distance": 7
+    }
+  ]
+}

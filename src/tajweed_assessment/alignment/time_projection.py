@@ -11,6 +11,7 @@ import sys
 
 _UROMAN_KEEP_RE = re.compile(r"([^a-z' ])")
 _WHITESPACE_RE = re.compile(r"\s+")
+_GLOBAL_ROMANIZE_CACHE: Dict[Tuple[str, str], str] = {}
 
 
 def load_jsonl(path: str | Path) -> List[Dict[str, Any]]:
@@ -64,14 +65,20 @@ def run_uroman(text: str, uroman_cmd: str = "") -> str:
 def romanize_char(ch: str, cache: Dict[str, str], uroman_cmd: str = "") -> str:
     if ch in cache:
         return cache[ch]
+    global_key = (uroman_cmd, ch)
+    if global_key in _GLOBAL_ROMANIZE_CACHE:
+        cache[ch] = _GLOBAL_ROMANIZE_CACHE[global_key]
+        return cache[ch]
 
     if ch == " ":
         cache[ch] = ""
+        _GLOBAL_ROMANIZE_CACHE[global_key] = ""
         return ""
 
     raw = run_uroman(ch, uroman_cmd=uroman_cmd)
     norm = normalize_uroman(raw).replace(" ", "")
     cache[ch] = norm
+    _GLOBAL_ROMANIZE_CACHE[global_key] = norm
     return norm
 
 

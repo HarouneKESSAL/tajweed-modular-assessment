@@ -134,6 +134,7 @@ def main() -> None:
                     "surah_name": row.get("surah_name"),
                     "quranjson_verse_key": row.get("quranjson_verse_key"),
                     "reciter_id": row.get("reciter_id") or "Unknown",
+                    "source_normalized_text": row.get("source_normalized_text") or row.get("normalized_text"),
                     "normalized_text": chunk_text,
                     "start_sec": start_sec,
                     "end_sec": end_sec,
