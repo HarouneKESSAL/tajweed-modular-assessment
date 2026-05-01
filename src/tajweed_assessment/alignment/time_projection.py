@@ -4,6 +4,7 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 import json
+import os
 import re
 import subprocess
 import sys
@@ -48,6 +49,7 @@ def run_uroman(text: str, uroman_cmd: str = "") -> str:
         cmd,
         input=text.encode("utf-8"),
         capture_output=True,
+        env={**os.environ, "PYTHONIOENCODING": "utf-8"},
         shell=False,
     )
 

@@ -1,0 +1,55 @@
+{
+  "experiment": "content_alignment_scaled_and_correct_only",
+  "goal": "Scale the clean MMS forced-alignment content path beyond the 40-row pilot and compare against the tuned chunked baseline.",
+  "decision": "do_not_promote_yet",
+  "reason": "The scaled alignment data increases text diversity, but neither the broad 250-row set nor the correct-only set beats the tuned chunked baseline on the strict text-held-out comparison.",
+  "baseline": {
+    "name": "current_tuned_chunked_open_decoder",
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156,
+    "lexicon_coverage": 0.0
+  },
+  "scaled250": {
+    "alignment_corpus": "data/manifests/retasy_content_alignment_corpus_scaled250.jsonl",
+    "forced_alignment": "data/alignment/content_torchaudio_forced_alignment_scaled250.jsonl",
+    "time_projection": "data/alignment/content_time_projection_scaled250.jsonl",
+    "safe_chunks": "data/manifests/retasy_content_chunks_alignment_scaled250_no_textsplit_val.jsonl",
+    "aligned_rows": 250,
+    "safe_chunk_rows": 703,
+    "safe_unique_chunk_texts": 363,
+    "safe_unique_source_texts": 134,
+    "checkpoint": "checkpoints/content_chunked_module_alignment_scaled250_hd96_partial.pt",
+    "best_evaluation": "data/analysis/chunked_content_open_alignment_scaled250_hd96_partial_textsplit_bp10.json",
+    "exact_match": 0.29016786570743404,
+    "char_accuracy": 0.7458102976926574,
+    "edit_distance": 1.6690647482014388,
+    "lexicon_coverage": 0.0
+  },
+  "correct200": {
+    "alignment_corpus": "data/manifests/retasy_content_alignment_corpus_correct200.jsonl",
+    "forced_alignment": "data/alignment/content_torchaudio_forced_alignment_correct200.jsonl",
+    "time_projection": "data/alignment/content_time_projection_correct200.jsonl",
+    "safe_chunks": "data/manifests/retasy_content_chunks_alignment_correct200_no_textsplit_val.jsonl",
+    "aligned_rows": 126,
+    "safe_chunk_rows": 266,
+    "safe_unique_chunk_texts": 127,
+    "safe_unique_source_texts": 52,
+    "checkpoint": "checkpoints/content_chunked_module_alignment_correct200_hd96_partial.pt",
+    "best_evaluation": "data/analysis/chunked_content_open_alignment_correct200_hd96_partial_textsplit_bp16.json",
+    "exact_match": 0.3405275779376499,
+    "char_accuracy": 0.7702785614397935,
+    "edit_distance": 1.5443645083932853,
+    "lexicon_coverage": 0.0
+  },
+  "interpretation": [
+    "Batch romanization made scaled content-corpus generation practical on Windows.",
+    "MMS forced alignment and Arabic time projection now scale cleanly: both scaled250 and correct200 had exact projection for all aligned rows.",
+    "The broad scaled250 set added much more variety but likely included noisy learner transcripts, which hurt recognition.",
+    "The correct-only set was cleaner and performed better than broad scaled250, but still did not beat the tuned baseline.",
+    "The next content step should not simply add more rows; it should use curriculum/sampling so new diverse aligned chunks do not overpower the stable original chunk distribution."
+  ],
+  "next_step": "Train a curriculum model: start from the tuned HD96 baseline, mix original chunks heavily with a small amount of correct aligned chunks, and gradually increase aligned-chunk exposure only if strict text-held-out accuracy improves."
+}
