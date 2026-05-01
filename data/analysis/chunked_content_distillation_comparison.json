@@ -1,0 +1,51 @@
+{
+  "experiment": "content_curriculum_teacher_distillation",
+  "goal": "Use the tuned HD96 content model as a teacher so an expanded-vocabulary curriculum model can learn clean aligned chunks without forgetting the original chunk behavior.",
+  "decision": "do_not_promote_yet",
+  "reason": "Teacher distillation preserved the original strict held-out score almost perfectly, but the model still did not learn the new aligned chunks well enough.",
+  "baseline": {
+    "name": "current_tuned_chunked_open_decoder",
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156,
+    "lexicon_coverage": 0.0
+  },
+  "best_distilled_candidate": {
+    "checkpoint": "checkpoints/content_chunked_module_distill_correct200_r10_e1_w2_hd96_partial.pt",
+    "manifest": "data/manifests/retasy_content_chunks_curriculum_correct200_r10.jsonl",
+    "teacher_checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "distill_weight": 2.0,
+    "distill_temperature": 2.0,
+    "epochs": 1,
+    "learning_rate": 0.00002,
+    "strict_textheldout_evaluation": "data/analysis/chunked_content_open_distill_correct200_r10_e1_w2_hd96_partial_textsplit_bp16.json",
+    "strict_exact_match": 0.7002398081534772,
+    "strict_char_accuracy": 0.8909872102318129,
+    "strict_edit_distance": 0.7410071942446043,
+    "extra_aligned_full_evaluation": "data/analysis/chunked_content_distill_correct200_w2_extra_full_bp16.json",
+    "extra_exact_match": 0.06766917293233082,
+    "extra_char_accuracy": 0.22443205995181727,
+    "extra_edit_distance": 5.2481203007518795
+  },
+  "stronger_teacher_candidate": {
+    "checkpoint": "checkpoints/content_chunked_module_distill_correct200_r10_e1_w5_hd96_partial.pt",
+    "distill_weight": 5.0,
+    "strict_textheldout_evaluation": "data/analysis/chunked_content_open_distill_correct200_r10_e1_w5_hd96_partial_textsplit_bp16.json",
+    "strict_exact_match": 0.697841726618705,
+    "strict_char_accuracy": 0.8921434281146495,
+    "strict_edit_distance": 0.7314148681055156,
+    "extra_aligned_full_evaluation": "data/analysis/chunked_content_distill_correct200_w5_extra_full_bp16.json",
+    "extra_exact_match": 0.06390977443609022,
+    "extra_char_accuracy": 0.22427590692217158,
+    "extra_edit_distance": 5.274436090225564
+  },
+  "interpretation": [
+    "Distillation solved most of the forgetting problem: the best distilled model tied baseline exact match on strict text-held-out chunks.",
+    "It did not solve the adaptation problem: performance on the new aligned chunks remained very low.",
+    "The current official content baseline should stay unchanged.",
+    "The next architecture step should separate old and new behavior more explicitly, for example with an adapter or dual-head model, instead of forcing one shared CTC head to satisfy both distributions immediately."
+  ],
+  "next_step": "Prototype an adapter/dual-head content model or train a separate expanded-content recognizer while keeping the old tuned content model as the production/default path."
+}

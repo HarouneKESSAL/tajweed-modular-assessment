@@ -106,6 +106,8 @@ class ChunkedContentDataset(Dataset):
             "targets": target,
             "text": text,
             "reciter_id": row.get("reciter_id") or "Unknown",
+            "curriculum_source": row.get("curriculum_source") or "unknown",
+            "id": row.get("id") or "",
         }
 
 
@@ -114,6 +116,8 @@ def collate_content_batch(batch):
     targets = [item["targets"] for item in batch]
     texts = [item["text"] for item in batch]
     reciters = [item["reciter_id"] for item in batch]
+    curriculum_sources = [item["curriculum_source"] for item in batch]
+    ids = [item["id"] for item in batch]
     x_pad = pad_sequence(xs, batch_first=True)
     input_lengths = torch.tensor([x.size(0) for x in xs], dtype=torch.long)
     target_lengths = torch.tensor([t.size(0) for t in targets], dtype=torch.long)
@@ -126,6 +130,8 @@ def collate_content_batch(batch):
         "raw_targets": targets,
         "texts": texts,
         "reciter_ids": reciters,
+        "curriculum_sources": curriculum_sources,
+        "ids": ids,
     }
 
 
@@ -237,6 +243,46 @@ def load_partial_content_checkpoint(model, init_state: dict, target_char_to_id: 
     }
 
 
+def build_teacher_student_index_map(teacher_char_to_id: dict[str, int], student_char_to_id: dict[str, int]) -> tuple[list[int], list[int]]:
+    teacher_indices = [BLANK_ID]
+    student_indices = [BLANK_ID]
+    for ch, teacher_id in sorted(teacher_char_to_id.items(), key=lambda item: int(item[1])):
+        student_id = student_char_to_id.get(ch)
+        if student_id is None:
+            continue
+        teacher_indices.append(int(teacher_id))
+        student_indices.append(int(student_id))
+    return teacher_indices, student_indices
+
+
+def content_distillation_loss(
+    student_log_probs: torch.Tensor,
+    teacher_log_probs: torch.Tensor,
+    input_lengths: torch.Tensor,
+    *,
+    student_indices: list[int],
+    teacher_indices: list[int],
+    selected_rows: list[int],
+    temperature: float = 1.0,
+) -> torch.Tensor:
+    if not selected_rows:
+        return student_log_probs.new_tensor(0.0)
+    losses = []
+    temp = max(float(temperature), 1e-6)
+    for row_idx in selected_rows:
+        valid_length = int(input_lengths[row_idx].item())
+        if valid_length <= 0:
+            continue
+        student_seq = student_log_probs[row_idx, :valid_length, student_indices] / temp
+        teacher_seq = teacher_log_probs[row_idx, :valid_length, teacher_indices] / temp
+        student_seq = student_seq.log_softmax(dim=-1)
+        teacher_probs = teacher_seq.softmax(dim=-1)
+        losses.append(torch.nn.functional.kl_div(student_seq, teacher_probs, reduction="batchmean") * (temp * temp))
+    if not losses:
+        return student_log_probs.new_tensor(0.0)
+    return torch.stack(losses).mean()
+
+
 def augment_content_features(
     x: torch.Tensor,
     lengths: torch.Tensor,
@@ -272,9 +318,24 @@ def augment_content_features(
     return augmented
 
 
-def train_content_epoch(model, loader, optimizer, loss_fn, device="cpu", augmentation: dict | None = None):
+def train_content_epoch(
+    model,
+    loader,
+    optimizer,
+    loss_fn,
+    device="cpu",
+    augmentation: dict | None = None,
+    distillation: dict | None = None,
+):
     model.train()
     augmentation = augmentation or {}
+    distillation = distillation or {}
+    teacher_model = distillation.get("teacher_model")
+    distill_weight = float(distillation.get("weight", 0.0))
+    distill_source = str(distillation.get("source", "base"))
+    distill_temperature = float(distillation.get("temperature", 1.0))
+    teacher_indices = distillation.get("teacher_indices") or []
+    student_indices = distillation.get("student_indices") or []
     total_loss = total_token_acc = total_seq_acc = 0.0
     for batch in loader:
         optimizer.zero_grad()
@@ -293,6 +354,25 @@ def train_content_epoch(model, loader, optimizer, loss_fn, device="cpu", augment
         target_lengths = batch["target_lengths"].to(device)
         log_probs = model(x, input_lengths)
         loss = loss_fn(log_probs.transpose(0, 1), targets, input_lengths, target_lengths)
+        if teacher_model is not None and distill_weight > 0.0 and teacher_indices and student_indices:
+            selected_rows = [
+                idx
+                for idx, source in enumerate(batch.get("curriculum_sources", []))
+                if source == distill_source
+            ]
+            if selected_rows:
+                with torch.no_grad():
+                    teacher_log_probs = teacher_model(x, input_lengths)
+                distill_loss = content_distillation_loss(
+                    log_probs,
+                    teacher_log_probs,
+                    input_lengths,
+                    student_indices=student_indices,
+                    teacher_indices=teacher_indices,
+                    selected_rows=selected_rows,
+                    temperature=distill_temperature,
+                )
+                loss = loss + distill_weight * distill_loss
         loss.backward()
         optimizer.step()
         total_loss += float(loss.item())
@@ -344,6 +424,10 @@ def main():
     parser.add_argument("--feature-mask-count", type=int, default=0)
     parser.add_argument("--feature-mask-width", type=int, default=0)
     parser.add_argument("--noise-std", type=float, default=0.0)
+    parser.add_argument("--distill-checkpoint", default="", help="Optional teacher checkpoint for base-row distillation.")
+    parser.add_argument("--distill-weight", type=float, default=0.0)
+    parser.add_argument("--distill-temperature", type=float, default=1.0)
+    parser.add_argument("--distill-source", default="base")
     args = parser.parse_args()
 
     data_cfg = load_yaml(PROJECT_ROOT / "configs" / "data.yaml")
@@ -457,6 +541,36 @@ def main():
             print(f"Initialized model from {PROJECT_ROOT / args.init_checkpoint}")
     device = train_cfg.get("device", "cpu")
     model = model.to(device)
+    distillation_cfg = None
+    if args.distill_checkpoint and float(args.distill_weight) > 0.0:
+        teacher_state = load_checkpoint(PROJECT_ROOT / args.distill_checkpoint)
+        teacher_model_cfg = teacher_state.get("config", {}).get("model", {})
+        teacher_hidden_dim = int(teacher_model_cfg.get("hidden_dim", model_cfg["hidden_dim"]))
+        teacher_model = ContentVerificationModule(
+            hidden_dim=teacher_hidden_dim,
+            num_phonemes=len(teacher_state["char_to_id"]) + 1,
+        )
+        teacher_model.load_state_dict(teacher_state["model_state_dict"])
+        teacher_model = teacher_model.to(device)
+        teacher_model.eval()
+        teacher_indices, student_indices = build_teacher_student_index_map(
+            teacher_state.get("char_to_id", {}),
+            full_dataset.char_to_id,
+        )
+        distillation_cfg = {
+            "teacher_model": teacher_model,
+            "weight": float(args.distill_weight),
+            "temperature": float(args.distill_temperature),
+            "source": str(args.distill_source),
+            "teacher_indices": teacher_indices,
+            "student_indices": student_indices,
+            "checkpoint": str(PROJECT_ROOT / args.distill_checkpoint),
+        }
+        print(
+            "Loaded content teacher for distillation: "
+            f"shared_outputs={len(teacher_indices)} weight={args.distill_weight:.3f} "
+            f"temperature={args.distill_temperature:.3f} source={args.distill_source}"
+        )
 
     loss_fn = torch.nn.CTCLoss(blank=BLANK_ID, zero_infinity=True)
     optimizer = torch.optim.Adam(model.parameters(), lr=train_cfg["learning_rate"])
@@ -464,7 +578,15 @@ def main():
     best_score = float("-inf")
 
     for epoch in range(1, train_cfg["epochs"] + 1):
-        train_metrics = train_content_epoch(model, train_loader, optimizer, loss_fn, device=device, augmentation=augmentation_cfg)
+        train_metrics = train_content_epoch(
+            model,
+            train_loader,
+            optimizer,
+            loss_fn,
+            device=device,
+            augmentation=augmentation_cfg,
+            distillation=distillation_cfg,
+        )
         val_metrics = evaluate_content_epoch(model, val_loader, loss_fn, device=device)
         score = 0.7 * val_metrics["token_acc"] + 0.3 * val_metrics["seq_acc"]
         if score > best_score:
@@ -478,6 +600,12 @@ def main():
                         "train": train_cfg,
                         "split_mode": args.split_mode,
                         "augmentation": augmentation_cfg,
+                        "distillation": {
+                            "checkpoint": str(PROJECT_ROOT / args.distill_checkpoint) if args.distill_checkpoint else "",
+                            "weight": float(args.distill_weight),
+                            "temperature": float(args.distill_temperature),
+                            "source": str(args.distill_source),
+                        },
                     },
                     "char_to_id": full_dataset.char_to_id,
                     "id_to_char": full_dataset.id_to_char,
