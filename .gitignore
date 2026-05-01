@@ -7,6 +7,7 @@ runs/
 data/raw/*
 data/interim/*
 data/processed/*
+data/manifests/retasy_content_weak_chunks*.jsonl
 !data/raw/.gitkeep
 !data/interim/.gitkeep
 !data/processed/.gitkeep

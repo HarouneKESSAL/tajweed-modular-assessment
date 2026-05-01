@@ -1,0 +1,41 @@
+{
+  "experiment": "weak_content_diversity_no_textsplit_val",
+  "goal": "Test whether a larger weakly timed chunk manifest can reduce dependence on the small fixed chunk answer list.",
+  "decision": "do_not_promote",
+  "reason": "The weakly timed data is much more diverse, but the timing noise is too high for the content recognizer to learn useful character alignment.",
+  "baseline": {
+    "name": "current_tuned_chunked_open_decoder",
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.6,
+    "lexicon_coverage": 0.0,
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156
+  },
+  "candidate": {
+    "name": "weak_diversity_hd96_continued",
+    "checkpoint": "checkpoints/content_chunked_module_weak_noheldout_hd96_cont.pt",
+    "evaluation": "data/analysis/chunked_content_open_weak_noheldout_hd96_cont_textsplit_bp10.json",
+    "training_manifest": "data/manifests/retasy_content_weak_chunks_no_textsplit_val.jsonl",
+    "training_rows": 14924,
+    "unique_training_chunk_texts": 409,
+    "unique_training_source_texts": 155,
+    "heldout_overlap_exclusion": "source_contains",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.0,
+    "lexicon_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.25993490921548473,
+    "edit_distance": 4.733812949640288
+  },
+  "interpretation": [
+    "This was not a hardcoded phrase-list improvement; the candidate used an open decoder with zero held-out lexicon coverage.",
+    "The weak manifest expanded text variety from a tiny phrase set to hundreds of chunk texts, but weak uniform word timing is not accurate enough for wav2vec+CTC content training.",
+    "The current tuned chunked baseline remains the best content checkpoint for now.",
+    "The next content improvement should use cleaner labels: either real word/character alignment for more verses, or a two-stage model that learns from high-quality aligned chunks first and uses weak data only after confidence filtering."
+  ]
+}
