@@ -1,0 +1,123 @@
+{
+  "experiment": "content_auxiliary_pretrain_correct200_then_r20_distill",
+  "goal": "Use clean aligned chunks as an auxiliary pretraining step before conservative baseline-preserving fine-tuning.",
+  "decision": "keep_experimental_do_not_promote_yet",
+  "reason": "The candidate ties baseline exact match and slightly improves char accuracy/edit distance, but does not produce a clear exact-match win. It should remain experimental until the gain is stronger or validated on a broader gate.",
+  "baseline": {
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156,
+    "blank_penalty": 1.6
+  },
+  "candidate": {
+    "aux_pretrain_checkpoint": "checkpoints/content_chunked_module_correct200_aux_pretrain_hd96.pt",
+    "final_checkpoint": "checkpoints/content_chunked_module_correct200_aux_pretrain_r20_e1_distill_w10_hd96_partial.pt",
+    "training_recipe": [
+      "Stage 1: initialize from tuned content baseline and train on correct200 aligned chunks for 8 epochs at lr=5e-5.",
+      "Stage 2: fine-tune on r20 curriculum with baseline distillation weight=10, temperature=2, one epoch at lr=1e-5."
+    ],
+    "best_strict_textheldout": {
+      "name": "bp16",
+      "blank_penalty": 1.6,
+      "artifact": "data/analysis/chunked_content_open_auxpretrain_correct200_r20_e1_distill_w10_hd96_textsplit_bp16_trainlexicon.json",
+      "exact_match": 0.7002398081534772,
+      "char_accuracy": 0.8925002854858954,
+      "edit_distance": 0.7266187050359713,
+      "lexicon_source": "train",
+      "eval_text_coverage": 0.0
+    },
+    "all_strict_textheldout": [
+      {
+        "name": "bp10",
+        "blank_penalty": 1.0,
+        "artifact": "data/analysis/chunked_content_open_auxpretrain_correct200_r20_e1_distill_w10_hd96_textsplit_bp10.json",
+        "exact_match": 0.6906474820143885,
+        "char_accuracy": 0.8903020440790212,
+        "edit_distance": 0.7410071942446043,
+        "lexicon_source": "full",
+        "eval_text_coverage": 1.0
+      },
+      {
+        "name": "bp12",
+        "blank_penalty": 1.2,
+        "artifact": "data/analysis/chunked_content_open_auxpretrain_correct200_r20_e1_distill_w10_hd96_textsplit_bp12.json",
+        "exact_match": 0.6954436450839329,
+        "char_accuracy": 0.8908730158730145,
+        "edit_distance": 0.7362110311750599,
+        "lexicon_source": "full",
+        "eval_text_coverage": 1.0
+      },
+      {
+        "name": "bp16",
+        "blank_penalty": 1.6,
+        "artifact": "data/analysis/chunked_content_open_auxpretrain_correct200_r20_e1_distill_w10_hd96_textsplit_bp16_trainlexicon.json",
+        "exact_match": 0.7002398081534772,
+        "char_accuracy": 0.8925002854858954,
+        "edit_distance": 0.7266187050359713,
+        "lexicon_source": "train",
+        "eval_text_coverage": 0.0
+      },
+      {
+        "name": "bp18",
+        "blank_penalty": 1.8,
+        "artifact": "data/analysis/chunked_content_open_auxpretrain_correct200_r20_e1_distill_w10_hd96_textsplit_bp18.json",
+        "exact_match": 0.6954436450839329,
+        "char_accuracy": 0.8918436679228028,
+        "edit_distance": 0.7266187050359713,
+        "lexicon_source": "full",
+        "eval_text_coverage": 1.0
+      },
+      {
+        "name": "bp20",
+        "blank_penalty": 2.0,
+        "artifact": "data/analysis/chunked_content_open_auxpretrain_correct200_r20_e1_distill_w10_hd96_textsplit_bp20.json",
+        "exact_match": 0.6906474820143885,
+        "char_accuracy": 0.8898880895283756,
+        "edit_distance": 0.7386091127098321,
+        "lexicon_source": "full",
+        "eval_text_coverage": 1.0
+      }
+    ],
+    "delta_vs_baseline": {
+      "exact_match": 0.0,
+      "char_accuracy": 0.00024266301244713073,
+      "edit_distance": -0.004796163069544335
+    },
+    "new_aligned_chunks_full": {
+      "artifact": "data/analysis/chunked_content_auxpretrain_correct200_r20_e1_distill_w10_extra_full_bp12.json",
+      "exact_match": 0.06766917293233082,
+      "char_accuracy": 0.23908567414206527,
+      "edit_distance": 5.150375939849624
+    }
+  },
+  "previous_conservative_r20": {
+    "decision": "do_not_promote",
+    "best_strict_textheldout": {
+      "blank_penalty": 1.2,
+      "artifact": "data/analysis/chunked_content_open_curriculum_correct200_r20_e1_distill_w10_hd96_partial_textsplit_bp12.json",
+      "exact_match": 0.6954436450839329,
+      "char_accuracy": 0.8912726961288098,
+      "edit_distance": 0.7410071942446043
+    },
+    "new_aligned_chunks_full": {
+      "artifact": "data/analysis/chunked_content_curriculum_correct200_r20_e1_distill_w10_extra_full_bp12.json",
+      "exact_match": 0.06390977443609022,
+      "char_accuracy": 0.23067924139352716,
+      "edit_distance": 5.2180451127819545
+    }
+  },
+  "baseline_on_new_aligned_chunks_full": {
+    "artifact": "data/analysis/chunked_content_baseline_hd96_reciter_correct200_extra_full_bp16.json",
+    "exact_match": 0.06390977443609022,
+    "char_accuracy": 0.2261332443663271,
+    "edit_distance": 5.2443609022556394
+  },
+  "interpretation": [
+    "Auxiliary pretraining helped more than plain conservative mixing: strict text-held-out exact recovered to the baseline while char accuracy and edit distance improved slightly.",
+    "New aligned chunk char accuracy improved from the baseline 0.226 to 0.239, better than the previous conservative r20 result of 0.231.",
+    "The gain is real but small; exact match did not exceed the current official baseline, so this should stay experimental.",
+    "Next step: improve the auxiliary objective itself, likely by training longer or using a smaller adapter/regularization strategy that learns aligned chunks without moving the old decoder behavior."
+  ]
+}

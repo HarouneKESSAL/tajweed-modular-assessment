@@ -1,0 +1,19 @@
+{
+  "samples": 417,
+  "split": "val",
+  "split_mode": "text",
+  "use_cleanup": false,
+  "blank_penalty": 1.6,
+  "decoder": "greedy",
+  "beam_width": 5,
+  "open_fallback_margin": 0.0,
+  "lexicon_source": "full",
+  "lexicon_size": 17,
+  "eval_unique_text_count": 6,
+  "eval_texts_in_lexicon": 417,
+  "eval_text_coverage": 1.0,
+  "exact_match": 0.7002398081534772,
+  "char_accuracy": 0.8925002854858954,
+  "edit_distance": 0.7266187050359713,
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_correct200_aux_pretrain_r20_e1_distill_w10_hd96_partial.pt"
+}
