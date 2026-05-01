@@ -1,0 +1,86 @@
+{
+  "reciter_trained_open_hd96_bp16": {
+    "artifact": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.6,
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_hd96_reciter.pt"
+  },
+  "strict_subchunk_only_bp10": {
+    "artifact": "data/analysis/chunked_content_open_subchunk_texttrain_hd96_textsplit_bp10.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.0,
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.2567089185794222,
+    "edit_distance": 4.779376498800959,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_subchunk_texttrain_hd96.pt"
+  },
+  "strict_curriculum_bp10": {
+    "artifact": "data/analysis/chunked_content_open_curriculum_hd96_textsplit_bp10.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.0,
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.2471023181454838,
+    "edit_distance": 5.0,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_curriculum_hd96.pt"
+  },
+  "strict_curriculum_bp14": {
+    "artifact": "data/analysis/chunked_content_open_curriculum_hd96_textsplit_bp14.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.4,
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.24578908301929903,
+    "edit_distance": 5.038369304556355,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_curriculum_hd96.pt"
+  },
+  "strict_curriculum_bp16": {
+    "artifact": "data/analysis/chunked_content_open_curriculum_hd96_textsplit_bp16.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 1.6,
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.24236325225533872,
+    "edit_distance": 5.079136690647482,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_curriculum_hd96.pt"
+  },
+  "strict_curriculum_bp20": {
+    "artifact": "data/analysis/chunked_content_open_curriculum_hd96_textsplit_bp20.json",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": "greedy",
+    "blank_penalty": 2.0,
+    "eval_text_coverage": 0.0,
+    "exact_match": 0.0,
+    "char_accuracy": 0.2373672490578967,
+    "edit_distance": 5.127098321342926,
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_curriculum_hd96.pt"
+  },
+  "interpretation": {
+    "important_correction": "The reciter-trained HD96 checkpoint scores well with an open decoder, but its training data includes the same phrase texts that appear in the text-held-out evaluation. It is decoder-independent, not text-unseen independent.",
+    "strict_result": "When held-out phrase source texts are excluded from training, subchunk-only and curriculum checkpoints do not compose unseen full phrases successfully.",
+    "decision": "Do not promote the strict subchunk/curriculum checkpoints. Keep them as negative evidence.",
+    "next_best_step": "Increase text diversity or generate more phrase/word combinations for training, then repeat strict text-held-out evaluation. Chunks can remain as the training unit, but we need many more unique chunks before moving to full-verse open recognition."
+  }
+}

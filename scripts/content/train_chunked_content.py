@@ -282,6 +282,7 @@ def main():
     parser.add_argument("--manifest", default="data/manifests/retasy_content_chunks.jsonl")
     parser.add_argument("--feature-cache-dir", default="data/interim/content_chunk_ssl_cache")
     parser.add_argument("--checkpoint", default="checkpoints/content_chunked_module.pt")
+    parser.add_argument("--init-checkpoint", default="", help="Optional checkpoint to initialize model weights before training.")
     parser.add_argument("--hardcase-json", default="")
     parser.add_argument("--split-mode", choices=["reciter", "text"], default="reciter")
     parser.add_argument("--hidden-dim", type=int, default=0)
@@ -393,6 +394,13 @@ def main():
     val_loader = DataLoader(val_ds, batch_size=train_cfg["batch_size"], shuffle=False, collate_fn=collate_content_batch)
 
     model = ContentVerificationModule(hidden_dim=model_cfg["hidden_dim"], num_phonemes=len(full_dataset.char_to_id) + 1)
+    if args.init_checkpoint:
+        init_state = load_checkpoint(PROJECT_ROOT / args.init_checkpoint)
+        init_char_to_id = init_state.get("char_to_id", {})
+        if init_char_to_id != full_dataset.char_to_id:
+            raise ValueError("init-checkpoint character vocabulary does not match the training manifest vocabulary")
+        model.load_state_dict(init_state["model_state_dict"])
+        print(f"Initialized model from {PROJECT_ROOT / args.init_checkpoint}")
     device = train_cfg.get("device", "cpu")
     model = model.to(device)
 
