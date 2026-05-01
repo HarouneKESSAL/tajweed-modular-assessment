@@ -1,0 +1,56 @@
+{
+  "question": "When can the content module depend on a learner-level recording instead of fixed chunks?",
+  "current_answer": "Not yet for open content recognition. The system can evaluate tajweed rule modules on learner recordings, but the content-recognition path still needs chunk/segment-level supervision because open recognition of new text is not reliable enough.",
+  "current_production_content_path": {
+    "name": "tuned_chunked_content_baseline",
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "strict_textheldout_exact_match": 0.7002398081534772,
+    "strict_textheldout_char_accuracy": 0.8922576224734483,
+    "status": "best official content baseline, still chunk-based"
+  },
+  "best_bridge_candidate": {
+    "name": "distilled_curriculum_expanded_vocab",
+    "checkpoint": "checkpoints/content_chunked_module_distill_correct200_r10_e1_w2_hd96_partial.pt",
+    "evaluation": "data/analysis/chunked_content_open_distill_correct200_r10_e1_w2_hd96_partial_textsplit_bp16.json",
+    "strict_textheldout_exact_match": 0.7002398081534772,
+    "strict_textheldout_char_accuracy": 0.8909872102318129,
+    "new_aligned_chunk_evaluation": "data/analysis/chunked_content_distill_correct200_w2_extra_full_bp16.json",
+    "new_aligned_chunk_exact_match": 0.06766917293233082,
+    "new_aligned_chunk_char_accuracy": 0.22443205995181727,
+    "status": "preserves old behavior but does not learn new aligned chunks enough"
+  },
+  "separate_expanded_recognizer_probe": {
+    "checkpoint": "checkpoints/content_expanded_correct200_textsplit_hd96.pt",
+    "training_manifest": "data/manifests/retasy_content_chunks_alignment_correct200_no_textsplit_val.jsonl",
+    "split_mode": "text",
+    "validation_evaluation": "data/analysis/content_expanded_correct200_textsplit_val_bp10.json",
+    "validation_exact_match": 0.018518518518518517,
+    "validation_char_accuracy": 0.2762345679012346,
+    "validation_edit_distance": 4.518518518518518,
+    "train_evaluation": "data/analysis/content_expanded_correct200_textsplit_train_bp10.json",
+    "train_exact_match": 0.1320754716981132,
+    "train_char_accuracy": 0.5558176100628931,
+    "status": "not ready; even a separate recognizer does not yet generalize to held-out expanded text"
+  },
+  "promotion_gate_for_learner_level_content": {
+    "minimum_chunk_level_gate": [
+      "Open decoder, zero held-out lexicon coverage",
+      "Strict text-held-out exact match >= current tuned baseline",
+      "Strict text-held-out char accuracy >= current tuned baseline",
+      "New aligned chunk held-out char accuracy should be substantially above the current failed probes"
+    ],
+    "next_gate_after_chunk_level": [
+      "Sliding or segmentation inference over full learner audio",
+      "Aggregate chunk predictions into a verse/phrase-level transcript",
+      "Evaluate on learner recordings whose text was not in the training phrase list"
+    ]
+  },
+  "plain_english_explanation": [
+    "Chunks are currently the safe training/evaluation unit because each chunk has a known target text and reliable timing.",
+    "A learner-level content model would receive a longer recording and infer the spoken text without being given a tiny list of allowed answers.",
+    "We can only trust that once the model first proves it can recognize new chunk texts reliably.",
+    "Our latest experiments show we are close to preserving the old chunk baseline while expanding vocabulary, but we are not yet recognizing new aligned text well enough."
+  ],
+  "recommended_next_step": "Increase high-quality aligned content data and/or prototype an adapter or dual-head model that keeps the old chunk head stable while training a separate expanded-text head."
+}
