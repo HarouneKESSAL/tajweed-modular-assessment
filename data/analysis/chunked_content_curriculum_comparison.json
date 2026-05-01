@@ -1,0 +1,57 @@
+{
+  "experiment": "content_curriculum_correct200",
+  "goal": "Preserve the tuned chunked content baseline while adding clean aligned content chunks through conservative curriculum sampling.",
+  "decision": "do_not_promote_yet",
+  "reason": "The best curriculum candidate nearly matches the tuned baseline and supports the expanded vocabulary, but it still does not beat the baseline on strict text-held-out evaluation.",
+  "baseline": {
+    "name": "current_tuned_chunked_open_decoder",
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156,
+    "lexicon_coverage": 0.0
+  },
+  "curriculum_r5": {
+    "manifest": "data/manifests/retasy_content_chunks_curriculum_correct200_r5.jsonl",
+    "base_rows_repeated": 7635,
+    "extra_rows": 266,
+    "checkpoint": "checkpoints/content_chunked_module_curriculum_correct200_r5_hd96_partial.pt",
+    "best_evaluation": "data/analysis/chunked_content_open_curriculum_correct200_r5_hd96_partial_textsplit_bp10.json",
+    "exact_match": 0.5875299760191847,
+    "char_accuracy": 0.8569433838714416,
+    "edit_distance": 0.9832134292565947,
+    "lexicon_coverage": 0.0
+  },
+  "curriculum_r10": {
+    "manifest": "data/manifests/retasy_content_chunks_curriculum_correct200_r10.jsonl",
+    "base_rows_repeated": 15270,
+    "extra_rows": 266,
+    "checkpoint": "checkpoints/content_chunked_module_curriculum_correct200_r10_hd96_partial.pt",
+    "best_evaluation": "data/analysis/chunked_content_open_curriculum_correct200_r10_hd96_partial_textsplit_bp16.json",
+    "exact_match": 0.6330935251798561,
+    "char_accuracy": 0.8691323621611388,
+    "edit_distance": 0.894484412470024,
+    "lexicon_coverage": 0.0
+  },
+  "curriculum_r10_e1_low_lr": {
+    "manifest": "data/manifests/retasy_content_chunks_curriculum_correct200_r10.jsonl",
+    "base_rows_repeated": 15270,
+    "extra_rows": 266,
+    "checkpoint": "checkpoints/content_chunked_module_curriculum_correct200_r10_e1_hd96_partial.pt",
+    "learning_rate": 0.00002,
+    "epochs": 1,
+    "best_evaluation": "data/analysis/chunked_content_open_curriculum_correct200_r10_e1_hd96_partial_textsplit_bp10.json",
+    "exact_match": 0.6858513189448441,
+    "char_accuracy": 0.8882823731710614,
+    "edit_distance": 0.7577937649880095,
+    "lexicon_coverage": 0.0
+  },
+  "interpretation": [
+    "Directly training on many new aligned chunks caused forgetting and reduced strict held-out performance.",
+    "Curriculum sampling helps: making original chunks dominate the manifest recovered most of the tuned baseline performance.",
+    "The best candidate is the ultra-conservative r10 one-epoch low-learning-rate model, which nearly matches the baseline while keeping the expanded character vocabulary.",
+    "Because it still trails the tuned baseline, it should remain experimental rather than becoming the official content checkpoint."
+  ],
+  "next_step": "Use distillation or a dual-head/adapter strategy so the model can learn new aligned chunks without moving the old output behavior as much."
+}

@@ -1,0 +1,19 @@
+{
+  "samples": 417,
+  "split": "val",
+  "split_mode": "text",
+  "use_cleanup": false,
+  "blank_penalty": 1.0,
+  "decoder": "greedy",
+  "beam_width": 5,
+  "open_fallback_margin": 0.0,
+  "lexicon_source": "train",
+  "lexicon_size": 11,
+  "eval_unique_text_count": 6,
+  "eval_texts_in_lexicon": 0,
+  "eval_text_coverage": 0.0,
+  "exact_match": 0.6235011990407674,
+  "char_accuracy": 0.867006394884092,
+  "edit_distance": 0.9064748201438849,
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_module_curriculum_correct200_r10_hd96_partial.pt"
+}
