@@ -13,6 +13,7 @@ from tajweed_assessment.models.common.losses import build_rule_class_weights
 from tajweed_assessment.models.duration.madd_ghunnah_module import DurationRuleModule
 from tajweed_assessment.models.transition.idgham_ikhfa_module import TransitionRuleModule
 from tajweed_assessment.models.burst.qalqalah_cnn import QalqalahCNN
+from tajweed_assessment.models.content.wav2vec_ctc import ContentVerificationModule
 from duration.train_duration import build_duration_sample_weights
 from transition.train_transition import build_transition_sample_weights
 
@@ -37,6 +38,14 @@ def test_burst_forward():
     x = torch.randn(2, 24, 39)
     logits = model(x)
     assert logits.shape == (2, 2)
+
+def test_content_adapter_forward():
+    model = ContentVerificationModule(hidden_dim=8, num_phonemes=5, adapter_dim=4)
+    feature_dim = model.encoder.lstm.input_size
+    x = torch.randn(2, 12, feature_dim)
+    lengths = torch.tensor([12, 10])
+    log_probs = model(x, lengths)
+    assert log_probs.shape == (2, 12, 5)
 
 def test_build_rule_class_weights_applies_overrides():
     weights = build_rule_class_weights({"ghunnah": 4.0, "madd": 1.5})

@@ -255,6 +255,29 @@ def build_teacher_student_index_map(teacher_char_to_id: dict[str, int], student_
     return teacher_indices, student_indices
 
 
+def freeze_ctc_output_rows(model, row_ids: list[int]) -> int:
+    frozen_rows = sorted({int(row_id) for row_id in row_ids if 0 <= int(row_id) < model.ctc_head.proj.out_features})
+    if not frozen_rows:
+        return 0
+    row_tensor = torch.tensor(frozen_rows, dtype=torch.long)
+
+    def weight_hook(grad: torch.Tensor) -> torch.Tensor:
+        row_index = row_tensor.to(grad.device)
+        masked = grad.clone()
+        masked.index_fill_(0, row_index, 0.0)
+        return masked
+
+    def bias_hook(grad: torch.Tensor) -> torch.Tensor:
+        row_index = row_tensor.to(grad.device)
+        masked = grad.clone()
+        masked.index_fill_(0, row_index, 0.0)
+        return masked
+
+    model.ctc_head.proj.weight.register_hook(weight_hook)
+    model.ctc_head.proj.bias.register_hook(bias_hook)
+    return len(frozen_rows)
+
+
 def content_distillation_loss(
     student_log_probs: torch.Tensor,
     teacher_log_probs: torch.Tensor,
@@ -416,6 +439,18 @@ def main():
     parser.add_argument("--hardcase-json", default="")
     parser.add_argument("--split-mode", choices=["reciter", "text"], default="reciter")
     parser.add_argument("--hidden-dim", type=int, default=0)
+    parser.add_argument("--adapter-dim", type=int, default=0)
+    parser.add_argument("--adapter-dropout", type=float, default=0.1)
+    parser.add_argument(
+        "--freeze-encoder",
+        action="store_true",
+        help="Freeze the base SSL/encoder weights so expansion training happens through the adapter/head.",
+    )
+    parser.add_argument(
+        "--freeze-shared-output-rows",
+        action="store_true",
+        help="Freeze blank/shared CTC output rows copied from the init checkpoint; new character rows can still learn.",
+    )
     parser.add_argument("--epochs", type=int, default=0)
     parser.add_argument("--batch-size", type=int, default=0)
     parser.add_argument("--learning-rate", type=float, default=0.0)
@@ -441,6 +476,12 @@ def main():
         train_cfg["learning_rate"] = float(args.learning_rate)
     if args.hidden_dim > 0:
         model_cfg["hidden_dim"] = int(args.hidden_dim)
+    if args.adapter_dim > 0:
+        model_cfg["adapter_dim"] = int(args.adapter_dim)
+        model_cfg["adapter_dropout"] = float(args.adapter_dropout)
+    else:
+        model_cfg.pop("adapter_dim", None)
+        model_cfg.pop("adapter_dropout", None)
     seed_everything(train_cfg["seed"])
     paths = ProjectPaths(PROJECT_ROOT)
     checkpoint_path = PROJECT_ROOT / args.checkpoint
@@ -489,6 +530,7 @@ def main():
     print(f"Chunked vocab size: {len(full_dataset.char_to_id) + 1}")
     print(f"Chunked split mode: {args.split_mode}")
     print(f"Chunked hidden dim: {model_cfg['hidden_dim']}")
+    print(f"Chunked adapter dim: {int(model_cfg.get('adapter_dim', 0) or 0)}")
     augmentation_cfg = {
         "time_mask_count": int(args.time_mask_count),
         "time_mask_width": int(args.time_mask_width),
@@ -527,7 +569,13 @@ def main():
     )
     val_loader = DataLoader(val_ds, batch_size=train_cfg["batch_size"], shuffle=False, collate_fn=collate_content_batch)
 
-    model = ContentVerificationModule(hidden_dim=model_cfg["hidden_dim"], num_phonemes=len(full_dataset.char_to_id) + 1)
+    model = ContentVerificationModule(
+        hidden_dim=model_cfg["hidden_dim"],
+        num_phonemes=len(full_dataset.char_to_id) + 1,
+        adapter_dim=int(model_cfg.get("adapter_dim", 0) or 0),
+        adapter_dropout=float(model_cfg.get("adapter_dropout", 0.1)),
+    )
+    init_state = None
     if args.init_checkpoint:
         init_state = load_checkpoint(PROJECT_ROOT / args.init_checkpoint)
         init_char_to_id = init_state.get("char_to_id", {})
@@ -540,6 +588,24 @@ def main():
             model.load_state_dict(init_state["model_state_dict"])
             print(f"Initialized model from {PROJECT_ROOT / args.init_checkpoint}")
     device = train_cfg.get("device", "cpu")
+    if args.freeze_encoder:
+        for param in model.ssl.parameters():
+            param.requires_grad = False
+        for param in model.encoder.parameters():
+            param.requires_grad = False
+        print("Frozen content SSL/encoder weights; training adapter/head parameters only.")
+    if args.freeze_shared_output_rows:
+        if init_state is None:
+            raise ValueError("--freeze-shared-output-rows requires --init-checkpoint")
+        init_char_to_id = init_state.get("char_to_id", {})
+        frozen_row_ids = [BLANK_ID]
+        frozen_row_ids.extend(
+            int(full_dataset.char_to_id[ch])
+            for ch in init_char_to_id
+            if ch in full_dataset.char_to_id
+        )
+        frozen_count = freeze_ctc_output_rows(model, frozen_row_ids)
+        print(f"Frozen {frozen_count} shared CTC output rows copied from the init checkpoint.")
     model = model.to(device)
     distillation_cfg = None
     if args.distill_checkpoint and float(args.distill_weight) > 0.0:
@@ -549,6 +615,8 @@ def main():
         teacher_model = ContentVerificationModule(
             hidden_dim=teacher_hidden_dim,
             num_phonemes=len(teacher_state["char_to_id"]) + 1,
+            adapter_dim=int(teacher_model_cfg.get("adapter_dim", 0) or 0),
+            adapter_dropout=float(teacher_model_cfg.get("adapter_dropout", 0.1)),
         )
         teacher_model.load_state_dict(teacher_state["model_state_dict"])
         teacher_model = teacher_model.to(device)
@@ -573,7 +641,7 @@ def main():
         )
 
     loss_fn = torch.nn.CTCLoss(blank=BLANK_ID, zero_infinity=True)
-    optimizer = torch.optim.Adam(model.parameters(), lr=train_cfg["learning_rate"])
+    optimizer = torch.optim.Adam((param for param in model.parameters() if param.requires_grad), lr=train_cfg["learning_rate"])
     checkpoint = ModelCheckpoint(checkpoint_path.parent, filename=checkpoint_path.name)
     best_score = float("-inf")
 
@@ -600,6 +668,10 @@ def main():
                         "train": train_cfg,
                         "split_mode": args.split_mode,
                         "augmentation": augmentation_cfg,
+                        "adapter_training": {
+                            "freeze_encoder": bool(args.freeze_encoder),
+                            "freeze_shared_output_rows": bool(args.freeze_shared_output_rows),
+                        },
                         "distillation": {
                             "checkpoint": str(PROJECT_ROOT / args.distill_checkpoint) if args.distill_checkpoint else "",
                             "weight": float(args.distill_weight),

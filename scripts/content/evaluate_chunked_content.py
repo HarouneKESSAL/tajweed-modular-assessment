@@ -250,7 +250,12 @@ def main():
     id_to_char = {int(k): v for k, v in checkpoint["id_to_char"].items()}
     ckpt_model_cfg = checkpoint.get("config", {}).get("model", {})
     hidden_dim = int(ckpt_model_cfg.get("hidden_dim", model_cfg["hidden_dim"]))
-    model = ContentVerificationModule(hidden_dim=hidden_dim, num_phonemes=len(checkpoint["char_to_id"]) + 1)
+    model = ContentVerificationModule(
+        hidden_dim=hidden_dim,
+        num_phonemes=len(checkpoint["char_to_id"]) + 1,
+        adapter_dim=int(ckpt_model_cfg.get("adapter_dim", 0) or 0),
+        adapter_dropout=float(ckpt_model_cfg.get("adapter_dropout", 0.1)),
+    )
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
 

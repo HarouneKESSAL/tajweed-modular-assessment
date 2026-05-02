@@ -1,0 +1,89 @@
+{
+  "experiment": "content_adapter_expansion_correct200",
+  "scale_note": "The final Quran-scale target is thousands of verses, so the experiment tests an adapter mechanism that could grow capacity without rewriting the stable baseline model.",
+  "goal": "Add adapter-style capacity for clean aligned content expansion while preserving the tuned chunked baseline.",
+  "decision": "do_not_promote",
+  "reason": "Neither adapter variant beats the official chunked baseline. The best adapter result remains below baseline exact match and does not improve new aligned chunks.",
+  "baseline": {
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "evaluation": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156
+  },
+  "previous_best_experimental_no_adapter": {
+    "decision": "keep_experimental_do_not_promote_yet",
+    "best_strict_textheldout": {
+      "name": "bp16",
+      "blank_penalty": 1.6,
+      "artifact": "data/analysis/chunked_content_open_auxpretrain_correct200_r20_e1_distill_w10_hd96_textsplit_bp16_trainlexicon.json",
+      "exact_match": 0.7002398081534772,
+      "char_accuracy": 0.8925002854858954,
+      "edit_distance": 0.7266187050359713,
+      "lexicon_source": "train",
+      "eval_text_coverage": 0.0
+    },
+    "new_aligned_chunks_full": {
+      "artifact": "data/analysis/chunked_content_auxpretrain_correct200_r20_e1_distill_w10_extra_full_bp12.json",
+      "exact_match": 0.06766917293233082,
+      "char_accuracy": 0.23908567414206527,
+      "edit_distance": 5.150375939849624
+    }
+  },
+  "plain_adapter": {
+    "checkpoint": "checkpoints/content_chunked_module_correct200_adapter_r20_e1_distill_w10_hd96_ad32.pt",
+    "recipe": [
+      "adapter_dim=32",
+      "stage 1 aligned chunk adapter/head pretraining",
+      "stage 2 r20 curriculum with distillation",
+      "encoder frozen, output rows not frozen"
+    ],
+    "best_strict_textheldout": {
+      "artifact": "data/analysis/chunked_content_open_adapter_correct200_r20_e1_distill_w10_hd96_ad32_textsplit_bp16.json",
+      "blank_penalty": 1.6,
+      "exact_match": 0.6738609112709832,
+      "char_accuracy": 0.8871188763275076,
+      "edit_distance": 0.7697841726618705
+    },
+    "new_aligned_chunks_full": {
+      "artifact": "data/analysis/chunked_content_adapter_correct200_r20_e1_distill_w10_extra_full_bp12.json",
+      "exact_match": 0.06390977443609022,
+      "char_accuracy": 0.22783989193763637,
+      "edit_distance": 5.2481203007518795
+    }
+  },
+  "freezeout_adapter": {
+    "checkpoint": "checkpoints/content_chunked_module_correct200_adapter_r20_e1_freezeout_distill_w10_hd96_ad32.pt",
+    "recipe": [
+      "adapter_dim=32",
+      "r20 curriculum with distillation",
+      "encoder frozen",
+      "blank/shared CTC output rows frozen from init checkpoint"
+    ],
+    "best_strict_textheldout": {
+      "artifact": "data/analysis/chunked_content_open_adapter_freezeout_correct200_r20_e1_distill_w10_hd96_ad32_textsplit_bp16.json",
+      "blank_penalty": 1.6,
+      "exact_match": 0.697841726618705,
+      "char_accuracy": 0.8915581820258062,
+      "edit_distance": 0.7386091127098321
+    },
+    "new_aligned_chunks_full": {
+      "artifact": "data/analysis/chunked_content_adapter_freezeout_correct200_r20_e1_distill_w10_extra_full_bp12.json",
+      "exact_match": 0.06390977443609022,
+      "char_accuracy": 0.22642550640670947,
+      "edit_distance": 5.274436090225564
+    }
+  },
+  "baseline_on_new_aligned_chunks_full": {
+    "artifact": "data/analysis/chunked_content_baseline_hd96_reciter_correct200_extra_full_bp16.json",
+    "exact_match": 0.06390977443609022,
+    "char_accuracy": 0.2261332443663271,
+    "edit_distance": 5.2443609022556394
+  },
+  "interpretation": [
+    "The adapter mechanism is implemented and reusable, but this small adapter did not solve open content expansion.",
+    "The earlier non-adapter auxiliary-pretraining experiment remains the strongest experimental content result because it tied exact match and slightly improved char accuracy/edit distance.",
+    "For Quran-scale coverage, the next step should be better segmentation/alignment quality or stronger supervised content data, not simply a small adapter on the current tiny clean pool.",
+    "The official content baseline remains unchanged."
+  ]
+}

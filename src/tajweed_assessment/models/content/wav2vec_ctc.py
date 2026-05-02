@@ -5,11 +5,27 @@ from tajweed_assessment.models.common.bilstm_encoder import BiLSTMEncoder
 from tajweed_assessment.models.common.ctc_head import CTCHead
 
 class ContentVerificationModule(nn.Module):
-    def __init__(self, hidden_dim: int = 64, num_phonemes: int = 11) -> None:
+    def __init__(
+        self,
+        hidden_dim: int = 64,
+        num_phonemes: int = 11,
+        adapter_dim: int = 0,
+        adapter_dropout: float = 0.1,
+    ) -> None:
         super().__init__()
         self.ssl = Wav2VecFeatureExtractor()
         feature_dim = getattr(self.ssl, "output_dim", 64)
         self.encoder = BiLSTMEncoder(input_dim=feature_dim, hidden_dim=hidden_dim, num_layers=1, dropout=0.1)
+        self.adapter_dim = int(adapter_dim)
+        if self.adapter_dim > 0:
+            self.adapter = nn.Sequential(
+                nn.Linear(self.encoder.output_dim, self.adapter_dim),
+                nn.GELU(),
+                nn.Dropout(float(adapter_dropout)),
+                nn.Linear(self.adapter_dim, self.encoder.output_dim),
+            )
+        else:
+            self.adapter = None
         self.ctc_head = CTCHead(self.encoder.output_dim, num_phonemes)
 
     def forward(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
@@ -17,6 +33,8 @@ class ContentVerificationModule(nn.Module):
 
     def forward_features(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
         encoded = self.encoder(x, lengths)
+        if self.adapter is not None:
+            encoded = encoded + self.adapter(encoded)
         return self.ctc_head.log_probs(encoded)
 
     def forward_waveform(self, waveform: torch.Tensor) -> torch.Tensor:
