@@ -20,5 +20,6 @@ Useful entry points:
 - `content/predict_chunked_content.py`: single-chunk content transcription from a manifest row or audio path
 - `content/build_subchunk_content_manifest.py`: creates shorter content subchunks
 - `content/build_textsplit_train_manifest.py`: creates leakage-safe text-split training manifests
+- `content/build_approx_ayah_content_chunks.py`: creates approximate short chunks from ayah-level audio manifests
 - `data/audit_clean_expansion_pool.py`: audits clean QuranJSON-matched rows before expanding training data
 - `data/import_hf_quran_content.py`: imports capped Hugging Face Quran audio/text pilots into local content manifests

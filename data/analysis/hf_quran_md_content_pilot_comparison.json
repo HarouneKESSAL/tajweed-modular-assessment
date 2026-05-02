@@ -1,0 +1,97 @@
+{
+  "title": "Quran-MD content pilot comparison",
+  "date": "2026-05-02",
+  "dataset": {
+    "manifest": "data/manifests/hf_quran_md_ayahs_unique48_r2.jsonl",
+    "rows": 96,
+    "unique_normalized_texts": 48,
+    "reciters": [
+      "abdurrahmaan_as_sudais",
+      "saood_ash_shuraym"
+    ],
+    "duration_seconds": 1273.06
+  },
+  "approx_chunk_dataset": {
+    "manifest": "data/manifests/hf_quran_md_ayahs_unique48_r2_approx_chunks.jsonl",
+    "rows": 678,
+    "method": "Approximate word/chunk timing from ayah-level duration using normalized word character counts.",
+    "warning": "This is an exploratory bridge only; it is not equivalent to real word-level alignment."
+  },
+  "decision": "do_not_promote",
+  "reason": "The larger Quran-MD pilot did not improve the open content path. Full-ayah CTC and approximate chunk timing both produced 0.000 exact match, so the next content step should use true word-level clips/timestamps or a stronger alignment pipeline before retraining.",
+  "experiments": [
+    {
+      "name": "Existing tuned chunked baseline on full ayahs",
+      "analysis_file": "data/analysis/hf_quran_md_pilot48_r2_baseline_content_full_bp16.json",
+      "samples": 96,
+      "exact_match": 0.0,
+      "char_accuracy": 0.11100362082139975,
+      "edit_distance": 53.71875
+    },
+    {
+      "name": "Aux-pretrained chunk model on full ayahs",
+      "analysis_file": "data/analysis/hf_quran_md_pilot48_r2_auxpretrain_content_full_bp16.json",
+      "samples": 96,
+      "exact_match": 0.0,
+      "char_accuracy": 0.11219905245149282,
+      "edit_distance": 53.625
+    },
+    {
+      "name": "Fine-tuned full-ayah pilot, train reciter",
+      "analysis_file": "data/analysis/hf_quran_md_pilot48_r2_recitersplit_hd96_train_bp16.json",
+      "samples": 48,
+      "exact_match": 0.0,
+      "char_accuracy": 0.24819581348143863,
+      "edit_distance": 44.729166666666664
+    },
+    {
+      "name": "Fine-tuned full-ayah pilot, held-out reciter",
+      "analysis_file": "data/analysis/hf_quran_md_pilot48_r2_recitersplit_hd96_val_bp16.json",
+      "samples": 48,
+      "exact_match": 0.0,
+      "char_accuracy": 0.11736712306543,
+      "edit_distance": 53.5
+    },
+    {
+      "name": "Approx chunks, old content init, train reciter",
+      "analysis_file": "data/analysis/hf_quran_md_approx_chunks48_r2_recitersplit_hd96_train_bp16.json",
+      "samples": 339,
+      "exact_match": 0.0,
+      "char_accuracy": 0.18747931026692097,
+      "edit_distance": 6.787610619469026
+    },
+    {
+      "name": "Approx chunks, old content init, held-out reciter",
+      "analysis_file": "data/analysis/hf_quran_md_approx_chunks48_r2_recitersplit_hd96_val_bp16.json",
+      "samples": 339,
+      "exact_match": 0.0,
+      "char_accuracy": 0.18317752388548875,
+      "edit_distance": 6.787610619469026
+    },
+    {
+      "name": "Approx chunks, old content init, held-out reciter, stronger blank penalty",
+      "analysis_file": "data/analysis/hf_quran_md_approx_chunks48_r2_recitersplit_hd96_val_bp30.json",
+      "samples": 339,
+      "exact_match": 0.0,
+      "char_accuracy": 0.17466349612367324,
+      "edit_distance": 6.908554572271386
+    },
+    {
+      "name": "Approx chunks, scratch model, train reciter",
+      "analysis_file": "data/analysis/hf_quran_md_approx_chunks48_r2_recitersplit_hd96_scratch_train_bp16.json",
+      "samples": 339,
+      "exact_match": 0.0,
+      "char_accuracy": 0.1709401300109267,
+      "edit_distance": 7.0
+    },
+    {
+      "name": "Approx chunks, scratch model, held-out reciter",
+      "analysis_file": "data/analysis/hf_quran_md_approx_chunks48_r2_recitersplit_hd96_scratch_val_bp16.json",
+      "samples": 339,
+      "exact_match": 0.0,
+      "char_accuracy": 0.13383707410256107,
+      "edit_distance": 7.238938053097345
+    }
+  ],
+  "next_best_step": "Import or build real word-level content training data, then repeat the same reciter-held-out comparison against the tuned chunked baseline."
+}

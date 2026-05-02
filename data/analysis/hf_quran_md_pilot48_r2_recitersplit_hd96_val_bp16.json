@@ -1,0 +1,19 @@
+{
+  "samples": 48,
+  "split": "val",
+  "split_mode": "reciter",
+  "use_cleanup": false,
+  "blank_penalty": 1.6,
+  "decoder": "greedy",
+  "beam_width": 5,
+  "open_fallback_margin": 0.0,
+  "lexicon_source": "train",
+  "lexicon_size": 48,
+  "eval_unique_text_count": 48,
+  "eval_texts_in_lexicon": 48,
+  "eval_text_coverage": 1.0,
+  "exact_match": 0.0,
+  "char_accuracy": 0.11736712306543,
+  "edit_distance": 53.5,
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_quran_md_pilot48_r2_recitersplit_hd96.pt"
+}

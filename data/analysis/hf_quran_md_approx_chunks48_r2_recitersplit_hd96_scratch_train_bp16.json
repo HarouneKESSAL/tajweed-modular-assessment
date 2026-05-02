@@ -1,0 +1,19 @@
+{
+  "samples": 339,
+  "split": "train",
+  "split_mode": "reciter",
+  "use_cleanup": false,
+  "blank_penalty": 1.6,
+  "decoder": "greedy",
+  "beam_width": 5,
+  "open_fallback_margin": 0.0,
+  "lexicon_source": "train",
+  "lexicon_size": 332,
+  "eval_unique_text_count": 332,
+  "eval_texts_in_lexicon": 339,
+  "eval_text_coverage": 1.0,
+  "exact_match": 0.0,
+  "char_accuracy": 0.1709401300109267,
+  "edit_distance": 7.0,
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_quran_md_approx_chunks48_r2_recitersplit_hd96_scratch.pt"
+}
