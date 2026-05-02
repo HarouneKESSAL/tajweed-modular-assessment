@@ -1,0 +1,41 @@
+{
+  "dataset": "Buraaq/quran-md-ayahs",
+  "dataset_alias": "quran-md-ayahs",
+  "split": "train",
+  "max_rows": 96,
+  "skip_rows": 0,
+  "max_per_text": 2,
+  "max_per_reciter": 0,
+  "output": "data\\manifests\\hf_quran_md_ayahs_unique48_r2.jsonl",
+  "audio_dir": "data\\raw\\hf_quran_md_ayahs_unique48_r2",
+  "rows_written": 96,
+  "rows_skipped": 1316,
+  "skipped": {
+    "max_per_text": 1316
+  },
+  "unique_texts": 48,
+  "unique_reciters": 2,
+  "unique_verse_ids": 48,
+  "total_duration_sec": 1273.05977324263,
+  "top_reciters": [
+    [
+      "saood_ash_shuraym",
+      48
+    ],
+    [
+      "abdurrahmaan_as_sudais",
+      48
+    ]
+  ],
+  "top_surahs": [
+    [
+      "Al-Baqara",
+      82
+    ],
+    [
+      "Al-Faatiha",
+      14
+    ]
+  ],
+  "description": "Quran-MD ayah-level full-Quran recitations with surah/ayah metadata."
+}
