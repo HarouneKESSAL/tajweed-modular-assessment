@@ -1,0 +1,19 @@
+{
+  "samples": 1003,
+  "split": "val",
+  "split_mode": "text",
+  "use_cleanup": false,
+  "blank_penalty": 1.6,
+  "decoder": "greedy",
+  "beam_width": 5,
+  "open_fallback_margin": 0.0,
+  "lexicon_source": "full",
+  "lexicon_size": 2571,
+  "eval_unique_text_count": 479,
+  "eval_texts_in_lexicon": 1003,
+  "eval_text_coverage": 1.0,
+  "exact_match": 0.4915254237288136,
+  "char_accuracy": 0.8342797005807978,
+  "edit_distance": 0.7507477567298105,
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_quran_md_words_pilot5000_r8_textsplit_hd160.pt"
+}

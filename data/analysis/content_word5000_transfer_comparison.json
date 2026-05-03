@@ -1,0 +1,64 @@
+{
+  "title": "Quran-MD 5000-word auxiliary content transfer comparison",
+  "date": "2026-05-03",
+  "source_dataset": "Buraaq/quran-md-words",
+  "source_url": "https://huggingface.co/datasets/Buraaq/quran-md-words",
+  "word_manifest": "data/manifests/hf_quran_md_words_pilot5000_r8.jsonl",
+  "word_dataset": {
+    "rows": 5000,
+    "unique_normalized_texts": 2571,
+    "unique_verse_ids": 359,
+    "duration_seconds": 8946.5,
+    "max_per_text": 8
+  },
+  "decision": "do_not_promote_transfer",
+  "official_chunked_baseline": {
+    "checkpoint": "checkpoints/content_chunked_module_hd96_reciter.pt",
+    "analysis_file": "data/analysis/chunked_content_open_hd96_reciter_textsplit_bp16.json",
+    "exact_match": 0.7002398081534772,
+    "char_accuracy": 0.8922576224734483,
+    "edit_distance": 0.7314148681055156,
+    "eval_text_coverage": 0.0
+  },
+  "word_auxiliary_model": {
+    "checkpoint": "checkpoints/content_quran_md_words_pilot5000_r8_textsplit_hd160.pt",
+    "baseline_old_content_on_words": {
+      "analysis_file": "data/analysis/hf_quran_md_words_pilot5000_r8_baseline_full_bp16.json",
+      "exact_match": 0.0014,
+      "char_accuracy": 0.062103427128426904,
+      "edit_distance": 5.9078
+    },
+    "held_out_word_text_bp00": {
+      "analysis_file": "data/analysis/hf_quran_md_words_pilot5000_r8_textsplit_hd160_val_bp00.json",
+      "exact_match": 0.4675972083748754,
+      "char_accuracy": 0.8393054962097835,
+      "edit_distance": 0.7238285144566301
+    },
+    "held_out_word_text_bp16": {
+      "analysis_file": "data/analysis/hf_quran_md_words_pilot5000_r8_textsplit_hd160_val_bp16.json",
+      "exact_match": 0.4915254237288136,
+      "char_accuracy": 0.8342797005807978,
+      "edit_distance": 0.7507477567298105
+    }
+  },
+  "chunk_transfer_model": {
+    "checkpoint": "checkpoints/content_chunked_module_word5000_pretrain_hd160_textsplit.pt",
+    "init_checkpoint": "checkpoints/content_quran_md_words_pilot5000_r8_textsplit_hd160.pt",
+    "held_out_chunk_text_bp00": {
+      "analysis_file": "data/analysis/content_chunked_word5000_pretrain_hd160_textsplit_val_bp00.json",
+      "exact_match": 0.0,
+      "char_accuracy": 0.3011019755624072,
+      "edit_distance": 4.623501199040767,
+      "eval_text_coverage": 0.0
+    },
+    "held_out_chunk_text_bp16": {
+      "analysis_file": "data/analysis/content_chunked_word5000_pretrain_hd160_textsplit_val_bp16.json",
+      "exact_match": 0.0,
+      "char_accuracy": 0.25914982299874384,
+      "edit_distance": 5.074340527577938,
+      "eval_text_coverage": 0.0
+    }
+  },
+  "interpretation": "The 5000-word auxiliary model is strong on held-out single words, but naive transfer into the phrase/chunk content model regresses badly. The official tuned chunked baseline remains the correct content baseline.",
+  "next_best_step": "Do not use direct word-to-chunk pretraining as-is. Next try a multi-task or curriculum mix where word clips and chunk clips are trained together, or train a word recognizer as a separate submodule for segmentation support rather than replacing the chunk content model."
+}
