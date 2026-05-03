@@ -1,0 +1,37 @@
+{
+  "dataset": "Buraaq/quran-md-words",
+  "dataset_alias": "quran-md-words",
+  "split": "train",
+  "max_rows": 512,
+  "skip_rows": 0,
+  "max_per_text": 4,
+  "max_per_reciter": 0,
+  "output": "data\\manifests\\hf_quran_md_words_pilot512_r4.jsonl",
+  "audio_dir": "data\\raw\\hf_quran_md_words_pilot512_r4",
+  "rows_written": 512,
+  "rows_skipped": 66,
+  "skipped": {
+    "max_per_text": 66
+  },
+  "unique_texts": 371,
+  "unique_reciters": 1,
+  "unique_verse_ids": 43,
+  "total_duration_sec": 859.634648526077,
+  "top_reciters": [
+    [
+      "quran_md_word_audio",
+      512
+    ]
+  ],
+  "top_surahs": [
+    [
+      "The Cow",
+      483
+    ],
+    [
+      "The Opening",
+      29
+    ]
+  ],
+  "description": "Quran-MD word-level audio clips with word, ayah, and surah metadata."
+}

@@ -19,6 +19,11 @@ DATASETS = {
         "default_split": "train",
         "description": "Quran-MD ayah-level full-Quran recitations with surah/ayah metadata.",
     },
+    "quran-md-words": {
+        "hf_name": "Buraaq/quran-md-words",
+        "default_split": "train",
+        "description": "Quran-MD word-level audio clips with word, ayah, and surah metadata.",
+    },
     "quran-ayah-corpus": {
         "hf_name": "rabah2026/Quran-Ayah-Corpus",
         "default_split": "train",
@@ -159,6 +164,38 @@ def convert_buraaq_row(row: dict, *, row_index: int, audio_path: Path, duration_
     }
 
 
+def convert_buraaq_word_row(row: dict, *, row_index: int, audio_path: Path, duration_sec: float) -> dict:
+    surah_id = int(row.get("surah_id") or 0)
+    ayah_id = int(row.get("ayah_id") or 0)
+    word_index = int(row.get("word_index") or 0)
+    word_id = str(row.get("word_id") or f"{word_index:03d}")
+    normalized = normalize_arabic_text(row.get("word_ar", ""))
+    return {
+        "id": f"quran_md_word_{surah_id:03d}_{ayah_id:03d}_{word_id}_{row_index:06d}",
+        "source_dataset": "Buraaq/quran-md-words",
+        "source_index": row_index,
+        "audio_path": str(audio_path.relative_to(PROJECT_ROOT)),
+        "surah_name": row.get("surah_name_en") or row.get("surah_name_ar"),
+        "surah_name_ar": row.get("surah_name_ar"),
+        "quranjson_surah_number": surah_id,
+        "quranjson_verse_key": f"verse_{ayah_id}",
+        "quranjson_verse_index": ayah_id,
+        "word_id": word_id,
+        "word_index": word_index,
+        "reciter_id": "quran_md_word_audio",
+        "reciter_name": "Quran-MD word audio",
+        "normalized_text": normalized,
+        "source_text": row.get("word_ar"),
+        "source_ayah_text": row.get("ayah_ar"),
+        "translation": row.get("word_en"),
+        "transliteration": row.get("word_tr"),
+        "start_sec": 0.0,
+        "end_sec": duration_sec,
+        "audio_duration_sec": duration_sec,
+        "content_source": "hf_quran_md_words",
+    }
+
+
 def convert_ayah_corpus_row(row: dict, *, row_index: int, audio_path: Path, duration_sec: float) -> dict:
     reciter = str(row.get("reciter") or "unknown")
     normalized = normalize_arabic_text(row.get("text", ""))
@@ -184,6 +221,9 @@ def prefilter_key(row: dict, dataset_alias: str) -> tuple[str, str]:
     if dataset_alias == "quran-md-ayahs":
         text = normalize_arabic_text(row.get("ayah_ar", "")).replace(" ", "")
         reciter = str(row.get("reciter_id") or "unknown")
+    elif dataset_alias == "quran-md-words":
+        text = normalize_arabic_text(row.get("word_ar", "")).replace(" ", "")
+        reciter = "quran_md_word_audio"
     elif dataset_alias == "quran-ayah-corpus":
         text = normalize_arabic_text(row.get("text", "")).replace(" ", "")
         reciter = str(row.get("reciter") or "unknown")
@@ -262,6 +302,8 @@ def main() -> None:
 
         if args.dataset == "quran-md-ayahs":
             out_row = convert_buraaq_row(row, row_index=row_index, audio_path=audio_path, duration_sec=duration_sec)
+        elif args.dataset == "quran-md-words":
+            out_row = convert_buraaq_word_row(row, row_index=row_index, audio_path=audio_path, duration_sec=duration_sec)
         elif args.dataset == "quran-ayah-corpus":
             out_row = convert_ayah_corpus_row(row, row_index=row_index, audio_path=audio_path, duration_sec=duration_sec)
         else:

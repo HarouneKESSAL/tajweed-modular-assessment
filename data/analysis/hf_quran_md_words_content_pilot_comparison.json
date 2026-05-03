@@ -1,0 +1,45 @@
+{
+  "title": "Quran-MD word-level content pilot comparison",
+  "date": "2026-05-03",
+  "source_dataset": "Buraaq/quran-md-words",
+  "source_url": "https://huggingface.co/datasets/Buraaq/quran-md-words",
+  "manifest": "data/manifests/hf_quran_md_words_pilot512_r4.jsonl",
+  "dataset": {
+    "rows": 512,
+    "unique_normalized_texts": 371,
+    "unique_reciters": 1,
+    "unique_verse_ids": 43,
+    "duration_seconds": 859.63,
+    "max_per_text": 4
+  },
+  "decision": "experimental_do_not_promote",
+  "reason": "Real word clips are learnable and improve character accuracy over the old content model, but held-out exact match is still 0.000. This should remain an experimental content expansion path until a larger word-level run improves exact match.",
+  "baseline": {
+    "name": "Existing tuned chunked baseline evaluated on Quran-MD word clips",
+    "analysis_file": "data/analysis/hf_quran_md_words_pilot512_r4_baseline_full_bp16.json",
+    "samples": 512,
+    "exact_match": 0.00390625,
+    "char_accuracy": 0.08014508928571434,
+    "edit_distance": 5.4296875
+  },
+  "word_model": {
+    "checkpoint": "checkpoints/content_quran_md_words_pilot512_r4_textsplit_hd96.pt",
+    "split_mode": "text",
+    "train": {
+      "analysis_file": "data/analysis/hf_quran_md_words_pilot512_r4_textsplit_hd96_train_bp16.json",
+      "samples": 410,
+      "exact_match": 0.11951219512195121,
+      "char_accuracy": 0.48019628339140533,
+      "edit_distance": 2.5317073170731708
+    },
+    "held_out_text": {
+      "analysis_file": "data/analysis/hf_quran_md_words_pilot512_r4_textsplit_hd96_val_bp16.json",
+      "samples": 102,
+      "exact_match": 0.0,
+      "char_accuracy": 0.2413865546218488,
+      "edit_distance": 3.5392156862745097
+    }
+  },
+  "interpretation": "This is better than the approximate ayah chunk route because the audio clips are real word-level units. The remaining gap is likely scale and model/decoder strength, not fake timing noise.",
+  "next_best_step": "Scale the Quran-MD word import to several thousand clips, train a word-level auxiliary content model, and then distill or mix it into the current tuned chunked content baseline while comparing against that baseline only."
+}

@@ -22,4 +22,4 @@ Useful entry points:
 - `content/build_textsplit_train_manifest.py`: creates leakage-safe text-split training manifests
 - `content/build_approx_ayah_content_chunks.py`: creates approximate short chunks from ayah-level audio manifests
 - `data/audit_clean_expansion_pool.py`: audits clean QuranJSON-matched rows before expanding training data
-- `data/import_hf_quran_content.py`: imports capped Hugging Face Quran audio/text pilots into local content manifests
+- `data/import_hf_quran_content.py`: imports capped Hugging Face Quran ayah/word audio-text pilots into local content manifests
