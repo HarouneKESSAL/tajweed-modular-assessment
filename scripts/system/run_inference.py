@@ -7,7 +7,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 import argparse
 import json
-from tajweed_assessment.scoring.weighted_score import load_error_weights
+
 import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
@@ -16,11 +16,12 @@ from tajweed_assessment.data.labels import normalize_rule_name, rule_to_id
 from tajweed_assessment.features.mfcc import extract_mfcc_features
 from tajweed_assessment.features.ssl import DummySSLFeatureExtractor
 from tajweed_assessment.inference.pipeline import TajweedInferencePipeline
-from tajweed_assessment.models.common.decoding import decode_with_majority_rules
 from tajweed_assessment.models.burst.qalqalah_cnn import QalqalahCNN
+from tajweed_assessment.models.common.decoding import decode_with_majority_rules
 from tajweed_assessment.models.duration.madd_ghunnah_module import DurationRuleModule
 from tajweed_assessment.models.fusion.duration_fusion_calibrator import DurationFusionCalibrator
 from tajweed_assessment.models.transition.idgham_ikhfa_module import TransitionRuleModule
+from tajweed_assessment.scoring.weighted_score import load_error_weights
 from tajweed_assessment.settings import load_yaml
 from tajweed_assessment.utils.io import load_checkpoint, load_json
 
@@ -280,8 +281,8 @@ def main() -> None:
     parser.add_argument("--show-matches", action="store_true")
     parser.add_argument(
         "--error-weights",
-        default=None,
-        help="Optional path to weighted Tajweed error scoring YAML.",
+        default="configs/error_weights.yaml",
+        help="Path to weighted Tajweed error scoring YAML.",
     )
     args = parser.parse_args()
 
