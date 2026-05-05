@@ -171,6 +171,12 @@ def whisper_ctc_input_lengths(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", default="data/manifests/retasy_content_chunks.jsonl")
+    parser.add_argument(
+        "--max-rows",
+        type=int,
+        default=0,
+        help="Limit manifest rows before train/val split, to match training subset experiments.",
+    )
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--split", choices=["train", "val", "full"], default="val")
     parser.add_argument("--max-samples", type=int, default=0)
@@ -185,6 +191,9 @@ def main() -> None:
     id_to_char = {int(k): str(v) for k, v in ckpt["id_to_char"].items()}
 
     rows = load_jsonl(resolve_path(args.manifest))
+    if args.max_rows > 0:
+        rows = rows[: args.max_rows]
+
     train_rows, val_rows = split_rows_text_holdout(rows, val_fraction=0.2, seed=1337)
 
     if args.split == "train":
@@ -205,12 +214,16 @@ def main() -> None:
 
     processor = WhisperProcessor.from_pretrained(model_name, language="arabic", task="transcribe")
 
+    saved_model_cfg = ckpt.get("config", {}).get("model", {})
     model = WhisperCTCContentModel(
         WhisperCTCConfig(
             model_name=model_name,
             num_labels=len(char_to_id) + 1,
-            freeze_encoder=True,
-            dropout=0.0,
+            freeze_encoder=bool(saved_model_cfg.get("freeze_encoder", True)),
+            dropout=float(saved_model_cfg.get("dropout", 0.0)),
+            head_type=str(saved_model_cfg.get("head_type", "linear")),
+            head_hidden_dim=int(saved_model_cfg.get("head_hidden_dim", 128)),
+            head_num_layers=int(saved_model_cfg.get("head_num_layers", 1)),
         )
     )
     model.load_state_dict(ckpt["model_state_dict"])

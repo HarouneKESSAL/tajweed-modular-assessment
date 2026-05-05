@@ -347,6 +347,9 @@ def main() -> None:
             num_labels=len(char_to_id) + 1,
             freeze_encoder=bool(model_cfg.get("freeze_encoder", True)),
             dropout=float(model_cfg.get("dropout", 0.1)),
+            head_type=str(model_cfg.get("head_type", "linear")),
+            head_hidden_dim=int(model_cfg.get("head_hidden_dim", 128)),
+            head_num_layers=int(model_cfg.get("head_num_layers", 1)),
         )
     ).to(device)
 
