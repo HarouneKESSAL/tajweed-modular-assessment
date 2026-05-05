@@ -27,6 +27,7 @@ from tajweed_assessment.settings import load_yaml
 from tajweed_assessment.utils.io import load_checkpoint, load_json, save_json
 from tajweed_assessment.models.common.decoding import ctc_lexicon_decode, ctc_prefix_beam_search
 from tajweed_assessment.training.metrics import greedy_decode_from_log_probs
+from tajweed_assessment.scoring.weighted_score import load_error_weights
 
 from content.train_chunked_content import (
     ChunkedContentDataset,
@@ -409,6 +410,263 @@ def safe_accuracy(correct: int, total: int) -> float | None:
 
 def format_acc(value: float | None) -> str:
     return f"{value:.3f}" if value is not None else "n/a"
+
+
+def _weight_config(
+    config: dict,
+    module: str,
+    error_type: str,
+) -> tuple[float, str, str]:
+    item = (
+        config.get("categories", {})
+        .get(module, {})
+        .get(error_type, {})
+    )
+
+    if not isinstance(item, dict):
+        return 1.0, "unknown", "unknown"
+
+    return (
+        float(item.get("weight", 1.0)),
+        str(item.get("severity", "unknown")),
+        str(item.get("lahn_type", "unknown")),
+    )
+
+
+def _add_weighted_error_count(
+    accumulator: dict,
+    config: dict,
+    *,
+    module: str,
+    error_type: str,
+    count: int,
+    confidence: float = 1.0,
+    description: str = "",
+) -> None:
+    if count <= 0:
+        return
+
+    confidence = max(0.0, min(1.0, float(confidence)))
+    weight, severity, lahn_type = _weight_config(config, module, error_type)
+    weighted_penalty = float(count) * weight * confidence
+
+    accumulator["num_errors"] += int(count)
+    accumulator["total_weighted_error_sum"] += weighted_penalty
+    accumulator["severity_counts"][severity] = accumulator["severity_counts"].get(severity, 0) + int(count)
+
+    by_module = accumulator["by_module"].setdefault(
+        module,
+        {
+            "num_errors": 0,
+            "weighted_error_sum": 0.0,
+            "severity_counts": {},
+        },
+    )
+    by_module["num_errors"] += int(count)
+    by_module["weighted_error_sum"] += weighted_penalty
+    by_module["severity_counts"][severity] = by_module["severity_counts"].get(severity, 0) + int(count)
+
+    accumulator["errors"].append(
+        {
+            "module": module,
+            "error_type": error_type,
+            "count": int(count),
+            "severity": severity,
+            "lahn_type": lahn_type,
+            "confidence": confidence,
+            "weight": weight,
+            "weighted_penalty": weighted_penalty,
+            "description": description,
+        }
+    )
+
+
+def estimate_suite_weighted_scoring(
+    *,
+    config: dict,
+    duration_summary: dict,
+    transition_summary: dict,
+    burst_summary: dict,
+    content_summary: dict,
+) -> dict:
+    """
+    Estimate severity-aware Tajweed score from aggregate suite metrics.
+
+    This does not replace per-sample scoring. It gives a suite-level view of
+    which module errors matter most under the pedagogical weighting config.
+    """
+    scale = float(config.get("scale", 3.0))
+
+    result = {
+        "scale": scale,
+        "evaluation_units": 0,
+        "estimated_average_score": None,
+        "total_weighted_error_sum": 0.0,
+        "total_scaled_penalty": 0.0,
+        "num_errors": 0,
+        "severity_counts": {},
+        "by_module": {},
+        "errors": [],
+        "notes": [
+            "This is an aggregate estimate built from suite summaries.",
+            "Content exact mismatches are treated as content/wrong_word errors.",
+            "Duration aggregate errors are mapped by rule type.",
+            "Transition aggregate errors are treated as wrong_transition_rule.",
+            "Burst false negatives are missing_qalqalah; false positives are weak_qalqalah.",
+        ],
+    }
+
+    # Duration: position-level rule errors.
+    if duration_summary and duration_summary.get("total_positions") is not None:
+        result["evaluation_units"] += int(duration_summary.get("total_positions") or 0)
+
+        for rule, stats in duration_summary.get("rule_summary", {}).items():
+            total = int(stats.get("total") or 0)
+            correct = int(stats.get("correct") or 0)
+            wrong = max(0, total - correct)
+
+            if rule == "ghunnah":
+                error_type = "ghunnah_duration_error"
+            elif rule == "madd":
+                # Conservative aggregate mapping. The suite summary does not
+                # distinguish minor vs severe madd duration errors.
+                error_type = "minor_madd_duration_error"
+            else:
+                error_type = "minor_madd_duration_error"
+
+            _add_weighted_error_count(
+                result,
+                config,
+                module="duration",
+                error_type=error_type,
+                count=wrong,
+                description=f"Duration rule aggregate mistakes for {rule}",
+            )
+
+    # Transition: sample-level class errors.
+    if transition_summary and transition_summary.get("available", True):
+        result["evaluation_units"] += int(transition_summary.get("samples") or 0)
+
+        for label, stats in transition_summary.get("class_summary", {}).items():
+            total = int(stats.get("total") or 0)
+            correct = int(stats.get("correct") or 0)
+            wrong = max(0, total - correct)
+
+            _add_weighted_error_count(
+                result,
+                config,
+                module="transition",
+                error_type="wrong_transition_rule",
+                count=wrong,
+                description=f"Transition aggregate mistakes for gold class {label}",
+            )
+
+    # Burst: use confusion matrix for better qalqalah error types.
+    if burst_summary and burst_summary.get("available", True):
+        result["evaluation_units"] += int(burst_summary.get("samples") or 0)
+
+        confusion = burst_summary.get("confusion_matrix")
+        if (
+            isinstance(confusion, list)
+            and len(confusion) >= 2
+            and isinstance(confusion[0], list)
+            and isinstance(confusion[1], list)
+            and len(confusion[0]) >= 2
+            and len(confusion[1]) >= 2
+        ):
+            false_qalqalah = int(confusion[0][1])
+            missed_qalqalah = int(confusion[1][0])
+
+            _add_weighted_error_count(
+                result,
+                config,
+                module="burst",
+                error_type="weak_qalqalah",
+                count=false_qalqalah,
+                description="Burst false positives: predicted qalqalah for none",
+            )
+            _add_weighted_error_count(
+                result,
+                config,
+                module="burst",
+                error_type="missing_qalqalah",
+                count=missed_qalqalah,
+                description="Burst false negatives: missed qalqalah",
+            )
+        else:
+            for label, stats in burst_summary.get("class_summary", {}).items():
+                total = int(stats.get("total") or 0)
+                correct = int(stats.get("correct") or 0)
+                wrong = max(0, total - correct)
+                error_type = "missing_qalqalah" if label == "qalqalah" else "weak_qalqalah"
+                _add_weighted_error_count(
+                    result,
+                    config,
+                    module="burst",
+                    error_type=error_type,
+                    count=wrong,
+                    description=f"Burst aggregate mistakes for gold class {label}",
+                )
+
+    # Content: chunk exact mismatches count as high-severity content errors.
+    if content_summary and content_summary.get("available", True):
+        samples = int(content_summary.get("samples") or 0)
+        result["evaluation_units"] += samples
+
+        exact_match = content_summary.get("exact_match")
+        if exact_match is not None:
+            wrong = max(0, int(round(samples * (1.0 - float(exact_match)))))
+            _add_weighted_error_count(
+                result,
+                config,
+                module="content",
+                error_type="wrong_word",
+                count=wrong,
+                description="Chunked content exact-match failures",
+            )
+
+    result["total_weighted_error_sum"] = float(result["total_weighted_error_sum"])
+    result["total_scaled_penalty"] = result["total_weighted_error_sum"] * scale
+
+    units = int(result["evaluation_units"])
+    if units > 0:
+        result["estimated_average_score"] = max(
+            0.0,
+            100.0 - (result["total_scaled_penalty"] / units),
+        )
+
+    # Stable sort by impact.
+    result["errors"] = sorted(
+        result["errors"],
+        key=lambda item: float(item.get("weighted_penalty", 0.0)),
+        reverse=True,
+    )
+
+    return result
+
+
+def print_weighted_scoring_summary(summary: dict) -> None:
+    print("Weighted scoring summary:")
+    if not summary:
+        print("- not available")
+        return
+
+    avg = summary.get("estimated_average_score")
+    avg_text = f"{avg:.3f}" if isinstance(avg, (int, float)) else "n/a"
+    print(f"- estimated_average_score={avg_text}")
+    print(f"- evaluation_units={summary.get('evaluation_units')}")
+    print(f"- num_errors={summary.get('num_errors')}")
+    print(f"- total_weighted_error_sum={summary.get('total_weighted_error_sum'):.3f}")
+    print(f"- total_scaled_penalty={summary.get('total_scaled_penalty'):.3f}")
+    print(f"- severity_counts={summary.get('severity_counts', {})}")
+
+    by_module = summary.get("by_module", {})
+    for module, stats in by_module.items():
+        print(
+            f"- {module}: errors={stats.get('num_errors')} "
+            f"weighted_sum={stats.get('weighted_error_sum'):.3f} "
+            f"severity_counts={stats.get('severity_counts', {})}"
+        )
 
 
 def evaluate_duration_manifest(pipeline: TajweedInferencePipeline, rows: list[dict], limit: int = 0) -> dict:
@@ -1034,8 +1292,20 @@ def main() -> None:
     parser.add_argument("--content-split", choices=["train", "val", "full"], default="val")
     parser.add_argument("--content-split-mode", choices=["reciter", "text"], default="reciter")
     parser.add_argument("--content-decoder-config", default="checkpoints/content_chunked_decoder.json")
+    parser.add_argument(
+        "--error-weights",
+        default="configs/error_weights.yaml",
+        help="Path to weighted Tajweed error scoring YAML. Use empty string to disable.",
+    )
     parser.add_argument("--output-json", default="")
     args = parser.parse_args()
+
+    error_weight_config = None
+    if args.error_weights:
+        error_weights_path = Path(args.error_weights)
+        if not error_weights_path.is_absolute():
+            error_weights_path = PROJECT_ROOT / error_weights_path
+        error_weight_config = load_error_weights(error_weights_path)
 
     duration_rows = load_jsonl(PROJECT_ROOT / args.duration_manifest)
     transition_rows = load_jsonl(PROJECT_ROOT / args.transition_manifest)
@@ -1095,12 +1365,23 @@ def main() -> None:
         limit=args.content_limit,
     )
 
+    weighted_scoring_summary = None
+    if error_weight_config is not None:
+        weighted_scoring_summary = estimate_suite_weighted_scoring(
+            config=error_weight_config,
+            duration_summary=duration_summary,
+            transition_summary=transition_summary,
+            burst_summary=burst_summary,
+            content_summary=content_summary,
+        )
+
     summary = {
         "duration": duration_summary,
         "transition": transition_summary,
         "burst": burst_summary,
         "content": content_summary,
         "content_reference_full_verse": content_reference_summary,
+        "weighted_scoring": weighted_scoring_summary,
         "duration_checkpoint": str(PROJECT_ROOT / "checkpoints" / args.duration_checkpoint),
         "transition_checkpoint": str(PROJECT_ROOT / "checkpoints" / args.transition_checkpoint),
     }
@@ -1135,6 +1416,9 @@ def main() -> None:
     print("")
     print("Content reference:")
     print_content_summary(content_reference_summary)
+
+    print("")
+    print_weighted_scoring_summary(weighted_scoring_summary or {})
 
     if args.output_json:
         save_json(summary, PROJECT_ROOT / args.output_json)
