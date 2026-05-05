@@ -7,7 +7,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 import argparse
 import json
-
+from tajweed_assessment.scoring.weighted_score import load_error_weights
 import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
@@ -278,6 +278,11 @@ def main() -> None:
     parser.add_argument("--manifest", default="data/manifests/retasy_duration_alignment_corpus_torchaudio_strict.jsonl")
     parser.add_argument("--sample-index", type=int, default=0)
     parser.add_argument("--show-matches", action="store_true")
+    parser.add_argument(
+        "--error-weights",
+        default=None,
+        help="Optional path to weighted Tajweed error scoring YAML.",
+    )
     args = parser.parse_args()
 
     rows = load_jsonl(PROJECT_ROOT / args.manifest)
@@ -286,7 +291,13 @@ def main() -> None:
 
     row = rows[args.sample_index]
     audio_path = row["audio_path"]
-
+    error_weight_config = None
+    if args.error_weights:
+        weights_path = Path(args.error_weights)
+        if not weights_path.is_absolute():
+            weights_path = PROJECT_ROOT / weights_path
+        error_weight_config = load_error_weights(weights_path)
+        
     duration_model = load_duration_module()
     localized_duration_model, localized_duration_labels, localized_duration_thresholds = load_localized_duration_module()
     duration_fusion_calibrator, duration_fusion_char_vocab = load_duration_fusion_calibrator()
@@ -307,6 +318,7 @@ def main() -> None:
         localized_duration_labels=localized_duration_labels or ("ghunnah", "madd"),
         localized_transition_labels=localized_transition_labels or ("idgham", "ikhfa"),
         device="cpu",
+        error_weight_config=error_weight_config,
     )
 
     mfcc = extract_mfcc_features(audio_path)
@@ -354,7 +366,10 @@ def main() -> None:
     print("Feedback:")
     for line in result["feedback"]:
         print(safe_text(f"- {line}"))
-
+    if result.get("weighted_score") is not None:
+        print("")
+        print("Weighted score:")
+        print_json(result["weighted_score"])
     if args.show_matches:
         matched = [j for j in result.get("module_judgments", []) if j.get("is_correct")]
         if matched:
