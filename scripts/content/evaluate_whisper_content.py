@@ -252,29 +252,39 @@ class WhisperContentEvaluator:
         language: str,
         task: str,
         device: str,
+        max_new_tokens: int,
     ) -> None:
         if device == "auto":
             device = "cuda" if torch.cuda.is_available() else "cpu"
+
+        if device.startswith("cuda") and not torch.cuda.is_available():
+            print(
+                "[warning] CUDA was requested, but this PyTorch install has no CUDA. "
+                "Falling back to CPU."
+            )
+            device = "cpu"
 
         self.device = torch.device(device)
         self.model_name = model_name
         self.language = language
         self.task = task
+        self.max_new_tokens = max_new_tokens
 
         self.processor = WhisperProcessor.from_pretrained(
             model_name,
             language=language,
             task=task,
         )
+
         self.model = WhisperForConditionalGeneration.from_pretrained(model_name)
         self.model.to(self.device)
         self.model.eval()
 
-        forced_decoder_ids = self.processor.get_decoder_prompt_ids(
-            language=language,
-            task=task,
-        )
-        self.model.config.forced_decoder_ids = forced_decoder_ids
+        # Prefer modern generation controls instead of custom forced_decoder_ids.
+        # This avoids the warning about deprecated custom forced_decoder_ids.
+        self.model.generation_config.language = language
+        self.model.generation_config.task = task
+        self.model.generation_config.forced_decoder_ids = None
 
     @torch.no_grad()
     def transcribe(self, waveform_16khz: torch.Tensor) -> str:
@@ -284,14 +294,31 @@ class WhisperContentEvaluator:
             audio_array,
             sampling_rate=16000,
             return_tensors="pt",
+            return_attention_mask=True,
         )
 
         input_features = inputs.input_features.to(self.device)
-        predicted_ids = self.model.generate(input_features)
+
+        attention_mask = inputs.get("attention_mask")
+        if attention_mask is not None:
+            attention_mask = attention_mask.to(self.device)
+
+        generate_kwargs: dict[str, Any] = {
+            "input_features": input_features,
+            "language": self.language,
+            "task": self.task,
+            "max_new_tokens": self.max_new_tokens,
+        }
+
+        if attention_mask is not None:
+            generate_kwargs["attention_mask"] = attention_mask
+
+        predicted_ids = self.model.generate(**generate_kwargs)
 
         text = self.processor.batch_decode(
             predicted_ids,
             skip_special_tokens=True,
+            clean_up_tokenization_spaces=False,
         )[0]
 
         return text.strip()
@@ -307,6 +334,7 @@ def evaluate_manifest(
     device: str,
     max_samples: int | None,
     start_index: int,
+    max_new_tokens: int,
 ) -> dict[str, Any]:
     rows = load_jsonl(manifest_path)
 
@@ -325,6 +353,7 @@ def evaluate_manifest(
         language=language,
         task=task,
         device=device,
+        max_new_tokens=max_new_tokens,
     )
 
     predictions: list[str] = []
@@ -342,7 +371,17 @@ def evaluate_manifest(
         start_time, end_time = get_time_bounds(row)
         start_sample, end_sample = get_sample_bounds(row)
 
+        chunk_duration = None
+        if start_time is not None and end_time is not None:
+            chunk_duration = max(0.0, float(end_time) - float(start_time))
+
         print(f"[{local_idx + 1}/{total}] {sample_id} -> {audio_path}")
+        if chunk_duration is not None:
+            print(f"  chunk_sec: {chunk_duration:.3f}")
+        elif start_sample is not None or end_sample is not None:
+            print(f"  chunk_samples: start={start_sample} end={end_sample}")
+        else:
+            print("  chunk_sec: full audio, no timing fields found")
 
         try:
             waveform = load_audio_16khz(
@@ -352,8 +391,13 @@ def evaluate_manifest(
                 start_sample=start_sample,
                 end_sample=end_sample,
             )
+
+            audio_duration_16khz = waveform.numel() / 16000.0
+            print(f"  audio_to_whisper_sec: {audio_duration_16khz:.3f}")
+
             predicted_text = evaluator.transcribe(waveform)
             error = None
+
             print(f"  expected : {expected_text}")
             print(f"  predicted: {predicted_text}")
         except Exception as exc:
@@ -375,6 +419,7 @@ def evaluate_manifest(
             "end_time": end_time,
             "start_sample": start_sample,
             "end_sample": end_sample,
+            "chunk_duration_sec": chunk_duration,
             "expected_text": expected_text,
             "predicted_text": predicted_text,
             "expected_normalized": expected_normalized,
@@ -399,6 +444,7 @@ def evaluate_manifest(
         "manifest": str(manifest_path),
         "start_index": start_index,
         "max_samples": max_samples,
+        "max_new_tokens": max_new_tokens,
         "samples": metrics.samples,
         "error_count": error_count,
         "metrics": {
@@ -467,6 +513,12 @@ def main() -> None:
         default=0,
         help="Start index in the manifest.",
     )
+    parser.add_argument(
+        "--max-new-tokens",
+        type=int,
+        default=32,
+        help="Maximum number of tokens Whisper may generate per chunk.",
+    )
 
     args = parser.parse_args()
 
@@ -481,6 +533,7 @@ def main() -> None:
         device=args.device,
         max_samples=max_samples,
         start_index=args.start_index,
+        max_new_tokens=args.max_new_tokens,
     )
 
     print("")
