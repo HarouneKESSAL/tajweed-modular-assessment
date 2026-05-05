@@ -255,21 +255,39 @@ def load_burst_module() -> QalqalahCNN | None:
     return model
 
 
-def load_content_module(checkpoint_name: str) -> tuple[ContentVerificationModule | None, dict | None]:
-    ckpt_path = PROJECT_ROOT / "checkpoints" / checkpoint_name
-    if not ckpt_path.exists():
-        return None, None
-    model_cfg = load_yaml(PROJECT_ROOT / "configs" / "model_content.yaml")
-    ckpt = load_checkpoint(ckpt_path)
-    ckpt_model_cfg = ckpt.get("config", {}).get("model", {})
-    hidden_dim = int(ckpt_model_cfg.get("hidden_dim", model_cfg["hidden_dim"]))
-    num_chars = len(ckpt.get("char_to_id", {})) + 1
+def load_content_module(checkpoint_name: str):
+    checkpoint_path = PROJECT_ROOT / "checkpoints" / checkpoint_name
+    if not checkpoint_path.exists():
+        checkpoint_path = PROJECT_ROOT / checkpoint_name
+
+    ckpt = torch.load(checkpoint_path, map_location="cpu")
+    state = ckpt["model_state_dict"]
+
+    char_to_id = ckpt.get("char_to_id")
+    if not isinstance(char_to_id, dict):
+        raise RuntimeError(f"Content checkpoint has no char_to_id: {checkpoint_path}")
+
+    model_config = ckpt.get("config", {}).get("model", {})
+    hidden_dim = int(model_config.get("hidden_dim", 64))
+
+    lstm_weight = state.get("encoder.lstm.weight_ih_l0")
+    if lstm_weight is not None:
+        inferred_hidden_dim = int(lstm_weight.shape[0] // 4)
+        if inferred_hidden_dim != hidden_dim:
+            print(
+                "[warning] content checkpoint hidden_dim config does not match weights: "
+                f"config={hidden_dim}, inferred={inferred_hidden_dim}. "
+                "Using inferred value."
+            )
+            hidden_dim = inferred_hidden_dim
+
     model = ContentVerificationModule(
         hidden_dim=hidden_dim,
-        num_phonemes=num_chars,
+        num_phonemes=len(char_to_id) + 1,
     )
-    model.load_state_dict(ckpt["model_state_dict"])
+    model.load_state_dict(state)
     model.eval()
+
     return model, ckpt
 
 

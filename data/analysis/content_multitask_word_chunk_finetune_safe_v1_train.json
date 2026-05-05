@@ -1,0 +1,35 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_multitask_word_chunk_finetune_safe_v1.pt",
+  "stage_results": [
+    {
+      "stage_name": "balanced",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_ckpt_safe_stage1_balanced.jsonl",
+      "best_metrics": {
+        "samples": 500.0,
+        "exact_match": 0.822,
+        "char_accuracy": 0.930838095238095,
+        "edit_distance": 0.448
+      }
+    },
+    {
+      "stage_name": "chunk_heavy",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_ckpt_safe_stage2_chunk_heavy.jsonl",
+      "best_metrics": {
+        "samples": 1000.0,
+        "exact_match": 0.737,
+        "char_accuracy": 0.904128571428572,
+        "edit_distance": 0.595
+      }
+    },
+    {
+      "stage_name": "chunk_focus",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_ckpt_safe_stage3_chunk_focus.jsonl",
+      "best_metrics": {
+        "samples": 1500.0,
+        "exact_match": 0.7433333333333333,
+        "char_accuracy": 0.9069396825396827,
+        "edit_distance": 0.578
+      }
+    }
+  ]
+}
