@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
-
+from tajweed_assessment.scoring.error_types import TajweedError
 import yaml
 
 
@@ -156,6 +156,100 @@ def score_inference_result(
         "score": final_score,
         "weighted_error_sum": weighted_error_sum,
         "scale": scale,
+        "num_errors": len(weighted_errors),
+        "severity_counts": severity_counts,
+        "errors": weighted_errors,
+    }
+    
+    
+    
+
+
+
+def get_error_weight(config: dict[str, Any], error: TajweedError) -> float:
+    weight, _severity, _lahn_type = _lookup_weight(
+        config,
+        error.module,
+        error.error_type,
+    )
+    return weight
+
+
+def get_error_severity(config: dict[str, Any], error: TajweedError) -> str:
+    _weight, severity, _lahn_type = _lookup_weight(
+        config,
+        error.module,
+        error.error_type,
+    )
+    return severity
+
+
+def get_error_lahn_type(config: dict[str, Any], error: TajweedError) -> str:
+    _weight, _severity, lahn_type = _lookup_weight(
+        config,
+        error.module,
+        error.error_type,
+    )
+    return lahn_type
+
+
+def weighted_error_sum(errors: list[TajweedError], config: dict[str, Any]) -> float:
+    total = 0.0
+
+    for error in errors:
+        confidence = _clamp_confidence(error.confidence)
+        total += get_error_weight(config, error) * confidence
+
+    return total
+
+
+def final_score(errors: list[TajweedError], config: dict[str, Any]) -> float:
+    scale = float(config.get("scale", 3.0))
+    penalty = weighted_error_sum(errors, config) * scale
+    return max(0.0, 100.0 - penalty)
+
+
+def summarize_weighted_errors(
+    errors: list[TajweedError],
+    config: dict[str, Any],
+) -> dict[str, Any]:
+    weighted_errors: list[dict[str, Any]] = []
+    severity_counts: dict[str, int] = {}
+
+    for error in errors:
+        confidence = _clamp_confidence(error.confidence)
+        weight = get_error_weight(config, error)
+        severity = get_error_severity(config, error)
+        lahn_type = get_error_lahn_type(config, error)
+        weighted_penalty = weight * confidence
+
+        severity_counts[severity] = severity_counts.get(severity, 0) + 1
+
+        weighted_errors.append(
+            {
+                "module": error.module,
+                "error_type": error.error_type,
+                "severity": severity,
+                "lahn_type": lahn_type,
+                "location": error.location,
+                "expected": error.expected,
+                "predicted": error.predicted,
+                "message": error.message,
+                "confidence": confidence,
+                "weight": weight,
+                "weighted_penalty": weighted_penalty,
+            }
+        )
+
+    weighted_sum = sum(float(item["weighted_penalty"]) for item in weighted_errors)
+    scale = float(config.get("scale", 3.0))
+    score = max(0.0, 100.0 - weighted_sum * scale)
+
+    return {
+        "score": score,
+        "weighted_error_sum": weighted_sum,
+        "scale": scale,
+        "error_count": len(weighted_errors),
         "num_errors": len(weighted_errors),
         "severity_counts": severity_counts,
         "errors": weighted_errors,
