@@ -1,0 +1,15 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_multitask_word_chunk_tiny_aux_v2.pt",
+  "stage_results": [
+    {
+      "stage_name": "tiny_aux",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_ckpt_v2_tiny_aux.jsonl",
+      "best_metrics": {
+        "samples": 50.0,
+        "exact_match": 0.02,
+        "char_accuracy": 0.10528571428571429,
+        "edit_distance": 5.1
+      }
+    }
+  ]
+}

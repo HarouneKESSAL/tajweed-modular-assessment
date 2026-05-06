@@ -1,0 +1,342 @@
+{
+  "duration": {
+    "samples": 973,
+    "route_counts": {
+      "duration": 973
+    },
+    "total_positions": 1646,
+    "correct_positions": 1634,
+    "accuracy": 0.9927095990279465,
+    "rule_summary": {
+      "ghunnah": {
+        "total": 364,
+        "correct": 358,
+        "accuracy": 0.9835164835164835
+      },
+      "madd": {
+        "total": 1282,
+        "correct": 1276,
+        "accuracy": 0.9953198127925117
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 1646,
+      "localized_same_as_sequence": 1607,
+      "localized_same_rate": 0.9763061968408262,
+      "localized_supports_gold": 1600,
+      "localized_supports_gold_rate": 0.9720534629404617,
+      "localized_supports_sequence": 1607,
+      "localized_supports_sequence_rate": 0.9763061968408262,
+      "localized_disagrees_with_sequence": 39,
+      "gold_supported_by_class": {
+        "ghunnah": {
+          "supported": 328,
+          "total": 364,
+          "rate": 0.9010989010989011
+        },
+        "madd": {
+          "supported": 1272,
+          "total": 1282,
+          "rate": 0.9921996879875195
+        }
+      },
+      "sequence_supported_by_class": {
+        "ghunnah": {
+          "supported": 115,
+          "total": 140,
+          "rate": 0.8214285714285714
+        },
+        "madd": {
+          "supported": 1492,
+          "total": 1506,
+          "rate": 0.9907038512616202
+        }
+      }
+    }
+  },
+  "transition": {
+    "available": true,
+    "samples": 690,
+    "accuracy": 0.9014492753623189,
+    "confusion_matrix": [
+      [
+        371,
+        28,
+        15
+      ],
+      [
+        18,
+        209,
+        0
+      ],
+      [
+        6,
+        1,
+        42
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 414,
+        "correct": 371,
+        "accuracy": 0.8961352657004831
+      },
+      "ikhfa": {
+        "total": 227,
+        "correct": 209,
+        "accuracy": 0.920704845814978
+      },
+      "idgham": {
+        "total": 49,
+        "correct": 42,
+        "accuracy": 0.8571428571428571
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 308,
+      "localized_same_as_whole_verse": 261,
+      "localized_same_rate": 0.8474025974025974,
+      "localized_supports_gold": 112,
+      "localized_supports_gold_rate": 0.36363636363636365,
+      "localized_supports_whole_verse": 105,
+      "localized_supports_whole_verse_rate": 0.3409090909090909,
+      "localized_disagrees_with_whole_verse": 47,
+      "gold_supported_by_class": {
+        "idgham": {
+          "supported": 35,
+          "total": 39,
+          "rate": 0.8974358974358975
+        },
+        "ikhfa": {
+          "supported": 77,
+          "total": 78,
+          "rate": 0.9871794871794872
+        },
+        "none": {
+          "supported": 0,
+          "total": 191,
+          "rate": 0.0
+        }
+      },
+      "whole_verse_supported_by_class": {
+        "idgham": {
+          "supported": 31,
+          "total": 38,
+          "rate": 0.8157894736842105
+        },
+        "ikhfa": {
+          "supported": 74,
+          "total": 89,
+          "rate": 0.8314606741573034
+        },
+        "none": {
+          "supported": 0,
+          "total": 181,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "burst": {
+    "available": true,
+    "samples": 1597,
+    "accuracy": 0.8741390106449592,
+    "confusion_matrix": [
+      [
+        876,
+        82
+      ],
+      [
+        119,
+        520
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 958,
+        "correct": 876,
+        "accuracy": 0.9144050104384134
+      },
+      "qalqalah": {
+        "total": 639,
+        "correct": 520,
+        "accuracy": 0.8137715179968701
+      }
+    }
+  },
+  "content": {
+    "available": true,
+    "mode": "chunked",
+    "samples": 417,
+    "split": "val",
+    "split_mode": "text",
+    "decoder": {
+      "blank_penalty": 1.6,
+      "use_cleanup": false,
+      "decoder": "greedy",
+      "beam_width": 1,
+      "decoder_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_decoder_open_hd96.json",
+      "lexicon_source": "train",
+      "lexicon_size": 11,
+      "eval_unique_text_count": 6,
+      "eval_texts_in_lexicon": 0,
+      "eval_text_coverage": 0.0
+    },
+    "exact_match": 0.7074340527577938,
+    "char_accuracy": 0.8932425488180867,
+    "edit_distance": 0.7242206235011991
+  },
+  "content_reference_full_verse": {
+    "available": true,
+    "mode": "full_verse",
+    "samples": 426,
+    "split": "val",
+    "exact_match": 0.01643192488262911,
+    "char_accuracy": 0.5359713564208723,
+    "edit_distance": 6.868544600938967
+  },
+  "weighted_scoring": {
+    "scale": 3.0,
+    "evaluation_units": 4350,
+    "estimated_average_score": 98.59103448275862,
+    "total_weighted_error_sum": 2043.0,
+    "total_scaled_penalty": 6129.0,
+    "num_errors": 403,
+    "severity_counts": {
+      "medium": 193,
+      "minor": 88,
+      "critical": 122
+    },
+    "by_module": {
+      "duration": {
+        "num_errors": 12,
+        "weighted_error_sum": 30.0,
+        "severity_counts": {
+          "medium": 6,
+          "minor": 6
+        }
+      },
+      "transition": {
+        "num_errors": 68,
+        "weighted_error_sum": 272.0,
+        "severity_counts": {
+          "medium": 68
+        }
+      },
+      "burst": {
+        "num_errors": 201,
+        "weighted_error_sum": 521.0,
+        "severity_counts": {
+          "minor": 82,
+          "medium": 119
+        }
+      },
+      "content": {
+        "num_errors": 122,
+        "weighted_error_sum": 1220.0,
+        "severity_counts": {
+          "critical": 122
+        }
+      }
+    },
+    "errors": [
+      {
+        "module": "content",
+        "error_type": "wrong_word",
+        "count": 122,
+        "severity": "critical",
+        "lahn_type": "jali",
+        "confidence": 1.0,
+        "weight": 10.0,
+        "weighted_penalty": 1220.0,
+        "description": "Chunked content exact-match failures"
+      },
+      {
+        "module": "burst",
+        "error_type": "missing_qalqalah",
+        "count": 119,
+        "severity": "medium",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 3.0,
+        "weighted_penalty": 357.0,
+        "description": "Burst false negatives: missed qalqalah"
+      },
+      {
+        "module": "transition",
+        "error_type": "wrong_transition_rule",
+        "count": 43,
+        "severity": "medium",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 4.0,
+        "weighted_penalty": 172.0,
+        "description": "Transition aggregate mistakes for gold class none"
+      },
+      {
+        "module": "burst",
+        "error_type": "weak_qalqalah",
+        "count": 82,
+        "severity": "minor",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 2.0,
+        "weighted_penalty": 164.0,
+        "description": "Burst false positives: predicted qalqalah for none"
+      },
+      {
+        "module": "transition",
+        "error_type": "wrong_transition_rule",
+        "count": 18,
+        "severity": "medium",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 4.0,
+        "weighted_penalty": 72.0,
+        "description": "Transition aggregate mistakes for gold class ikhfa"
+      },
+      {
+        "module": "transition",
+        "error_type": "wrong_transition_rule",
+        "count": 7,
+        "severity": "medium",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 4.0,
+        "weighted_penalty": 28.0,
+        "description": "Transition aggregate mistakes for gold class idgham"
+      },
+      {
+        "module": "duration",
+        "error_type": "ghunnah_duration_error",
+        "count": 6,
+        "severity": "medium",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 3.0,
+        "weighted_penalty": 18.0,
+        "description": "Duration rule aggregate mistakes for ghunnah"
+      },
+      {
+        "module": "duration",
+        "error_type": "minor_madd_duration_error",
+        "count": 6,
+        "severity": "minor",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 2.0,
+        "weighted_penalty": 12.0,
+        "description": "Duration rule aggregate mistakes for madd"
+      }
+    ],
+    "notes": [
+      "This is an aggregate estimate built from suite summaries.",
+      "Content exact mismatches are treated as content/wrong_word errors.",
+      "Duration aggregate errors are mapped by rule type.",
+      "Transition aggregate errors are treated as wrong_transition_rule.",
+      "Burst false negatives are missing_qalqalah; false positives are weak_qalqalah."
+    ]
+  },
+  "duration_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_module.pt",
+  "transition_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\transition_module_hardcase.pt"
+}
