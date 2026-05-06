@@ -1,0 +1,1652 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\transition_multilabel_retasy_hf_pilot.jsonl",
+  "threshold_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\configs\\transition_multilabel_thresholds.yaml",
+  "profiles": [
+    "gold_safe",
+    "ikhfa_recall_safe",
+    "merged_best",
+    "retasy_extended_best"
+  ],
+  "label_names": [
+    "ikhfa",
+    "idgham"
+  ],
+  "samples": 300,
+  "results": {
+    "gold_safe": {
+      "samples": 300,
+      "exact_match": 0.7933333333333333,
+      "macro_precision": 0.6486111111111111,
+      "macro_recall": 0.5760613207547169,
+      "macro_f1": 0.5938053097345133,
+      "per_label": {
+        "ikhfa": {
+          "accuracy": 0.84,
+          "precision": 0.7416666666666667,
+          "recall": 0.839622641509434,
+          "f1": 0.7876106194690266,
+          "positives": 106,
+          "predicted_positive": 120,
+          "tp": 89,
+          "fp": 31,
+          "fn": 17,
+          "tn": 163
+        },
+        "idgham": {
+          "accuracy": 0.95,
+          "precision": 0.5555555555555556,
+          "recall": 0.3125,
+          "f1": 0.39999999999999997,
+          "positives": 16,
+          "predicted_positive": 9,
+          "tp": 5,
+          "fp": 4,
+          "fn": 11,
+          "tn": 280
+        }
+      },
+      "predicted_combo_counts": {
+        "none": 171,
+        "ikhfa": 120,
+        "idgham": 9
+      },
+      "gold_combo_counts": {
+        "none": 178,
+        "ikhfa": 106,
+        "idgham": 16
+      },
+      "thresholds": {
+        "ikhfa": 0.4,
+        "idgham": 0.35
+      },
+      "checkpoint": "checkpoints/transition_multilabel_retasy_hf_pilot_v1.pt",
+      "examples": [
+        {
+          "id": "retasy_train_001964",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.26913154125213623,
+            "idgham": 0.14041905105113983
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002264",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.28689032793045044,
+            "idgham": 0.25393080711364746
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_001976",
+          "text": "اذا جاء نصر الله والفتح",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5097552537918091,
+            "idgham": 0.1065378487110138
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005297",
+          "text": "قل اعوذ برب الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6623063683509827,
+            "idgham": 0.06537063419818878
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_003605",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.30397823452949524,
+            "idgham": 0.058891214430332184
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_006817",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6564216613769531,
+            "idgham": 0.09320111572742462
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005101",
+          "text": "وما ادريك ما الحطمة",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.2675234377384186,
+            "idgham": 0.2110106647014618
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005204",
+          "text": "ان شانيك هو الابتر",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5323619842529297,
+            "idgham": 0.19749094545841217
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_006394",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5464045405387878,
+            "idgham": 0.12918667495250702
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002659",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.4681234359741211,
+            "idgham": 0.07446195185184479
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_003229",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.7113944292068481,
+            "idgham": 0.10578768700361252
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005581",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.23433740437030792,
+            "idgham": 0.09781598299741745
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_006295",
+          "text": "قل هو الله احد",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.17134644091129303,
+            "idgham": 0.10666734725236893
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_001259",
+          "text": "من الجنة والناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5126380324363708,
+            "idgham": 0.04598357528448105
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_001736",
+          "text": "فصل لربك وانحر",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.36575695872306824,
+            "idgham": 0.1236281767487526
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002498",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.3228360116481781,
+            "idgham": 0.04432569071650505
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002254",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.19524550437927246,
+            "idgham": 0.07784563302993774
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_004070",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.21463772654533386,
+            "idgham": 0.05165901407599449
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005998",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6597184538841248,
+            "idgham": 0.042852118611335754
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_000556",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.770673930644989,
+            "idgham": 0.06876438111066818
+          },
+          "thresholds": {
+            "ikhfa": 0.4,
+            "idgham": 0.35
+          }
+        }
+      ]
+    },
+    "ikhfa_recall_safe": {
+      "samples": 300,
+      "exact_match": 0.65,
+      "macro_precision": 0.5390843104410944,
+      "macro_recall": 0.6468160377358491,
+      "macro_f1": 0.5409836065573771,
+      "per_label": {
+        "ikhfa": {
+          "accuracy": 0.6766666666666666,
+          "precision": 0.5226130653266332,
+          "recall": 0.9811320754716981,
+          "f1": 0.6819672131147542,
+          "positives": 106,
+          "predicted_positive": 199,
+          "tp": 104,
+          "fp": 95,
+          "fn": 2,
+          "tn": 99
+        },
+        "idgham": {
+          "accuracy": 0.95,
+          "precision": 0.5555555555555556,
+          "recall": 0.3125,
+          "f1": 0.39999999999999997,
+          "positives": 16,
+          "predicted_positive": 9,
+          "tp": 5,
+          "fp": 4,
+          "fn": 11,
+          "tn": 280
+        }
+      },
+      "predicted_combo_counts": {
+        "ikhfa": 195,
+        "none": 96,
+        "ikhfa+idgham": 4,
+        "idgham": 5
+      },
+      "gold_combo_counts": {
+        "none": 178,
+        "ikhfa": 106,
+        "idgham": 16
+      },
+      "thresholds": {
+        "ikhfa": 0.25,
+        "idgham": 0.35
+      },
+      "checkpoint": "checkpoints/transition_multilabel_retasy_hf_pilot_v1.pt",
+      "examples": [
+        {
+          "id": "retasy_train_001964",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.26913154125213623,
+            "idgham": 0.14041905105113983
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002264",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.28689032793045044,
+            "idgham": 0.25393080711364746
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_001976",
+          "text": "اذا جاء نصر الله والفتح",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5097552537918091,
+            "idgham": 0.1065378487110138
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005297",
+          "text": "قل اعوذ برب الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6623063683509827,
+            "idgham": 0.06537063419818878
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_003605",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.30397823452949524,
+            "idgham": 0.058891214430332184
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_006817",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6564216613769531,
+            "idgham": 0.09320111572742462
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005101",
+          "text": "وما ادريك ما الحطمة",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.2675234377384186,
+            "idgham": 0.2110106647014618
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005204",
+          "text": "ان شانيك هو الابتر",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5323619842529297,
+            "idgham": 0.19749094545841217
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_006394",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5464045405387878,
+            "idgham": 0.12918667495250702
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002659",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.4681234359741211,
+            "idgham": 0.07446195185184479
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_003229",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.7113944292068481,
+            "idgham": 0.10578768700361252
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005581",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.23433740437030792,
+            "idgham": 0.09781598299741745
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_006295",
+          "text": "قل هو الله احد",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.17134644091129303,
+            "idgham": 0.10666734725236893
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_001259",
+          "text": "من الجنة والناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5126380324363708,
+            "idgham": 0.04598357528448105
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_001736",
+          "text": "فصل لربك وانحر",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.36575695872306824,
+            "idgham": 0.1236281767487526
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002498",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.3228360116481781,
+            "idgham": 0.04432569071650505
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_002254",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.19524550437927246,
+            "idgham": 0.07784563302993774
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_004070",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.21463772654533386,
+            "idgham": 0.05165901407599449
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_005998",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6597184538841248,
+            "idgham": 0.042852118611335754
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        },
+        {
+          "id": "retasy_train_000556",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.770673930644989,
+            "idgham": 0.06876438111066818
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.35
+          }
+        }
+      ]
+    },
+    "merged_best": {
+      "samples": 300,
+      "exact_match": 0.8133333333333334,
+      "macro_precision": 0.8101851851851852,
+      "macro_recall": 0.5571933962264151,
+      "macro_f1": 0.6244689889549703,
+      "per_label": {
+        "ikhfa": {
+          "accuracy": 0.8533333333333334,
+          "precision": 0.7870370370370371,
+          "recall": 0.8018867924528302,
+          "f1": 0.794392523364486,
+          "positives": 106,
+          "predicted_positive": 108,
+          "tp": 85,
+          "fp": 23,
+          "fn": 21,
+          "tn": 171
+        },
+        "idgham": {
+          "accuracy": 0.96,
+          "precision": 0.8333333333333334,
+          "recall": 0.3125,
+          "f1": 0.45454545454545453,
+          "positives": 16,
+          "predicted_positive": 6,
+          "tp": 5,
+          "fp": 1,
+          "fn": 11,
+          "tn": 283
+        }
+      },
+      "predicted_combo_counts": {
+        "none": 186,
+        "ikhfa": 108,
+        "idgham": 6
+      },
+      "gold_combo_counts": {
+        "none": 178,
+        "ikhfa": 106,
+        "idgham": 16
+      },
+      "thresholds": {
+        "ikhfa": 0.45,
+        "idgham": 0.4
+      },
+      "checkpoint": "checkpoints/transition_multilabel_retasy_hf_pilot_v1.pt",
+      "examples": [
+        {
+          "id": "retasy_train_001964",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.26913154125213623,
+            "idgham": 0.14041905105113983
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_002264",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.28689032793045044,
+            "idgham": 0.25393080711364746
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_001976",
+          "text": "اذا جاء نصر الله والفتح",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5097552537918091,
+            "idgham": 0.1065378487110138
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_005297",
+          "text": "قل اعوذ برب الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6623063683509827,
+            "idgham": 0.06537063419818878
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_003605",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.30397823452949524,
+            "idgham": 0.058891214430332184
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_006817",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6564216613769531,
+            "idgham": 0.09320111572742462
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_005101",
+          "text": "وما ادريك ما الحطمة",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.2675234377384186,
+            "idgham": 0.2110106647014618
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_005204",
+          "text": "ان شانيك هو الابتر",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5323619842529297,
+            "idgham": 0.19749094545841217
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_006394",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5464045405387878,
+            "idgham": 0.12918667495250702
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_002659",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.4681234359741211,
+            "idgham": 0.07446195185184479
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_003229",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.7113944292068481,
+            "idgham": 0.10578768700361252
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_005581",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.23433740437030792,
+            "idgham": 0.09781598299741745
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_006295",
+          "text": "قل هو الله احد",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.17134644091129303,
+            "idgham": 0.10666734725236893
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_001259",
+          "text": "من الجنة والناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5126380324363708,
+            "idgham": 0.04598357528448105
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_001736",
+          "text": "فصل لربك وانحر",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.36575695872306824,
+            "idgham": 0.1236281767487526
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_002498",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.3228360116481781,
+            "idgham": 0.04432569071650505
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_002254",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.19524550437927246,
+            "idgham": 0.07784563302993774
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_004070",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.21463772654533386,
+            "idgham": 0.05165901407599449
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_005998",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6597184538841248,
+            "idgham": 0.042852118611335754
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        },
+        {
+          "id": "retasy_train_000556",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.770673930644989,
+            "idgham": 0.06876438111066818
+          },
+          "thresholds": {
+            "ikhfa": 0.45,
+            "idgham": 0.4
+          }
+        }
+      ]
+    },
+    "retasy_extended_best": {
+      "samples": 300,
+      "exact_match": 0.6166666666666667,
+      "macro_precision": 0.39644166779845175,
+      "macro_recall": 0.8030660377358491,
+      "macro_f1": 0.529662851840396,
+      "per_label": {
+        "ikhfa": {
+          "accuracy": 0.6766666666666666,
+          "precision": 0.5226130653266332,
+          "recall": 0.9811320754716981,
+          "f1": 0.6819672131147542,
+          "positives": 106,
+          "predicted_positive": 199,
+          "tp": 104,
+          "fp": 95,
+          "fn": 2,
+          "tn": 99
+        },
+        "idgham": {
+          "accuracy": 0.89,
+          "precision": 0.2702702702702703,
+          "recall": 0.625,
+          "f1": 0.3773584905660377,
+          "positives": 16,
+          "predicted_positive": 37,
+          "tp": 10,
+          "fp": 27,
+          "fn": 6,
+          "tn": 257
+        }
+      },
+      "predicted_combo_counts": {
+        "ikhfa": 181,
+        "ikhfa+idgham": 18,
+        "none": 82,
+        "idgham": 19
+      },
+      "gold_combo_counts": {
+        "none": 178,
+        "ikhfa": 106,
+        "idgham": 16
+      },
+      "thresholds": {
+        "ikhfa": 0.25,
+        "idgham": 0.25
+      },
+      "checkpoint": "checkpoints/transition_multilabel_retasy_hf_pilot_v1.pt",
+      "examples": [
+        {
+          "id": "retasy_train_001964",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.26913154125213623,
+            "idgham": 0.14041905105113983
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_002264",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa",
+            "idgham"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa+idgham",
+          "probabilities": {
+            "ikhfa": 0.28689032793045044,
+            "idgham": 0.25393080711364746
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_001976",
+          "text": "اذا جاء نصر الله والفتح",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5097552537918091,
+            "idgham": 0.1065378487110138
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_005297",
+          "text": "قل اعوذ برب الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6623063683509827,
+            "idgham": 0.06537063419818878
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_003605",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.30397823452949524,
+            "idgham": 0.058891214430332184
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_006817",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6564216613769531,
+            "idgham": 0.09320111572742462
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_005101",
+          "text": "وما ادريك ما الحطمة",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.2675234377384186,
+            "idgham": 0.2110106647014618
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_005204",
+          "text": "ان شانيك هو الابتر",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5323619842529297,
+            "idgham": 0.19749094545841217
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_006394",
+          "text": "من شر ما خلق",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5464045405387878,
+            "idgham": 0.12918667495250702
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_002659",
+          "text": "ومن شر حاسد اذا حسد",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.4681234359741211,
+            "idgham": 0.07446195185184479
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_003229",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.7113944292068481,
+            "idgham": 0.10578768700361252
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_005581",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.23433740437030792,
+            "idgham": 0.09781598299741745
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_006295",
+          "text": "قل هو الله احد",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.17134644091129303,
+            "idgham": 0.10666734725236893
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_001259",
+          "text": "من الجنة والناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.5126380324363708,
+            "idgham": 0.04598357528448105
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_001736",
+          "text": "فصل لربك وانحر",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.36575695872306824,
+            "idgham": 0.1236281767487526
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_002498",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.3228360116481781,
+            "idgham": 0.04432569071650505
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_002254",
+          "text": "اياك نعبد واياك نستعين",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.19524550437927246,
+            "idgham": 0.07784563302993774
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_004070",
+          "text": "اله الناس",
+          "gold_rules": [],
+          "predicted_rules": [],
+          "gold_combo": "none",
+          "predicted_combo": "none",
+          "probabilities": {
+            "ikhfa": 0.21463772654533386,
+            "idgham": 0.05165901407599449
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_005998",
+          "text": "ملك الناس",
+          "gold_rules": [],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "none",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.6597184538841248,
+            "idgham": 0.042852118611335754
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        },
+        {
+          "id": "retasy_train_000556",
+          "text": "من شر الوسواس الخناس",
+          "gold_rules": [
+            "ikhfa"
+          ],
+          "predicted_rules": [
+            "ikhfa"
+          ],
+          "gold_combo": "ikhfa",
+          "predicted_combo": "ikhfa",
+          "probabilities": {
+            "ikhfa": 0.770673930644989,
+            "idgham": 0.06876438111066818
+          },
+          "thresholds": {
+            "ikhfa": 0.25,
+            "idgham": 0.25
+          }
+        }
+      ]
+    }
+  }
+}

@@ -22,4 +22,4 @@ transition_multilabel_retasy_hf_pilot_v1:
       ikhfa: 0.25
       idgham: 0.35
 
-  recommended_for_system: gold_safe
+  recommended_for_system: merged_best

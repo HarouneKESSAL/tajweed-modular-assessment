@@ -14,6 +14,7 @@ import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.utils.data import DataLoader, Subset
 
+from tajweed_assessment.evaluation.transition_multilabel_profiles import evaluate_transition_multilabel_profiles, save_transition_multilabel_profile_report
 from tajweed_assessment.data.labels import TRANSITION_RULES, normalize_rule_name, rule_to_id
 from tajweed_assessment.features.mfcc import extract_mfcc_features
 from tajweed_assessment.features.ssl import DummySSLFeatureExtractor
@@ -1316,6 +1317,34 @@ def main() -> None:
         help="Path to weighted Tajweed error scoring YAML. Use empty string to disable.",
     )
     parser.add_argument("--output-json", default="")
+    parser.add_argument(
+        "--transition-multilabel-eval-manifest",
+        default="",
+        help="Optional manifest for evaluating multi-label transition profiles.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-threshold-config",
+        default="configs/transition_multilabel_thresholds.yaml",
+        help="YAML config containing multi-label transition thresholds.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-profiles",
+        nargs="*",
+        default=["gold_safe", "ikhfa_recall_safe", "merged_best", "retasy_extended_best"],
+        help="Threshold profiles to evaluate for the multi-label transition model.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-limit",
+        type=int,
+        default=0,
+        help="Optional sample limit for multi-label transition evaluation.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-output-json",
+        default="",
+        help="Optional output path for multi-label transition profile evaluation JSON.",
+    )
+
     args = parser.parse_args()
 
     error_weight_config = None
@@ -1441,6 +1470,38 @@ def main() -> None:
     if args.output_json:
         save_json(summary, PROJECT_ROOT / args.output_json)
         print("")
+    if getattr(args, "transition_multilabel_eval_manifest", ""):
+        transition_multilabel_result = evaluate_transition_multilabel_profiles(
+            manifest_path=args.transition_multilabel_eval_manifest,
+            threshold_config=args.transition_multilabel_threshold_config,
+            profiles=args.transition_multilabel_profiles,
+            limit=args.transition_multilabel_limit,
+            device="cpu",
+        )
+
+        transition_multilabel_output_json = args.transition_multilabel_output_json
+        if not transition_multilabel_output_json:
+            base_output = getattr(args, "output_json", "")
+            if base_output:
+                transition_multilabel_output_json = str(Path(base_output).with_name(Path(base_output).stem + "_transition_multilabel_profiles.json"))
+            else:
+                transition_multilabel_output_json = "data/analysis/transition_multilabel_profiles_from_suite.json"
+
+        save_transition_multilabel_profile_report(
+            transition_multilabel_output_json,
+            transition_multilabel_result,
+        )
+
+        print("\nTransition multi-label profile summary:")
+        for profile, metrics in transition_multilabel_result["results"].items():
+            print(
+                f"- {profile}: "
+                f"exact={metrics['exact_match']:.3f} "
+                f"macro_f1={metrics['macro_f1']:.3f} "
+                f"predicted={metrics['predicted_combo_counts']}"
+            )
+        print(f"Saved transition multi-label JSON to {transition_multilabel_output_json}")
+
         print(f"Saved suite JSON to {PROJECT_ROOT / args.output_json}")
 
 
