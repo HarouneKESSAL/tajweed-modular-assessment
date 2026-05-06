@@ -18,9 +18,8 @@ transition_multilabel_retasy_hf_pilot_v1:
       ikhfa: 0.25
       idgham: 0.25
 
-  recommended_for_system: gold_safe
+    ikhfa_recall_safe:
+      ikhfa: 0.25
+      idgham: 0.35
 
-  notes:
-    - Multi-label transition model supports none, ikhfa, idgham, and ikhfa+idgham.
-    - HF ayah examples are weak text-pattern labels and should remain lower trust.
-    - Gold-safe thresholds avoid hallucinating ikhfa+idgham on gold-only Retasy validation.
+  recommended_for_system: gold_safe

@@ -12,6 +12,7 @@ import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
+from tajweed_assessment.inference.transition_multilabel import load_transition_multilabel_predictor_from_config
 from tajweed_assessment.data.labels import normalize_rule_name, rule_to_id
 from tajweed_assessment.features.mfcc import extract_mfcc_features
 from tajweed_assessment.features.ssl import DummySSLFeatureExtractor
@@ -284,6 +285,22 @@ def main() -> None:
         default="configs/error_weights.yaml",
         help="Path to weighted Tajweed error scoring YAML.",
     )
+    parser.add_argument(
+        "--transition-multilabel",
+        action="store_true",
+        help="Run optional multi-label transition predictor in addition to the existing transition module.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-threshold-config",
+        default="configs/transition_multilabel_thresholds.yaml",
+        help="YAML threshold config for the multi-label transition predictor.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-threshold-profile",
+        default="gold_safe",
+        help="Threshold profile to use: gold_safe, merged_best, or retasy_extended_best.",
+    )
+
     args = parser.parse_args()
 
     rows = load_jsonl(PROJECT_ROOT / args.manifest)
@@ -361,6 +378,32 @@ def main() -> None:
     print("Routing plan :")
     print_json(result["routing_plan"])
     print("")
+    transition_multilabel_result = None
+    if getattr(args, "transition_multilabel", False):
+        try:
+            predictor = load_transition_multilabel_predictor_from_config(
+                args.transition_multilabel_threshold_config,
+                profile=args.transition_multilabel_threshold_profile,
+                device="cpu",
+            )
+            audio_path_for_multilabel = None
+            for candidate_name in ("sample", "row", "record", "item", "sample_row", "selected_sample"):
+                candidate = locals().get(candidate_name)
+                if isinstance(candidate, dict) and candidate.get("audio_path"):
+                    audio_path_for_multilabel = candidate["audio_path"]
+                    break
+
+            if audio_path_for_multilabel is None:
+                raise KeyError("Could not find audio_path for multi-label transition inference.")
+
+            transition_multilabel_result = predictor.predict(audio_path_for_multilabel)
+
+            print("\nMulti-label transition:")
+            print(json.dumps(transition_multilabel_result.to_dict(), ensure_ascii=False, indent=2))
+        except Exception as exc:
+            print("\nMulti-label transition:")
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False, indent=2))
+
     print("Diagnosis report:")
     print_json(result["report"])
     print("")
