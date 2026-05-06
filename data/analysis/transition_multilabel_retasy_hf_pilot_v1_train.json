@@ -1,0 +1,36 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\transition_multilabel_retasy_hf_pilot.jsonl",
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\transition_multilabel_retasy_hf_pilot_v1.pt",
+  "best_metrics": {
+    "exact_match": 0.7910447716712952,
+    "macro_precision": 0.9663486480712891,
+    "macro_recall": 0.7774579524993896,
+    "macro_f1": 0.861565887928009,
+    "per_label": {
+      "ikhfa": {
+        "accuracy": 0.8320895433425903,
+        "precision": 0.9513888955116272,
+        "recall": 0.7828571200370789,
+        "f1": 0.8589341640472412,
+        "positives": 175,
+        "predicted_positive": 144,
+        "mean_prob": 0.5917609930038452
+      },
+      "idgham": {
+        "accuracy": 0.8768656849861145,
+        "precision": 0.9813084006309509,
+        "recall": 0.7720588445663452,
+        "f1": 0.8641976118087769,
+        "positives": 136,
+        "predicted_positive": 107,
+        "mean_prob": 0.48493725061416626
+      }
+    },
+    "predicted_combo_counts": {
+      "ikhfa": 44,
+      "none": 117,
+      "idgham": 7,
+      "ikhfa+idgham": 100
+    }
+  }
+}
