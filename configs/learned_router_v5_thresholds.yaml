@@ -1,0 +1,32 @@
+learned_router_v5_retasy_hf_rule_aware_group_text:
+  checkpoint: checkpoints/learned_router_v5_retasy_hf_rule_aware_group_text.pt
+
+  target_names:
+    - use_duration
+    - use_transition
+    - use_burst
+
+  thresholds:
+    weak_policy_tuned:
+      use_duration: 0.30
+      use_transition: 0.50
+      use_burst: 0.75
+
+    trusted_retasy_calibrated:
+      use_duration: 0.95
+      use_transition: 0.80
+      use_burst: 0.70
+
+    default:
+      use_duration: 0.50
+      use_transition: 0.50
+      use_burst: 0.50
+
+  recommended_for_system: trusted_retasy_calibrated
+
+  notes:
+    - Trained on Retasy trusted routing rows plus HF all-ayah weak routing rows.
+    - Uses 69 features including 22 rule-aware features.
+    - weak_policy_tuned was tuned on mixed Retasy+HF validation.
+    - trusted_retasy_calibrated was tuned on balanced trusted Retasy calibration data.
+    - Current rule/metadata router remains official until end-to-end comparison.

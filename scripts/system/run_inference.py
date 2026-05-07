@@ -12,6 +12,7 @@ import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
+from tajweed_assessment.inference.learned_routing import load_learned_routing_predictor_from_config
 from tajweed_assessment.inference.transition_multilabel import load_transition_multilabel_predictor_from_config
 from tajweed_assessment.data.labels import normalize_rule_name, rule_to_id
 from tajweed_assessment.features.mfcc import extract_mfcc_features
@@ -301,6 +302,22 @@ def main() -> None:
         help="Threshold profile to use: gold_safe, merged_best, or retasy_extended_best.",
     )
 
+    parser.add_argument(
+        "--learned-routing",
+        action="store_true",
+        help="Run optional learned routing predictor and print comparison with current routing plan.",
+    )
+    parser.add_argument(
+        "--learned-routing-threshold-config",
+        default="configs/learned_router_thresholds.yaml",
+        help="YAML config for learned routing checkpoint and thresholds.",
+    )
+    parser.add_argument(
+        "--learned-routing-threshold-profile",
+        default="balanced_safe",
+        help="Learned routing threshold profile to use.",
+    )
+
     args = parser.parse_args()
 
     rows = load_jsonl(PROJECT_ROOT / args.manifest)
@@ -402,6 +419,51 @@ def main() -> None:
             print(json.dumps(transition_multilabel_result.to_dict(), ensure_ascii=False, indent=2))
         except Exception as exc:
             print("\nMulti-label transition:")
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False, indent=2))
+
+    if getattr(args, "learned_routing", False):
+        try:
+            learned_audio_path = None
+            learned_text = ""
+
+            for candidate_name in ("sample", "row", "record", "item", "sample_row", "selected_sample"):
+                candidate = locals().get(candidate_name)
+                if isinstance(candidate, dict):
+                    if candidate.get("audio_path"):
+                        learned_audio_path = candidate["audio_path"]
+                    learned_text = (
+                        candidate.get("text")
+                        or candidate.get("normalized_text")
+                        or candidate.get("source_text")
+                        or learned_text
+                    )
+                    if learned_audio_path:
+                        break
+
+            if learned_audio_path is None:
+                raise KeyError("Could not find audio_path for learned routing inference.")
+
+            learned_predictor = load_learned_routing_predictor_from_config(
+                config_path=args.learned_routing_threshold_config,
+                profile=args.learned_routing_threshold_profile,
+                device="cpu",
+            )
+            learned_result = learned_predictor.predict(
+                audio_path=learned_audio_path,
+                text=learned_text,
+            )
+
+            print("\nLearned routing comparison:")
+            print(json.dumps(
+                {
+                    "current_routing_plan": result.get("routing_plan"),
+                    "learned_routing": learned_result.to_dict(),
+                },
+                ensure_ascii=False,
+                indent=2,
+            ))
+        except Exception as exc:
+            print("\nLearned routing comparison:")
             print(json.dumps({"error": str(exc)}, ensure_ascii=False, indent=2))
 
     print("Diagnosis report:")
