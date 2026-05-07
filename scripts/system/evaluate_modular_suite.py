@@ -14,6 +14,7 @@ import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.utils.data import DataLoader, Subset
 
+from tajweed_assessment.inference.learned_routing import load_learned_routing_predictor_from_config
 from tajweed_assessment.evaluation.transition_multilabel_profiles import evaluate_transition_multilabel_profiles, save_transition_multilabel_profile_report
 from tajweed_assessment.data.labels import TRANSITION_RULES, normalize_rule_name, rule_to_id
 from tajweed_assessment.features.mfcc import extract_mfcc_features
@@ -1345,6 +1346,28 @@ def main() -> None:
         help="Optional output path for multi-label transition profile evaluation JSON.",
     )
 
+    parser.add_argument(
+        "--learned-routing-profile-comparison",
+        default="",
+        help="Optional routing dataset/manifest for learned routing profile comparison.",
+    )
+    parser.add_argument(
+        "--learned-routing-threshold-config",
+        default="configs/learned_router_v5_thresholds.yaml",
+        help="YAML config for learned routing checkpoint and thresholds.",
+    )
+    parser.add_argument(
+        "--learned-routing-profiles",
+        nargs="*",
+        default=["trusted_retasy_calibrated", "weak_policy_tuned"],
+        help="Learned routing profiles to compare.",
+    )
+    parser.add_argument(
+        "--learned-routing-profile-output-json",
+        default="",
+        help="Optional output path for learned routing profile comparison JSON.",
+    )
+
     args = parser.parse_args()
 
     error_weight_config = None
@@ -1470,6 +1493,86 @@ def main() -> None:
     if args.output_json:
         save_json(summary, PROJECT_ROOT / args.output_json)
         print("")
+    if getattr(args, "learned_routing_profile_comparison", ""):
+        import sys
+
+        routing_scripts_dir = PROJECT_ROOT / "scripts" / "routing"
+        if str(routing_scripts_dir) not in sys.path:
+            sys.path.insert(0, str(routing_scripts_dir))
+
+        from compare_learned_routing_profiles import (
+            load_jsonl as load_routing_compare_jsonl,
+            metrics_against_current,
+            resolve_path as resolve_routing_compare_path,
+        )
+
+        routing_rows = load_routing_compare_jsonl(
+            resolve_routing_compare_path(args.learned_routing_profile_comparison)
+        )
+
+        learned_routing_comparison_result = {
+            "dataset": str(resolve_routing_compare_path(args.learned_routing_profile_comparison)),
+            "threshold_config": str(resolve_routing_compare_path(args.learned_routing_threshold_config)),
+            "profiles": args.learned_routing_profiles,
+            "samples": len(routing_rows),
+            "results": {},
+        }
+
+        for profile in args.learned_routing_profiles:
+            learned_predictor = load_learned_routing_predictor_from_config(
+                config_path=args.learned_routing_threshold_config,
+                profile=profile,
+                device="cpu",
+            )
+
+            predictions = []
+            for row in routing_rows:
+                learned_text = (
+                    row.get("text")
+                    or row.get("normalized_text")
+                    or row.get("source_text")
+                    or ""
+                )
+                pred = learned_predictor.predict(
+                    audio_path=row.get("audio_path", ""),
+                    text=learned_text,
+                )
+                predictions.append(pred.to_dict())
+
+            learned_routing_comparison_result["results"][profile] = metrics_against_current(
+                rows=routing_rows,
+                predictions=predictions,
+                max_examples=40,
+            )
+
+        learned_routing_output_json = args.learned_routing_profile_output_json
+        if not learned_routing_output_json:
+            base_output = getattr(args, "output_json", "")
+            if base_output:
+                output_path = Path(base_output)
+                learned_routing_output_json = str(
+                    output_path.with_name(output_path.stem + "_learned_routing_profiles.json")
+                )
+            else:
+                learned_routing_output_json = "data/analysis/learned_routing_profiles_from_suite.json"
+
+        learned_routing_output_path = Path(learned_routing_output_json)
+        learned_routing_output_path.parent.mkdir(parents=True, exist_ok=True)
+        learned_routing_output_path.write_text(
+            json.dumps(learned_routing_comparison_result, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+        print("\nLearned routing profile comparison summary:")
+        for profile, metrics in learned_routing_comparison_result["results"].items():
+            print(
+                f"- {profile}: "
+                f"exact_agreement={metrics['exact_agreement']:.3f} "
+                f"macro_f1_vs_current={metrics['macro_f1_vs_current']:.3f} "
+                f"disagreements={metrics['disagreement_type_counts']}"
+            )
+        print(f"Saved learned routing profile comparison JSON to {learned_routing_output_json}")
+
     if getattr(args, "transition_multilabel_eval_manifest", ""):
         transition_multilabel_result = evaluate_transition_multilabel_profiles(
             manifest_path=args.transition_multilabel_eval_manifest,
