@@ -1,0 +1,85 @@
+{
+  "init_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6c_old_expanded_full_vocab_hd96.pt",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6c_missing_letter_targets.jsonl",
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6c_new_rows_only.pt",
+  "new_ids": [
+    1,
+    2,
+    3,
+    8,
+    13,
+    15,
+    18,
+    19,
+    20,
+    21,
+    23,
+    24,
+    25
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 11.612277761290345,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.021218487394957988
+    },
+    {
+      "epoch": 2,
+      "train_loss": 10.916552395760258,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.02415966386554622
+    },
+    {
+      "epoch": 3,
+      "train_loss": 10.677384654177896,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.020728291316526617
+    },
+    {
+      "epoch": 4,
+      "train_loss": 10.533706130860727,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.024509803921568627
+    },
+    {
+      "epoch": 5,
+      "train_loss": 10.420688617078564,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.027871148459383755
+    },
+    {
+      "epoch": 6,
+      "train_loss": 10.32781351970721,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.021848739495798318
+    },
+    {
+      "epoch": 7,
+      "train_loss": 10.251799776584287,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.026610644257703084
+    },
+    {
+      "epoch": 8,
+      "train_loss": 10.171014683156073,
+      "samples": 238,
+      "exact": 0.0,
+      "char_accuracy": 0.027731092436974795
+    }
+  ],
+  "best": {
+    "epoch": 5,
+    "train_loss": 10.420688617078564,
+    "samples": 238,
+    "exact": 0.0,
+    "char_accuracy": 0.027871148459383755
+  }
+}
