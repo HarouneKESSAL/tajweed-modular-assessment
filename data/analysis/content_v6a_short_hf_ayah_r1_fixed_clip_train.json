@@ -1,0 +1,35 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6a_short_hf_ayah_r1_fixed_clip.pt",
+  "stage_results": [
+    {
+      "stage_name": "anchor",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_stage1_anchor.jsonl",
+      "best_metrics": {
+        "samples": 1000.0,
+        "exact_match": 0.0,
+        "char_accuracy": 8.012820512820506e-05,
+        "edit_distance": 16.827
+      }
+    },
+    {
+      "stage_name": "ayah_intro",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_stage2_ayah_intro.jsonl",
+      "best_metrics": {
+        "samples": 1140.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.17396354779125955,
+        "edit_distance": 21.753508771929823
+      }
+    },
+    {
+      "stage_name": "ayah_focus",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_stage3_ayah_focus.jsonl",
+      "best_metrics": {
+        "samples": 1360.0,
+        "exact_match": 0.0014705882352941176,
+        "char_accuracy": 0.41236425337782096,
+        "edit_distance": 15.572794117647058
+      }
+    }
+  ]
+}
