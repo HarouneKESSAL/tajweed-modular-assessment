@@ -336,7 +336,7 @@ def main() -> None:
     parser.add_argument("--split", default="val")
     parser.add_argument("--sample-index", type=int, default=0)
     parser.add_argument("--checkpoint", default="checkpoints/content_ayah_hf_v2_balanced_hd96.pt")
-    parser.add_argument("--decoder-config", default="checkpoints/content_ayah_decoder_bp12.json")
+    parser.add_argument("--decoder-config", default="configs/content_ayah_decoder_bp12.json")
     parser.add_argument("--feature-cache-dir", default="data/interim/ayah_content_inference_ssl_cache")
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--output-json", default="")

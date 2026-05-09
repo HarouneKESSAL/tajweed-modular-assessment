@@ -322,7 +322,7 @@ def main() -> None:
     parser.add_argument("--ayah-content-only", action="store_true")
     parser.add_argument("--ayah-content-split", default="all")
     parser.add_argument("--ayah-content-checkpoint", default="checkpoints/content_ayah_hf_v2_balanced_hd96.pt")
-    parser.add_argument("--ayah-content-decoder-config", default="checkpoints/content_ayah_decoder_bp12.json")
+    parser.add_argument("--ayah-content-decoder-config", default="configs/content_ayah_decoder_bp12.json")
     parser.add_argument("--ayah-content-feature-cache-dir", default="data/interim/ayah_content_inference_ssl_cache")
     parser.add_argument("--ayah-content-device", default="cuda")
 
