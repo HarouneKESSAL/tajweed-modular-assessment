@@ -64,6 +64,43 @@ def to_int_id_to_char(raw: dict[Any, str]) -> dict[int, str]:
     return raw
 
 
+def ayah_quality_label(char_acc: float) -> str:
+    if char_acc >= 0.95:
+        return "excellent"
+    if char_acc >= 0.85:
+        return "strong"
+    if char_acc >= 0.70:
+        return "usable_with_minor_or_moderate_errors"
+    if char_acc >= 0.50:
+        return "partial_recitation_detected"
+    return "weak_or_wrong_ayah"
+
+
+def ayah_feedback(char_acc: float, edit_dist: int, gold_len: int, pred_len: int) -> list[str]:
+    feedback: list[str] = []
+
+    if char_acc >= 0.95:
+        feedback.append("Full-verse content is very close to the expected ayah.")
+    elif char_acc >= 0.85:
+        feedback.append("Full-verse content mostly matches the expected ayah, with small text-level differences.")
+    elif char_acc >= 0.70:
+        feedback.append("The recitation appears to be the expected ayah, but there are moderate content differences.")
+    elif char_acc >= 0.50:
+        feedback.append("The model detected partial overlap with the expected ayah, but the content match is not reliable yet.")
+    else:
+        feedback.append("The predicted content is far from the expected ayah, or the model failed on this recording.")
+
+    if pred_len < max(1, int(gold_len * 0.65)):
+        feedback.append("Prediction is much shorter than the expected ayah; possible under-recognition or incomplete audio.")
+    elif pred_len > int(gold_len * 1.35):
+        feedback.append("Prediction is much longer than the expected ayah; possible over-emission or noisy decoding.")
+
+    if edit_dist > max(3, int(gold_len * 0.30)):
+        feedback.append("There are many character-level differences, so this should not be treated as a clean recitation.")
+
+    return feedback
+
+
 def greedy_decode(
     logits: torch.Tensor,
     input_lengths: torch.Tensor,
@@ -189,6 +226,12 @@ def run_ayah_content_for_row(
         logits = model(x, input_lengths)
         pred = greedy_decode(logits, input_lengths, id_to_char, blank_penalty)[0]
 
+    acc = char_accuracy(gold, pred)
+    ed = edit_distance(gold, pred)
+    gold_len = len(compact(gold))
+    pred_len = len(compact(pred))
+    edit_rate = ed / max(1, gold_len)
+
     result = {
         "id": sample_id,
         "audio_path": audio_path,
@@ -197,10 +240,14 @@ def run_ayah_content_for_row(
         "blank_penalty": blank_penalty,
         "gold": compact(gold),
         "pred": compact(pred),
-        "char_accuracy": char_accuracy(gold, pred),
-        "edit_distance": edit_distance(gold, pred),
-        "gold_len": len(compact(gold)),
-        "pred_len": len(compact(pred)),
+        "score": round(acc * 100.0, 2),
+        "quality": ayah_quality_label(acc),
+        "char_accuracy": acc,
+        "edit_distance": ed,
+        "edit_rate": edit_rate,
+        "gold_len": gold_len,
+        "pred_len": pred_len,
+        "feedback": ayah_feedback(acc, ed, gold_len, pred_len),
         "device": device,
     }
 
@@ -238,17 +285,25 @@ def print_ayah_content_report(result: dict[str, Any]) -> None:
     print(f"Gold         : {result['gold']}")
     print(f"Prediction   : {result['pred']}")
     print()
-    print("Metrics:")
+    print("Full-verse content score:")
     print(json.dumps(
         {
+            "score": result["score"],
+            "quality": result["quality"],
             "char_accuracy": result["char_accuracy"],
             "edit_distance": result["edit_distance"],
+            "edit_rate": result["edit_rate"],
             "gold_len": result["gold_len"],
             "pred_len": result["pred_len"],
         },
         ensure_ascii=False,
         indent=2,
     ))
+
+    print()
+    print("Feedback:")
+    for item in result["feedback"]:
+        print(f"- {item}")
 
 
 def main() -> None:
