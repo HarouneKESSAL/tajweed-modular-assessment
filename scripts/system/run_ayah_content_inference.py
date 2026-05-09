@@ -64,42 +64,59 @@ def to_int_id_to_char(raw: dict[Any, str]) -> dict[int, str]:
     return raw
 
 
-def ayah_quality_label(char_acc: float) -> str:
+def ayah_quality_label(char_acc: float, edit_dist: int = 999, exact_match: bool = False) -> str:
+    # Qur'an content is high-stakes: a high similarity score is not enough
+    # to call the content correct. Only exact / near-exact matches are verified.
+    if exact_match:
+        return "content_verified_exact"
+    if char_acc >= 0.98 and edit_dist <= 1:
+        return "content_verified_near_exact"
     if char_acc >= 0.95:
-        return "excellent"
+        return "almost_correct_review_required"
     if char_acc >= 0.85:
-        return "strong"
+        return "likely_same_ayah_but_not_clean"
     if char_acc >= 0.70:
-        return "usable_with_minor_or_moderate_errors"
+        return "same_ayah_candidate_review_required"
     if char_acc >= 0.50:
-        return "partial_recitation_detected"
-    return "weak_or_wrong_ayah"
+        return "partial_content_match_review_required"
+    return "weak_or_wrong_content"
 
 
-def ayah_feedback(char_acc: float, edit_dist: int, gold_len: int, pred_len: int) -> list[str]:
+def ayah_acceptance_verdict(char_acc: float, edit_dist: int, exact_match: bool) -> str:
+    if exact_match:
+        return "accepted_exact"
+    if char_acc >= 0.98 and edit_dist <= 1:
+        return "accepted_near_exact_review_recommended"
+    return "not_accepted"
+
+
+def ayah_feedback(char_acc: float, edit_dist: int, gold_len: int, pred_len: int, exact_match: bool = False) -> list[str]:
     feedback: list[str] = []
 
-    if char_acc >= 0.95:
-        feedback.append("Full-verse content is very close to the expected ayah.")
+    if exact_match:
+        feedback.append("Content exactly matches the expected ayah after normalization.")
+    elif char_acc >= 0.98 and edit_dist <= 1:
+        feedback.append("Content is near-exact, but because this is Qur'an content it should still be reviewed.")
+    elif char_acc >= 0.95:
+        feedback.append("The recitation is very close to the expected ayah, but it is not clean enough for automatic acceptance.")
     elif char_acc >= 0.85:
-        feedback.append("Full-verse content mostly matches the expected ayah, with small text-level differences.")
+        feedback.append("The recitation likely matches the expected ayah, but there are content differences that require correction.")
     elif char_acc >= 0.70:
-        feedback.append("The recitation appears to be the expected ayah, but there are moderate content differences.")
+        feedback.append("The recitation may be the expected ayah, but the content match is not strong enough to accept.")
     elif char_acc >= 0.50:
-        feedback.append("The model detected partial overlap with the expected ayah, but the content match is not reliable yet.")
+        feedback.append("Only a partial content match was detected. Treat this as review-required, not correct.")
     else:
-        feedback.append("The predicted content is far from the expected ayah, or the model failed on this recording.")
+        feedback.append("The predicted content is far from the expected ayah, incomplete, or the model failed on this recording.")
 
     if pred_len < max(1, int(gold_len * 0.65)):
-        feedback.append("Prediction is much shorter than the expected ayah; possible under-recognition or incomplete audio.")
+        feedback.append("Prediction is much shorter than the expected ayah; possible incomplete audio or under-recognition.")
     elif pred_len > int(gold_len * 1.35):
         feedback.append("Prediction is much longer than the expected ayah; possible over-emission or noisy decoding.")
 
-    if edit_dist > max(3, int(gold_len * 0.30)):
-        feedback.append("There are many character-level differences, so this should not be treated as a clean recitation.")
+    if edit_dist > 0:
+        feedback.append("For Qur'an content, any text difference should be treated seriously and reviewed.")
 
     return feedback
-
 
 def greedy_decode(
     logits: torch.Tensor,
@@ -226,11 +243,14 @@ def run_ayah_content_for_row(
         logits = model(x, input_lengths)
         pred = greedy_decode(logits, input_lengths, id_to_char, blank_penalty)[0]
 
+    gold_compact = compact(gold)
+    pred_compact = compact(pred)
     acc = char_accuracy(gold, pred)
     ed = edit_distance(gold, pred)
-    gold_len = len(compact(gold))
-    pred_len = len(compact(pred))
+    gold_len = len(gold_compact)
+    pred_len = len(pred_compact)
     edit_rate = ed / max(1, gold_len)
+    exact_match = gold_compact == pred_compact
 
     result = {
         "id": sample_id,
@@ -238,16 +258,18 @@ def run_ayah_content_for_row(
         "checkpoint": str(checkpoint_path),
         "decoder_config": str(decoder_config_path),
         "blank_penalty": blank_penalty,
-        "gold": compact(gold),
-        "pred": compact(pred),
+        "gold": gold_compact,
+        "pred": pred_compact,
         "score": round(acc * 100.0, 2),
-        "quality": ayah_quality_label(acc),
+        "quality": ayah_quality_label(acc, ed, exact_match),
+        "acceptance_verdict": ayah_acceptance_verdict(acc, ed, exact_match),
+        "exact_match": exact_match,
         "char_accuracy": acc,
         "edit_distance": ed,
         "edit_rate": edit_rate,
         "gold_len": gold_len,
         "pred_len": pred_len,
-        "feedback": ayah_feedback(acc, ed, gold_len, pred_len),
+        "feedback": ayah_feedback(acc, ed, gold_len, pred_len, exact_match),
         "device": device,
     }
 
@@ -290,6 +312,8 @@ def print_ayah_content_report(result: dict[str, Any]) -> None:
         {
             "score": result["score"],
             "quality": result["quality"],
+            "acceptance_verdict": result["acceptance_verdict"],
+            "exact_match": result["exact_match"],
             "char_accuracy": result["char_accuracy"],
             "edit_distance": result["edit_distance"],
             "edit_rate": result["edit_rate"],
