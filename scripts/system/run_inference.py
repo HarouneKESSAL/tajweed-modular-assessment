@@ -318,7 +318,40 @@ def main() -> None:
         help="Learned routing threshold profile to use.",
     )
 
+    parser.add_argument("--ayah-content", action="store_true")
+    parser.add_argument("--ayah-content-only", action="store_true")
+    parser.add_argument("--ayah-content-split", default="all")
+    parser.add_argument("--ayah-content-checkpoint", default="checkpoints/content_ayah_hf_v2_balanced_hd96.pt")
+    parser.add_argument("--ayah-content-decoder-config", default="checkpoints/content_ayah_decoder_bp12.json")
+    parser.add_argument("--ayah-content-feature-cache-dir", default="data/interim/ayah_content_inference_ssl_cache")
+    parser.add_argument("--ayah-content-device", default="cuda")
+
     args = parser.parse_args()
+
+    # AYAH_CONTENT_ONLY_EARLY_RETURN
+    if getattr(args, "ayah_content_only", False):
+        import sys
+
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+
+        from scripts.system.run_ayah_content_inference import (
+            run_ayah_content_for_manifest_sample,
+            print_ayah_content_report,
+        )
+
+        result = run_ayah_content_for_manifest_sample(
+            manifest_path=args.manifest,
+            split=args.ayah_content_split,
+            sample_index=args.sample_index,
+            checkpoint_path=args.ayah_content_checkpoint,
+            decoder_config_path=args.ayah_content_decoder_config,
+            feature_cache_dir=args.ayah_content_feature_cache_dir,
+            device=args.ayah_content_device,
+        )
+        print_ayah_content_report(result)
+        return
+
 
     rows = load_jsonl(PROJECT_ROOT / args.manifest)
     if args.sample_index < 0 or args.sample_index >= len(rows):
@@ -504,6 +537,30 @@ def main() -> None:
             print("")
             print("Matched findings:")
             print("- None")
+
+
+    if getattr(args, "ayah_content", False):
+        import sys
+
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+
+        from scripts.system.run_ayah_content_inference import (
+            run_ayah_content_for_manifest_sample,
+            print_ayah_content_report,
+        )
+
+        print()
+        result = run_ayah_content_for_manifest_sample(
+            manifest_path=args.manifest,
+            split=args.ayah_content_split,
+            sample_index=args.sample_index,
+            checkpoint_path=args.ayah_content_checkpoint,
+            decoder_config_path=args.ayah_content_decoder_config,
+            feature_cache_dir=args.ayah_content_feature_cache_dir,
+            device=args.ayah_content_device,
+        )
+        print_ayah_content_report(result)
 
 
 if __name__ == "__main__":

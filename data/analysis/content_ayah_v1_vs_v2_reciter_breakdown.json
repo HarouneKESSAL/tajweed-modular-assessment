@@ -1,0 +1,1533 @@
+{
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_hf_ayah_clean_all.jsonl",
+  "split": "val",
+  "limit": 500,
+  "blank_penalty": 1.2,
+  "v1": {
+    "name": "v1",
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_ayah_hf_v1_hd96.pt",
+    "overall": {
+      "samples": 448,
+      "exact_match": 0.046875,
+      "char_accuracy": 0.7418755742496923,
+      "edit_distance": 7.037946428571429,
+      "avg_gold_len": 27.495535714285715,
+      "avg_pred_len": 25.834821428571427
+    },
+    "by_reciter": {
+      "abdul_basit_murattal": {
+        "samples": 46,
+        "exact_match": 0.06521739130434782,
+        "char_accuracy": 0.8466799547856867,
+        "edit_distance": 4.891304347826087,
+        "avg_gold_len": 29.08695652173913,
+        "avg_pred_len": 28.543478260869566
+      },
+      "abdullaah_3awwaad_al_juhaynee": {
+        "samples": 41,
+        "exact_match": 0.0,
+        "char_accuracy": 0.2961203790722154,
+        "edit_distance": 18.024390243902438,
+        "avg_gold_len": 24.853658536585368,
+        "avg_pred_len": 10.951219512195122
+      },
+      "abdullah_basfar": {
+        "samples": 11,
+        "exact_match": 0.0,
+        "char_accuracy": 0.8371598675712607,
+        "edit_distance": 6.2727272727272725,
+        "avg_gold_len": 38.0,
+        "avg_pred_len": 37.63636363636363
+      },
+      "abdurrahmaan_as_sudais": {
+        "samples": 11,
+        "exact_match": 0.0,
+        "char_accuracy": 0.6990340772658089,
+        "edit_distance": 11.909090909090908,
+        "avg_gold_len": 38.63636363636363,
+        "avg_pred_len": 38.81818181818182
+      },
+      "abu_bakr_ash_shaatree": {
+        "samples": 56,
+        "exact_match": 0.0,
+        "char_accuracy": 0.7086587499140921,
+        "edit_distance": 4.803571428571429,
+        "avg_gold_len": 17.0,
+        "avg_pred_len": 17.142857142857142
+      },
+      "alafasy": {
+        "samples": 23,
+        "exact_match": 0.043478260869565216,
+        "char_accuracy": 0.8448230134108171,
+        "edit_distance": 5.173913043478261,
+        "avg_gold_len": 31.434782608695652,
+        "avg_pred_len": 31.08695652173913
+      },
+      "ali_jaber": {
+        "samples": 20,
+        "exact_match": 0.25,
+        "char_accuracy": 0.8674308246758053,
+        "edit_distance": 4.75,
+        "avg_gold_len": 27.85,
+        "avg_pred_len": 26.7
+      },
+      "banna": {
+        "samples": 31,
+        "exact_match": 0.03225806451612903,
+        "char_accuracy": 0.8200635400012549,
+        "edit_distance": 6.806451612903226,
+        "avg_gold_len": 36.935483870967744,
+        "avg_pred_len": 35.87096774193548
+      },
+      "ghamadi": {
+        "samples": 29,
+        "exact_match": 0.10344827586206896,
+        "char_accuracy": 0.8272665499605535,
+        "edit_distance": 4.206896551724138,
+        "avg_gold_len": 22.551724137931036,
+        "avg_pred_len": 22.06896551724138
+      },
+      "husary_mujawwad": {
+        "samples": 19,
+        "exact_match": 0.0,
+        "char_accuracy": 0.7872390880392262,
+        "edit_distance": 8.210526315789474,
+        "avg_gold_len": 37.21052631578947,
+        "avg_pred_len": 35.421052631578945
+      },
+      "hussary.teacher": {
+        "samples": 31,
+        "exact_match": 0.1935483870967742,
+        "char_accuracy": 0.8685447297556671,
+        "edit_distance": 3.7096774193548385,
+        "avg_gold_len": 26.580645161290324,
+        "avg_pred_len": 26.29032258064516
+      },
+      "ibrahim_akhdar": {
+        "samples": 33,
+        "exact_match": 0.0,
+        "char_accuracy": 0.8469074290837849,
+        "edit_distance": 4.03030303030303,
+        "avg_gold_len": 25.939393939393938,
+        "avg_pred_len": 25.393939393939394
+      },
+      "minshawy_mujawwad": {
+        "samples": 12,
+        "exact_match": 0.0,
+        "char_accuracy": 0.5470525467494095,
+        "edit_distance": 18.25,
+        "avg_gold_len": 38.25,
+        "avg_pred_len": 39.166666666666664
+      },
+      "muhsin_al_qasim": {
+        "samples": 36,
+        "exact_match": 0.0,
+        "char_accuracy": 0.6553902253657156,
+        "edit_distance": 5.527777777777778,
+        "avg_gold_len": 16.77777777777778,
+        "avg_pred_len": 16.88888888888889
+      },
+      "saood_ash_shuraym": {
+        "samples": 13,
+        "exact_match": 0.15384615384615385,
+        "char_accuracy": 0.8280360888951872,
+        "edit_distance": 7.0,
+        "avg_gold_len": 34.53846153846154,
+        "avg_pred_len": 34.0
+      },
+      "warsh_husary": {
+        "samples": 5,
+        "exact_match": 0.0,
+        "char_accuracy": 0.5787545787545787,
+        "edit_distance": 6.2,
+        "avg_gold_len": 14.8,
+        "avg_pred_len": 13.4
+      },
+      "warsh_yassin": {
+        "samples": 31,
+        "exact_match": 0.0,
+        "char_accuracy": 0.8015961207741316,
+        "edit_distance": 7.387096774193548,
+        "avg_gold_len": 35.935483870967744,
+        "avg_pred_len": 35.38709677419355
+      }
+    },
+    "worst_examples": [
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_028_035612",
+        "reciter": "minshawy_mujawwad",
+        "gold": "واعلمواانمااموالكمواولادكمفتنةواناللهعندهاجرعظيم",
+        "pred": "ولهاانماممولتمموولاتكفنتوانواعدوايهنيوالموانمالاكوااملاكممفنتوانوعندعاواهمين",
+        "char_accuracy": 0.0,
+        "edit_distance": 51,
+        "gold_len": 48,
+        "pred_len": 76
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_073_013_164623",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وطعاماذاغصةوعذابااليما",
+        "pred": "نان",
+        "char_accuracy": 0.045454545454545414,
+        "edit_distance": 21,
+        "gold_len": 22,
+        "pred_len": 3
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_043_162523",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "يوميخرجونمنالاجداثسراعاكانهمالينصبيوفضون",
+        "pred": "عاههاهااين",
+        "char_accuracy": 0.15000000000000002,
+        "edit_distance": 34,
+        "gold_len": 40,
+        "pred_len": 10
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_072_020_163993",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قلانماادعوربيولااشركبهاحدا",
+        "pred": "فاااا",
+        "char_accuracy": 0.15384615384615385,
+        "edit_distance": 22,
+        "gold_len": 26,
+        "pred_len": 5
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_037_167623",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "الميكنطفةمنمنييمني",
+        "pred": "وللننها",
+        "char_accuracy": 0.16666666666666663,
+        "edit_distance": 15,
+        "gold_len": 18,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_030_167413",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اليربكيومئذالمساق",
+        "pred": "ولاكككنا",
+        "char_accuracy": 0.17647058823529416,
+        "edit_distance": 14,
+        "gold_len": 17,
+        "pred_len": 8
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_040_167713",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اليسذلكبقادرعليانيحييالموتي",
+        "pred": "فيررايين",
+        "char_accuracy": 0.18518518518518523,
+        "edit_distance": 22,
+        "gold_len": 27,
+        "pred_len": 8
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_016_161713",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "نزاعةللشوي",
+        "pred": "وعاالسا",
+        "char_accuracy": 0.19999999999999996,
+        "edit_distance": 8,
+        "gold_len": 10,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_072_001_163423",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قلاوحياليانهاستمعنفرمنالجنفقالوااناسمعناقراناعجبا",
+        "pred": "ينااينيلنساا",
+        "char_accuracy": 0.20408163265306123,
+        "edit_distance": 39,
+        "gold_len": 49,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_072_012_163753",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "واناظنناانلننعجزاللهفيالارضولننعجزههربا",
+        "pred": "فاعععاهاهاانا",
+        "char_accuracy": 0.20512820512820518,
+        "edit_distance": 31,
+        "gold_len": 39,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_001_162583",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اناارسلنانوحااليقومهانانذرقومكمنقبلانياتيهمعذاباليم",
+        "pred": "هنساههاناياقاين",
+        "char_accuracy": 0.21568627450980393,
+        "edit_distance": 40,
+        "gold_len": 51,
+        "pred_len": 15
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_004_157333",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثمارجعالبصركرتينينقلباليكالبصرخاسئاوهوحسير",
+        "pred": "اعاهاابخاوين",
+        "char_accuracy": 0.23809523809523814,
+        "edit_distance": 32,
+        "gold_len": 42,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_030_165733",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "عليهاتسعةعشر",
+        "pred": "ولسر",
+        "char_accuracy": 0.25,
+        "edit_distance": 9,
+        "gold_len": 12,
+        "pred_len": 4
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_016_163033",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وجعلالقمرفيهننوراوجعلالشمسسراجا",
+        "pred": "وملهااووااسلاة",
+        "char_accuracy": 0.25806451612903225,
+        "edit_distance": 23,
+        "gold_len": 31,
+        "pred_len": 14
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_014_157633",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "الايعلممنخلقوهواللطيفالخبير",
+        "pred": "للععلهوواممين",
+        "char_accuracy": 0.2592592592592593,
+        "edit_distance": 20,
+        "gold_len": 27,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_025_163303",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "مماخطيئاتهماغرقوافادخلوانارافلميجدوالهممندوناللهانصارا",
+        "pred": "نوامعيهمييوموااااينيااا",
+        "char_accuracy": 0.2592592592592593,
+        "edit_distance": 40,
+        "gold_len": 54,
+        "pred_len": 23
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_008_161473",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "يومتكونالسماءكالمهل",
+        "pred": "وامهعامن",
+        "char_accuracy": 0.26315789473684215,
+        "edit_distance": 14,
+        "gold_len": 19,
+        "pred_len": 8
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_020_165433",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثمقتلكيفقدر",
+        "pred": "ونلييير",
+        "char_accuracy": 0.2727272727272727,
+        "edit_distance": 8,
+        "gold_len": 11,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_096_007_183376",
+        "reciter": "muhsin_al_qasim",
+        "gold": "انراهاستغني",
+        "pred": "والايوتان",
+        "char_accuracy": 0.2727272727272727,
+        "edit_distance": 8,
+        "gold_len": 11,
+        "pred_len": 9
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_016_157693",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اامنتممنفيالسماءانيخسفبكمالارضفاذاهيتمور",
+        "pred": "كعلسنسفرفااالمون",
+        "char_accuracy": 0.275,
+        "edit_distance": 29,
+        "gold_len": 40,
+        "pred_len": 16
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_073_014_164653",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "يومترجفالارضوالجبالوكانتالجبالكثيبامهيلا",
+        "pred": "وهلرااالياهيمنكا",
+        "char_accuracy": 0.275,
+        "edit_distance": 29,
+        "gold_len": 40,
+        "pred_len": 16
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+        "reciter": "minshawy_mujawwad",
+        "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+        "pred": "بذيتترنفيسكماادانالهيشيشكماتدنالهساافااسممااةشركون",
+        "char_accuracy": 0.28260869565217395,
+        "edit_distance": 33,
+        "gold_len": 46,
+        "pred_len": 50
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_022_167173",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وجوهيومئذناضرة",
+        "pred": "ونار",
+        "char_accuracy": 0.2857142857142857,
+        "edit_distance": 10,
+        "gold_len": 14,
+        "pred_len": 4
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_011_157543",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فاعترفوابذنبهمفسحقالاصحابالسعير",
+        "pred": "فعاللهلنالللعااين",
+        "char_accuracy": 0.29032258064516125,
+        "edit_distance": 22,
+        "gold_len": 31,
+        "pred_len": 17
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_021_161863",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "واذامسهالخيرمنوعا",
+        "pred": "ااالسههعااا",
+        "char_accuracy": 0.2941176470588235,
+        "edit_distance": 12,
+        "gold_len": 17,
+        "pred_len": 11
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_038_165973",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "كلنفسبماكسبترهينة",
+        "pred": "لفسفيية",
+        "char_accuracy": 0.2941176470588235,
+        "edit_distance": 12,
+        "gold_len": 17,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_031_162163",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فمنابتغيوراءذلكفاولئكهمالعادون",
+        "pred": "فنللااهالاكين",
+        "char_accuracy": 0.30000000000000004,
+        "edit_distance": 21,
+        "gold_len": 30,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_068_034_159133",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "انللمتقينعندربهمجناتالنعيم",
+        "pred": "نريلييهالامهمنهفمنعي",
+        "char_accuracy": 0.3076923076923077,
+        "edit_distance": 18,
+        "gold_len": 26,
+        "pred_len": 20
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_026_163333",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وقالنوحربلاتذرعليالارضمنالكافرينديارا",
+        "pred": "ولاللنليهاايهييرا",
+        "char_accuracy": 0.32432432432432434,
+        "edit_distance": 25,
+        "gold_len": 37,
+        "pred_len": 17
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_068_014_158533",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "انكانذامالوبنين",
+        "pred": "نكاين",
+        "char_accuracy": 0.33333333333333337,
+        "edit_distance": 10,
+        "gold_len": 15,
+        "pred_len": 5
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_068_047_159523",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "امعندهمالغيبفهميكتبون",
+        "pred": "اوميقورمفيمترون",
+        "char_accuracy": 0.33333333333333337,
+        "edit_distance": 14,
+        "gold_len": 21,
+        "pred_len": 15
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_015_165283",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثميطمعانازيد",
+        "pred": "ثعراالين",
+        "char_accuracy": 0.33333333333333337,
+        "edit_distance": 8,
+        "gold_len": 12,
+        "pred_len": 8
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_009_166783",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وجمعالشمسوالقمر",
+        "pred": "وااششقر",
+        "char_accuracy": 0.33333333333333337,
+        "edit_distance": 10,
+        "gold_len": 15,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_064_005_156103",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "المياتكمنباالذينكفروامنقبلفذاقواوبالامرهمولهمعذاباليم",
+        "pred": "ثييلامناننواوااوايالاعالالين",
+        "char_accuracy": 0.339622641509434,
+        "edit_distance": 35,
+        "gold_len": 53,
+        "pred_len": 28
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_069_005_159823",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فاماثمودفاهلكوابالطاغية",
+        "pred": "فاااامابمقية",
+        "char_accuracy": 0.34782608695652173,
+        "edit_distance": 15,
+        "gold_len": 23,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_100_004_184486",
+        "reciter": "muhsin_al_qasim",
+        "gold": "فاثرنبهنقعا",
+        "pred": "فاترضمنبمينقعنف",
+        "char_accuracy": 0.36363636363636365,
+        "edit_distance": 7,
+        "gold_len": 11,
+        "pred_len": 15
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_008_165073",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فاذانقرفيالناقور",
+        "pred": "ارنانور",
+        "char_accuracy": 0.375,
+        "edit_distance": 10,
+        "gold_len": 16,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abu_bakr_ash_shaatree_079_021_171975",
+        "reciter": "abu_bakr_ash_shaatree",
+        "gold": "فكذبوعصي",
+        "pred": "فكاليلوعص",
+        "char_accuracy": 0.375,
+        "edit_distance": 5,
+        "gold_len": 8,
+        "pred_len": 9
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_068_020_158713",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فاصبحتكالصريم",
+        "pred": "لللسلتالصين",
+        "char_accuracy": 0.3846153846153846,
+        "edit_distance": 8,
+        "gold_len": 13,
+        "pred_len": 11
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_035_167563",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثماوليلكفاولي",
+        "pred": "ولليلي",
+        "char_accuracy": 0.3846153846153846,
+        "edit_distance": 8,
+        "gold_len": 13,
+        "pred_len": 6
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_112_018121",
+        "reciter": "abdurrahmaan_as_sudais",
+        "gold": "ومنيكسبخطيئةاواثماثميرمبهبريئافقداحتملبهتاناواثمامبينا",
+        "pred": "ونعيشرصطياتاعافمنثمايرمبيبرياعوهفقدحتملبهتانافقدحتملباتانموافممبيناي",
+        "char_accuracy": 0.38888888888888884,
+        "edit_distance": 33,
+        "gold_len": 54,
+        "pred_len": 68
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_043_166123",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قالوالمنكمنالمصلين",
+        "pred": "وللتلممممسين",
+        "char_accuracy": 0.38888888888888884,
+        "edit_distance": 11,
+        "gold_len": 18,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_050_166333",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "كانهمحمرمستنفرة",
+        "pred": "نهملساسعرة",
+        "char_accuracy": 0.4,
+        "edit_distance": 9,
+        "gold_len": 15,
+        "pred_len": 10
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_002_162613",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قالياقومانيلكمنذيرمبين",
+        "pred": "ييابمكميمين",
+        "char_accuracy": 0.40909090909090906,
+        "edit_distance": 13,
+        "gold_len": 22,
+        "pred_len": 11
+      },
+      {
+        "id": "hf_quran_md_ayah_route_hussary.teacher_037_152_118179",
+        "reciter": "hussary.teacher",
+        "gold": "ولداللهوانهملكاذبون",
+        "pred": "ماكيليقولونولداللهوانهملكاذبون",
+        "char_accuracy": 0.42105263157894735,
+        "edit_distance": 11,
+        "gold_len": 19,
+        "pred_len": 30
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_069_049_161143",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وانالنعلمانمنكممكذبين",
+        "pred": "وانننننلننينجين",
+        "char_accuracy": 0.4285714285714286,
+        "edit_distance": 12,
+        "gold_len": 21,
+        "pred_len": 15
+      },
+      {
+        "id": "hf_quran_md_ayah_route_warsh_husary_084_001_176534",
+        "reciter": "warsh_husary",
+        "gold": "اذاالسماءانشقت",
+        "pred": "ابتماءشقا",
+        "char_accuracy": 0.4285714285714286,
+        "edit_distance": 8,
+        "gold_len": 14,
+        "pred_len": 9
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_092_009_181996",
+        "reciter": "muhsin_al_qasim",
+        "gold": "وكذببالحسني",
+        "pred": "وكذدببلعشناف",
+        "char_accuracy": 0.4545454545454546,
+        "edit_distance": 6,
+        "gold_len": 11,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abu_bakr_ash_shaatree_088_005_179145",
+        "reciter": "abu_bakr_ash_shaatree",
+        "gold": "تسقيمنعينانية",
+        "pred": "وسقومنينناانن",
+        "char_accuracy": 0.46153846153846156,
+        "edit_distance": 7,
+        "gold_len": 13,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_091_009_181546",
+        "reciter": "muhsin_al_qasim",
+        "gold": "قدافلحمنزكاها",
+        "pred": "ادالحهماازكااار",
+        "char_accuracy": 0.46153846153846156,
+        "edit_distance": 7,
+        "gold_len": 13,
+        "pred_len": 15
+      }
+    ]
+  },
+  "v2": {
+    "name": "v2",
+    "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_ayah_hf_v2_balanced_hd96.pt",
+    "overall": {
+      "samples": 448,
+      "exact_match": 0.0625,
+      "char_accuracy": 0.7621132140627868,
+      "edit_distance": 6.446428571428571,
+      "avg_gold_len": 27.495535714285715,
+      "avg_pred_len": 25.995535714285715
+    },
+    "by_reciter": {
+      "abdul_basit_murattal": {
+        "samples": 46,
+        "exact_match": 0.08695652173913043,
+        "char_accuracy": 0.8710239678677788,
+        "edit_distance": 4.304347826086956,
+        "avg_gold_len": 29.08695652173913,
+        "avg_pred_len": 28.608695652173914
+      },
+      "abdullaah_3awwaad_al_juhaynee": {
+        "samples": 41,
+        "exact_match": 0.0,
+        "char_accuracy": 0.31933262176264293,
+        "edit_distance": 17.5609756097561,
+        "avg_gold_len": 24.853658536585368,
+        "avg_pred_len": 11.707317073170731
+      },
+      "abdullah_basfar": {
+        "samples": 11,
+        "exact_match": 0.0,
+        "char_accuracy": 0.8482410737453961,
+        "edit_distance": 5.909090909090909,
+        "avg_gold_len": 38.0,
+        "avg_pred_len": 38.27272727272727
+      },
+      "abdurrahmaan_as_sudais": {
+        "samples": 11,
+        "exact_match": 0.0,
+        "char_accuracy": 0.723851538733988,
+        "edit_distance": 11.0,
+        "avg_gold_len": 38.63636363636363,
+        "avg_pred_len": 38.27272727272727
+      },
+      "abu_bakr_ash_shaatree": {
+        "samples": 56,
+        "exact_match": 0.0,
+        "char_accuracy": 0.7072291928304015,
+        "edit_distance": 4.839285714285714,
+        "avg_gold_len": 17.0,
+        "avg_pred_len": 17.428571428571427
+      },
+      "alafasy": {
+        "samples": 23,
+        "exact_match": 0.13043478260869565,
+        "char_accuracy": 0.8833791517982318,
+        "edit_distance": 4.043478260869565,
+        "avg_gold_len": 31.434782608695652,
+        "avg_pred_len": 30.956521739130434
+      },
+      "ali_jaber": {
+        "samples": 20,
+        "exact_match": 0.25,
+        "char_accuracy": 0.8917378734659511,
+        "edit_distance": 3.95,
+        "avg_gold_len": 27.85,
+        "avg_pred_len": 27.65
+      },
+      "banna": {
+        "samples": 31,
+        "exact_match": 0.06451612903225806,
+        "char_accuracy": 0.8537753429124239,
+        "edit_distance": 5.645161290322581,
+        "avg_gold_len": 36.935483870967744,
+        "avg_pred_len": 36.354838709677416
+      },
+      "ghamadi": {
+        "samples": 29,
+        "exact_match": 0.10344827586206896,
+        "char_accuracy": 0.8413799145074073,
+        "edit_distance": 3.9310344827586206,
+        "avg_gold_len": 22.551724137931036,
+        "avg_pred_len": 22.482758620689655
+      },
+      "husary_mujawwad": {
+        "samples": 19,
+        "exact_match": 0.0,
+        "char_accuracy": 0.8280195547411839,
+        "edit_distance": 6.631578947368421,
+        "avg_gold_len": 37.21052631578947,
+        "avg_pred_len": 35.578947368421055
+      },
+      "hussary.teacher": {
+        "samples": 31,
+        "exact_match": 0.1935483870967742,
+        "char_accuracy": 0.885647909342168,
+        "edit_distance": 3.3870967741935485,
+        "avg_gold_len": 26.580645161290324,
+        "avg_pred_len": 26.322580645161292
+      },
+      "ibrahim_akhdar": {
+        "samples": 33,
+        "exact_match": 0.09090909090909091,
+        "char_accuracy": 0.871320682173848,
+        "edit_distance": 3.484848484848485,
+        "avg_gold_len": 25.939393939393938,
+        "avg_pred_len": 25.696969696969695
+      },
+      "minshawy_mujawwad": {
+        "samples": 12,
+        "exact_match": 0.0,
+        "char_accuracy": 0.6367900613650982,
+        "edit_distance": 15.0,
+        "avg_gold_len": 38.25,
+        "avg_pred_len": 37.333333333333336
+      },
+      "muhsin_al_qasim": {
+        "samples": 36,
+        "exact_match": 0.0,
+        "char_accuracy": 0.659801731063986,
+        "edit_distance": 5.472222222222222,
+        "avg_gold_len": 16.77777777777778,
+        "avg_pred_len": 16.833333333333332
+      },
+      "saood_ash_shuraym": {
+        "samples": 13,
+        "exact_match": 0.15384615384615385,
+        "char_accuracy": 0.8509324499980617,
+        "edit_distance": 6.230769230769231,
+        "avg_gold_len": 34.53846153846154,
+        "avg_pred_len": 33.53846153846154
+      },
+      "warsh_husary": {
+        "samples": 5,
+        "exact_match": 0.0,
+        "char_accuracy": 0.5465201465201466,
+        "edit_distance": 6.8,
+        "avg_gold_len": 14.8,
+        "avg_pred_len": 13.2
+      },
+      "warsh_yassin": {
+        "samples": 31,
+        "exact_match": 0.0,
+        "char_accuracy": 0.8135319470903668,
+        "edit_distance": 6.903225806451613,
+        "avg_gold_len": 35.935483870967744,
+        "avg_pred_len": 35.225806451612904
+      }
+    },
+    "worst_examples": [
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_028_035612",
+        "reciter": "minshawy_mujawwad",
+        "gold": "واعلمواانمااموالكمواولادكمفتنةواناللهعندهاجرعظيم",
+        "pred": "ولنواانمامنتممولاتكفنتنواعدواجينغيوالموامالواكواملاكمفنتوانلعدعروامين",
+        "char_accuracy": 0.02083333333333337,
+        "edit_distance": 47,
+        "gold_len": 48,
+        "pred_len": 69
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_072_001_163423",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قلاوحياليانهاستمعنفرمنالجنفقالوااناسمعناقراناعجبا",
+        "pred": "نساينننسسلا",
+        "char_accuracy": 0.1428571428571429,
+        "edit_distance": 42,
+        "gold_len": 49,
+        "pred_len": 11
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_072_012_163753",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "واناظنناانلننعجزاللهفيالارضولننعجزههربا",
+        "pred": "فاععانمباننا",
+        "char_accuracy": 0.17948717948717952,
+        "edit_distance": 32,
+        "gold_len": 39,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_016_161713",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "نزاعةللشوي",
+        "pred": "وعمالسن",
+        "char_accuracy": 0.19999999999999996,
+        "edit_distance": 8,
+        "gold_len": 10,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_025_163303",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "مماخطيئاتهماغرقوافادخلوانارافلميجدوالهممندوناللهانصارا",
+        "pred": "نمعامييجيكيوموااايياا",
+        "char_accuracy": 0.20370370370370372,
+        "edit_distance": 43,
+        "gold_len": 54,
+        "pred_len": 21
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_037_167623",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "الميكنطفةمنمنييمني",
+        "pred": "ونرلننننيا",
+        "char_accuracy": 0.2222222222222222,
+        "edit_distance": 14,
+        "gold_len": 18,
+        "pred_len": 10
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_040_167713",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اليسذلكبقادرعليانيحييالموتي",
+        "pred": "فيررانيينن",
+        "char_accuracy": 0.2222222222222222,
+        "edit_distance": 21,
+        "gold_len": 27,
+        "pred_len": 10
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_016_157693",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اامنتممنفيالسماءانيخسفبكمالارضفاذاهيتمور",
+        "pred": "لسسسمففااامون",
+        "char_accuracy": 0.22499999999999998,
+        "edit_distance": 31,
+        "gold_len": 40,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_043_162523",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "يوميخرجونمنالاجداثسراعاكانهمالينصبيوفضون",
+        "pred": "عانلامهااااين",
+        "char_accuracy": 0.22499999999999998,
+        "edit_distance": 31,
+        "gold_len": 40,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_030_167413",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اليربكيومئذالمساق",
+        "pred": "وييما",
+        "char_accuracy": 0.23529411764705888,
+        "edit_distance": 13,
+        "gold_len": 17,
+        "pred_len": 5
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_004_157333",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثمارجعالبصركرتينينقلباليكالبصرخاسئاوهوحسير",
+        "pred": "اعجاااابسصاروامين",
+        "char_accuracy": 0.23809523809523814,
+        "edit_distance": 32,
+        "gold_len": 42,
+        "pred_len": 17
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_030_165733",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "عليهاتسعةعشر",
+        "pred": "وللسر",
+        "char_accuracy": 0.25,
+        "edit_distance": 9,
+        "gold_len": 12,
+        "pred_len": 5
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_014_157633",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "الايعلممنخلقوهواللطيفالخبير",
+        "pred": "لععممهمولمين",
+        "char_accuracy": 0.2592592592592593,
+        "edit_distance": 20,
+        "gold_len": 27,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_008_161473",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "يومتكونالسماءكالمهل",
+        "pred": "وامهسعامن",
+        "char_accuracy": 0.26315789473684215,
+        "edit_distance": 14,
+        "gold_len": 19,
+        "pred_len": 9
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_031_162163",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فمنابتغيوراءذلكفاولئكهمالعادون",
+        "pred": "فنااهااكموين",
+        "char_accuracy": 0.2666666666666667,
+        "edit_distance": 22,
+        "gold_len": 30,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_073_013_164623",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وطعاماذاغصةوعذابااليما",
+        "pred": "وااااا",
+        "char_accuracy": 0.2727272727272727,
+        "edit_distance": 16,
+        "gold_len": 22,
+        "pred_len": 6
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_096_007_183376",
+        "reciter": "muhsin_al_qasim",
+        "gold": "انراهاستغني",
+        "pred": "ولوااواتالي",
+        "char_accuracy": 0.2727272727272727,
+        "edit_distance": 8,
+        "gold_len": 11,
+        "pred_len": 11
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_073_014_164653",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "يومترجفالارضوالجبالوكانتالجبالكثيبامهيلا",
+        "pred": "والراانانهيمنمجا",
+        "char_accuracy": 0.275,
+        "edit_distance": 29,
+        "gold_len": 40,
+        "pred_len": 16
+      },
+      {
+        "id": "hf_quran_md_ayah_route_warsh_husary_084_001_176534",
+        "reciter": "warsh_husary",
+        "gold": "اذاالسماءانشقت",
+        "pred": "ابتمءشط",
+        "char_accuracy": 0.2857142857142857,
+        "edit_distance": 10,
+        "gold_len": 14,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_067_011_157543",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فاعترفوابذنبهمفسحقالاصحابالسعير",
+        "pred": "فعلهلنسسساالسبعااين",
+        "char_accuracy": 0.29032258064516125,
+        "edit_distance": 22,
+        "gold_len": 31,
+        "pred_len": 19
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_070_021_161863",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "واذامسهالخيرمنوعا",
+        "pred": "االسبواا",
+        "char_accuracy": 0.2941176470588235,
+        "edit_distance": 12,
+        "gold_len": 17,
+        "pred_len": 8
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_001_162583",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "اناارسلنانوحااليقومهانانذرقومكمنقبلانياتيهمعذاباليم",
+        "pred": "نساااهنانااترمجياين",
+        "char_accuracy": 0.2941176470588235,
+        "edit_distance": 36,
+        "gold_len": 51,
+        "pred_len": 19
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_069_005_159823",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فاماثمودفاهلكوابالطاغية",
+        "pred": "االامانبمرلية",
+        "char_accuracy": 0.30434782608695654,
+        "edit_distance": 16,
+        "gold_len": 23,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_072_020_163993",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قلانماادعوربيولااشركبهاحدا",
+        "pred": "فاااااهاا",
+        "char_accuracy": 0.3076923076923077,
+        "edit_distance": 18,
+        "gold_len": 26,
+        "pred_len": 9
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_035_167563",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثماوليلكفاولي",
+        "pred": "ولففيفيي",
+        "char_accuracy": 0.3076923076923077,
+        "edit_distance": 9,
+        "gold_len": 13,
+        "pred_len": 8
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_015_165283",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثميطمعانازيد",
+        "pred": "ثاعاالمير",
+        "char_accuracy": 0.33333333333333337,
+        "edit_distance": 8,
+        "gold_len": 12,
+        "pred_len": 9
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_009_166783",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وجمعالشمسوالقمر",
+        "pred": "وااسششصقر",
+        "char_accuracy": 0.33333333333333337,
+        "edit_distance": 10,
+        "gold_len": 15,
+        "pred_len": 9
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_064_005_156103",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "المياتكمنباالذينكفروامنقبلفذاقواوبالامرهمولهمعذاباليم",
+        "pred": "ثلياامنننكاامعواواااونانعلالبجين",
+        "char_accuracy": 0.339622641509434,
+        "edit_distance": 35,
+        "gold_len": 53,
+        "pred_len": 32
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_068_034_159133",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "انللمتقينعندربهمجناتالنعيم",
+        "pred": "انيملييولمهمنهفني",
+        "char_accuracy": 0.34615384615384615,
+        "edit_distance": 17,
+        "gold_len": 26,
+        "pred_len": 17
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_026_163333",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وقالنوحربلاتذرعليالارضمنالكافرينديارا",
+        "pred": "واللنللاااايهتيرا",
+        "char_accuracy": 0.3513513513513513,
+        "edit_distance": 24,
+        "gold_len": 37,
+        "pred_len": 17
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_038_165973",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "كلنفسبماكسبترهينة",
+        "pred": "ومفسفاسيية",
+        "char_accuracy": 0.3529411764705882,
+        "edit_distance": 11,
+        "gold_len": 17,
+        "pred_len": 10
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_016_163033",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وجعلالقمرفيهننوراوجعلالشمسسراجا",
+        "pred": "والدباووابسسسراا",
+        "char_accuracy": 0.3548387096774194,
+        "edit_distance": 20,
+        "gold_len": 31,
+        "pred_len": 16
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_075_022_167173",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وجوهيومئذناضرة",
+        "pred": "وماننار",
+        "char_accuracy": 0.3571428571428571,
+        "edit_distance": 9,
+        "gold_len": 14,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_020_165433",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "ثمقتلكيفقدر",
+        "pred": "ومنليير",
+        "char_accuracy": 0.36363636363636365,
+        "edit_distance": 7,
+        "gold_len": 11,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_100_004_184486",
+        "reciter": "muhsin_al_qasim",
+        "gold": "فاثرنبهنقعا",
+        "pred": "فاترضمنبمينقعنف",
+        "char_accuracy": 0.36363636363636365,
+        "edit_distance": 7,
+        "gold_len": 11,
+        "pred_len": 15
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_068_047_159523",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "امعندهمالغيبفهميكتبون",
+        "pred": "انيهرمفبيمترون",
+        "char_accuracy": 0.38095238095238093,
+        "edit_distance": 13,
+        "gold_len": 21,
+        "pred_len": 14
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_069_049_161143",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "وانالنعلمانمنكممكذبين",
+        "pred": "والننننلننينجين",
+        "char_accuracy": 0.38095238095238093,
+        "edit_distance": 13,
+        "gold_len": 21,
+        "pred_len": 15
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_043_166123",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قالوالمنكمنالمصلين",
+        "pred": "ولااتكمممسين",
+        "char_accuracy": 0.38888888888888884,
+        "edit_distance": 11,
+        "gold_len": 18,
+        "pred_len": 12
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_068_014_158533",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "انكانذامالوبنين",
+        "pred": "ننامين",
+        "char_accuracy": 0.4,
+        "edit_distance": 9,
+        "gold_len": 15,
+        "pred_len": 6
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_050_166333",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "كانهمحمرمستنفرة",
+        "pred": "انممسار",
+        "char_accuracy": 0.4,
+        "edit_distance": 9,
+        "gold_len": 15,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+        "reciter": "minshawy_mujawwad",
+        "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+        "pred": "بذيتتنتيسكماتدنالهنششكماتدونالهساتانسمماتشركون",
+        "char_accuracy": 0.4130434782608695,
+        "edit_distance": 27,
+        "gold_len": 46,
+        "pred_len": 46
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_074_008_165073",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "فاذانقرفيالناقور",
+        "pred": "فلانننانور",
+        "char_accuracy": 0.4375,
+        "edit_distance": 9,
+        "gold_len": 16,
+        "pred_len": 10
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abu_bakr_ash_shaatree_079_037_172455",
+        "reciter": "abu_bakr_ash_shaatree",
+        "gold": "فامامنطغي",
+        "pred": "فاماماترار",
+        "char_accuracy": 0.4444444444444444,
+        "edit_distance": 5,
+        "gold_len": 9,
+        "pred_len": 10
+      },
+      {
+        "id": "hf_quran_md_ayah_route_warsh_yassin_021_001_074496",
+        "reciter": "warsh_yassin",
+        "gold": "اقتربللناسحسابهموهمفيغفلةمعرضون",
+        "pred": "بسملهروماانحينقتربلناسحسابهموهمتيوفلتمعرضون",
+        "char_accuracy": 0.4516129032258065,
+        "edit_distance": 17,
+        "gold_len": 31,
+        "pred_len": 43
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullaah_3awwaad_al_juhaynee_071_002_162613",
+        "reciter": "abdullaah_3awwaad_al_juhaynee",
+        "gold": "قالياقومانيلكمنذيرمبين",
+        "pred": "اييابميكتبيمين",
+        "char_accuracy": 0.4545454545454546,
+        "edit_distance": 12,
+        "gold_len": 22,
+        "pred_len": 14
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_092_009_181996",
+        "reciter": "muhsin_al_qasim",
+        "gold": "وكذببالحسني",
+        "pred": "وكذذببالعشنااف",
+        "char_accuracy": 0.4545454545454546,
+        "edit_distance": 6,
+        "gold_len": 11,
+        "pred_len": 14
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abu_bakr_ash_shaatree_088_005_179145",
+        "reciter": "abu_bakr_ash_shaatree",
+        "gold": "تسقيمنعينانية",
+        "pred": "وسقومنينماامم",
+        "char_accuracy": 0.46153846153846156,
+        "edit_distance": 7,
+        "gold_len": 13,
+        "pred_len": 13
+      },
+      {
+        "id": "hf_quran_md_ayah_route_muhsin_al_qasim_091_009_181546",
+        "reciter": "muhsin_al_qasim",
+        "gold": "قدافلحمنزكاها",
+        "pred": "ادالحهماازكاار",
+        "char_accuracy": 0.46153846153846156,
+        "edit_distance": 7,
+        "gold_len": 13,
+        "pred_len": 14
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_112_018121",
+        "reciter": "abdurrahmaan_as_sudais",
+        "gold": "ومنيكسبخطيئةاواثماثميرمبهبريئافقداحتملبهتاناواثمامبينا",
+        "pred": "ونايشرصخطياتاعافماثمالرمبيبرياافقدحتملبهتانافقدحتملباتالموافممبيناي",
+        "char_accuracy": 0.4629629629629629,
+        "edit_distance": 29,
+        "gold_len": 54,
+        "pred_len": 67
+      },
+      {
+        "id": "hf_quran_md_ayah_route_hussary.teacher_037_152_118179",
+        "reciter": "hussary.teacher",
+        "gold": "ولداللهوانهملكاذبون",
+        "pred": "ماكليقولونولداللهوانهملكاذبون",
+        "char_accuracy": 0.4736842105263158,
+        "edit_distance": 10,
+        "gold_len": 19,
+        "pred_len": 29
+      }
+    ]
+  },
+  "deltas": [
+    {
+      "reciter": "minshawy_mujawwad",
+      "samples": 12,
+      "v1_char_accuracy": 0.5470525467494095,
+      "v2_char_accuracy": 0.6367900613650982,
+      "delta_char_accuracy": 0.08973751461568868,
+      "v1_edit_distance": 18.25,
+      "v2_edit_distance": 15.0,
+      "delta_edit_distance": -3.25,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "husary_mujawwad",
+      "samples": 19,
+      "v1_char_accuracy": 0.7872390880392262,
+      "v2_char_accuracy": 0.8280195547411839,
+      "delta_char_accuracy": 0.040780466701957785,
+      "v1_edit_distance": 8.210526315789474,
+      "v2_edit_distance": 6.631578947368421,
+      "delta_edit_distance": -1.578947368421053,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "alafasy",
+      "samples": 23,
+      "v1_char_accuracy": 0.8448230134108171,
+      "v2_char_accuracy": 0.8833791517982318,
+      "delta_char_accuracy": 0.038556138387414673,
+      "v1_edit_distance": 5.173913043478261,
+      "v2_edit_distance": 4.043478260869565,
+      "delta_edit_distance": -1.1304347826086953,
+      "v1_exact_match": 0.043478260869565216,
+      "v2_exact_match": 0.13043478260869565,
+      "delta_exact_match": 0.08695652173913043
+    },
+    {
+      "reciter": "banna",
+      "samples": 31,
+      "v1_char_accuracy": 0.8200635400012549,
+      "v2_char_accuracy": 0.8537753429124239,
+      "delta_char_accuracy": 0.03371180291116893,
+      "v1_edit_distance": 6.806451612903226,
+      "v2_edit_distance": 5.645161290322581,
+      "delta_edit_distance": -1.161290322580645,
+      "v1_exact_match": 0.03225806451612903,
+      "v2_exact_match": 0.06451612903225806,
+      "delta_exact_match": 0.03225806451612903
+    },
+    {
+      "reciter": "abdurrahmaan_as_sudais",
+      "samples": 11,
+      "v1_char_accuracy": 0.6990340772658089,
+      "v2_char_accuracy": 0.723851538733988,
+      "delta_char_accuracy": 0.02481746146817909,
+      "v1_edit_distance": 11.909090909090908,
+      "v2_edit_distance": 11.0,
+      "delta_edit_distance": -0.9090909090909083,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "ibrahim_akhdar",
+      "samples": 33,
+      "v1_char_accuracy": 0.8469074290837849,
+      "v2_char_accuracy": 0.871320682173848,
+      "delta_char_accuracy": 0.024413253090063036,
+      "v1_edit_distance": 4.03030303030303,
+      "v2_edit_distance": 3.484848484848485,
+      "delta_edit_distance": -0.5454545454545454,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.09090909090909091,
+      "delta_exact_match": 0.09090909090909091
+    },
+    {
+      "reciter": "abdul_basit_murattal",
+      "samples": 46,
+      "v1_char_accuracy": 0.8466799547856867,
+      "v2_char_accuracy": 0.8710239678677788,
+      "delta_char_accuracy": 0.02434401308209211,
+      "v1_edit_distance": 4.891304347826087,
+      "v2_edit_distance": 4.304347826086956,
+      "delta_edit_distance": -0.5869565217391308,
+      "v1_exact_match": 0.06521739130434782,
+      "v2_exact_match": 0.08695652173913043,
+      "delta_exact_match": 0.021739130434782608
+    },
+    {
+      "reciter": "ali_jaber",
+      "samples": 20,
+      "v1_char_accuracy": 0.8674308246758053,
+      "v2_char_accuracy": 0.8917378734659511,
+      "delta_char_accuracy": 0.02430704879014578,
+      "v1_edit_distance": 4.75,
+      "v2_edit_distance": 3.95,
+      "delta_edit_distance": -0.7999999999999998,
+      "v1_exact_match": 0.25,
+      "v2_exact_match": 0.25,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "abdullaah_3awwaad_al_juhaynee",
+      "samples": 41,
+      "v1_char_accuracy": 0.2961203790722154,
+      "v2_char_accuracy": 0.31933262176264293,
+      "delta_char_accuracy": 0.023212242690427543,
+      "v1_edit_distance": 18.024390243902438,
+      "v2_edit_distance": 17.5609756097561,
+      "delta_edit_distance": -0.4634146341463392,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "saood_ash_shuraym",
+      "samples": 13,
+      "v1_char_accuracy": 0.8280360888951872,
+      "v2_char_accuracy": 0.8509324499980617,
+      "delta_char_accuracy": 0.02289636110287452,
+      "v1_edit_distance": 7.0,
+      "v2_edit_distance": 6.230769230769231,
+      "delta_edit_distance": -0.7692307692307692,
+      "v1_exact_match": 0.15384615384615385,
+      "v2_exact_match": 0.15384615384615385,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "hussary.teacher",
+      "samples": 31,
+      "v1_char_accuracy": 0.8685447297556671,
+      "v2_char_accuracy": 0.885647909342168,
+      "delta_char_accuracy": 0.017103179586500872,
+      "v1_edit_distance": 3.7096774193548385,
+      "v2_edit_distance": 3.3870967741935485,
+      "delta_edit_distance": -0.32258064516129004,
+      "v1_exact_match": 0.1935483870967742,
+      "v2_exact_match": 0.1935483870967742,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "ghamadi",
+      "samples": 29,
+      "v1_char_accuracy": 0.8272665499605535,
+      "v2_char_accuracy": 0.8413799145074073,
+      "delta_char_accuracy": 0.014113364546853857,
+      "v1_edit_distance": 4.206896551724138,
+      "v2_edit_distance": 3.9310344827586206,
+      "delta_edit_distance": -0.27586206896551735,
+      "v1_exact_match": 0.10344827586206896,
+      "v2_exact_match": 0.10344827586206896,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "warsh_yassin",
+      "samples": 31,
+      "v1_char_accuracy": 0.8015961207741316,
+      "v2_char_accuracy": 0.8135319470903668,
+      "delta_char_accuracy": 0.011935826316235243,
+      "v1_edit_distance": 7.387096774193548,
+      "v2_edit_distance": 6.903225806451613,
+      "delta_edit_distance": -0.48387096774193505,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "abdullah_basfar",
+      "samples": 11,
+      "v1_char_accuracy": 0.8371598675712607,
+      "v2_char_accuracy": 0.8482410737453961,
+      "delta_char_accuracy": 0.011081206174135438,
+      "v1_edit_distance": 6.2727272727272725,
+      "v2_edit_distance": 5.909090909090909,
+      "delta_edit_distance": -0.3636363636363633,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "muhsin_al_qasim",
+      "samples": 36,
+      "v1_char_accuracy": 0.6553902253657156,
+      "v2_char_accuracy": 0.659801731063986,
+      "delta_char_accuracy": 0.004411505698270424,
+      "v1_edit_distance": 5.527777777777778,
+      "v2_edit_distance": 5.472222222222222,
+      "delta_edit_distance": -0.05555555555555536,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "abu_bakr_ash_shaatree",
+      "samples": 56,
+      "v1_char_accuracy": 0.7086587499140921,
+      "v2_char_accuracy": 0.7072291928304015,
+      "delta_char_accuracy": -0.0014295570836905247,
+      "v1_edit_distance": 4.803571428571429,
+      "v2_edit_distance": 4.839285714285714,
+      "delta_edit_distance": 0.03571428571428559,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    },
+    {
+      "reciter": "warsh_husary",
+      "samples": 5,
+      "v1_char_accuracy": 0.5787545787545787,
+      "v2_char_accuracy": 0.5465201465201466,
+      "delta_char_accuracy": -0.03223443223443212,
+      "v1_edit_distance": 6.2,
+      "v2_edit_distance": 6.8,
+      "delta_edit_distance": 0.5999999999999996,
+      "v1_exact_match": 0.0,
+      "v2_exact_match": 0.0,
+      "delta_exact_match": 0.0
+    }
+  ]
+}

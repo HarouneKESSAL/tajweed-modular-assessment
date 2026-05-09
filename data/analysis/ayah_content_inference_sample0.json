@@ -1,0 +1,14 @@
+{
+  "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_001_000210",
+  "audio_path": "data\\raw\\hf_quran_md_ayah_routing_weak_all_ayahs_r1\\hf_quran_md_ayah_route_saood_ash_shuraym_002_001_000210.wav",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_ayah_hf_v2_balanced_hd96.pt",
+  "decoder_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_ayah_decoder_bp12.json",
+  "blank_penalty": 1.2,
+  "gold": "الم",
+  "pred": "الم",
+  "char_accuracy": 1.0,
+  "edit_distance": 0,
+  "gold_len": 3,
+  "pred_len": 3,
+  "device": "cuda"
+}
