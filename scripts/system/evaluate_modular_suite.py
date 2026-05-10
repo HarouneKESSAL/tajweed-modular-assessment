@@ -836,13 +836,14 @@ def evaluate_transition_manifest(
     localized_label_vocab: tuple[str, ...] = (),
     localized_thresholds: dict[str, float] | None = None,
     localized_index: dict[str, dict] | None = None,
+    transition_thresholds: dict[str, float] | None = None,
 ) -> dict:
     if model is None:
         return {"available": False}
     rows = rows[:limit] if limit > 0 else rows
     ssl_extractor = DummySSLFeatureExtractor(output_dim=64)
     confusion = torch.zeros(len(TRANSITION_RULES), len(TRANSITION_RULES), dtype=torch.long)
-    thresholds = load_transition_thresholds()
+    thresholds = transition_thresholds
     hybrid = {
         "localized_available": 0,
         "localized_same_as_whole_verse": 0,
@@ -1301,10 +1302,35 @@ def main() -> None:
     parser.add_argument(
         "--duration-fusion-checkpoint",
         default="",
-        help="Optional duration fusion calibrator checkpoint in checkpoints/. Leave empty to use the conservative duration baseline.",
+        help="Optional duration fusion calibrator checkpoint in checkpoints/. Leave empty to use the approved default if present.",
     )
     parser.add_argument("--transition-checkpoint", default=preferred_transition_checkpoint())
     parser.add_argument("--chunked-content-checkpoint", default="content_chunked_module.pt")
+    parser.add_argument(
+        "--disable-duration-fusion",
+        action="store_true",
+        help="Disable learned duration fusion even if a fusion checkpoint exists.",
+    )
+    parser.add_argument(
+        "--disable-localized-duration",
+        action="store_true",
+        help="Disable the localized duration support model.",
+    )
+    parser.add_argument(
+        "--disable-localized-transition",
+        action="store_true",
+        help="Disable localized transition support analysis.",
+    )
+    parser.add_argument(
+        "--disable-transition-thresholds",
+        action="store_true",
+        help="Deprecated/no-op because transition thresholds are disabled by default.",
+    )
+    parser.add_argument(
+        "--enable-transition-thresholds",
+        action="store_true",
+        help="Enable tuned transition decision thresholds. Default is argmax/no thresholds.",
+    )
     parser.add_argument("--duration-limit", type=int, default=0)
     parser.add_argument("--transition-limit", type=int, default=0)
     parser.add_argument("--burst-limit", type=int, default=0)
@@ -1385,10 +1411,20 @@ def main() -> None:
 
     duration_model = load_duration_module(args.duration_checkpoint)
     localized_duration_model, localized_duration_labels, localized_duration_thresholds = load_localized_duration_module()
-    duration_fusion_calibrator, duration_fusion_char_vocab = load_duration_fusion_calibrator(args.duration_fusion_checkpoint)
+    if args.disable_localized_duration:
+        localized_duration_model, localized_duration_labels, localized_duration_thresholds = None, tuple(), None
+
+    duration_fusion_calibrator, duration_fusion_char_vocab = (
+        (None, None)
+        if args.disable_duration_fusion
+        else load_duration_fusion_calibrator(args.duration_fusion_checkpoint)
+    )
     transition_model = load_transition_module(args.transition_checkpoint)
     localized_transition_model, localized_transition_labels, localized_transition_thresholds = load_localized_transition_module()
+    if args.disable_localized_transition:
+        localized_transition_model, localized_transition_labels, localized_transition_thresholds = None, tuple(), None
     burst_model = load_burst_module()
+    transition_thresholds = load_transition_thresholds() if args.enable_transition_thresholds else None
     chunked_content_model, chunked_content_checkpoint = load_content_module(args.chunked_content_checkpoint)
     full_content_model, full_content_checkpoint = load_content_module("content_module.pt")
     pipeline = TajweedInferencePipeline(
@@ -1399,7 +1435,7 @@ def main() -> None:
         localized_duration_module=localized_duration_model,
         localized_transition_module=localized_transition_model,
         burst_module=burst_model,
-        transition_thresholds=load_transition_thresholds(),
+        transition_thresholds=transition_thresholds,
         localized_duration_thresholds=localized_duration_thresholds,
         localized_transition_thresholds=localized_transition_thresholds,
         localized_duration_labels=localized_duration_labels or ("ghunnah", "madd"),
@@ -1416,6 +1452,7 @@ def main() -> None:
         localized_label_vocab=localized_transition_labels,
         localized_thresholds=localized_transition_thresholds,
         localized_index=build_localized_transition_index(localized_transition_rows),
+        transition_thresholds=transition_thresholds,
     )
     burst_summary = evaluate_burst_manifest(burst_model, burst_rows, args.burst_limit)
     content_summary = evaluate_chunked_content_manifest(
@@ -1454,6 +1491,14 @@ def main() -> None:
         "weighted_scoring": weighted_scoring_summary,
         "duration_checkpoint": str(PROJECT_ROOT / "checkpoints" / args.duration_checkpoint),
         "transition_checkpoint": str(PROJECT_ROOT / "checkpoints" / args.transition_checkpoint),
+        "ablation_flags": {
+            "disable_duration_fusion": bool(args.disable_duration_fusion),
+            "disable_localized_duration": bool(args.disable_localized_duration),
+            "disable_localized_transition": bool(args.disable_localized_transition),
+            "disable_transition_thresholds": bool(args.disable_transition_thresholds),
+            "enable_transition_thresholds": bool(args.enable_transition_thresholds),
+            "transition_threshold_default": "argmax_no_thresholds",
+        },
     }
 
     print("")
