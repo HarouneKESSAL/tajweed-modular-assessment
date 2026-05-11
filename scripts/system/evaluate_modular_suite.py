@@ -963,7 +963,12 @@ def evaluate_transition_manifest(
     return summary
 
 
-def evaluate_burst_manifest(model: QalqalahCNN | None, rows: list[dict], limit: int = 0) -> dict:
+def evaluate_burst_manifest(
+    model: QalqalahCNN | None,
+    rows: list[dict],
+    limit: int = 0,
+    burst_threshold: float | None = None,
+) -> dict:
     if model is None:
         return {"available": False}
     rows = rows[:limit] if limit > 0 else rows
@@ -975,7 +980,13 @@ def evaluate_burst_manifest(model: QalqalahCNN | None, rows: list[dict], limit: 
         x = extract_mfcc_features(row["audio_path"]).unsqueeze(0)
         with torch.no_grad():
             logits = model(x)
-        pred = int(logits.argmax(dim=-1)[0].item())
+
+        if burst_threshold is None:
+            pred = int(logits.argmax(dim=-1)[0].item())
+        else:
+            probs = torch.softmax(logits, dim=-1)
+            qalqalah_prob = float(probs[0, 1].item())
+            pred = 1 if qalqalah_prob >= burst_threshold else 0
         gold = int(row.get("burst_label", 1 if (row.get("canonical_rules") or ["none"])[0] == "qalqalah" else 0))
         confusion[gold, pred] += 1
 
@@ -1000,6 +1011,8 @@ def evaluate_burst_manifest(model: QalqalahCNN | None, rows: list[dict], limit: 
         "accuracy": safe_accuracy(correct, total),
         "confusion_matrix": confusion.tolist(),
         "class_summary": per_class,
+        "burst_threshold": burst_threshold,
+        "decision_rule": "argmax" if burst_threshold is None else "qalqalah_probability_threshold",
     }
 
 
@@ -1334,6 +1347,12 @@ def main() -> None:
     parser.add_argument("--duration-limit", type=int, default=0)
     parser.add_argument("--transition-limit", type=int, default=0)
     parser.add_argument("--burst-limit", type=int, default=0)
+    parser.add_argument(
+        "--burst-threshold",
+        type=float,
+        default=0.47,
+        help="Qalqalah probability threshold. Use a negative value for legacy argmax behavior.",
+    )
     parser.add_argument("--content-limit", type=int, default=0)
     parser.add_argument("--content-split", choices=["train", "val", "full"], default="val")
     parser.add_argument("--content-split-mode", choices=["reciter", "text"], default="reciter")
@@ -1454,7 +1473,13 @@ def main() -> None:
         localized_index=build_localized_transition_index(localized_transition_rows),
         transition_thresholds=transition_thresholds,
     )
-    burst_summary = evaluate_burst_manifest(burst_model, burst_rows, args.burst_limit)
+    burst_threshold = None if args.burst_threshold < 0 else float(args.burst_threshold)
+    burst_summary = evaluate_burst_manifest(
+        burst_model,
+        burst_rows,
+        args.burst_limit,
+        burst_threshold=burst_threshold,
+    )
     content_summary = evaluate_chunked_content_manifest(
         chunked_content_model,
         chunked_content_checkpoint,
@@ -1498,6 +1523,7 @@ def main() -> None:
             "disable_transition_thresholds": bool(args.disable_transition_thresholds),
             "enable_transition_thresholds": bool(args.enable_transition_thresholds),
             "transition_threshold_default": "argmax_no_thresholds",
+            "burst_threshold": None if args.burst_threshold < 0 else float(args.burst_threshold),
         },
     }
 
