@@ -159,6 +159,7 @@ Shared data-preparation scripts.
 - `extract_features.py`: feature extraction utility.
 - `build_torchaudio_alignment_corpus.py`: builds an alignment corpus using torchaudio outputs.
 - `run_torchaudio_forced_alignment.py`: runs torchaudio forced alignment.
+- `build_hf_quran_md_ayah_routing_weak.py`: imports Quran-MD ayah audio and builds weak routing labels for scalability/routing experiments.
 
 ### `scripts/duration/`
 
@@ -184,6 +185,7 @@ Scripts for transition rules such as `ikhfa` and `idgham`.
 - `tune_transition_thresholds.py`: tunes transition thresholds.
 - `mine_transition_hardcases.py`: extracts hard transition examples.
 - `predict_localized_transition.py`: inspects localized transition predictions for a sample.
+- `find_transition_both_label_candidates.py`: mines candidate ayahs or clips that may contain both `ikhfa` and `idgham`.
 
 ### `scripts/burst/`
 
@@ -207,6 +209,9 @@ Scripts for content-recognition experiments.
 - `build_chunked_content_manifest.py`: builds chunk-level content data.
 - `build_subchunk_content_manifest.py`: creates shorter word/character-window content examples from chunk manifests.
 - `build_textsplit_train_manifest.py`: builds a leakage-safe training manifest that excludes held-out source texts.
+- `evaluate_content_fullverse_buckets.py`: evaluates content recognition by full-verse length buckets.
+- `evaluate_fullverse_as_chunks.py`: probes whether full verses can be evaluated through chunk-style decoding.
+- `tune_content_decoder_blank_penalty.py`: tunes CTC blank penalty values for chunked/open content decoding.
 - `train_whisper_quran_asr.py`: fine-tunes a Whisper-style Quran ASR content model.
 - `evaluate_whisper_quran_asr.py`: evaluates Whisper/Quran ASR content predictions.
 - `run_whisper_quran_content_gate.py`: applies the learner-facing content gate and muqattaat normalization.
@@ -229,6 +234,16 @@ End-to-end scripts for the full modular system.
 - `build_whole_system_status_report.py`: creates the current whole-system status report.
 - `run_inference_with_whisper_gate.py`: runs content-gated inference using the Whisper content gate before rule diagnosis.
 - `progress_check.ps1`: helper PowerShell script for checking project progress.
+
+### `scripts/routing/`
+
+Scripts for learned-routing experiments. The official system still uses rule/metadata routing, but these scripts support ablation and scalability work.
+
+- `build_learned_routing_dataset.py`: builds feature rows for learned routing experiments.
+- `build_learned_routing_dataset_grouped.py`: builds grouped/text-held-out learned-routing splits.
+- `train_learned_router.py`: trains the optional learned router.
+- `evaluate_learned_router.py`: evaluates learned-router checkpoints.
+- `tune_learned_router_thresholds.py`: tunes routing decision thresholds.
 
 ### `scripts/README.md`
 
