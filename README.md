@@ -10,6 +10,27 @@ The system is organized around five main parts:
 - **Content module**: checks whether the recited content matches the expected Arabic text.
 - **System layer**: routes samples to the right modules, combines outputs, evaluates the full pipeline, and produces feedback.
 
+## Current Baseline Snapshot
+
+The latest thesis-oriented baseline separates content recognition from Tajweed-rule diagnosis:
+
+- **Content gate**: Whisper-medium Quran ASR gate with muqattaat normalization.
+- **Tajweed modules**: duration, transition, and burst are evaluated on annotated Tajweed manifests.
+- **Ablation reports**: module-level and whole-system comparisons are stored under `data/analysis/thesis_ablation_v2/`.
+
+Current headline results:
+
+| Component | Metric | Result |
+|---|---:|---:|
+| Content gate | exact after muqattaat normalization | 73.96% |
+| Content gate | character accuracy after normalization | 98.17% |
+| Content gate | CER after normalization | 1.89% |
+| Duration module | accuracy | 99.27% |
+| Transition module | accuracy | 91.01% |
+| Burst module | accuracy | 87.54% |
+
+Important interpretation: the old chunked CTC content module is now kept mainly as a legacy ablation baseline. The learner-facing content path is the Whisper-medium Quran ASR content gate.
+
 ## Repository Structure
 
 ```text
@@ -30,6 +51,7 @@ tajweed-modular-assessment/
 
 - `README.md`: this guide.
 - `requirements.txt`: Python dependencies needed to run the project.
+- `requirements-whisper.txt`: optional dependencies for Whisper/Quran ASR content-gate experiments.
 - `.gitignore`: excludes virtual environments, caches, interim features, and large checkpoint weights.
 - `PROGRESS_REPORT_EN.md`: detailed English progress report for teachers.
 - `TECHNICAL_METHODS_REPORT.md`: deeper explanation of techniques such as MFCC, wav2vec, CTC, routing, and modular evaluation.
@@ -37,6 +59,10 @@ tajweed-modular-assessment/
 - `CODEBASE_ARCHITECTURE_NOTES.md`: notes about the current architecture and future cleanup.
 - `PRESENTATION_REPORT.md`: report-style presentation text.
 - `COLLEAGUE_HANDOFF_REPORT.md`: handoff summary for another developer or teammate.
+- `SOUTENANCE_EVALUATION_REPORT.md`: teacher-facing evaluation checklist and progress report.
+- `FINAL_REPORT_CHAPTER_TECHNIQUES_RESULTS.md`: final-report chapter draft covering methods, results, and requested evaluation points.
+- `sec7_development_experimentation.tex`: LaTeX chapter version of the development, experimentation, and results section.
+- `latex_test_project/`: one-file and wrapper LaTeX test project for compiling the chapter outside the main thesis.
 - `Conceptual_Framework.pdf`: conceptual framework document used as project background.
 
 ## `configs/`
@@ -49,6 +75,10 @@ This folder contains YAML files that control training and evaluation behavior.
 - `configs/model_transition.yaml`: architecture settings for the transition model.
 - `configs/model_burst.yaml`: architecture settings for the burst/qalqalah model.
 - `configs/train.yaml`: common training settings such as seed, epochs, batch size, learning rate, and device.
+- `configs/production_content_gate.json`: selected learner-facing content-gate configuration.
+- `configs/whole_system_baseline_v2.json`: selected whole-system baseline metadata for the thesis-oriented v2 reports.
+- `configs/content_chunked_decoder_beam_bp04.json`: beam-decoding ablation config for legacy chunked content.
+- `configs/content_chunked_decoder_eval_lexicon_bp04.json`: evaluation-lexicon decoder ablation config.
 
 ## `checkpoints/`
 
@@ -106,6 +136,10 @@ Examples:
 - `transition_confusions.json`: transition confusion analysis.
 - `chunked_content_lexicon_dependency.json`: analysis of content dependency on phrase-list decoding.
 - `final_baseline_results.json`: compact final baseline summary.
+- `whole_system_status_report_v2.md`: current whole-system explanation separating the Whisper content gate from Tajweed modules.
+- `thesis_ablation_v2/THESIS_ABLATION_SUMMARY.md`: thesis-ready ablation summary with content gate, Tajweed module, and threshold comparisons.
+- `thesis_ablation_v2/MODULE_INTERNAL_ABLATION_REPORT.md`: module-internal ablation report for duration, transition, burst, and content.
+- `ablations/`: supporting ablation outputs for decoder settings, routing profiles, burst thresholds, and module variants.
 
 ## `external/`
 
@@ -173,6 +207,14 @@ Scripts for content-recognition experiments.
 - `build_chunked_content_manifest.py`: builds chunk-level content data.
 - `build_subchunk_content_manifest.py`: creates shorter word/character-window content examples from chunk manifests.
 - `build_textsplit_train_manifest.py`: builds a leakage-safe training manifest that excludes held-out source texts.
+- `train_whisper_quran_asr.py`: fine-tunes a Whisper-style Quran ASR content model.
+- `evaluate_whisper_quran_asr.py`: evaluates Whisper/Quran ASR content predictions.
+- `run_whisper_quran_content_gate.py`: applies the learner-facing content gate and muqattaat normalization.
+- `analyze_whisper_content_gate_errors.py`: analyzes remaining content-gate errors and near misses.
+- `build_whisper_quran_v2_weighted_manifest.py`: builds the weighted v2 Whisper training/evaluation manifest.
+- `summarize_whisper_content_gate_policy.py`: summarizes the content-gate acceptance policy.
+- `analyze_chunk_content_errors.py`: analyzes legacy chunked CTC content errors.
+- `export_chunk_content_predictions.py`: exports chunked content predictions for diagnostics.
 
 ### `scripts/system/`
 
@@ -181,6 +223,11 @@ End-to-end scripts for the full modular system.
 - `run_inference.py`: runs inference on one sample and prints the routing plan, diagnosis report, feedback, and matched findings.
 - `evaluate_modular_pipeline.py`: evaluates the modular pipeline.
 - `evaluate_modular_suite.py`: evaluates duration, transition, burst, and content in one suite.
+- `run_ablation_study.py`: runs whole-system ablation variants with components enabled/disabled and writes JSON/Markdown summaries.
+- `build_module_internal_ablation_report.py`: builds module-internal ablation summaries.
+- `build_thesis_ablation_summary_v2.py`: creates the thesis-ready v2 ablation report.
+- `build_whole_system_status_report.py`: creates the current whole-system status report.
+- `run_inference_with_whisper_gate.py`: runs content-gated inference using the Whisper content gate before rule diagnosis.
 - `progress_check.ps1`: helper PowerShell script for checking project progress.
 
 ### `scripts/README.md`
@@ -290,6 +337,29 @@ Run the phrase-list-independent content evaluation:
   --output-json data\analysis\modular_suite_content_open_hd96_textsplit.json
 ```
 
+Run the current thesis ablation study:
+
+```powershell
+.\.venv\Scripts\python scripts\system\run_ablation_study.py
+```
+
+Build the thesis-ready v2 ablation summary:
+
+```powershell
+.\.venv\Scripts\python scripts\system\build_thesis_ablation_summary_v2.py
+```
+
+Build the whole-system status report:
+
+```powershell
+.\.venv\Scripts\python scripts\system\build_whole_system_status_report.py `
+  --content-summary-json data\analysis\whisper_quran_medium_v2_weighted_val_summary.json `
+  --content-muqattaat-json data\analysis\whisper_quran_medium_v2_weighted_content_gate_errors_normfix.json `
+  --module-suite-json data\analysis\ablations\modular_burst_threshold_047_final.json `
+  --output-json data\analysis\whole_system_status_report_v2.json `
+  --output-md data\analysis\whole_system_status_report_v2.md
+```
+
 Run inference on one sample:
 
 ```powershell
@@ -331,6 +401,18 @@ Some key artifacts:
 - `modular_suite_content_lexicon.json`: known-verse/lexicon-constrained content benchmark.
 - `duration_pipeline_verse_holdout_comparison.json`: held-out duration fusion comparison.
 - `transition_confusions_hardcase.json`: transition hardcase/confusion analysis.
+- `whole_system_status_report_v2.md`: recommended current status report for the full system.
+- `thesis_ablation_v2/THESIS_ABLATION_SUMMARY.md`: recommended thesis ablation table and interpretation.
+- `thesis_ablation_v2/whole_system_status_report_v2.md`: archived copy of the current whole-system status report.
+
+Current interpretation:
+
+- The final learner-facing content gate is Whisper-medium v2 weighted with muqattaat normalization.
+- Duration is the strongest Tajweed module and reaches 99.27% accuracy on the annotated duration suite.
+- Transition reaches 91.01% accuracy; `idgham` remains the hardest transition class.
+- Burst/qalqalah reaches 87.54% accuracy after selecting the 0.47 threshold.
+- The chunked CTC content model remains useful for historical comparison, but it is not the final learner-facing content gate.
+- Whole-system scores should be explained as two layers: content acceptance first, then Tajweed-rule diagnosis on annotated rule manifests.
 
 ## Notes For Future Developers
 

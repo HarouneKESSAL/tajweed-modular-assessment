@@ -1,0 +1,1010 @@
+% !TEX TS-program = xelatex
+\documentclass[12pt,a4paper]{report}
+
+% -- Math (must come before bidi/polyglossia) ----------------
+\usepackage{amsmath, amssymb}
+
+% -- Graphics & floats (must come before bidi) ---------------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+
+% -- Tables --------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+
+% -- Colors & listings (must come before bidi) ---------------
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!8}
+}
+
+% -- TikZ (must come before bidi) ----------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, calc, backgrounds}
+
+% -- Hyperlinks (before bidi) --------------------------------
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=blue!60!black}
+
+% -- Enumitem ------------------------------------------------
+\usepackage{enumitem}
+
+% -- References (before bidi) --------------------------------
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}
+
+% -- Font and language (XeLaTeX) - MUST come last ------------
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+
+% -- Custom colours for TikZ figures -------------------------
+\definecolor{pipeblue}{RGB}{52, 120, 190}
+\definecolor{pipegreen}{RGB}{56, 142, 60}
+\definecolor{pipeorange}{RGB}{230, 120, 30}
+\definecolor{pipegray}{RGB}{110, 110, 110}
+\definecolor{pipeyellow}{RGB}{180, 140, 0}
+\definecolor{pipered}{RGB}{192, 57, 43}
+\definecolor{pipepurple}{RGB}{120, 60, 160}
+
+% -- Inline bibliography for one-file testing ----------------
+\begin{filecontents*}{bibliography.bib}
+@misc{retasyDataset,
+  title        = {RetaSy Quranic Audio Dataset},
+  howpublished = {\url{https://huggingface.co/datasets/RetaSy/quranic_audio_dataset}},
+  note         = {Dataset used for learner-oriented Quranic recitation experiments}
+}
+
+@misc{quranJsonTajwid,
+  title        = {Quran JSON Tajwid Reference},
+  note         = {Structured Quran and Tajweed rule reference used to derive expected rule positions}
+}
+
+@misc{quranMd,
+  title        = {Quran-MD Audio Dataset},
+  note         = {Clean Quran recitation data explored for scalability, word-level, and ayah-level experiments}
+}
+\end{filecontents*}
+
+% -- Title ---------------------------------------------------
+\title{\textbf{A Modular Architecture for Automatic Tajweed Assessment\\
+               of Quranic Recitation}}
+\author{Test Compilation File}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+\tableofcontents
+\chapter{Development, Experimentation, and Results}
+\label{chap:development_experimentation}
+
+This chapter presents the development state of the proposed Tajweed assessment
+system, the main techniques used in the implementation, and the experimental
+results obtained during the project. The goal is not only to report the final
+numbers, but also to explain how the system evolved from the first prototype to
+the current modular architecture.
+
+The system was designed as a modular pipeline instead of a single global model.
+This decision was important because Tajweed errors do not all have the same
+nature. Some errors are related to duration, such as \textit{madd} and
+\textit{ghunnah}. Some errors are related to transitions between letters, such
+as \textit{ikhfa} and \textit{idgham}. Others are related to articulation and
+burst energy, such as \textit{qalqalah}. Finally, content errors concern whether
+the learner recited the expected words or not. A single model would make all
+these problems mixed together, while a modular system makes each problem easier
+to train, evaluate, debug, and explain.
+
+\section{Development Evolution}
+
+The project evolved through several stages. Each stage was motivated by an
+observed limitation in the previous version.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.22\textwidth} X X}
+\toprule
+\textbf{Stage} & \textbf{Work done} & \textbf{Main observation} \\
+\midrule
+Initial setup &
+Created the first manifests, audio loading scripts, feature extraction, and
+training scripts. &
+The project needed a stable data format before model training could become
+reliable. \\
+\midrule
+First modular version &
+Separated the system into duration, transition, burst, and content modules. &
+Specialist modules were easier to evaluate than a single monolithic classifier. \\
+\midrule
+Full-verse content attempt &
+Trained content recognition on complete verses. &
+Full-verse recognition was too difficult with the available learner data. \\
+\midrule
+Chunked content reformulation &
+Split content into shorter chunks and trained a chunked content model. &
+Shorter sequences improved content recognition strongly. \\
+\midrule
+Hardcase mining &
+Analyzed confusion matrices and re-used difficult examples for training. &
+The system improved when training focused on repeated errors. \\
+\midrule
+Localized support models &
+Added models that detect acoustic evidence around expected rule positions. &
+This improved interpretability because the system could inspect local evidence,
+not only whole-clip labels. \\
+\midrule
+Fusion and threshold tuning &
+Combined conservative predictions with localized evidence and tuned thresholds. &
+Promotion was accepted only when side-by-side evaluation improved the baseline. \\
+\midrule
+Scalability experiments &
+Explored Quran-MD word and ayah data, weak routing labels, and larger
+vocabularies. &
+Large clean recitation data helps scalability, but does not replace learner
+mistake annotations. \\
+\bottomrule
+\end{tabularx}
+\caption{Development evolution from the first prototype to the current system.}
+\label{tab:development_evolution}
+\end{table}
+
+\section{Datasets and Textual References}
+
+The system uses JSONL manifest files as the central corpus format. Each line in
+a manifest represents one sample or one segment. A row can contain the audio
+path, normalized text, surah and ayah information, reciter metadata, rule labels,
+rule positions, and routing targets.
+
+\subsection{RetaSy Learner Recitation Dataset}
+
+The main learner-oriented dataset used in the project is the RetaSy Quranic
+audio dataset. This dataset is important because it contains recitations from
+learners, not only clean professional reciters. For a Tajweed assessment system,
+learner data is more useful than perfect recitation alone because the model must
+learn how mistakes appear acoustically.
+
+However, the dataset is still limited for this task. The number of distinct
+verses and annotated learner errors is small compared with the full Quran, which
+contains more than six thousand verses. This limitation explains why the system
+promotes conservative baselines and treats larger-data experiments as research
+extensions until they are validated.
+
+\subsection{Quran JSON and Colored Mushaf Reference}
+
+The project also used a structured Quran reference based on Quran JSON and the
+colored Mushaf idea. In the colored Mushaf, Tajweed rules are visually marked by
+colors. In the project, this information was used in structured form through the
+local reference files under \texttt{external/quranjson-tajwid}.
+
+This reference was useful because audio data alone does not explicitly tell the
+system where a Tajweed rule should appear. The Quran JSON reference provides the
+canonical Quran text, surah and ayah identifiers, and rule-related spans. These
+spans were transformed into project manifests such as
+\texttt{quranjson\_rules.jsonl} and joined with learner audio manifests such as
+\texttt{retasy\_quranjson\_train.jsonl}.
+
+In simple words, the Quran JSON and colored Mushaf reference tells the system
+what should exist in the verse, while the audio model tries to detect whether
+the learner produced it correctly.
+
+\subsection{Quran-MD Clean Recitation Data}
+
+The Quran-MD dataset was explored as a larger source of clean Quran recitation.
+It was useful for word-level and ayah-level scalability experiments because it
+contains many more audio clips than the learner-oriented subsets. The main
+benefit of this dataset is coverage: it exposes the content model and routing
+experiments to more Arabic words and more Quranic text.
+
+The limitation is that Quran-MD is mainly clean recitation data. Therefore, it
+cannot directly solve learner mistake detection. It is useful for pretraining,
+representation learning, and scalability, but it must be validated against
+learner data before being promoted.
+
+\section{Corpus Construction}
+
+The corpus construction step transforms raw audio metadata and textual
+references into model-ready manifests. The simplified logic is shown in
+Listing~\ref{lst:corpus_pseudocode}.
+
+\begin{lstlisting}[caption={Simplified pseudocode for corpus construction.},label={lst:corpus_pseudocode}]
+input:
+    audio files
+    metadata
+    Quran JSON reference text
+    colored Mushaf Tajweed rule reference
+    normalization rules
+
+for each sample:
+    load metadata
+    normalize Arabic text
+    map sample to surah and ayah
+    join sample with Quran JSON verse
+    extract expected Tajweed rule positions
+
+    assign routing labels:
+        use_duration
+        use_transition
+        use_burst
+        use_content
+
+    if the row contains madd or ghunnah:
+        add to duration manifest
+
+    if the row contains ikhfa or idgham:
+        add to transition manifest
+
+    if the row contains qalqalah:
+        add to burst manifest
+
+    if expected text is available:
+        create full verse or chunked content targets
+
+    write JSONL row with:
+        sample id
+        audio path
+        normalized text
+        rule labels
+        rule positions
+        routing labels
+        source dataset
+        reciter metadata
+\end{lstlisting}
+
+\section{Feature Representation}
+
+\subsection{MFCC Features}
+
+The rule-based modules use Mel-Frequency Cepstral Coefficients (MFCCs). MFCCs
+are compact acoustic features that describe the spectral shape of speech. They
+are useful for local Tajweed phenomena because rules such as duration,
+transitions, and qalqalah depend on short acoustic events.
+
+The system also uses delta and delta-delta features. A delta feature describes
+how the signal changes over time, while a delta-delta feature describes the
+change of that change. This helps the model capture movement in speech, not
+only static sound frames.
+
+\subsection{Wav2Vec-Style SSL Features}
+
+For content recognition, the system uses self-supervised speech representations
+inspired by Wav2Vec-style models. Self-supervised learning (SSL) means that a
+large speech model learns useful audio representations from audio itself before
+being adapted to a specific task.
+
+Content recognition is closer to automatic speech recognition than simple rule
+classification. For that reason, stronger learned speech representations are
+more suitable than handcrafted MFCCs. The content model uses these features and
+then predicts Arabic characters.
+
+\section{Modeling Techniques}
+
+\subsection{BiLSTM Temporal Modeling}
+
+Several modules use a bidirectional Long Short-Term Memory network (BiLSTM). A
+BiLSTM reads an audio sequence from left to right and from right to left. This
+is useful because a Tajweed rule can depend on what comes before and after a
+letter. For example, transition rules depend on the relationship between two
+neighboring letters.
+
+\subsection{CTC Loss}
+
+Connectionist Temporal Classification (CTC) is used for content recognition.
+CTC is useful when the training data contains an audio clip and its text, but
+does not contain exact timestamps for every character. Instead of requiring a
+manual alignment between frames and letters, CTC learns the alignment during
+training.
+
+The decoder converts the CTC frame probabilities into a final text prediction.
+The project tested several decoding choices, including greedy decoding,
+open decoding, lexicon-constrained decoding, and blank-penalty tuning.
+
+\subsection{Hardcase Mining}
+
+Hardcase mining is a targeted error-analysis technique. Instead of only looking
+at the average accuracy, the system extracts examples where the model makes
+confident mistakes. These examples are then used to guide retraining or
+comparison experiments.
+
+\begin{lstlisting}[caption={Hardcase mining loop.},label={lst:hardcase_loop}]
+train baseline model
+evaluate model
+extract high-confidence mistakes
+group errors by rule and confusion type
+build hardcase list
+retrain or tune with hardcase awareness
+compare against the previous baseline
+\end{lstlisting}
+
+\subsection{Localized Support Models}
+
+A localized support model tries to find acoustic evidence near the expected
+position of a Tajweed rule. This is different from a whole-verse classifier.
+The whole-verse classifier predicts one label for the entire clip, while the
+localized support model checks whether the evidence exists around a specific
+time region.
+
+This improves explainability. When the system reports a rule error, it can also
+store whether localized evidence supported or contradicted the decision.
+
+\subsection{Learned Fusion}
+
+Fusion means combining several sources of evidence. In the duration path, the
+system combines the conservative duration prediction with localized evidence.
+This learned fusion was treated as experimental first. It was promoted only
+after a strict verse-held-out evaluation showed improvement over the
+conservative baseline.
+
+\subsection{Threshold and Decoder Tuning}
+
+Many models output probabilities. A threshold decides when a probability becomes
+a positive prediction. Threshold tuning was used to improve rule decisions and
+avoid blindly accepting low-confidence predictions.
+
+For CTC content recognition, the blank symbol can dominate the output. If the
+decoder predicts too many blanks, it deletes many characters. The project tuned
+a blank penalty to reduce deletion errors and improve content predictions.
+
+\subsection{Severity-Aware Error Weighting}
+
+The final feedback does not treat all mistakes equally. A critical content error
+or a strong rule violation should have more pedagogical weight than a minor
+uncertainty. The project therefore uses severity-aware scoring.
+
+This is close to an error-priority mechanism. It is not a neural attention
+module in the deep-learning sense, but it gives more importance to errors that
+matter more for feedback.
+
+\begin{equation}
+\text{weighted penalty}
+= \text{error count} \times \text{severity weight} \times \text{confidence}.
+\end{equation}
+
+\section{System Architecture}
+
+The system follows a route-then-specialize architecture. A routing layer decides
+which specialist module should be used for a sample. The specialist modules then
+produce predictions, and the feedback layer converts those predictions into
+human-readable comments.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1.1cm,
+    block/.style={rectangle, rounded corners, draw=black!50, thick,
+                  align=center, minimum height=0.8cm, minimum width=2.6cm,
+                  fill=gray!8},
+    route/.style={rectangle, rounded corners, draw=pipeblue, thick,
+                  align=center, minimum height=0.8cm, minimum width=2.8cm,
+                  fill=pipeblue!10},
+    module/.style={rectangle, rounded corners, draw=pipegreen!70!black, thick,
+                   align=center, minimum height=0.8cm, minimum width=2.7cm,
+                   fill=pipegreen!10},
+    output/.style={rectangle, rounded corners, draw=pipered!70!black, thick,
+                   align=center, minimum height=0.8cm, minimum width=2.8cm,
+                   fill=pipered!10},
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+]
+
+\node[block] (audio) {Audio sample};
+\node[block, below=of audio] (features) {Feature extraction\\MFCC or SSL};
+\node[route, below=of features] (router) {Routing layer};
+
+\node[module, below left=1.0cm and 3.2cm of router] (duration) {Duration\\madd, ghunnah};
+\node[module, below left=1.0cm and 0.8cm of router] (transition) {Transition\\ikhfa, idgham};
+\node[module, below right=1.0cm and 0.8cm of router] (burst) {Burst\\qalqalah};
+\node[module, below right=1.0cm and 3.2cm of router] (content) {Content\\text correctness};
+
+\node[output, below=2.0cm of router] (feedback) {Diagnosis and feedback};
+
+\draw[arrow] (audio) -- (features);
+\draw[arrow] (features) -- (router);
+\draw[arrow] (router) -- (duration);
+\draw[arrow] (router) -- (transition);
+\draw[arrow] (router) -- (burst);
+\draw[arrow] (router) -- (content);
+\draw[arrow] (duration) -- (feedback);
+\draw[arrow] (transition) -- (feedback);
+\draw[arrow] (burst) -- (feedback);
+\draw[arrow] (content) -- (feedback);
+
+\end{tikzpicture}
+\caption{General modular architecture of the Tajweed assessment system.}
+\label{fig:modular_architecture}
+\end{figure}
+
+\section{Module Development}
+
+\subsection{Duration Module}
+
+The duration module detects rules related to length and nasal duration,
+especially \textit{madd} and \textit{ghunnah}. It was built in several layers.
+
+\paragraph{Dataset and labels.}
+The duration corpus was created from samples that contain expected duration
+rules. The Quran JSON and colored Mushaf reference helped identify where
+\textit{madd} and \textit{ghunnah} should occur in the text. The manifest stores
+the audio path, normalized text, expected rule, and target position.
+
+\paragraph{MFCC feature pipeline.}
+The audio is converted into MFCC features with temporal derivatives. This gives
+the model a compact representation of the sound and its changes over time.
+
+\paragraph{Sequence duration model.}
+The main duration classifier analyzes the audio sequence and predicts whether
+the target rule is correctly represented. Earlier duration experiments reached
+approximately 0.838 focus accuracy in confusion analysis.
+
+\paragraph{Localized support model.}
+A second model was trained to detect local acoustic support around expected
+duration positions. This improves the explanation because the system can inspect
+the evidence near the expected rule location.
+
+\paragraph{Learned fusion layer.}
+The duration path later combined the conservative duration classifier with
+localized evidence. This learned fusion was not accepted immediately. It was
+tested against the conservative baseline on a strict verse-held-out subset.
+
+\paragraph{Strict held-out approval.}
+The learned fusion was promoted because it improved strict verse-held-out
+accuracy from 0.954 to 0.973. The \textit{ghunnah} class improved from 0.745 to
+0.872, and \textit{madd} improved from 0.980 to 0.985.
+
+\subsection{Transition Module}
+
+The transition module detects rules that happen between letters, mainly
+\textit{ikhfa} and \textit{idgham}. In the official baseline, the first version
+used one dominant transition label per verse or clip. This simplification made
+training stable and allowed a clear baseline.
+
+However, one verse can contain more than one rule family. For example, a verse
+may contain both an \textit{ikhfa} case and another transition behavior. For
+this reason, a multi-label transition experiment was also developed. In the
+multi-label setting, the model can predict more than one transition label for a
+sample. This version is promising, but the single-label hardcase transition
+model remains the official promoted baseline because it currently gives the
+strongest validated result.
+
+The transition module improved from about 0.770 accuracy in early evaluations
+to 0.901 official accuracy after hardcase-aware training and threshold tuning.
+
+\subsection{Burst Module}
+
+The burst module focuses on \textit{qalqalah}. Qalqalah is an articulation rule
+where a specific consonant has a bouncing or echo-like burst. This acoustic
+phenomenon is different from duration or transition, so it was treated as a
+separate specialist module.
+
+The promoted burst baseline reached 0.874 accuracy. The class-level analysis
+showed 0.914 accuracy for the \textit{none} class and 0.814 accuracy for
+\textit{qalqalah}. This means the module is usable, but qalqalah detection still
+has room for improvement.
+
+\subsection{Content Module}
+
+The content module checks whether the recited text matches the expected text.
+This was the most difficult part of the project because it is close to Arabic
+automatic speech recognition.
+
+The first full-verse content model performed poorly, with exact match around
+0.016 and character accuracy around 0.536. This showed that full-verse
+recognition was too hard for the available data and model size.
+
+The project then reformulated content recognition as a chunked task. Instead of
+asking the model to recognize a complete verse, the verse is split into shorter
+segments. This improved the official chunked content baseline to 0.700 exact
+match and 0.892 character accuracy.
+
+Additional content experiments were tested:
+
+\begin{itemize}[leftmargin=*]
+    \item A 5000-word Quran-MD auxiliary model improved word-level recognition
+    on clean held-out words, but direct transfer to chunked learner content was
+    not reliable.
+    \item A tiny auxiliary fine-tuning stage slightly improved the chunked
+    baseline from 0.700 to 0.707 exact match, but it remains experimental.
+    \item Full-ayah content experiments improved character-level behavior but
+    were not reliable enough for learner-level open recognition.
+\end{itemize}
+
+\subsection{Routing Module}
+
+The routing module decides which specialist module should be activated. The
+official system uses rule and metadata information from the manifest. For
+example, if a sample contains an expected \textit{madd} or \textit{ghunnah}
+target, the duration module is activated. If it contains an \textit{ikhfa} or
+\textit{idgham} target, the transition module is activated.
+
+A learned router was also explored. It achieved strong weak-label consistency
+on a mixed Retasy and Quran-MD routing dataset, but weaker Retasy-only
+validation showed that it should remain experimental. Therefore, the official
+baseline keeps the conservative rule-based router.
+
+\section{Official Results}
+
+Table~\ref{tab:official_results} summarizes the official promoted results.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.28\textwidth} p{0.32\textwidth} X}
+\toprule
+\textbf{Module} & \textbf{Metric} & \textbf{Result} \\
+\midrule
+Duration & Suite accuracy & 0.993 \\
+Duration & Strict verse-held-out accuracy & 0.973 \\
+Duration: ghunnah & Suite class accuracy & 0.984 \\
+Duration: madd & Suite class accuracy & 0.995 \\
+Transition & Accuracy & 0.901 \\
+Transition: none & Class accuracy & 0.896 \\
+Transition: ikhfa & Class accuracy & 0.921 \\
+Transition: idgham & Class accuracy & 0.857 \\
+Burst / qalqalah & Accuracy & 0.874 \\
+Content chunked baseline & Exact match & 0.700 \\
+Content chunked baseline & Character accuracy & 0.892 \\
+Content chunked baseline & Average edit distance & 0.731 \\
+\bottomrule
+\end{tabularx}
+\caption{Official promoted results of the modular system.}
+\label{tab:official_results}
+\end{table}
+
+\section{Ablation Study}
+
+An ablation study measures the value added by each component. The principle is
+simple: remove or replace one component, then compare performance. This section
+reports both system-level and module-level ablations. In this project, the
+ablation study was not only theoretical. Each important addition was evaluated
+against the previous baseline before it was accepted or kept experimental.
+
+\subsection{Added Components and Their Measured Effect}
+
+Table~\ref{tab:added_components_ablation} summarizes the main components added
+during development and the measurable effect of each one. The most important
+rule used during development was conservative promotion: a new component was
+accepted only when it improved the relevant validation result without creating a
+hidden regression.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.26\textwidth} p{0.23\textwidth} p{0.23\textwidth} X}
+\toprule
+\textbf{Added component} & \textbf{Before} & \textbf{After} & \textbf{Decision} \\
+\midrule
+Chunked content reformulation &
+Full-verse exact 0.016, character accuracy 0.536 &
+Chunked exact 0.700, character accuracy 0.892 &
+Promoted. This was the largest content gain because short chunks are much
+easier than complete verses. \\
+\midrule
+Content decoder blank penalty &
+Blank penalty 1.0: exact 0.691, character accuracy 0.890, edit distance 0.741 &
+Blank penalty 1.6: exact 0.700, character accuracy 0.892, edit distance 0.731 &
+Promoted. The decoder deleted fewer characters and improved exact match. \\
+\midrule
+Duration learned fusion &
+Conservative strict held-out accuracy 0.954; ghunnah 0.745; madd 0.980 &
+Learned fusion strict held-out accuracy 0.973; ghunnah 0.872; madd 0.985 &
+Promoted. It improved generalization on a verse-held-out subset. \\
+\midrule
+Transition hardcase training &
+Early transition accuracy about 0.770 &
+Official transition accuracy 0.901; ikhfa 0.921; idgham 0.857 &
+Promoted. Hardcase training reduced repeated confusion between transition
+classes. \\
+\midrule
+Dedicated burst module &
+No separate qalqalah specialist &
+Burst accuracy 0.874; qalqalah class accuracy 0.814 &
+Kept as baseline. It adds a separate articulation pathway. \\
+\midrule
+Tiny auxiliary content fine-tuning &
+Official chunked exact 0.700; character accuracy 0.892; critical errors 125 &
+Tiny auxiliary v2 exact 0.707; character accuracy 0.893; critical errors 122 &
+Kept as candidate. The gain is positive but small, so the original baseline is
+preserved. \\
+\midrule
+Quran-MD word auxiliary model &
+Old content model on word clips: exact 0.001, character accuracy 0.062 &
+Word auxiliary model: exact 0.492, character accuracy 0.834 &
+Useful for future pretraining. Direct transfer to chunked learner content failed,
+so it was not promoted. \\
+\midrule
+Learned router with thresholds &
+Default weak-label exact 0.895, macro-F1 0.976 &
+Tuned thresholds exact 0.921, macro-F1 0.979 &
+Experimental. Strong on weak labels, but Retasy-only validation was weaker, so
+the rule-based router remains official. \\
+\bottomrule
+\end{tabularx}
+\caption{Measured value added by the main components introduced during development.}
+\label{tab:added_components_ablation}
+\end{table}
+
+\subsection{System-Level Ablation}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.31\textwidth} p{0.24\textwidth} X}
+\toprule
+\textbf{System variant} & \textbf{Observed behavior} & \textbf{Conclusion} \\
+\midrule
+Single full-verse content direction &
+Very low exact match on learner content. &
+A monolithic content-first system is not sufficient. \\
+\midrule
+Specialist rule modules &
+Duration, transition, and burst obtained stable class-level results. &
+Modularity improves diagnosability and performance. \\
+\midrule
+Without localized evidence &
+Predictions were less explainable and harder to validate. &
+Localized support adds interpretability and safer fusion. \\
+\midrule
+Without hardcase mining &
+Repeated high-confidence mistakes remained visible. &
+Hardcase mining helps target real model weaknesses. \\
+\midrule
+Without severity weighting &
+All errors had equal importance. &
+Severity weighting makes feedback closer to teacher priorities. \\
+\bottomrule
+\end{tabularx}
+\caption{System-level ablation summary.}
+\label{tab:system_ablation}
+\end{table}
+
+\subsection{Duration Module Ablation}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.30\textwidth} p{0.25\textwidth} X}
+\toprule
+\textbf{Variant} & \textbf{Result} & \textbf{Interpretation} \\
+\midrule
+Basic duration sequence model &
+Focus accuracy around 0.838 in earlier analysis. &
+The model learned useful duration patterns but confused \textit{ghunnah} and
+\textit{madd}. \\
+\midrule
+Hardcase-aware duration training &
+Improved some difficult cases but could reduce general balance if overused. &
+Hardcase weighting must be controlled carefully. \\
+\midrule
+Conservative duration baseline &
+Strict held-out accuracy 0.954. &
+Reliable baseline before fusion. \\
+\midrule
+Learned duration fusion &
+Strict held-out accuracy 0.973. &
+Fusion improved the conservative baseline and was promoted. \\
+\bottomrule
+\end{tabularx}
+\caption{Ablation inside the duration module.}
+\label{tab:duration_ablation}
+\end{table}
+
+\subsection{Transition Module Ablation}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.30\textwidth} p{0.25\textwidth} X}
+\toprule
+\textbf{Variant} & \textbf{Result} & \textbf{Interpretation} \\
+\midrule
+Early transition classifier &
+Accuracy around 0.770. &
+The initial model detected some transition patterns but still confused
+\textit{none}, \textit{ikhfa}, and \textit{idgham}. \\
+\midrule
+Hardcase transition checkpoint &
+Official accuracy 0.901. &
+Hardcase-aware training significantly improved transition reliability. \\
+\midrule
+Localized transition support &
+Provided local evidence for transition decisions. &
+Useful for explanation and hybrid inference. \\
+\midrule
+Multi-label transition experiment &
+Exact match around 0.819 in gold-only profile experiments. &
+Promising for verses with multiple rules, but not promoted yet. \\
+\bottomrule
+\end{tabularx}
+\caption{Ablation inside the transition module.}
+\label{tab:transition_ablation}
+\end{table}
+
+\subsection{Burst Module Ablation}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.30\textwidth} p{0.25\textwidth} X}
+\toprule
+\textbf{Variant} & \textbf{Result} & \textbf{Interpretation} \\
+\midrule
+No burst specialist &
+Qalqalah would be mixed with other rule errors. &
+The system would lose a dedicated articulation pathway. \\
+\midrule
+Dedicated burst classifier &
+Accuracy 0.874. &
+The specialist module provides a stable qalqalah baseline. \\
+\midrule
+Class-level analysis &
+None 0.914, qalqalah 0.814. &
+The module is stronger on non-qalqalah cases than positive qalqalah cases. \\
+\bottomrule
+\end{tabularx}
+\caption{Ablation inside the burst module.}
+\label{tab:burst_ablation}
+\end{table}
+
+\subsection{Content Module Ablation}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.32\textwidth} p{0.25\textwidth} X}
+\toprule
+\textbf{Variant} & \textbf{Result} & \textbf{Interpretation} \\
+\midrule
+Full-verse CTC content &
+Exact 0.016, character accuracy 0.536. &
+Full verses are too difficult for the available learner data. \\
+\midrule
+First chunked content model &
+Exact around 0.383. &
+Chunking immediately made the task more learnable. \\
+\midrule
+Official chunked baseline &
+Exact 0.700, character accuracy 0.892. &
+This is the current promoted content baseline. \\
+\midrule
+Blank-penalty tuned decoder &
+Improved deletion behavior. &
+Decoder tuning matters because CTC can over-predict blanks. \\
+\midrule
+Quran-MD word auxiliary model &
+Clean word exact 0.492, character accuracy 0.834. &
+Useful for learning words, but direct transfer to learner chunks failed. \\
+\midrule
+Tiny auxiliary transfer &
+Exact 0.707, character accuracy 0.893. &
+Small gain, kept experimental until more validation. \\
+\midrule
+Full-ayah content experiment &
+Exact 0.063, character accuracy 0.762. &
+Promising for future scalability, not ready for official use. \\
+\bottomrule
+\end{tabularx}
+\caption{Ablation inside the content module.}
+\label{tab:content_ablation}
+\end{table}
+
+\subsection{Routing and Scoring Ablation}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.31\textwidth} p{0.24\textwidth} X}
+\toprule
+\textbf{Variant} & \textbf{Result} & \textbf{Interpretation} \\
+\midrule
+Rule-based router &
+Official routing path. &
+Reliable because it uses known rule metadata. \\
+\midrule
+Learned router v5 &
+Weak-label exact around 0.921 on mixed data, weaker on Retasy-only validation. &
+Promising but not official because weak labels are not enough. \\
+\midrule
+Unweighted scoring &
+All errors have equal cost. &
+Pedagogically weak because serious mistakes are not prioritized. \\
+\midrule
+Severity-aware scoring &
+Critical errors receive higher penalty. &
+More useful for learner feedback and teacher interpretation. \\
+\bottomrule
+\end{tabularx}
+\caption{Ablation inside routing and scoring.}
+\label{tab:routing_scoring_ablation}
+\end{table}
+
+\section{Hyperparameter Optimization}
+
+Hyperparameters are configuration choices that are not learned directly by the
+model, but strongly affect training and inference. Examples include the learning
+rate, number of epochs, hidden size, class weights, thresholds, split strategy,
+and decoder parameters. In this project, hyperparameter optimization was done in
+a controlled and experimental way rather than as a large automatic search.
+
+This choice was deliberate. The available learner-error data is limited, so a
+large search can easily overfit the validation set. For that reason, the project
+used targeted tuning driven by error analysis: first inspect the failure mode,
+then tune the parameter that directly affects it, then compare against the
+current baseline.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{0.24\textwidth} p{0.24\textwidth} p{0.24\textwidth} X}
+\toprule
+\textbf{Hyperparameter} & \textbf{What was varied} & \textbf{Observed effect} & \textbf{Final interpretation} \\
+\midrule
+Learning rate &
+Especially low learning rate for content auxiliary tuning, for example
+$10^{-5}$. &
+Aggressive fine-tuning damaged chunk reliability, while low learning rate
+preserved the baseline. &
+Small learning rates are safer when adapting a content model with limited data. \\
+\midrule
+Number of epochs &
+Short auxiliary training versus longer aggressive training. &
+The successful tiny auxiliary content run used only one epoch and still improved
+exact match from 0.700 to 0.707. &
+More epochs are not automatically better; they can overfit small auxiliary
+datasets. \\
+\midrule
+Decoder blank penalty &
+Compared blank penalty 1.0 and 1.6 for chunked CTC decoding. &
+Exact match improved from 0.691 to 0.700 and edit distance improved from 0.741
+to 0.731. &
+The blank penalty is important because CTC models can delete too many
+characters. \\
+\midrule
+Decision thresholds &
+Transition, localized support, and learned routing thresholds were tuned. &
+Learned router thresholds improved weak-label exact match from 0.895 to 0.921;
+multi-label transition used ikhfa 0.45 and idgham 0.40 experimentally. &
+Threshold tuning is useful, but a tuned model is promoted only if it improves
+strict validation. \\
+\midrule
+Class weights &
+Used to reduce imbalance between frequent and rare labels. &
+Transition benefited from class-aware training because idgham had fewer samples
+than none and ikhfa. &
+Class weights help minority rules, but they must be checked against overall
+accuracy. \\
+\midrule
+Hardcase weights &
+Boosted examples that appeared in repeated high-confidence mistakes. &
+Transition improved strongly, while duration hardcase variants showed that too
+much weighting can hurt balance. &
+Hardcase weighting is useful only with a promotion gate; it is not automatically
+safe. \\
+\midrule
+Model size &
+Compared smaller and slightly larger content configurations, including the HD96
+chunked model. &
+The HD96 chunked model became the official content baseline with exact 0.700
+and character accuracy 0.892. &
+Increasing capacity helps only when paired with strict text-held-out evaluation. \\
+\midrule
+Data split strategy &
+Used text-held-out and verse-held-out splits instead of only random splits. &
+Duration fusion was accepted only after verse-held-out accuracy improved from
+0.954 to 0.973. &
+Strict splits are essential because random splits can hide memorization. \\
+\bottomrule
+\end{tabularx}
+\caption{Hyperparameters tuned during the project and their practical effect.}
+\label{tab:hyperparameter_summary}
+\end{table}
+
+In the final report, the safest way to describe this work is the following:
+the project performed \textit{targeted hyperparameter tuning with controlled
+promotion gates}. This means that hyperparameters were not changed randomly.
+They were adjusted to solve observed problems, and the new version was accepted
+only when it improved the relevant validation metric.
+
+An Optuna-based automatic search is a strong future extension. Optuna could
+search over learning rate, thresholds, class weights, blank penalty, hidden
+dimension, and loss weights. However, it should be used only after creating
+larger and stricter validation sets, otherwise it may optimize the validation
+set without improving real generalization.
+
+\section{Comparison with Related Work}
+
+Compared with many existing Quran recitation projects, the proposed system is
+more focused on modular diagnosis than on producing a single global correctness
+score. Some works focus on automatic speech recognition, some focus on a small
+set of Tajweed rules, and others focus on clean recitation. This project
+combines several components:
+
+\begin{itemize}[leftmargin=*]
+    \item learner-oriented data through RetaSy,
+    \item Quran JSON and colored Mushaf references for rule positions,
+    \item MFCC-based rule modules,
+    \item Wav2Vec-style content recognition,
+    \item localized evidence models,
+    \item hardcase mining,
+    \item severity-aware feedback,
+    \item batch evaluation and JSON analysis reports.
+\end{itemize}
+
+The main advantage is not only the final metric value, but the fact that each
+part can be evaluated separately. This makes the system easier to explain,
+debug, extend, and defend in an academic setting.
+
+\section{BERTScore and Confidence Metrics}
+
+BERTScore is useful for semantic similarity in natural language generation.
+However, Quran recitation assessment is not mainly a semantic task. A small
+letter mistake can be very important even if the semantic embedding similarity
+remains high. Therefore, BERTScore is not the main metric for this project.
+
+Instead, the system uses metrics that are closer to the task:
+
+\begin{itemize}[leftmargin=*]
+    \item exact match for content,
+    \item character accuracy,
+    \item edit distance,
+    \item class accuracy for rules,
+    \item confidence scores from model probabilities,
+    \item severity-weighted error penalties.
+\end{itemize}
+
+These metrics better reflect whether the learner recited the expected text and
+whether the expected Tajweed rule was detected.
+
+\section{Scalability}
+
+The current system is a research prototype. It can scale in three directions.
+
+First, data scalability requires more distinct verses and more learner mistake
+examples. The full Quran contains more than six thousand verses, while the
+current learner-oriented training data covers a much smaller subset. More ayahs
+and more reciters would improve generalization.
+
+Second, model scalability requires moving content recognition from chunked
+recognition toward less constrained learner-level recognition. The chunked
+baseline is useful now, but the long-term goal is to recognize and score longer
+open recitations.
+
+Third, system scalability requires keeping the modular architecture clean. Each
+module should have its own training script, evaluation script, manifests,
+checkpoints, and analysis reports. This is why the codebase was reorganized into
+module-oriented folders.
+
+\section{Final Discussion}
+
+The current system is not a finished commercial product, but it is a complete
+development and experimentation prototype. It implements the architecture
+described in the conceptual framework: routing, specialist modules, feature
+extraction, temporal modeling, diagnosis, feedback generation, and batch
+evaluation.
+
+The strongest validated parts are the duration, transition, and burst modules.
+The content module improved significantly after moving from full-verse
+recognition to chunked recognition, but open learner-level content recognition
+remains the main future challenge. The most important scientific lesson of the
+project is that larger clean recitation data is useful, but learner mistake data
+is essential for true Tajweed assessment.
+
+In summary, the project demonstrates a modular and extensible architecture for
+automatic Tajweed assessment. It provides measurable results, controlled
+ablations, documented negative experiments, and a clear path for future
+improvement.
+
+% -- Bibliography --------------------------------------------
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{bibliography}
+
+\end{document}

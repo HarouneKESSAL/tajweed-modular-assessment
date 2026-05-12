@@ -1,0 +1,1482 @@
+{
+  "overall": {
+    "samples": 417,
+    "exact_rate": 0.7074340527577938,
+    "avg_char_accuracy": 0.8928571428571428,
+    "empty_pred_rate": 0.0,
+    "avg_gold_len": 6.4700239808153475,
+    "avg_pred_len": 6.294964028776978
+  },
+  "errors": {
+    "samples": 122,
+    "exact_rate": 0.0,
+    "avg_char_accuracy": 0.6337822014051522,
+    "empty_pred_rate": 0.0,
+    "avg_gold_len": 6.688524590163935,
+    "avg_pred_len": 6.090163934426229
+  },
+  "num_errors": 122,
+  "num_empty_predictions": 0,
+  "num_too_short": 24,
+  "num_too_long": 13,
+  "by_gold_length": {
+    "004_006": {
+      "samples": 48,
+      "exact_rate": 0.0,
+      "avg_char_accuracy": 0.59375,
+      "empty_pred_rate": 0.0,
+      "avg_gold_len": 5.5,
+      "avg_pred_len": 5.625
+    },
+    "007_010": {
+      "samples": 74,
+      "exact_rate": 0.0,
+      "avg_char_accuracy": 0.6597490347490348,
+      "empty_pred_rate": 0.0,
+      "avg_gold_len": 7.45945945945946,
+      "avg_pred_len": 6.391891891891892
+    }
+  },
+  "top_repeated_gold_failures": [
+    {
+      "gold": "الوسواس",
+      "count": 40,
+      "avg_char_accuracy": 0.7142857142857143,
+      "example_predictions": [
+        [
+          "الوساس",
+          16
+        ],
+        [
+          "الواس",
+          8
+        ],
+        [
+          "الوواس",
+          5
+        ],
+        [
+          "والخناس",
+          1
+        ],
+        [
+          "السواس",
+          1
+        ]
+      ]
+    },
+    {
+      "gold": "لااعبد",
+      "count": 30,
+      "avg_char_accuracy": 0.7111111111111111,
+      "example_predictions": [
+        [
+          "لاعبد",
+          21
+        ],
+        [
+          "اعبد",
+          1
+        ],
+        [
+          "اليد",
+          1
+        ],
+        [
+          "لياعبد",
+          1
+        ],
+        [
+          "لاعاد",
+          1
+        ]
+      ]
+    },
+    {
+      "gold": "ملكالناس",
+      "count": 18,
+      "avg_char_accuracy": 0.5694444444444444,
+      "example_predictions": [
+        [
+          "ملناس",
+          3
+        ],
+        [
+          "والناس",
+          3
+        ],
+        [
+          "الكالناس",
+          2
+        ],
+        [
+          "ملكاناس",
+          1
+        ],
+        [
+          "النمن",
+          1
+        ]
+      ]
+    },
+    {
+      "gold": "ماتعبدون",
+      "count": 16,
+      "avg_char_accuracy": 0.625,
+      "example_predictions": [
+        [
+          "ماعبدون",
+          6
+        ],
+        [
+          "ماتعبدتن",
+          2
+        ],
+        [
+          "والنياس",
+          1
+        ],
+        [
+          "التين",
+          1
+        ],
+        [
+          "ماتتعبدون",
+          1
+        ]
+      ]
+    },
+    {
+      "gold": "منشر",
+      "count": 12,
+      "avg_char_accuracy": 0.2916666666666667,
+      "example_predictions": [
+        [
+          "منشار",
+          2
+        ],
+        [
+          "منش",
+          1
+        ],
+        [
+          "منشرنس",
+          1
+        ],
+        [
+          "منشرر",
+          1
+        ],
+        [
+          "والوساس",
+          1
+        ]
+      ]
+    },
+    {
+      "gold": "والناس",
+      "count": 6,
+      "avg_char_accuracy": 0.6111111111111112,
+      "example_predictions": [
+        [
+          "الناس",
+          2
+        ],
+        [
+          "والخناس",
+          1
+        ],
+        [
+          "والنعاس",
+          1
+        ],
+        [
+          "الرنبيمن",
+          1
+        ],
+        [
+          "عالرنعم",
+          1
+        ]
+      ]
+    }
+  ],
+  "top_deleted_gold_chars": [
+    [
+      "ا",
+      33
+    ],
+    [
+      "و",
+      31
+    ],
+    [
+      "س",
+      20
+    ],
+    [
+      "ل",
+      15
+    ],
+    [
+      "ك",
+      7
+    ],
+    [
+      "ت",
+      7
+    ],
+    [
+      "م",
+      6
+    ],
+    [
+      "ر",
+      4
+    ],
+    [
+      "ش",
+      3
+    ],
+    [
+      "ع",
+      3
+    ],
+    [
+      "ن",
+      1
+    ],
+    [
+      "ب",
+      1
+    ]
+  ],
+  "top_inserted_pred_chars": [
+    [
+      "ا",
+      30
+    ],
+    [
+      "ن",
+      22
+    ],
+    [
+      "و",
+      15
+    ],
+    [
+      "ي",
+      15
+    ],
+    [
+      "ع",
+      12
+    ],
+    [
+      "ر",
+      10
+    ],
+    [
+      "س",
+      9
+    ],
+    [
+      "ل",
+      9
+    ],
+    [
+      "ك",
+      9
+    ],
+    [
+      "ح",
+      8
+    ],
+    [
+      "م",
+      7
+    ],
+    [
+      "ب",
+      4
+    ],
+    [
+      "ت",
+      4
+    ],
+    [
+      "ة",
+      3
+    ],
+    [
+      "د",
+      3
+    ],
+    [
+      "ج",
+      2
+    ],
+    [
+      "خ",
+      2
+    ]
+  ],
+  "top_replaced_gold_chars": [
+    [
+      "و",
+      20
+    ],
+    [
+      "م",
+      13
+    ],
+    [
+      "س",
+      12
+    ],
+    [
+      "ل",
+      9
+    ],
+    [
+      "ا",
+      8
+    ],
+    [
+      "ع",
+      8
+    ],
+    [
+      "د",
+      8
+    ],
+    [
+      "ب",
+      7
+    ],
+    [
+      "ك",
+      6
+    ],
+    [
+      "ن",
+      4
+    ],
+    [
+      "ر",
+      4
+    ],
+    [
+      "ت",
+      4
+    ],
+    [
+      "ش",
+      3
+    ]
+  ],
+  "worst_examples": [
+    {
+      "id": "retasy_train_005377_chunk_00",
+      "gold": "منشر",
+      "pred": "والوساس",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 7,
+      "gold_len": 4,
+      "pred_len": 7,
+      "len_delta": 3
+    },
+    {
+      "id": "retasy_train_005444_chunk_00",
+      "gold": "منشر",
+      "pred": "الرحم",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 5,
+      "gold_len": 4,
+      "pred_len": 5,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_005644_chunk_00",
+      "gold": "منشر",
+      "pred": "منكالجنة",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 6,
+      "gold_len": 4,
+      "pred_len": 8,
+      "len_delta": 4
+    },
+    {
+      "id": "retasy_train_005677_chunk_00",
+      "gold": "منشر",
+      "pred": "منالجناس",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 6,
+      "gold_len": 4,
+      "pred_len": 8,
+      "len_delta": 4
+    },
+    {
+      "id": "retasy_train_005699_chunk_00",
+      "gold": "منشر",
+      "pred": "الرحمن",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 6,
+      "gold_len": 4,
+      "pred_len": 6,
+      "len_delta": 2
+    },
+    {
+      "id": "retasy_train_006092_chunk_00",
+      "gold": "منشر",
+      "pred": "الرحن",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 5,
+      "gold_len": 4,
+      "pred_len": 5,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_006369_chunk_00",
+      "gold": "منشر",
+      "pred": "انشاكند",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 5,
+      "gold_len": 4,
+      "pred_len": 7,
+      "len_delta": 3
+    },
+    {
+      "id": "retasy_train_005377_chunk_01",
+      "gold": "الوسواس",
+      "pred": "واياكنوعبد",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 8,
+      "gold_len": 7,
+      "pred_len": 10,
+      "len_delta": 3
+    },
+    {
+      "id": "retasy_train_005610_chunk_01",
+      "gold": "الوسواس",
+      "pred": "واياكنسعن",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 8,
+      "gold_len": 7,
+      "pred_len": 9,
+      "len_delta": 2
+    },
+    {
+      "id": "retasy_train_006314_chunk_01",
+      "gold": "والناس",
+      "pred": "الرنبيمن",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 6,
+      "gold_len": 6,
+      "pred_len": 8,
+      "len_delta": 2
+    },
+    {
+      "id": "retasy_train_005361_chunk_00",
+      "gold": "لااعبد",
+      "pred": "واياكنباس",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 6,
+      "gold_len": 6,
+      "pred_len": 9,
+      "len_delta": 3
+    },
+    {
+      "id": "retasy_train_006367_chunk_00",
+      "gold": "لااعبد",
+      "pred": "واياكنان",
+      "exact": false,
+      "char_accuracy": 0.0,
+      "edit_distance": 6,
+      "gold_len": 6,
+      "pred_len": 8,
+      "len_delta": 2
+    },
+    {
+      "id": "retasy_train_000611_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "والنياس",
+      "exact": false,
+      "char_accuracy": 0.125,
+      "edit_distance": 7,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_005361_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "الكاناس",
+      "exact": false,
+      "char_accuracy": 0.125,
+      "edit_distance": 7,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_006006_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "اياس",
+      "exact": false,
+      "char_accuracy": 0.125,
+      "edit_distance": 7,
+      "gold_len": 8,
+      "pred_len": 4,
+      "len_delta": -4
+    },
+    {
+      "id": "retasy_train_006367_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "واكناس",
+      "exact": false,
+      "char_accuracy": 0.125,
+      "edit_distance": 7,
+      "gold_len": 8,
+      "pred_len": 6,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_006139_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لبدمن",
+      "exact": false,
+      "char_accuracy": 0.16666666666666663,
+      "edit_distance": 5,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_005748_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "والنعبا",
+      "exact": false,
+      "char_accuracy": 0.25,
+      "edit_distance": 6,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_006466_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "الرحمن",
+      "exact": false,
+      "char_accuracy": 0.25,
+      "edit_distance": 6,
+      "gold_len": 8,
+      "pred_len": 6,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_002731_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "التين",
+      "exact": false,
+      "char_accuracy": 0.25,
+      "edit_distance": 6,
+      "gold_len": 8,
+      "pred_len": 5,
+      "len_delta": -3
+    },
+    {
+      "id": "retasy_train_005677_chunk_01",
+      "gold": "الوسواس",
+      "pred": "واكناس",
+      "exact": false,
+      "char_accuracy": 0.2857142857142857,
+      "edit_distance": 5,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_006371_chunk_01",
+      "gold": "والناس",
+      "pred": "عالرنعم",
+      "exact": false,
+      "char_accuracy": 0.33333333333333337,
+      "edit_distance": 4,
+      "gold_len": 6,
+      "pred_len": 7,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_001310_chunk_00",
+      "gold": "لااعبد",
+      "pred": "اليد",
+      "exact": false,
+      "char_accuracy": 0.33333333333333337,
+      "edit_distance": 4,
+      "gold_len": 6,
+      "pred_len": 4,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_006006_chunk_00",
+      "gold": "لااعبد",
+      "pred": "الاتعبدون",
+      "exact": false,
+      "char_accuracy": 0.33333333333333337,
+      "edit_distance": 4,
+      "gold_len": 6,
+      "pred_len": 9,
+      "len_delta": 3
+    },
+    {
+      "id": "retasy_train_005364_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "النمن",
+      "exact": false,
+      "char_accuracy": 0.375,
+      "edit_distance": 5,
+      "gold_len": 8,
+      "pred_len": 5,
+      "len_delta": -3
+    },
+    {
+      "id": "retasy_train_005503_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "مالرحان",
+      "exact": false,
+      "char_accuracy": 0.375,
+      "edit_distance": 5,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_005563_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "الرحعباس",
+      "exact": false,
+      "char_accuracy": 0.375,
+      "edit_distance": 5,
+      "gold_len": 8,
+      "pred_len": 8,
+      "len_delta": 0
+    },
+    {
+      "id": "retasy_train_006177_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "اياكناة",
+      "exact": false,
+      "char_accuracy": 0.375,
+      "edit_distance": 5,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000586_chunk_01",
+      "gold": "الوسواس",
+      "pred": "والخناس",
+      "exact": false,
+      "char_accuracy": 0.4285714285714286,
+      "edit_distance": 4,
+      "gold_len": 7,
+      "pred_len": 7,
+      "len_delta": 0
+    },
+    {
+      "id": "retasy_train_005444_chunk_01",
+      "gold": "الوسواس",
+      "pred": "النا",
+      "exact": false,
+      "char_accuracy": 0.4285714285714286,
+      "edit_distance": 4,
+      "gold_len": 7,
+      "pred_len": 4,
+      "len_delta": -3
+    },
+    {
+      "id": "retasy_train_005699_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الحسعيان",
+      "exact": false,
+      "char_accuracy": 0.4285714285714286,
+      "edit_distance": 4,
+      "gold_len": 7,
+      "pred_len": 8,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_006369_chunk_01",
+      "gold": "الوسواس",
+      "pred": "والوسعيان",
+      "exact": false,
+      "char_accuracy": 0.4285714285714286,
+      "edit_distance": 4,
+      "gold_len": 7,
+      "pred_len": 9,
+      "len_delta": 2
+    },
+    {
+      "id": "retasy_train_004041_chunk_00",
+      "gold": "منشر",
+      "pred": "منشرنس",
+      "exact": false,
+      "char_accuracy": 0.5,
+      "edit_distance": 2,
+      "gold_len": 4,
+      "pred_len": 6,
+      "len_delta": 2
+    },
+    {
+      "id": "retasy_train_005525_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "وايالنعاس",
+      "exact": false,
+      "char_accuracy": 0.5,
+      "edit_distance": 4,
+      "gold_len": 8,
+      "pred_len": 9,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_006092_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الرحاس",
+      "exact": false,
+      "char_accuracy": 0.5714285714285714,
+      "edit_distance": 3,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000906_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "ملناس",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 5,
+      "len_delta": -3
+    },
+    {
+      "id": "retasy_train_005416_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "والناس",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 6,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_005508_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "والناس",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 6,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_005706_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "ملناس",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 5,
+      "len_delta": -3
+    },
+    {
+      "id": "retasy_train_005740_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "والناس",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 6,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_005998_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "مناناس",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 6,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_006483_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "ملناس",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 5,
+      "len_delta": -3
+    },
+    {
+      "id": "retasy_train_005994_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "مابدمن",
+      "exact": false,
+      "char_accuracy": 0.625,
+      "edit_distance": 3,
+      "gold_len": 8,
+      "pred_len": 6,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_000682_chunk_00",
+      "gold": "لااعبد",
+      "pred": "اعبد",
+      "exact": false,
+      "char_accuracy": 0.6666666666666667,
+      "edit_distance": 2,
+      "gold_len": 6,
+      "pred_len": 4,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_004094_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعاد",
+      "exact": false,
+      "char_accuracy": 0.6666666666666667,
+      "edit_distance": 2,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000747_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "exact": false,
+      "char_accuracy": 0.7142857142857143,
+      "edit_distance": 2,
+      "gold_len": 7,
+      "pred_len": 5,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_002470_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "exact": false,
+      "char_accuracy": 0.7142857142857143,
+      "edit_distance": 2,
+      "gold_len": 7,
+      "pred_len": 5,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_003795_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "exact": false,
+      "char_accuracy": 0.7142857142857143,
+      "edit_distance": 2,
+      "gold_len": 7,
+      "pred_len": 5,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_004041_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "exact": false,
+      "char_accuracy": 0.7142857142857143,
+      "edit_distance": 2,
+      "gold_len": 7,
+      "pred_len": 5,
+      "len_delta": -2
+    },
+    {
+      "id": "retasy_train_004160_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الواس",
+      "exact": false,
+      "char_accuracy": 0.7142857142857143,
+      "edit_distance": 2,
+      "gold_len": 7,
+      "pred_len": 5,
+      "len_delta": -2
+    }
+  ],
+  "near_misses": [
+    {
+      "id": "retasy_train_001357_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "ملكاناس",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_005455_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "الكالناس",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 8,
+      "len_delta": 0
+    },
+    {
+      "id": "retasy_train_005724_chunk_00",
+      "gold": "ملكالناس",
+      "pred": "الكالناس",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 8,
+      "len_delta": 0
+    },
+    {
+      "id": "retasy_train_000579_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000662_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000682_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماتعبدتن",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 8,
+      "len_delta": 0
+    },
+    {
+      "id": "retasy_train_000888_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001310_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_003573_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_004412_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماتتعبدون",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 9,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_005147_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماتعبدتن",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 8,
+      "len_delta": 0
+    },
+    {
+      "id": "retasy_train_006032_chunk_01",
+      "gold": "ماتعبدون",
+      "pred": "ماعبدون",
+      "exact": false,
+      "char_accuracy": 0.875,
+      "edit_distance": 1,
+      "gold_len": 8,
+      "pred_len": 7,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000373_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوواس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000494_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000501_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000724_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000843_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوواس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000918_chunk_01",
+      "gold": "الوسواس",
+      "pred": "السواس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001304_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001402_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001407_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001530_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001659_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوواس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001839_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001979_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_002873_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_003486_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوواس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_004089_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_004318_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_004475_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_004723_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_005107_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_005294_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوواس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_005834_chunk_01",
+      "gold": "الوسواس",
+      "pred": "الوساس",
+      "exact": false,
+      "char_accuracy": 0.8571428571428572,
+      "edit_distance": 1,
+      "gold_len": 7,
+      "pred_len": 6,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_004940_chunk_01",
+      "gold": "والناس",
+      "pred": "والخناس",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 7,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_006004_chunk_01",
+      "gold": "والناس",
+      "pred": "الناس",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_006196_chunk_01",
+      "gold": "والناس",
+      "pred": "الناس",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_006297_chunk_01",
+      "gold": "والناس",
+      "pred": "والنعاس",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 7,
+      "len_delta": 1
+    },
+    {
+      "id": "retasy_train_000150_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000489_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000888_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_000993_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001101_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_001185_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_002294_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_002420_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لياعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 6,
+      "len_delta": 0
+    },
+    {
+      "id": "retasy_train_002480_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_002664_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_002731_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    },
+    {
+      "id": "retasy_train_003040_chunk_00",
+      "gold": "لااعبد",
+      "pred": "لاعبد",
+      "exact": false,
+      "char_accuracy": 0.8333333333333334,
+      "edit_distance": 1,
+      "gold_len": 6,
+      "pred_len": 5,
+      "len_delta": -1
+    }
+  ]
+}

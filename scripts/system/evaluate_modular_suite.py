@@ -1198,6 +1198,8 @@ def evaluate_chunked_content_manifest(
     char_acc_sum = 0.0
     edit_sum = 0.0
 
+    examples = []
+
     with torch.no_grad():
         for batch in loader:
             log_probs = model(batch["x"], batch["input_lengths"])
@@ -1208,15 +1210,33 @@ def evaluate_chunked_content_manifest(
                 beam_width=beam_width,
                 lexicon_targets=lexicon_targets,
             )
-            for gold_text, pred_ids in zip(batch["texts"], decoded):
+            batch_ids = batch.get("ids", [""] * len(batch["texts"]))
+            for sample_id, gold_text, pred_ids in zip(batch_ids, batch["texts"], decoded):
                 gold = normalize_chunked_text_target(gold_text)
                 pred = decode_ids(pred_ids, id_to_char)
                 if use_cleanup:
                     pred = chunked_content_postprocess(pred)
+
+                ed = levenshtein(gold, pred)
+                acc = char_accuracy(gold, pred)
+                is_exact = pred == gold
+
                 total += 1
-                exact += int(pred == gold)
-                char_acc_sum += char_accuracy(gold, pred)
-                edit_sum += levenshtein(gold, pred)
+                exact += int(is_exact)
+                char_acc_sum += acc
+                edit_sum += ed
+
+                examples.append({
+                    "id": str(sample_id),
+                    "gold": gold,
+                    "pred": pred,
+                    "exact": bool(is_exact),
+                    "char_accuracy": float(acc),
+                    "edit_distance": int(ed),
+                    "gold_len": len(gold),
+                    "pred_len": len(pred),
+                    "len_delta": len(pred) - len(gold),
+                })
 
     return {
         "available": True,
@@ -1224,6 +1244,8 @@ def evaluate_chunked_content_manifest(
         "samples": total,
         "split": split,
         "split_mode": split_mode,
+        "examples": examples,
+        "worst_examples": sorted(examples, key=lambda x: x["char_accuracy"])[:50],
         "decoder": {
             "blank_penalty": blank_penalty,
             "use_cleanup": use_cleanup,
