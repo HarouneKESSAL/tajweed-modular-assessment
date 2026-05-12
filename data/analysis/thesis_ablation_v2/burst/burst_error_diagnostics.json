@@ -1,0 +1,47 @@
+{
+  "samples": 1597,
+  "accuracy": 0.8753913587977458,
+  "class_summary": {
+    "none": {
+      "total": 958,
+      "correct": 857,
+      "accuracy": 0.894572025052192
+    },
+    "qalqalah": {
+      "total": 639,
+      "correct": 541,
+      "accuracy": 0.8466353677621283
+    }
+  },
+  "confusion_matrix": [
+    [
+      857,
+      101
+    ],
+    [
+      98,
+      541
+    ]
+  ],
+  "weighted_score": 98.62482758620689,
+  "num_errors": 395,
+  "burst_weighted": {
+    "module": "burst",
+    "error_type": "weak_qalqalah",
+    "count": 101,
+    "severity": "minor",
+    "lahn_type": "khafi",
+    "confidence": 1.0,
+    "weight": 2.0,
+    "weighted_penalty": 202.0,
+    "description": "Burst false positives: predicted qalqalah for none"
+  },
+  "notes": [
+    "Burst mainly over-predicts qalqalah. Raising the threshold may help."
+  ],
+  "false_positives_predicted_qalqalah_for_none": 101,
+  "false_negatives_missed_qalqalah": 98,
+  "false_positive_share_of_burst_errors": 0.507537688442211,
+  "false_negative_share_of_burst_errors": 0.49246231155778897,
+  "dominant_error": "weak_qalqalah_false_positives"
+}

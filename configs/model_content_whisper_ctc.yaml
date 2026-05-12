@@ -1,0 +1,4 @@
+model_name: openai/whisper-tiny
+freeze_encoder: true
+dropout: 0.1
+blank_id: 0

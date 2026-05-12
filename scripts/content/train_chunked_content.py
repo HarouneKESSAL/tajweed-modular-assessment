@@ -93,10 +93,29 @@ class ChunkedContentDataset(Dataset):
             x = torch.load(cache_path)
         else:
             waveform, _ = load_audio(row["audio_path"], sample_rate=self.sample_rate, speed_config=self.speed_config)
-            start = max(0, int(float(row.get("start_sec", 0.0)) * self.sample_rate))
-            end = min(waveform.size(1), int(float(row.get("end_sec", 0.0)) * self.sample_rate))
+
+            start_value = row.get("start_sec", 0.0)
+            end_value = row.get("end_sec", None)
+
+            if start_value is None or start_value == "":
+                start_value = 0.0
+
+            start = max(0, int(float(start_value) * self.sample_rate))
+
+            if end_value is None or end_value == "":
+                end = waveform.size(1)
+            else:
+                end = min(waveform.size(1), int(float(end_value) * self.sample_rate))
+
+            if end <= start:
+                # If timing metadata is invalid, prefer the remaining full audio
+                # instead of silently clipping to 0.25s. The old fallback made
+                # full-ayah rows impossible for CTC training.
+                end = waveform.size(1)
+
             if end <= start:
                 end = min(waveform.size(1), start + int(0.25 * self.sample_rate))
+
             clip = waveform[:, start:end]
             x = self.ssl(clip)
             if cache_path is not None:

@@ -1,0 +1,10 @@
+
+model_name: openai/whisper-small
+language: arabic
+task: transcribe
+device: cpu
+max_samples: 20
+normalization:
+  strip_marks: true
+  normalize_hamza_forms: true
+  normalize_ya: true

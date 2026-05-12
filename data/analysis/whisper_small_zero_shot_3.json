@@ -1,0 +1,66 @@
+{
+  "model_name": "openai/whisper-small",
+  "language": "arabic",
+  "task": "transcribe",
+  "device": "cpu",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\retasy_content_chunks.jsonl",
+  "start_index": 0,
+  "max_samples": 3,
+  "samples": 3,
+  "error_count": 0,
+  "metrics": {
+    "exact_match": 0.0,
+    "normalized_exact_match": 0.0,
+    "char_accuracy": 0.2777777777777778,
+    "normalized_char_accuracy": 0.2777777777777778,
+    "mean_edit_distance": 4.666666666666667,
+    "normalized_mean_edit_distance": 4.666666666666667
+  },
+  "items": [
+    {
+      "index": 0,
+      "sample_id": "retasy_train_000020_chunk_00",
+      "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\raw\\retasy_train_audio\\000020_al_faatihah.wav",
+      "start_time": 0.1504921875,
+      "end_time": 1.7346484375000002,
+      "start_sample": null,
+      "end_sample": null,
+      "expected_text": "الرحمن",
+      "predicted_text": "ورحمة",
+      "expected_normalized": "الرحمن",
+      "predicted_normalized": "ورحمة",
+      "strict_match": false,
+      "normalized_match": false
+    },
+    {
+      "index": 1,
+      "sample_id": "retasy_train_000020_chunk_01",
+      "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\raw\\retasy_train_audio\\000020_al_faatihah.wav",
+      "start_time": 1.7147578125,
+      "end_time": 2.597,
+      "start_sample": null,
+      "end_sample": null,
+      "expected_text": "الرحيم",
+      "predicted_text": "وصحي",
+      "expected_normalized": "الرحيم",
+      "predicted_normalized": "وصحي",
+      "strict_match": false,
+      "normalized_match": false
+    },
+    {
+      "index": 2,
+      "sample_id": "retasy_train_000029_chunk_00",
+      "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\raw\\retasy_train_audio\\000029_an_nas.wav",
+      "start_time": 0.010090452261306532,
+      "end_time": 1.613572864321608,
+      "start_sample": null,
+      "end_sample": null,
+      "expected_text": "من شر",
+      "predicted_text": "من شريل وراء",
+      "expected_normalized": "من شر",
+      "predicted_normalized": "من شريل وراء",
+      "strict_match": false,
+      "normalized_match": false
+    }
+  ]
+}

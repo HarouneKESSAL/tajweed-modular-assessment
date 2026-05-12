@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from typing import Optional
 import torch
 import torch.nn as nn
+from typing import Any
+from tajweed_assessment.scoring.weighted_score import score_inference_result
 
 from tajweed_assessment.data.labels import TRANSITION_RULES, id_to_rule
 from tajweed_assessment.models.common.decoding import decode_with_majority_rules
@@ -333,6 +335,7 @@ class TajweedInferencePipeline:
     duration_localizer_override_threshold: float = 0.98
     duration_localizer_override_chars: tuple[str, ...] = ("ن",)
     device: str = "cpu"
+    error_weight_config: dict[str, Any] | None = None
 
     def __post_init__(self) -> None:
         self.duration_module.to(self.device).eval()
@@ -378,7 +381,20 @@ class TajweedInferencePipeline:
             canonical_rules=canonical_rules,
             module_judgments=judgments,
         )
-        return {"report": report.to_dict(), "feedback": render_feedback(report)}
+        report_dict = report.to_dict()
+        weighted_score = None
+        if self.error_weight_config is not None:
+            weighted_score = score_inference_result(
+                report=report_dict,
+                module_judgments=judgments,
+                config=self.error_weight_config,
+            )
+
+        return {
+            "report": report_dict,
+            "weighted_score": weighted_score,
+            "feedback": render_feedback(report),
+        }
 
     @torch.no_grad()
     def run_modular(
@@ -515,6 +531,7 @@ class TajweedInferencePipeline:
             pred_label, pred_confidence = _decode_transition_prediction(logits, self.transition_thresholds)
             pred_name = TRANSITION_RULES[pred_label] if 0 <= pred_label < len(TRANSITION_RULES) else "none"
             localized_evidence = None
+
             if self.localized_transition_module is not None and localized_transition_x is not None:
                 localized_x = localized_transition_x.unsqueeze(0).to(self.device)
                 localized_lengths = torch.tensor([localized_transition_x.size(0)], dtype=torch.long, device=self.device)
@@ -526,15 +543,18 @@ class TajweedInferencePipeline:
                     self.localized_transition_thresholds,
                     self.localized_transition_frame_hop_sec,
                 )
+
             for idx, expected in enumerate(canonical_rules):
                 expected_name = id_to_rule.get(expected, "none")
                 if expected_name not in {"ikhfa", "idgham"}:
                     continue
+
                 localized_prob = None
                 localized_span_count = None
                 localized_top_span = None
                 localized_threshold = None
                 localized_predicted_labels = []
+
                 if localized_evidence is not None:
                     localized_prob = localized_evidence["clip_probabilities"].get(expected_name)
                     localized_threshold = localized_evidence["thresholds"].get(expected_name)
@@ -543,6 +563,7 @@ class TajweedInferencePipeline:
                     localized_span_count = len(label_spans)
                     if label_spans:
                         localized_top_span = max(label_spans, key=lambda span: span.get("max_prob", 0.0))
+
                 module_judgments.append(
                     {
                         "position": idx,
@@ -565,10 +586,12 @@ class TajweedInferencePipeline:
             logits = self.burst_module(burst_x.unsqueeze(0).to(self.device))
             probs = logits.softmax(dim=-1)[0]
             pred_positive = int(logits.argmax(dim=-1)[0].item()) == 1
+
             for idx, expected in enumerate(canonical_rules):
                 expected_name = id_to_rule.get(expected, "none")
                 if expected_name != "qalqalah":
                     continue
+
                 pred_name = "qalqalah" if pred_positive else "none"
                 module_judgments.append(
                     {
@@ -590,15 +613,31 @@ class TajweedInferencePipeline:
             module_judgments=module_judgments,
             canonical_chars=canonical_chars,
         )
+
+        report_dict = report.to_dict()
+        weighted_score = None
+
+        if self.error_weight_config is not None:
+            weighted_score = score_inference_result(
+                report=report_dict,
+                module_judgments=module_judgments,
+                config=self.error_weight_config,
+            )
+
         return {
             "routing_plan": {
                 "use_duration": plan.use_duration,
-                "use_duration_localizer": plan.use_duration and self.localized_duration_module is not None and localized_duration_x is not None,
+                "use_duration_localizer": plan.use_duration
+                and self.localized_duration_module is not None
+                and localized_duration_x is not None,
                 "use_transition": plan.use_transition,
-                "use_transition_localizer": plan.use_transition and self.localized_transition_module is not None and localized_transition_x is not None,
+                "use_transition_localizer": plan.use_transition
+                and self.localized_transition_module is not None
+                and localized_transition_x is not None,
                 "use_burst": plan.use_burst,
             },
             "module_judgments": module_judgments,
-            "report": report.to_dict(),
+            "report": report_dict,
+            "weighted_score": weighted_score,
             "feedback": render_feedback(report),
         }

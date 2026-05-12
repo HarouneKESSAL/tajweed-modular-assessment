@@ -1,0 +1,8 @@
+torch
+torchaudio
+transformers>=4.40
+accelerate
+soundfile
+librosa
+numpy
+tqdm

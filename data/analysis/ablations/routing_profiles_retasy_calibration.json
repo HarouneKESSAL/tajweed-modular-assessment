@@ -1,0 +1,1941 @@
+{
+  "dataset": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\learned_routing_retasy_calibration_balanced.jsonl",
+  "split": "val",
+  "threshold_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\configs\\learned_router_v5_thresholds.yaml",
+  "profiles": [
+    "trusted_retasy_calibrated",
+    "weak_policy_tuned"
+  ],
+  "samples": 520,
+  "results": {
+    "trusted_retasy_calibrated": {
+      "samples": 520,
+      "exact_agreement": 0.9461538461538461,
+      "macro_f1_vs_current": 0.9558193467088731,
+      "per_label": {
+        "use_duration": {
+          "accuracy": 0.9653846153846154,
+          "precision_vs_current": 0.9154929577464789,
+          "recall_vs_current": 1.0,
+          "f1_vs_current": 0.9558823529411764,
+          "official_positive": 195,
+          "learned_positive": 213,
+          "tp_agree_on": 195,
+          "fp_extra": 18,
+          "fn_missed": 0,
+          "tn_agree_off": 307
+        },
+        "use_transition": {
+          "accuracy": 0.9634615384615385,
+          "precision_vs_current": 0.881578947368421,
+          "recall_vs_current": 0.9925925925925926,
+          "f1_vs_current": 0.9337979094076654,
+          "official_positive": 135,
+          "learned_positive": 152,
+          "tp_agree_on": 134,
+          "fp_extra": 18,
+          "fn_missed": 1,
+          "tn_agree_off": 367
+        },
+        "use_burst": {
+          "accuracy": 0.9807692307692307,
+          "precision_vs_current": 0.9565217391304348,
+          "recall_vs_current": 1.0,
+          "f1_vs_current": 0.9777777777777777,
+          "official_positive": 220,
+          "learned_positive": 230,
+          "tp_agree_on": 220,
+          "fp_extra": 10,
+          "fn_missed": 0,
+          "tn_agree_off": 290
+        }
+      },
+      "current_combo_counts": {
+        "use_burst": 120,
+        "use_transition+use_burst": 75,
+        "use_duration+use_transition": 50,
+        "use_duration": 120,
+        "none": 120,
+        "use_duration+use_burst": 25,
+        "use_transition": 10
+      },
+      "learned_combo_counts": {
+        "use_burst": 112,
+        "use_transition+use_burst": 75,
+        "use_duration+use_transition": 50,
+        "use_duration": 120,
+        "none": 111,
+        "use_duration+use_burst": 25,
+        "use_duration+use_transition+use_burst": 18,
+        "use_transition": 9
+      },
+      "disagreement_type_counts": {
+        "extra_learned_module": 27,
+        "missed_and_extra": 1
+      },
+      "examples": [
+        {
+          "id": "retasy_train_001604",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.32371389865875244,
+            "use_transition": 0.00039368687430396676,
+            "use_burst": 0.8071914315223694
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_005066",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.43186837434768677,
+            "use_transition": 0.00048538247938267887,
+            "use_burst": 0.8427278995513916
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_003958",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.1041492372751236,
+            "use_transition": 0.00028909638058394194,
+            "use_burst": 0.7870059013366699
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_003708",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999316930770874,
+            "use_transition": 0.9997299313545227,
+            "use_burst": 0.9996129870414734
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_000473",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999890327453613,
+            "use_transition": 0.9999415874481201,
+            "use_burst": 0.9999303817749023
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_005622",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.14034424722194672,
+            "use_transition": 0.0004409396497067064,
+            "use_burst": 0.8082628846168518
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_000880",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.17794811725616455,
+            "use_transition": 0.0005239032325334847,
+            "use_burst": 0.7528031468391418
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_003272",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999685287475586,
+            "use_transition": 0.9998666048049927,
+            "use_burst": 0.9998421669006348
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003108",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999943733215332,
+            "use_transition": 0.9997636675834656,
+            "use_burst": 0.9997459053993225
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_001778",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.99993896484375,
+            "use_transition": 0.9997648596763611,
+            "use_burst": 0.9996317625045776
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003084",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999500513076782,
+            "use_transition": 0.9997949004173279,
+            "use_burst": 0.9997358918190002
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_000978",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999316930770874,
+            "use_transition": 0.9997299313545227,
+            "use_burst": 0.9996129870414734
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_002035",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.737945020198822,
+            "use_transition": 0.0004935986362397671,
+            "use_burst": 0.9328750967979431
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_006788",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999990701675415,
+            "use_transition": 0.9999481439590454,
+            "use_burst": 0.9999394416809082
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_000699",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999886155128479,
+            "use_transition": 0.9995337724685669,
+            "use_burst": 0.9991757273674011
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_006364",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999872446060181,
+            "use_transition": 0.9999384880065918,
+            "use_burst": 0.9999176263809204
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003136",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999746084213257,
+            "use_transition": 0.9998992681503296,
+            "use_burst": 0.9998281002044678
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_002305",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999962568283081,
+            "use_transition": 0.9998409748077393,
+            "use_burst": 0.9998176693916321
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003275",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999415874481201,
+            "use_transition": 0.9997708201408386,
+            "use_burst": 0.9996598958969116
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_001546",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999858140945435,
+            "use_transition": 0.9999175071716309,
+            "use_burst": 0.9999247789382935
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_006752",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999449253082275,
+            "use_transition": 0.9997723698616028,
+            "use_burst": 0.9997166991233826
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_004271",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.4230372905731201,
+            "use_transition": 0.0005231774412095547,
+            "use_burst": 0.8364017605781555
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_004211",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999444484710693,
+            "use_transition": 0.9997656941413879,
+            "use_burst": 0.9997603297233582
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_002102",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.1131226196885109,
+            "use_transition": 0.0003208171983715147,
+            "use_burst": 0.7947177290916443
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_001648",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999642372131348,
+            "use_transition": 0.9998430013656616,
+            "use_burst": 0.9998303651809692
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003725",
+          "text": "جزاء وفاقا",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.3808102309703827,
+            "use_transition": 0.18557456135749817,
+            "use_burst": 0.8137537837028503
+          },
+          "missed": [
+            "use_transition"
+          ],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_003453",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999456405639648,
+            "use_transition": 0.9997761845588684,
+            "use_burst": 0.9996715784072876
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003791",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9392489194869995,
+            "use_transition": 0.0008078399114310741,
+            "use_burst": 0.9663760662078857
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        }
+      ]
+    },
+    "weak_policy_tuned": {
+      "samples": 520,
+      "exact_agreement": 0.9307692307692308,
+      "macro_f1_vs_current": 0.9438921616756669,
+      "per_label": {
+        "use_duration": {
+          "accuracy": 0.95,
+          "precision_vs_current": 0.8823529411764706,
+          "recall_vs_current": 1.0,
+          "f1_vs_current": 0.9375,
+          "official_positive": 195,
+          "learned_positive": 221,
+          "tp_agree_on": 195,
+          "fp_extra": 26,
+          "fn_missed": 0,
+          "tn_agree_off": 299
+        },
+        "use_transition": {
+          "accuracy": 0.9557692307692308,
+          "precision_vs_current": 0.8589743589743589,
+          "recall_vs_current": 0.9925925925925926,
+          "f1_vs_current": 0.9209621993127148,
+          "official_positive": 135,
+          "learned_positive": 156,
+          "tp_agree_on": 134,
+          "fp_extra": 22,
+          "fn_missed": 1,
+          "tn_agree_off": 363
+        },
+        "use_burst": {
+          "accuracy": 0.9769230769230769,
+          "precision_vs_current": 0.956140350877193,
+          "recall_vs_current": 0.990909090909091,
+          "f1_vs_current": 0.9732142857142858,
+          "official_positive": 220,
+          "learned_positive": 228,
+          "tp_agree_on": 218,
+          "fp_extra": 10,
+          "fn_missed": 2,
+          "tn_agree_off": 290
+        }
+      },
+      "current_combo_counts": {
+        "use_burst": 120,
+        "use_transition+use_burst": 75,
+        "use_duration+use_transition": 50,
+        "use_duration": 120,
+        "none": 120,
+        "use_duration+use_burst": 25,
+        "use_transition": 10
+      },
+      "learned_combo_counts": {
+        "use_burst": 104,
+        "use_transition+use_burst": 73,
+        "use_duration+use_transition": 50,
+        "use_duration": 120,
+        "none": 109,
+        "use_duration+use_burst": 31,
+        "use_duration+use_transition+use_burst": 20,
+        "use_transition": 13
+      },
+      "disagreement_type_counts": {
+        "extra_learned_module": 33,
+        "missed_official_module": 2,
+        "missed_and_extra": 1
+      },
+      "examples": [
+        {
+          "id": "retasy_train_001604",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.32371389865875244,
+            "use_transition": 0.00039368687430396676,
+            "use_burst": 0.8071914315223694
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_005066",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.43186837434768677,
+            "use_transition": 0.00048538247938267887,
+            "use_burst": 0.8427278995513916
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_003958",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.1041492372751236,
+            "use_transition": 0.00028909638058394194,
+            "use_burst": 0.7870059013366699
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_003708",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999316930770874,
+            "use_transition": 0.9997299313545227,
+            "use_burst": 0.9996129870414734
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_000473",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999890327453613,
+            "use_transition": 0.9999415874481201,
+            "use_burst": 0.9999303817749023
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_005622",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.14034424722194672,
+            "use_transition": 0.0004409396497067064,
+            "use_burst": 0.8082628846168518
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_000880",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.17794811725616455,
+            "use_transition": 0.0005239032325334847,
+            "use_burst": 0.7528031468391418
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_001700",
+          "text": "فسبح بحمد ربك واستغفره انه كان توابا",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": false
+          },
+          "probabilities": {
+            "use_duration": 0.006517612840980291,
+            "use_transition": 0.6004959940910339,
+            "use_burst": 0.04099840670824051
+          },
+          "missed": [],
+          "extra": [
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_005150",
+          "text": "من شر ما خلق",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.3727376461029053,
+            "use_transition": 0.9999983310699463,
+            "use_burst": 0.9999988079071045
+          },
+          "missed": [],
+          "extra": [
+            "use_duration"
+          ]
+        },
+        {
+          "id": "retasy_train_003272",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999685287475586,
+            "use_transition": 0.9998666048049927,
+            "use_burst": 0.9998421669006348
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003108",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999943733215332,
+            "use_transition": 0.9997636675834656,
+            "use_burst": 0.9997459053993225
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_001778",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.99993896484375,
+            "use_transition": 0.9997648596763611,
+            "use_burst": 0.9996317625045776
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003348",
+          "text": "وما ادريك ما الحطمة",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "probabilities": {
+            "use_duration": 0.0183990728110075,
+            "use_transition": 0.012017395347356796,
+            "use_burst": 0.7349076867103577
+          },
+          "missed": [
+            "use_burst"
+          ],
+          "extra": []
+        },
+        {
+          "id": "retasy_train_003084",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999500513076782,
+            "use_transition": 0.9997949004173279,
+            "use_burst": 0.9997358918190002
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_000978",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999316930770874,
+            "use_transition": 0.9997299313545227,
+            "use_burst": 0.9996129870414734
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_002035",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.737945020198822,
+            "use_transition": 0.0004935986362397671,
+            "use_burst": 0.9328750967979431
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_002582",
+          "text": "فسبح بحمد ربك واستغفره انه كان توابا",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": false
+          },
+          "probabilities": {
+            "use_duration": 0.0035782770719379187,
+            "use_transition": 0.5356404781341553,
+            "use_burst": 0.026048997417092323
+          },
+          "missed": [],
+          "extra": [
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_006788",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999990701675415,
+            "use_transition": 0.9999481439590454,
+            "use_burst": 0.9999394416809082
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_000699",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999886155128479,
+            "use_transition": 0.9995337724685669,
+            "use_burst": 0.9991757273674011
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_006364",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999872446060181,
+            "use_transition": 0.9999384880065918,
+            "use_burst": 0.9999176263809204
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003136",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999746084213257,
+            "use_transition": 0.9998992681503296,
+            "use_burst": 0.9998281002044678
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_002305",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.999962568283081,
+            "use_transition": 0.9998409748077393,
+            "use_burst": 0.9998176693916321
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003275",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999415874481201,
+            "use_transition": 0.9997708201408386,
+            "use_burst": 0.9996598958969116
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_001546",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999858140945435,
+            "use_transition": 0.9999175071716309,
+            "use_burst": 0.9999247789382935
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_004100",
+          "text": "فسبح بحمد ربك واستغفره انه كان توابا",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": false
+          },
+          "probabilities": {
+            "use_duration": 0.03285190463066101,
+            "use_transition": 0.793647825717926,
+            "use_burst": 0.1912267506122589
+          },
+          "missed": [],
+          "extra": [
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_006752",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999449253082275,
+            "use_transition": 0.9997723698616028,
+            "use_burst": 0.9997166991233826
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_004271",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.4230372905731201,
+            "use_transition": 0.0005231774412095547,
+            "use_burst": 0.8364017605781555
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_004211",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999444484710693,
+            "use_transition": 0.9997656941413879,
+            "use_burst": 0.9997603297233582
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_002102",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.1131226196885109,
+            "use_transition": 0.0003208171983715147,
+            "use_burst": 0.7947177290916443
+          },
+          "missed": [],
+          "extra": [
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_006494",
+          "text": "فسبح بحمد ربك واستغفره انه كان توابا",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": false
+          },
+          "probabilities": {
+            "use_duration": 0.015857217833399773,
+            "use_transition": 0.7221488356590271,
+            "use_burst": 0.09972336143255234
+          },
+          "missed": [],
+          "extra": [
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_000610",
+          "text": "من شر ما خلق",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.42876511812210083,
+            "use_transition": 0.9999985694885254,
+            "use_burst": 0.9999986886978149
+          },
+          "missed": [],
+          "extra": [
+            "use_duration"
+          ]
+        },
+        {
+          "id": "retasy_train_005101",
+          "text": "وما ادريك ما الحطمة",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "probabilities": {
+            "use_duration": 0.0183990728110075,
+            "use_transition": 0.012017395347356796,
+            "use_burst": 0.7349076867103577
+          },
+          "missed": [
+            "use_burst"
+          ],
+          "extra": []
+        },
+        {
+          "id": "retasy_train_001648",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999642372131348,
+            "use_transition": 0.9998430013656616,
+            "use_burst": 0.9998303651809692
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003725",
+          "text": "جزاء وفاقا",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": true,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.3808102309703827,
+            "use_transition": 0.18557456135749817,
+            "use_burst": 0.8137537837028503
+          },
+          "missed": [
+            "use_transition"
+          ],
+          "extra": [
+            "use_duration",
+            "use_burst"
+          ]
+        },
+        {
+          "id": "retasy_train_003453",
+          "text": "ما اغني عنه ماله وما كسب",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "transition",
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": true,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9999456405639648,
+            "use_transition": 0.9997761845588684,
+            "use_burst": 0.9996715784072876
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_transition"
+          ]
+        },
+        {
+          "id": "retasy_train_003791",
+          "text": "قل اعوذ برب الناس",
+          "label_source": "trusted_retasy_routing",
+          "sources": [
+            "burst"
+          ],
+          "current": {
+            "use_duration": false,
+            "use_transition": false,
+            "use_burst": false
+          },
+          "learned": {
+            "use_duration": true,
+            "use_transition": false,
+            "use_burst": true
+          },
+          "probabilities": {
+            "use_duration": 0.9392489194869995,
+            "use_transition": 0.0008078399114310741,
+            "use_burst": 0.9663760662078857
+          },
+          "missed": [],
+          "extra": [
+            "use_duration",
+            "use_burst"
+          ]
+        }
+      ]
+    }
+  }
+}

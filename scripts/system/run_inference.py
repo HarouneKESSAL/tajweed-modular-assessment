@@ -12,15 +12,18 @@ import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
+from tajweed_assessment.inference.learned_routing import load_learned_routing_predictor_from_config
+from tajweed_assessment.inference.transition_multilabel import load_transition_multilabel_predictor_from_config
 from tajweed_assessment.data.labels import normalize_rule_name, rule_to_id
 from tajweed_assessment.features.mfcc import extract_mfcc_features
 from tajweed_assessment.features.ssl import DummySSLFeatureExtractor
 from tajweed_assessment.inference.pipeline import TajweedInferencePipeline
-from tajweed_assessment.models.common.decoding import decode_with_majority_rules
 from tajweed_assessment.models.burst.qalqalah_cnn import QalqalahCNN
+from tajweed_assessment.models.common.decoding import decode_with_majority_rules
 from tajweed_assessment.models.duration.madd_ghunnah_module import DurationRuleModule
 from tajweed_assessment.models.fusion.duration_fusion_calibrator import DurationFusionCalibrator
 from tajweed_assessment.models.transition.idgham_ikhfa_module import TransitionRuleModule
+from tajweed_assessment.scoring.weighted_score import load_error_weights
 from tajweed_assessment.settings import load_yaml
 from tajweed_assessment.utils.io import load_checkpoint, load_json
 
@@ -278,7 +281,77 @@ def main() -> None:
     parser.add_argument("--manifest", default="data/manifests/retasy_duration_alignment_corpus_torchaudio_strict.jsonl")
     parser.add_argument("--sample-index", type=int, default=0)
     parser.add_argument("--show-matches", action="store_true")
+    parser.add_argument(
+        "--error-weights",
+        default="configs/error_weights.yaml",
+        help="Path to weighted Tajweed error scoring YAML.",
+    )
+    parser.add_argument(
+        "--transition-multilabel",
+        action="store_true",
+        help="Run optional multi-label transition predictor in addition to the existing transition module.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-threshold-config",
+        default="configs/transition_multilabel_thresholds.yaml",
+        help="YAML threshold config for the multi-label transition predictor.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-threshold-profile",
+        default="gold_safe",
+        help="Threshold profile to use: gold_safe, merged_best, or retasy_extended_best.",
+    )
+
+    parser.add_argument(
+        "--learned-routing",
+        action="store_true",
+        help="Run optional learned routing predictor and print comparison with current routing plan.",
+    )
+    parser.add_argument(
+        "--learned-routing-threshold-config",
+        default="configs/learned_router_thresholds.yaml",
+        help="YAML config for learned routing checkpoint and thresholds.",
+    )
+    parser.add_argument(
+        "--learned-routing-threshold-profile",
+        default="balanced_safe",
+        help="Learned routing threshold profile to use.",
+    )
+
+    parser.add_argument("--ayah-content", action="store_true")
+    parser.add_argument("--ayah-content-only", action="store_true")
+    parser.add_argument("--ayah-content-split", default="all")
+    parser.add_argument("--ayah-content-checkpoint", default="checkpoints/content_ayah_hf_v2_balanced_hd96.pt")
+    parser.add_argument("--ayah-content-decoder-config", default="configs/content_ayah_decoder_bp12.json")
+    parser.add_argument("--ayah-content-feature-cache-dir", default="data/interim/ayah_content_inference_ssl_cache")
+    parser.add_argument("--ayah-content-device", default="cuda")
+
     args = parser.parse_args()
+
+    # AYAH_CONTENT_ONLY_EARLY_RETURN
+    if getattr(args, "ayah_content_only", False):
+        import sys
+
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+
+        from scripts.system.run_ayah_content_inference import (
+            run_ayah_content_for_manifest_sample,
+            print_ayah_content_report,
+        )
+
+        result = run_ayah_content_for_manifest_sample(
+            manifest_path=args.manifest,
+            split=args.ayah_content_split,
+            sample_index=args.sample_index,
+            checkpoint_path=args.ayah_content_checkpoint,
+            decoder_config_path=args.ayah_content_decoder_config,
+            feature_cache_dir=args.ayah_content_feature_cache_dir,
+            device=args.ayah_content_device,
+        )
+        print_ayah_content_report(result)
+        return
+
 
     rows = load_jsonl(PROJECT_ROOT / args.manifest)
     if args.sample_index < 0 or args.sample_index >= len(rows):
@@ -286,7 +359,13 @@ def main() -> None:
 
     row = rows[args.sample_index]
     audio_path = row["audio_path"]
-
+    error_weight_config = None
+    if args.error_weights:
+        weights_path = Path(args.error_weights)
+        if not weights_path.is_absolute():
+            weights_path = PROJECT_ROOT / weights_path
+        error_weight_config = load_error_weights(weights_path)
+        
     duration_model = load_duration_module()
     localized_duration_model, localized_duration_labels, localized_duration_thresholds = load_localized_duration_module()
     duration_fusion_calibrator, duration_fusion_char_vocab = load_duration_fusion_calibrator()
@@ -307,6 +386,7 @@ def main() -> None:
         localized_duration_labels=localized_duration_labels or ("ghunnah", "madd"),
         localized_transition_labels=localized_transition_labels or ("idgham", "ikhfa"),
         device="cpu",
+        error_weight_config=error_weight_config,
     )
 
     mfcc = extract_mfcc_features(audio_path)
@@ -348,13 +428,87 @@ def main() -> None:
     print("Routing plan :")
     print_json(result["routing_plan"])
     print("")
+    transition_multilabel_result = None
+    if getattr(args, "transition_multilabel", False):
+        try:
+            predictor = load_transition_multilabel_predictor_from_config(
+                args.transition_multilabel_threshold_config,
+                profile=args.transition_multilabel_threshold_profile,
+                device="cpu",
+            )
+            audio_path_for_multilabel = None
+            for candidate_name in ("sample", "row", "record", "item", "sample_row", "selected_sample"):
+                candidate = locals().get(candidate_name)
+                if isinstance(candidate, dict) and candidate.get("audio_path"):
+                    audio_path_for_multilabel = candidate["audio_path"]
+                    break
+
+            if audio_path_for_multilabel is None:
+                raise KeyError("Could not find audio_path for multi-label transition inference.")
+
+            transition_multilabel_result = predictor.predict(audio_path_for_multilabel)
+
+            print("\nMulti-label transition:")
+            print(json.dumps(transition_multilabel_result.to_dict(), ensure_ascii=False, indent=2))
+        except Exception as exc:
+            print("\nMulti-label transition:")
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False, indent=2))
+
+    if getattr(args, "learned_routing", False):
+        try:
+            learned_audio_path = None
+            learned_text = ""
+
+            for candidate_name in ("sample", "row", "record", "item", "sample_row", "selected_sample"):
+                candidate = locals().get(candidate_name)
+                if isinstance(candidate, dict):
+                    if candidate.get("audio_path"):
+                        learned_audio_path = candidate["audio_path"]
+                    learned_text = (
+                        candidate.get("text")
+                        or candidate.get("normalized_text")
+                        or candidate.get("source_text")
+                        or learned_text
+                    )
+                    if learned_audio_path:
+                        break
+
+            if learned_audio_path is None:
+                raise KeyError("Could not find audio_path for learned routing inference.")
+
+            learned_predictor = load_learned_routing_predictor_from_config(
+                config_path=args.learned_routing_threshold_config,
+                profile=args.learned_routing_threshold_profile,
+                device="cpu",
+            )
+            learned_result = learned_predictor.predict(
+                audio_path=learned_audio_path,
+                text=learned_text,
+            )
+
+            print("\nLearned routing comparison:")
+            print(json.dumps(
+                {
+                    "current_routing_plan": result.get("routing_plan"),
+                    "learned_routing": learned_result.to_dict(),
+                },
+                ensure_ascii=False,
+                indent=2,
+            ))
+        except Exception as exc:
+            print("\nLearned routing comparison:")
+            print(json.dumps({"error": str(exc)}, ensure_ascii=False, indent=2))
+
     print("Diagnosis report:")
     print_json(result["report"])
     print("")
     print("Feedback:")
     for line in result["feedback"]:
         print(safe_text(f"- {line}"))
-
+    if result.get("weighted_score") is not None:
+        print("")
+        print("Weighted score:")
+        print_json(result["weighted_score"])
     if args.show_matches:
         matched = [j for j in result.get("module_judgments", []) if j.get("is_correct")]
         if matched:
@@ -383,6 +537,30 @@ def main() -> None:
             print("")
             print("Matched findings:")
             print("- None")
+
+
+    if getattr(args, "ayah_content", False):
+        import sys
+
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+
+        from scripts.system.run_ayah_content_inference import (
+            run_ayah_content_for_manifest_sample,
+            print_ayah_content_report,
+        )
+
+        print()
+        result = run_ayah_content_for_manifest_sample(
+            manifest_path=args.manifest,
+            split=args.ayah_content_split,
+            sample_index=args.sample_index,
+            checkpoint_path=args.ayah_content_checkpoint,
+            decoder_config_path=args.ayah_content_decoder_config,
+            feature_cache_dir=args.ayah_content_feature_cache_dir,
+            device=args.ayah_content_device,
+        )
+        print_ayah_content_report(result)
 
 
 if __name__ == "__main__":

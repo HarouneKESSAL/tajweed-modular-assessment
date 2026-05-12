@@ -1,0 +1,7 @@
+model_name: openai/whisper-tiny
+freeze_encoder: true
+dropout: 0.1
+blank_id: 0
+head_type: bilstm
+head_hidden_dim: 128
+head_num_layers: 1

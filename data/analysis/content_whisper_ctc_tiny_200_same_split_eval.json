@@ -1,0 +1,184 @@
+{
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_whisper_ctc_tiny_200.pt",
+  "model_name": "openai/whisper-tiny",
+  "split": "val",
+  "samples": 28,
+  "metrics": {
+    "exact_match": 0.0,
+    "normalized_exact_match": 0.0,
+    "char_accuracy": 0.24879535147392293,
+    "normalized_char_accuracy": 0.24879535147392293,
+    "mean_edit_distance": 5.928571428571429,
+    "normalized_mean_edit_distance": 5.928571428571429
+  },
+  "items": [
+    {
+      "sample_id": "retasy_train_000029_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "الا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000043_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "النن",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000057_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "ا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000073_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "ال ن",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000158_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "ان ",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000225_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "ايا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000321_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "الن",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000355_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "اي",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000373_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "الا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000382_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "ا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000404_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "ان",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000406_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "ا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000427_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "ان ",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000429_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "ان ن",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000438_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "ا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000494_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "الي",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000501_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "اي",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000516_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "الن ن",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000556_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "ا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000571_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "اسس",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000575_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "الي",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000584_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "ا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000586_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "الا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000638_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "ان",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000671_chunk_00",
+      "expected": "ملك الناس",
+      "predicted": "اس",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000723_chunk_00",
+      "expected": "من الجنة",
+      "predicted": "ان ",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000724_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "اا",
+      "exact": false
+    },
+    {
+      "sample_id": "retasy_train_000747_chunk_01",
+      "expected": "الوسواس",
+      "predicted": "ال",
+      "exact": false
+    }
+  ]
+}

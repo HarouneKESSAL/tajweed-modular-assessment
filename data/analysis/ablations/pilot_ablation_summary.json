@@ -1,0 +1,95 @@
+{
+  "baseline": {
+    "weighted_score": 98.591,
+    "duration_acc": 0.993,
+    "transition_acc": 0.901,
+    "burst_acc": 0.874,
+    "chunk_content_char_accuracy": 0.893,
+    "chunk_content_exact_match": 0.707,
+    "critical_errors": 122,
+    "num_errors": 403
+  },
+  "module_contribution_estimate": [
+    {
+      "module": "duration",
+      "errors": 12,
+      "weighted_sum": 30.0,
+      "severity": "medium/minor",
+      "current_acc": 0.993,
+      "weighted_share": 0.014684287812041116
+    },
+    {
+      "module": "transition",
+      "errors": 68,
+      "weighted_sum": 272.0,
+      "severity": "medium",
+      "current_acc": 0.901,
+      "weighted_share": 0.13313754282917278
+    },
+    {
+      "module": "burst",
+      "errors": 201,
+      "weighted_sum": 521.0,
+      "severity": "minor/medium",
+      "current_acc": 0.874,
+      "weighted_share": 0.25501713166911405
+    },
+    {
+      "module": "chunk_content",
+      "errors": 122,
+      "weighted_sum": 1220.0,
+      "severity": "critical",
+      "current_acc": 0.893,
+      "weighted_share": 0.5971610376896721
+    }
+  ],
+  "ayah_strict_batch": {
+    "samples": 448,
+    "avg_score": 76.21142857142857,
+    "avg_char_accuracy": 0.7621132140627868,
+    "avg_edit_distance": 6.446428571428571,
+    "avg_edit_rate": 0.23788678593721327,
+    "exact_rate": 0.0625,
+    "accepted_rate": 0.0625,
+    "acceptance_counts": {
+      "accepted_exact": 28,
+      "not_accepted": 420
+    },
+    "quality_counts": {
+      "content_verified_exact": 28,
+      "likely_same_ayah_but_not_clean": 127,
+      "same_ayah_candidate_review_required": 170,
+      "partial_content_match_review_required": 56,
+      "weak_or_wrong_content": 51,
+      "almost_correct_review_required": 16
+    }
+  },
+  "expected_text_ctc": {
+    "samples": 448,
+    "free_exact_rate": 0.0625,
+    "expected_text_accepted_rate": 0.11383928571428571,
+    "expected_text_strong_review_rate": 0.40401785714285715,
+    "expected_text_plausible_review_rate": 0.24330357142857142,
+    "avg_free_char_accuracy": 0.7621132140627868,
+    "avg_expected_ctc_loss_per_char": 0.8407779494098053,
+    "avg_expected_ctc_confidence": 0.5052350407191526,
+    "verdict_counts": {
+      "accepted_free_decode_exact": 28,
+      "expected_text_strong_but_review_required": 181,
+      "expected_text_plausible_review_required": 109,
+      "free_decode_similarity_review_required": 13,
+      "not_supported": 94,
+      "accepted_expected_text_near_exact_review_recommended": 23
+    }
+  },
+  "interpretation": {
+    "highest_weight_module": "chunk_content",
+    "highest_error_count_module": "burst",
+    "recommended_next_real_ablations": [
+      "chunk_content decoder/config ablation",
+      "transition localizer ablation",
+      "burst threshold/localization ablation",
+      "ayah strict free-decode vs expected-text CTC review evidence"
+    ]
+  }
+}

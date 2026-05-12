@@ -1,0 +1,290 @@
+{
+  "duration": {
+    "samples": 50,
+    "route_counts": {
+      "duration": 50
+    },
+    "total_positions": 86,
+    "correct_positions": 86,
+    "accuracy": 1.0,
+    "rule_summary": {
+      "ghunnah": {
+        "total": 19,
+        "correct": 19,
+        "accuracy": 1.0
+      },
+      "madd": {
+        "total": 67,
+        "correct": 67,
+        "accuracy": 1.0
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 86,
+      "localized_same_as_sequence": 84,
+      "localized_same_rate": 0.9767441860465116,
+      "localized_supports_gold": 84,
+      "localized_supports_gold_rate": 0.9767441860465116,
+      "localized_supports_sequence": 84,
+      "localized_supports_sequence_rate": 0.9767441860465116,
+      "localized_disagrees_with_sequence": 2,
+      "gold_supported_by_class": {
+        "ghunnah": {
+          "supported": 18,
+          "total": 19,
+          "rate": 0.9473684210526315
+        },
+        "madd": {
+          "supported": 66,
+          "total": 67,
+          "rate": 0.9850746268656716
+        }
+      },
+      "sequence_supported_by_class": {
+        "ghunnah": {
+          "supported": 4,
+          "total": 5,
+          "rate": 0.8
+        },
+        "madd": {
+          "supported": 80,
+          "total": 81,
+          "rate": 0.9876543209876543
+        }
+      }
+    }
+  },
+  "transition": {
+    "available": true,
+    "samples": 50,
+    "accuracy": 0.92,
+    "confusion_matrix": [
+      [
+        25,
+        4,
+        0
+      ],
+      [
+        0,
+        16,
+        0
+      ],
+      [
+        0,
+        0,
+        5
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 29,
+        "correct": 25,
+        "accuracy": 0.8620689655172413
+      },
+      "ikhfa": {
+        "total": 16,
+        "correct": 16,
+        "accuracy": 1.0
+      },
+      "idgham": {
+        "total": 5,
+        "correct": 5,
+        "accuracy": 1.0
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 23,
+      "localized_same_as_whole_verse": 19,
+      "localized_same_rate": 0.8260869565217391,
+      "localized_supports_gold": 7,
+      "localized_supports_gold_rate": 0.30434782608695654,
+      "localized_supports_whole_verse": 7,
+      "localized_supports_whole_verse_rate": 0.30434782608695654,
+      "localized_disagrees_with_whole_verse": 4,
+      "gold_supported_by_class": {
+        "idgham": {
+          "supported": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "ikhfa": {
+          "supported": 3,
+          "total": 3,
+          "rate": 1.0
+        },
+        "none": {
+          "supported": 0,
+          "total": 16,
+          "rate": 0.0
+        }
+      },
+      "whole_verse_supported_by_class": {
+        "idgham": {
+          "supported": 4,
+          "total": 4,
+          "rate": 1.0
+        },
+        "ikhfa": {
+          "supported": 3,
+          "total": 6,
+          "rate": 0.5
+        },
+        "none": {
+          "supported": 0,
+          "total": 13,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "burst": {
+    "available": true,
+    "samples": 50,
+    "accuracy": 0.86,
+    "confusion_matrix": [
+      [
+        31,
+        6
+      ],
+      [
+        1,
+        12
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 37,
+        "correct": 31,
+        "accuracy": 0.8378378378378378
+      },
+      "qalqalah": {
+        "total": 13,
+        "correct": 12,
+        "accuracy": 0.9230769230769231
+      }
+    }
+  },
+  "content": {
+    "available": true,
+    "mode": "chunked",
+    "samples": 50,
+    "split": "val",
+    "split_mode": "reciter",
+    "decoder": {
+      "blank_penalty": 1.0,
+      "use_cleanup": false,
+      "decoder": "lexicon",
+      "beam_width": 1,
+      "decoder_config": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_chunked_decoder.json",
+      "lexicon_source": "full",
+      "lexicon_size": 17,
+      "eval_unique_text_count": 17,
+      "eval_texts_in_lexicon": 50,
+      "eval_text_coverage": 1.0
+    },
+    "exact_match": 0.66,
+    "char_accuracy": 0.7388095238095237,
+    "edit_distance": 1.72
+  },
+  "content_reference_full_verse": {
+    "available": true,
+    "mode": "full_verse",
+    "samples": 50,
+    "split": "val",
+    "exact_match": 0.02,
+    "char_accuracy": 0.6583771170350116,
+    "edit_distance": 5.34
+  },
+  "weighted_scoring": {
+    "scale": 3.0,
+    "evaluation_units": 236,
+    "estimated_average_score": 97.44491525423729,
+    "total_weighted_error_sum": 201.0,
+    "total_scaled_penalty": 603.0,
+    "num_errors": 28,
+    "severity_counts": {
+      "medium": 5,
+      "minor": 6,
+      "critical": 17
+    },
+    "by_module": {
+      "transition": {
+        "num_errors": 4,
+        "weighted_error_sum": 16.0,
+        "severity_counts": {
+          "medium": 4
+        }
+      },
+      "burst": {
+        "num_errors": 7,
+        "weighted_error_sum": 15.0,
+        "severity_counts": {
+          "minor": 6,
+          "medium": 1
+        }
+      },
+      "content": {
+        "num_errors": 17,
+        "weighted_error_sum": 170.0,
+        "severity_counts": {
+          "critical": 17
+        }
+      }
+    },
+    "errors": [
+      {
+        "module": "content",
+        "error_type": "wrong_word",
+        "count": 17,
+        "severity": "critical",
+        "lahn_type": "jali",
+        "confidence": 1.0,
+        "weight": 10.0,
+        "weighted_penalty": 170.0,
+        "description": "Chunked content exact-match failures"
+      },
+      {
+        "module": "transition",
+        "error_type": "wrong_transition_rule",
+        "count": 4,
+        "severity": "medium",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 4.0,
+        "weighted_penalty": 16.0,
+        "description": "Transition aggregate mistakes for gold class none"
+      },
+      {
+        "module": "burst",
+        "error_type": "weak_qalqalah",
+        "count": 6,
+        "severity": "minor",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 2.0,
+        "weighted_penalty": 12.0,
+        "description": "Burst false positives: predicted qalqalah for none"
+      },
+      {
+        "module": "burst",
+        "error_type": "missing_qalqalah",
+        "count": 1,
+        "severity": "medium",
+        "lahn_type": "khafi",
+        "confidence": 1.0,
+        "weight": 3.0,
+        "weighted_penalty": 3.0,
+        "description": "Burst false negatives: missed qalqalah"
+      }
+    ],
+    "notes": [
+      "This is an aggregate estimate built from suite summaries.",
+      "Content exact mismatches are treated as content/wrong_word errors.",
+      "Duration aggregate errors are mapped by rule type.",
+      "Transition aggregate errors are treated as wrong_transition_rule.",
+      "Burst false negatives are missing_qalqalah; false positives are weak_qalqalah."
+    ]
+  },
+  "duration_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\duration_module.pt",
+  "transition_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\transition_module_hardcase.pt"
+}

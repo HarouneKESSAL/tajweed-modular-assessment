@@ -1,0 +1,8 @@
+{
+  "decoder": "beam",
+  "blank_penalty": 0.4,
+  "use_cleanup": false,
+  "beam_width": 10,
+  "lexicon_source": "train",
+  "notes": "Ablation: beam search without eval lexicon."
+}

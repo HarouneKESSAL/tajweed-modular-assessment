@@ -1,0 +1,10 @@
+seed: 1337
+epochs: 3
+batch_size: 2
+learning_rate: 0.001
+weight_decay: 0.0
+val_fraction: 0.2
+split_mode: text
+max_train_samples: 0
+max_val_samples: 0
+device: cpu

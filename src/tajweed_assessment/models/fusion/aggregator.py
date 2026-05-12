@@ -28,11 +28,50 @@ def aggregate_diagnosis(
                 surviving_positions.add(ref_pos)
                 continue
             if step["type"] == "substitution":
-                errors.append(DiagnosisError(position=ref_pos, type="content_error", expected=id_to_phoneme[step["ref"]], predicted=id_to_phoneme[step["hyp"]]))
+                errors.append(
+                    DiagnosisError(
+                        position=ref_pos,
+                        type="content_error",
+                        expected=id_to_phoneme[step["ref"]],
+                        predicted=id_to_phoneme[step["hyp"]],
+                        extra={
+                            "source_module": "content",
+                            "alignment_type": "substitution",
+                            "weighted_error_type": "letter_substitution",
+                            "confidence": 1.0,
+                        },
+                    )
+                )
             elif step["type"] == "deletion":
-                errors.append(DiagnosisError(position=ref_pos, type="content_error", expected=id_to_phoneme[step["ref"]], predicted="<deleted>"))
+                errors.append(
+                    DiagnosisError(
+                        position=ref_pos,
+                        type="content_error",
+                        expected=id_to_phoneme[step["ref"]],
+                        predicted="<deleted>",
+                        extra={
+                            "source_module": "content",
+                            "alignment_type": "deletion",
+                            "weighted_error_type": "missing_word",
+                            "confidence": 1.0,
+                        },
+                    )
+                )
             elif step["type"] == "insertion":
-                errors.append(DiagnosisError(position=ref_pos + 1, type="content_error", expected="<none>", predicted=id_to_phoneme[step["hyp"]]))
+                errors.append(
+                    DiagnosisError(
+                        position=ref_pos + 1,
+                        type="content_error",
+                        expected="<none>",
+                        predicted=id_to_phoneme[step["hyp"]],
+                        extra={
+                            "source_module": "content",
+                            "alignment_type": "insertion",
+                            "weighted_error_type": "extra_word",
+                            "confidence": 1.0,
+                        },
+                    )
+                )
     else:
         surviving_positions.update(range(len(canonical_rules)))
         surviving_positions.update(int(j["position"]) for j in module_judgments)

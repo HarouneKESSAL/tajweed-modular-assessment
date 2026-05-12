@@ -1,0 +1,20 @@
+{
+  "baseline_name": "whole_system_v2",
+  "date": "2026-05-11",
+  "content_gate": {
+    "model": "checkpoints/content_asr_whisper_medium_quran_v2_weighted",
+    "exact_compact_after_muqattaat_norm": 0.7395577395577395,
+    "accepted_exact_after_muqattaat": "301/407",
+    "cer_after_muqattaat_norm": 0.018939729179573414,
+    "remaining_content_errors": 106,
+    "muqattaat_remaining_errors": 0
+  },
+  "tajweed_modules": {
+    "duration_accuracy": 0.9927095990279465,
+    "transition_accuracy": 0.9101,
+    "burst_accuracy": 0.8754
+  },
+  "report_json": "data/analysis/whole_system_status_report_v2.json",
+  "report_md": "data/analysis/whole_system_status_report_v2.md",
+  "decision": "freeze whole-system baseline v2 before burst v2 work"
+}

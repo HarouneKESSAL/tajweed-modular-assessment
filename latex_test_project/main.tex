@@ -1,0 +1,83 @@
+% !TEX TS-program = xelatex
+\documentclass[12pt,a4paper]{report}
+
+% -- Math (must come before bidi/polyglossia) ----------------
+\usepackage{amsmath, amssymb}
+
+% -- Graphics & floats (must come before bidi) ---------------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+
+% -- Tables --------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+
+% -- Colors & listings (must come before bidi) ---------------
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!8}
+}
+
+% -- TikZ (must come before bidi) ----------------------------
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, calc, backgrounds}
+
+% -- Hyperlinks (before bidi) --------------------------------
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=blue!60!black}
+
+% -- Enumitem ------------------------------------------------
+\usepackage{enumitem}
+
+% -- References (before bidi) --------------------------------
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}
+
+% -- Font and language (XeLaTeX) - MUST come last ------------
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{arabic}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+
+% -- Custom colours for TikZ figures -------------------------
+\definecolor{pipeblue}{RGB}{52, 120, 190}
+\definecolor{pipegreen}{RGB}{56, 142, 60}
+\definecolor{pipeorange}{RGB}{230, 120, 30}
+\definecolor{pipegray}{RGB}{110, 110, 110}
+\definecolor{pipeyellow}{RGB}{180, 140, 0}
+\definecolor{pipered}{RGB}{192, 57, 43}
+\definecolor{pipepurple}{RGB}{120, 60, 160}
+
+% -- Title ---------------------------------------------------
+\title{\textbf{A Modular Architecture for Automatic Tajweed Assessment\\
+               of Quranic Recitation}}
+\author{Test Compilation Project}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% -- Test Chapter --------------------------------------------
+% This wrapper includes the chapter from the repository root.
+% If you move this folder elsewhere, copy sec7_development_experimentation.tex
+% into this folder and change the next line to:
+% \input{sec7_development_experimentation}
+\input{../sec7_development_experimentation}
+
+% -- Bibliography --------------------------------------------
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{bibliography}
+
+\end{document}

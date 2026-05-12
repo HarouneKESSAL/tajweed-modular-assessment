@@ -1,0 +1,25 @@
+transition_multilabel_retasy_hf_pilot_v1:
+  checkpoint: checkpoints/transition_multilabel_retasy_hf_pilot_v1.pt
+
+  label_names:
+    - ikhfa
+    - idgham
+
+  thresholds:
+    gold_safe:
+      ikhfa: 0.40
+      idgham: 0.35
+
+    merged_best:
+      ikhfa: 0.45
+      idgham: 0.40
+
+    retasy_extended_best:
+      ikhfa: 0.25
+      idgham: 0.25
+
+    ikhfa_recall_safe:
+      ikhfa: 0.25
+      idgham: 0.35
+
+  recommended_for_system: merged_best

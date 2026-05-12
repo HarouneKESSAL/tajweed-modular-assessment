@@ -14,6 +14,8 @@ import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.utils.data import DataLoader, Subset
 
+from tajweed_assessment.inference.learned_routing import load_learned_routing_predictor_from_config
+from tajweed_assessment.evaluation.transition_multilabel_profiles import evaluate_transition_multilabel_profiles, save_transition_multilabel_profile_report
 from tajweed_assessment.data.labels import TRANSITION_RULES, normalize_rule_name, rule_to_id
 from tajweed_assessment.features.mfcc import extract_mfcc_features
 from tajweed_assessment.features.ssl import DummySSLFeatureExtractor
@@ -27,6 +29,7 @@ from tajweed_assessment.settings import load_yaml
 from tajweed_assessment.utils.io import load_checkpoint, load_json, save_json
 from tajweed_assessment.models.common.decoding import ctc_lexicon_decode, ctc_prefix_beam_search
 from tajweed_assessment.training.metrics import greedy_decode_from_log_probs
+from tajweed_assessment.scoring.weighted_score import load_error_weights
 
 from content.train_chunked_content import (
     ChunkedContentDataset,
@@ -254,21 +257,39 @@ def load_burst_module() -> QalqalahCNN | None:
     return model
 
 
-def load_content_module(checkpoint_name: str) -> tuple[ContentVerificationModule | None, dict | None]:
-    ckpt_path = PROJECT_ROOT / "checkpoints" / checkpoint_name
-    if not ckpt_path.exists():
-        return None, None
-    model_cfg = load_yaml(PROJECT_ROOT / "configs" / "model_content.yaml")
-    ckpt = load_checkpoint(ckpt_path)
-    ckpt_model_cfg = ckpt.get("config", {}).get("model", {})
-    hidden_dim = int(ckpt_model_cfg.get("hidden_dim", model_cfg["hidden_dim"]))
-    num_chars = len(ckpt.get("char_to_id", {})) + 1
+def load_content_module(checkpoint_name: str):
+    checkpoint_path = PROJECT_ROOT / "checkpoints" / checkpoint_name
+    if not checkpoint_path.exists():
+        checkpoint_path = PROJECT_ROOT / checkpoint_name
+
+    ckpt = torch.load(checkpoint_path, map_location="cpu")
+    state = ckpt["model_state_dict"]
+
+    char_to_id = ckpt.get("char_to_id")
+    if not isinstance(char_to_id, dict):
+        raise RuntimeError(f"Content checkpoint has no char_to_id: {checkpoint_path}")
+
+    model_config = ckpt.get("config", {}).get("model", {})
+    hidden_dim = int(model_config.get("hidden_dim", 64))
+
+    lstm_weight = state.get("encoder.lstm.weight_ih_l0")
+    if lstm_weight is not None:
+        inferred_hidden_dim = int(lstm_weight.shape[0] // 4)
+        if inferred_hidden_dim != hidden_dim:
+            print(
+                "[warning] content checkpoint hidden_dim config does not match weights: "
+                f"config={hidden_dim}, inferred={inferred_hidden_dim}. "
+                "Using inferred value."
+            )
+            hidden_dim = inferred_hidden_dim
+
     model = ContentVerificationModule(
         hidden_dim=hidden_dim,
-        num_phonemes=num_chars,
+        num_phonemes=len(char_to_id) + 1,
     )
-    model.load_state_dict(ckpt["model_state_dict"])
+    model.load_state_dict(state)
     model.eval()
+
     return model, ckpt
 
 
@@ -409,6 +430,263 @@ def safe_accuracy(correct: int, total: int) -> float | None:
 
 def format_acc(value: float | None) -> str:
     return f"{value:.3f}" if value is not None else "n/a"
+
+
+def _weight_config(
+    config: dict,
+    module: str,
+    error_type: str,
+) -> tuple[float, str, str]:
+    item = (
+        config.get("categories", {})
+        .get(module, {})
+        .get(error_type, {})
+    )
+
+    if not isinstance(item, dict):
+        return 1.0, "unknown", "unknown"
+
+    return (
+        float(item.get("weight", 1.0)),
+        str(item.get("severity", "unknown")),
+        str(item.get("lahn_type", "unknown")),
+    )
+
+
+def _add_weighted_error_count(
+    accumulator: dict,
+    config: dict,
+    *,
+    module: str,
+    error_type: str,
+    count: int,
+    confidence: float = 1.0,
+    description: str = "",
+) -> None:
+    if count <= 0:
+        return
+
+    confidence = max(0.0, min(1.0, float(confidence)))
+    weight, severity, lahn_type = _weight_config(config, module, error_type)
+    weighted_penalty = float(count) * weight * confidence
+
+    accumulator["num_errors"] += int(count)
+    accumulator["total_weighted_error_sum"] += weighted_penalty
+    accumulator["severity_counts"][severity] = accumulator["severity_counts"].get(severity, 0) + int(count)
+
+    by_module = accumulator["by_module"].setdefault(
+        module,
+        {
+            "num_errors": 0,
+            "weighted_error_sum": 0.0,
+            "severity_counts": {},
+        },
+    )
+    by_module["num_errors"] += int(count)
+    by_module["weighted_error_sum"] += weighted_penalty
+    by_module["severity_counts"][severity] = by_module["severity_counts"].get(severity, 0) + int(count)
+
+    accumulator["errors"].append(
+        {
+            "module": module,
+            "error_type": error_type,
+            "count": int(count),
+            "severity": severity,
+            "lahn_type": lahn_type,
+            "confidence": confidence,
+            "weight": weight,
+            "weighted_penalty": weighted_penalty,
+            "description": description,
+        }
+    )
+
+
+def estimate_suite_weighted_scoring(
+    *,
+    config: dict,
+    duration_summary: dict,
+    transition_summary: dict,
+    burst_summary: dict,
+    content_summary: dict,
+) -> dict:
+    """
+    Estimate severity-aware Tajweed score from aggregate suite metrics.
+
+    This does not replace per-sample scoring. It gives a suite-level view of
+    which module errors matter most under the pedagogical weighting config.
+    """
+    scale = float(config.get("scale", 3.0))
+
+    result = {
+        "scale": scale,
+        "evaluation_units": 0,
+        "estimated_average_score": None,
+        "total_weighted_error_sum": 0.0,
+        "total_scaled_penalty": 0.0,
+        "num_errors": 0,
+        "severity_counts": {},
+        "by_module": {},
+        "errors": [],
+        "notes": [
+            "This is an aggregate estimate built from suite summaries.",
+            "Content exact mismatches are treated as content/wrong_word errors.",
+            "Duration aggregate errors are mapped by rule type.",
+            "Transition aggregate errors are treated as wrong_transition_rule.",
+            "Burst false negatives are missing_qalqalah; false positives are weak_qalqalah.",
+        ],
+    }
+
+    # Duration: position-level rule errors.
+    if duration_summary and duration_summary.get("total_positions") is not None:
+        result["evaluation_units"] += int(duration_summary.get("total_positions") or 0)
+
+        for rule, stats in duration_summary.get("rule_summary", {}).items():
+            total = int(stats.get("total") or 0)
+            correct = int(stats.get("correct") or 0)
+            wrong = max(0, total - correct)
+
+            if rule == "ghunnah":
+                error_type = "ghunnah_duration_error"
+            elif rule == "madd":
+                # Conservative aggregate mapping. The suite summary does not
+                # distinguish minor vs severe madd duration errors.
+                error_type = "minor_madd_duration_error"
+            else:
+                error_type = "minor_madd_duration_error"
+
+            _add_weighted_error_count(
+                result,
+                config,
+                module="duration",
+                error_type=error_type,
+                count=wrong,
+                description=f"Duration rule aggregate mistakes for {rule}",
+            )
+
+    # Transition: sample-level class errors.
+    if transition_summary and transition_summary.get("available", True):
+        result["evaluation_units"] += int(transition_summary.get("samples") or 0)
+
+        for label, stats in transition_summary.get("class_summary", {}).items():
+            total = int(stats.get("total") or 0)
+            correct = int(stats.get("correct") or 0)
+            wrong = max(0, total - correct)
+
+            _add_weighted_error_count(
+                result,
+                config,
+                module="transition",
+                error_type="wrong_transition_rule",
+                count=wrong,
+                description=f"Transition aggregate mistakes for gold class {label}",
+            )
+
+    # Burst: use confusion matrix for better qalqalah error types.
+    if burst_summary and burst_summary.get("available", True):
+        result["evaluation_units"] += int(burst_summary.get("samples") or 0)
+
+        confusion = burst_summary.get("confusion_matrix")
+        if (
+            isinstance(confusion, list)
+            and len(confusion) >= 2
+            and isinstance(confusion[0], list)
+            and isinstance(confusion[1], list)
+            and len(confusion[0]) >= 2
+            and len(confusion[1]) >= 2
+        ):
+            false_qalqalah = int(confusion[0][1])
+            missed_qalqalah = int(confusion[1][0])
+
+            _add_weighted_error_count(
+                result,
+                config,
+                module="burst",
+                error_type="weak_qalqalah",
+                count=false_qalqalah,
+                description="Burst false positives: predicted qalqalah for none",
+            )
+            _add_weighted_error_count(
+                result,
+                config,
+                module="burst",
+                error_type="missing_qalqalah",
+                count=missed_qalqalah,
+                description="Burst false negatives: missed qalqalah",
+            )
+        else:
+            for label, stats in burst_summary.get("class_summary", {}).items():
+                total = int(stats.get("total") or 0)
+                correct = int(stats.get("correct") or 0)
+                wrong = max(0, total - correct)
+                error_type = "missing_qalqalah" if label == "qalqalah" else "weak_qalqalah"
+                _add_weighted_error_count(
+                    result,
+                    config,
+                    module="burst",
+                    error_type=error_type,
+                    count=wrong,
+                    description=f"Burst aggregate mistakes for gold class {label}",
+                )
+
+    # Content: chunk exact mismatches count as high-severity content errors.
+    if content_summary and content_summary.get("available", True):
+        samples = int(content_summary.get("samples") or 0)
+        result["evaluation_units"] += samples
+
+        exact_match = content_summary.get("exact_match")
+        if exact_match is not None:
+            wrong = max(0, int(round(samples * (1.0 - float(exact_match)))))
+            _add_weighted_error_count(
+                result,
+                config,
+                module="content",
+                error_type="wrong_word",
+                count=wrong,
+                description="Chunked content exact-match failures",
+            )
+
+    result["total_weighted_error_sum"] = float(result["total_weighted_error_sum"])
+    result["total_scaled_penalty"] = result["total_weighted_error_sum"] * scale
+
+    units = int(result["evaluation_units"])
+    if units > 0:
+        result["estimated_average_score"] = max(
+            0.0,
+            100.0 - (result["total_scaled_penalty"] / units),
+        )
+
+    # Stable sort by impact.
+    result["errors"] = sorted(
+        result["errors"],
+        key=lambda item: float(item.get("weighted_penalty", 0.0)),
+        reverse=True,
+    )
+
+    return result
+
+
+def print_weighted_scoring_summary(summary: dict) -> None:
+    print("Weighted scoring summary:")
+    if not summary:
+        print("- not available")
+        return
+
+    avg = summary.get("estimated_average_score")
+    avg_text = f"{avg:.3f}" if isinstance(avg, (int, float)) else "n/a"
+    print(f"- estimated_average_score={avg_text}")
+    print(f"- evaluation_units={summary.get('evaluation_units')}")
+    print(f"- num_errors={summary.get('num_errors')}")
+    print(f"- total_weighted_error_sum={summary.get('total_weighted_error_sum'):.3f}")
+    print(f"- total_scaled_penalty={summary.get('total_scaled_penalty'):.3f}")
+    print(f"- severity_counts={summary.get('severity_counts', {})}")
+
+    by_module = summary.get("by_module", {})
+    for module, stats in by_module.items():
+        print(
+            f"- {module}: errors={stats.get('num_errors')} "
+            f"weighted_sum={stats.get('weighted_error_sum'):.3f} "
+            f"severity_counts={stats.get('severity_counts', {})}"
+        )
 
 
 def evaluate_duration_manifest(pipeline: TajweedInferencePipeline, rows: list[dict], limit: int = 0) -> dict:
@@ -558,13 +836,14 @@ def evaluate_transition_manifest(
     localized_label_vocab: tuple[str, ...] = (),
     localized_thresholds: dict[str, float] | None = None,
     localized_index: dict[str, dict] | None = None,
+    transition_thresholds: dict[str, float] | None = None,
 ) -> dict:
     if model is None:
         return {"available": False}
     rows = rows[:limit] if limit > 0 else rows
     ssl_extractor = DummySSLFeatureExtractor(output_dim=64)
     confusion = torch.zeros(len(TRANSITION_RULES), len(TRANSITION_RULES), dtype=torch.long)
-    thresholds = load_transition_thresholds()
+    thresholds = transition_thresholds
     hybrid = {
         "localized_available": 0,
         "localized_same_as_whole_verse": 0,
@@ -684,7 +963,12 @@ def evaluate_transition_manifest(
     return summary
 
 
-def evaluate_burst_manifest(model: QalqalahCNN | None, rows: list[dict], limit: int = 0) -> dict:
+def evaluate_burst_manifest(
+    model: QalqalahCNN | None,
+    rows: list[dict],
+    limit: int = 0,
+    burst_threshold: float | None = None,
+) -> dict:
     if model is None:
         return {"available": False}
     rows = rows[:limit] if limit > 0 else rows
@@ -696,7 +980,13 @@ def evaluate_burst_manifest(model: QalqalahCNN | None, rows: list[dict], limit: 
         x = extract_mfcc_features(row["audio_path"]).unsqueeze(0)
         with torch.no_grad():
             logits = model(x)
-        pred = int(logits.argmax(dim=-1)[0].item())
+
+        if burst_threshold is None:
+            pred = int(logits.argmax(dim=-1)[0].item())
+        else:
+            probs = torch.softmax(logits, dim=-1)
+            qalqalah_prob = float(probs[0, 1].item())
+            pred = 1 if qalqalah_prob >= burst_threshold else 0
         gold = int(row.get("burst_label", 1 if (row.get("canonical_rules") or ["none"])[0] == "qalqalah" else 0))
         confusion[gold, pred] += 1
 
@@ -721,6 +1011,8 @@ def evaluate_burst_manifest(model: QalqalahCNN | None, rows: list[dict], limit: 
         "accuracy": safe_accuracy(correct, total),
         "confusion_matrix": confusion.tolist(),
         "class_summary": per_class,
+        "burst_threshold": burst_threshold,
+        "decision_rule": "argmax" if burst_threshold is None else "qalqalah_probability_threshold",
     }
 
 
@@ -906,6 +1198,8 @@ def evaluate_chunked_content_manifest(
     char_acc_sum = 0.0
     edit_sum = 0.0
 
+    examples = []
+
     with torch.no_grad():
         for batch in loader:
             log_probs = model(batch["x"], batch["input_lengths"])
@@ -916,15 +1210,33 @@ def evaluate_chunked_content_manifest(
                 beam_width=beam_width,
                 lexicon_targets=lexicon_targets,
             )
-            for gold_text, pred_ids in zip(batch["texts"], decoded):
+            batch_ids = batch.get("ids", [""] * len(batch["texts"]))
+            for sample_id, gold_text, pred_ids in zip(batch_ids, batch["texts"], decoded):
                 gold = normalize_chunked_text_target(gold_text)
                 pred = decode_ids(pred_ids, id_to_char)
                 if use_cleanup:
                     pred = chunked_content_postprocess(pred)
+
+                ed = levenshtein(gold, pred)
+                acc = char_accuracy(gold, pred)
+                is_exact = pred == gold
+
                 total += 1
-                exact += int(pred == gold)
-                char_acc_sum += char_accuracy(gold, pred)
-                edit_sum += levenshtein(gold, pred)
+                exact += int(is_exact)
+                char_acc_sum += acc
+                edit_sum += ed
+
+                examples.append({
+                    "id": str(sample_id),
+                    "gold": gold,
+                    "pred": pred,
+                    "exact": bool(is_exact),
+                    "char_accuracy": float(acc),
+                    "edit_distance": int(ed),
+                    "gold_len": len(gold),
+                    "pred_len": len(pred),
+                    "len_delta": len(pred) - len(gold),
+                })
 
     return {
         "available": True,
@@ -932,6 +1244,8 @@ def evaluate_chunked_content_manifest(
         "samples": total,
         "split": split,
         "split_mode": split_mode,
+        "examples": examples,
+        "worst_examples": sorted(examples, key=lambda x: x["char_accuracy"])[:50],
         "decoder": {
             "blank_penalty": blank_penalty,
             "use_cleanup": use_cleanup,
@@ -1023,19 +1337,112 @@ def main() -> None:
     parser.add_argument(
         "--duration-fusion-checkpoint",
         default="",
-        help="Optional duration fusion calibrator checkpoint in checkpoints/. Leave empty to use the conservative duration baseline.",
+        help="Optional duration fusion calibrator checkpoint in checkpoints/. Leave empty to use the approved default if present.",
     )
     parser.add_argument("--transition-checkpoint", default=preferred_transition_checkpoint())
     parser.add_argument("--chunked-content-checkpoint", default="content_chunked_module.pt")
+    parser.add_argument(
+        "--disable-duration-fusion",
+        action="store_true",
+        help="Disable learned duration fusion even if a fusion checkpoint exists.",
+    )
+    parser.add_argument(
+        "--disable-localized-duration",
+        action="store_true",
+        help="Disable the localized duration support model.",
+    )
+    parser.add_argument(
+        "--disable-localized-transition",
+        action="store_true",
+        help="Disable localized transition support analysis.",
+    )
+    parser.add_argument(
+        "--disable-transition-thresholds",
+        action="store_true",
+        help="Deprecated/no-op because transition thresholds are disabled by default.",
+    )
+    parser.add_argument(
+        "--enable-transition-thresholds",
+        action="store_true",
+        help="Enable tuned transition decision thresholds. Default is argmax/no thresholds.",
+    )
     parser.add_argument("--duration-limit", type=int, default=0)
     parser.add_argument("--transition-limit", type=int, default=0)
     parser.add_argument("--burst-limit", type=int, default=0)
+    parser.add_argument(
+        "--burst-threshold",
+        type=float,
+        default=0.47,
+        help="Qalqalah probability threshold. Use a negative value for legacy argmax behavior.",
+    )
     parser.add_argument("--content-limit", type=int, default=0)
     parser.add_argument("--content-split", choices=["train", "val", "full"], default="val")
     parser.add_argument("--content-split-mode", choices=["reciter", "text"], default="reciter")
     parser.add_argument("--content-decoder-config", default="checkpoints/content_chunked_decoder.json")
+    parser.add_argument(
+        "--error-weights",
+        default="configs/error_weights.yaml",
+        help="Path to weighted Tajweed error scoring YAML. Use empty string to disable.",
+    )
     parser.add_argument("--output-json", default="")
+    parser.add_argument(
+        "--transition-multilabel-eval-manifest",
+        default="",
+        help="Optional manifest for evaluating multi-label transition profiles.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-threshold-config",
+        default="configs/transition_multilabel_thresholds.yaml",
+        help="YAML config containing multi-label transition thresholds.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-profiles",
+        nargs="*",
+        default=["gold_safe", "ikhfa_recall_safe", "merged_best", "retasy_extended_best"],
+        help="Threshold profiles to evaluate for the multi-label transition model.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-limit",
+        type=int,
+        default=0,
+        help="Optional sample limit for multi-label transition evaluation.",
+    )
+    parser.add_argument(
+        "--transition-multilabel-output-json",
+        default="",
+        help="Optional output path for multi-label transition profile evaluation JSON.",
+    )
+
+    parser.add_argument(
+        "--learned-routing-profile-comparison",
+        default="",
+        help="Optional routing dataset/manifest for learned routing profile comparison.",
+    )
+    parser.add_argument(
+        "--learned-routing-threshold-config",
+        default="configs/learned_router_v5_thresholds.yaml",
+        help="YAML config for learned routing checkpoint and thresholds.",
+    )
+    parser.add_argument(
+        "--learned-routing-profiles",
+        nargs="*",
+        default=["trusted_retasy_calibrated", "weak_policy_tuned"],
+        help="Learned routing profiles to compare.",
+    )
+    parser.add_argument(
+        "--learned-routing-profile-output-json",
+        default="",
+        help="Optional output path for learned routing profile comparison JSON.",
+    )
+
     args = parser.parse_args()
+
+    error_weight_config = None
+    if args.error_weights:
+        error_weights_path = Path(args.error_weights)
+        if not error_weights_path.is_absolute():
+            error_weights_path = PROJECT_ROOT / error_weights_path
+        error_weight_config = load_error_weights(error_weights_path)
 
     duration_rows = load_jsonl(PROJECT_ROOT / args.duration_manifest)
     transition_rows = load_jsonl(PROJECT_ROOT / args.transition_manifest)
@@ -1045,10 +1452,20 @@ def main() -> None:
 
     duration_model = load_duration_module(args.duration_checkpoint)
     localized_duration_model, localized_duration_labels, localized_duration_thresholds = load_localized_duration_module()
-    duration_fusion_calibrator, duration_fusion_char_vocab = load_duration_fusion_calibrator(args.duration_fusion_checkpoint)
+    if args.disable_localized_duration:
+        localized_duration_model, localized_duration_labels, localized_duration_thresholds = None, tuple(), None
+
+    duration_fusion_calibrator, duration_fusion_char_vocab = (
+        (None, None)
+        if args.disable_duration_fusion
+        else load_duration_fusion_calibrator(args.duration_fusion_checkpoint)
+    )
     transition_model = load_transition_module(args.transition_checkpoint)
     localized_transition_model, localized_transition_labels, localized_transition_thresholds = load_localized_transition_module()
+    if args.disable_localized_transition:
+        localized_transition_model, localized_transition_labels, localized_transition_thresholds = None, tuple(), None
     burst_model = load_burst_module()
+    transition_thresholds = load_transition_thresholds() if args.enable_transition_thresholds else None
     chunked_content_model, chunked_content_checkpoint = load_content_module(args.chunked_content_checkpoint)
     full_content_model, full_content_checkpoint = load_content_module("content_module.pt")
     pipeline = TajweedInferencePipeline(
@@ -1059,7 +1476,7 @@ def main() -> None:
         localized_duration_module=localized_duration_model,
         localized_transition_module=localized_transition_model,
         burst_module=burst_model,
-        transition_thresholds=load_transition_thresholds(),
+        transition_thresholds=transition_thresholds,
         localized_duration_thresholds=localized_duration_thresholds,
         localized_transition_thresholds=localized_transition_thresholds,
         localized_duration_labels=localized_duration_labels or ("ghunnah", "madd"),
@@ -1076,8 +1493,15 @@ def main() -> None:
         localized_label_vocab=localized_transition_labels,
         localized_thresholds=localized_transition_thresholds,
         localized_index=build_localized_transition_index(localized_transition_rows),
+        transition_thresholds=transition_thresholds,
     )
-    burst_summary = evaluate_burst_manifest(burst_model, burst_rows, args.burst_limit)
+    burst_threshold = None if args.burst_threshold < 0 else float(args.burst_threshold)
+    burst_summary = evaluate_burst_manifest(
+        burst_model,
+        burst_rows,
+        args.burst_limit,
+        burst_threshold=burst_threshold,
+    )
     content_summary = evaluate_chunked_content_manifest(
         chunked_content_model,
         chunked_content_checkpoint,
@@ -1095,14 +1519,34 @@ def main() -> None:
         limit=args.content_limit,
     )
 
+    weighted_scoring_summary = None
+    if error_weight_config is not None:
+        weighted_scoring_summary = estimate_suite_weighted_scoring(
+            config=error_weight_config,
+            duration_summary=duration_summary,
+            transition_summary=transition_summary,
+            burst_summary=burst_summary,
+            content_summary=content_summary,
+        )
+
     summary = {
         "duration": duration_summary,
         "transition": transition_summary,
         "burst": burst_summary,
         "content": content_summary,
         "content_reference_full_verse": content_reference_summary,
+        "weighted_scoring": weighted_scoring_summary,
         "duration_checkpoint": str(PROJECT_ROOT / "checkpoints" / args.duration_checkpoint),
         "transition_checkpoint": str(PROJECT_ROOT / "checkpoints" / args.transition_checkpoint),
+        "ablation_flags": {
+            "disable_duration_fusion": bool(args.disable_duration_fusion),
+            "disable_localized_duration": bool(args.disable_localized_duration),
+            "disable_localized_transition": bool(args.disable_localized_transition),
+            "disable_transition_thresholds": bool(args.disable_transition_thresholds),
+            "enable_transition_thresholds": bool(args.enable_transition_thresholds),
+            "transition_threshold_default": "argmax_no_thresholds",
+            "burst_threshold": None if args.burst_threshold < 0 else float(args.burst_threshold),
+        },
     }
 
     print("")
@@ -1136,9 +1580,124 @@ def main() -> None:
     print("Content reference:")
     print_content_summary(content_reference_summary)
 
+    print("")
+    print_weighted_scoring_summary(weighted_scoring_summary or {})
+
     if args.output_json:
         save_json(summary, PROJECT_ROOT / args.output_json)
         print("")
+    if getattr(args, "learned_routing_profile_comparison", ""):
+        import sys
+
+        routing_scripts_dir = PROJECT_ROOT / "scripts" / "routing"
+        if str(routing_scripts_dir) not in sys.path:
+            sys.path.insert(0, str(routing_scripts_dir))
+
+        from compare_learned_routing_profiles import (
+            load_jsonl as load_routing_compare_jsonl,
+            metrics_against_current,
+            resolve_path as resolve_routing_compare_path,
+        )
+
+        routing_rows = load_routing_compare_jsonl(
+            resolve_routing_compare_path(args.learned_routing_profile_comparison)
+        )
+
+        learned_routing_comparison_result = {
+            "dataset": str(resolve_routing_compare_path(args.learned_routing_profile_comparison)),
+            "threshold_config": str(resolve_routing_compare_path(args.learned_routing_threshold_config)),
+            "profiles": args.learned_routing_profiles,
+            "samples": len(routing_rows),
+            "results": {},
+        }
+
+        for profile in args.learned_routing_profiles:
+            learned_predictor = load_learned_routing_predictor_from_config(
+                config_path=args.learned_routing_threshold_config,
+                profile=profile,
+                device="cpu",
+            )
+
+            predictions = []
+            for row in routing_rows:
+                learned_text = (
+                    row.get("text")
+                    or row.get("normalized_text")
+                    or row.get("source_text")
+                    or ""
+                )
+                pred = learned_predictor.predict(
+                    audio_path=row.get("audio_path", ""),
+                    text=learned_text,
+                )
+                predictions.append(pred.to_dict())
+
+            learned_routing_comparison_result["results"][profile] = metrics_against_current(
+                rows=routing_rows,
+                predictions=predictions,
+                max_examples=40,
+            )
+
+        learned_routing_output_json = args.learned_routing_profile_output_json
+        if not learned_routing_output_json:
+            base_output = getattr(args, "output_json", "")
+            if base_output:
+                output_path = Path(base_output)
+                learned_routing_output_json = str(
+                    output_path.with_name(output_path.stem + "_learned_routing_profiles.json")
+                )
+            else:
+                learned_routing_output_json = "data/analysis/learned_routing_profiles_from_suite.json"
+
+        learned_routing_output_path = Path(learned_routing_output_json)
+        learned_routing_output_path.parent.mkdir(parents=True, exist_ok=True)
+        learned_routing_output_path.write_text(
+            json.dumps(learned_routing_comparison_result, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+        print("\nLearned routing profile comparison summary:")
+        for profile, metrics in learned_routing_comparison_result["results"].items():
+            print(
+                f"- {profile}: "
+                f"exact_agreement={metrics['exact_agreement']:.3f} "
+                f"macro_f1_vs_current={metrics['macro_f1_vs_current']:.3f} "
+                f"disagreements={metrics['disagreement_type_counts']}"
+            )
+        print(f"Saved learned routing profile comparison JSON to {learned_routing_output_json}")
+
+    if getattr(args, "transition_multilabel_eval_manifest", ""):
+        transition_multilabel_result = evaluate_transition_multilabel_profiles(
+            manifest_path=args.transition_multilabel_eval_manifest,
+            threshold_config=args.transition_multilabel_threshold_config,
+            profiles=args.transition_multilabel_profiles,
+            limit=args.transition_multilabel_limit,
+            device="cpu",
+        )
+
+        transition_multilabel_output_json = args.transition_multilabel_output_json
+        if not transition_multilabel_output_json:
+            base_output = getattr(args, "output_json", "")
+            if base_output:
+                transition_multilabel_output_json = str(Path(base_output).with_name(Path(base_output).stem + "_transition_multilabel_profiles.json"))
+            else:
+                transition_multilabel_output_json = "data/analysis/transition_multilabel_profiles_from_suite.json"
+
+        save_transition_multilabel_profile_report(
+            transition_multilabel_output_json,
+            transition_multilabel_result,
+        )
+
+        print("\nTransition multi-label profile summary:")
+        for profile, metrics in transition_multilabel_result["results"].items():
+            print(
+                f"- {profile}: "
+                f"exact={metrics['exact_match']:.3f} "
+                f"macro_f1={metrics['macro_f1']:.3f} "
+                f"predicted={metrics['predicted_combo_counts']}"
+            )
+        print(f"Saved transition multi-label JSON to {transition_multilabel_output_json}")
+
         print(f"Saved suite JSON to {PROJECT_ROOT / args.output_json}")
 
 

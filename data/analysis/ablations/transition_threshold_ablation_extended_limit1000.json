@@ -1,0 +1,178 @@
+{
+  "transition_manifest": "data\\manifests\\retasy_transition_multilabel_extended.jsonl",
+  "transition_checkpoint": "transition_module_hardcase.pt",
+  "limit": 1000,
+  "with_thresholds": {
+    "available": true,
+    "samples": 840,
+    "accuracy": 0.8345238095238096,
+    "confusion_matrix": [
+      [
+        450,
+        53,
+        61
+      ],
+      [
+        18,
+        209,
+        0
+      ],
+      [
+        6,
+        1,
+        42
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 564,
+        "correct": 450,
+        "accuracy": 0.7978723404255319
+      },
+      "ikhfa": {
+        "total": 227,
+        "correct": 209,
+        "accuracy": 0.920704845814978
+      },
+      "idgham": {
+        "total": 49,
+        "correct": 42,
+        "accuracy": 0.8571428571428571
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 308,
+      "localized_same_as_whole_verse": 261,
+      "localized_same_rate": 0.8474025974025974,
+      "localized_supports_gold": 112,
+      "localized_supports_gold_rate": 0.36363636363636365,
+      "localized_supports_whole_verse": 105,
+      "localized_supports_whole_verse_rate": 0.3409090909090909,
+      "localized_disagrees_with_whole_verse": 47,
+      "gold_supported_by_class": {
+        "idgham": {
+          "supported": 35,
+          "total": 39,
+          "rate": 0.8974358974358975
+        },
+        "ikhfa": {
+          "supported": 77,
+          "total": 78,
+          "rate": 0.9871794871794872
+        },
+        "none": {
+          "supported": 0,
+          "total": 191,
+          "rate": 0.0
+        }
+      },
+      "whole_verse_supported_by_class": {
+        "idgham": {
+          "supported": 31,
+          "total": 38,
+          "rate": 0.8157894736842105
+        },
+        "ikhfa": {
+          "supported": 74,
+          "total": 89,
+          "rate": 0.8314606741573034
+        },
+        "none": {
+          "supported": 0,
+          "total": 181,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "without_thresholds": {
+    "available": true,
+    "samples": 840,
+    "accuracy": 0.8523809523809524,
+    "confusion_matrix": [
+      [
+        469,
+        42,
+        53
+      ],
+      [
+        21,
+        205,
+        1
+      ],
+      [
+        7,
+        0,
+        42
+      ]
+    ],
+    "class_summary": {
+      "none": {
+        "total": 564,
+        "correct": 469,
+        "accuracy": 0.8315602836879432
+      },
+      "ikhfa": {
+        "total": 227,
+        "correct": 205,
+        "accuracy": 0.9030837004405287
+      },
+      "idgham": {
+        "total": 49,
+        "correct": 42,
+        "accuracy": 0.8571428571428571
+      }
+    },
+    "hybrid_support": {
+      "localized_available": 308,
+      "localized_same_as_whole_verse": 268,
+      "localized_same_rate": 0.8701298701298701,
+      "localized_supports_gold": 112,
+      "localized_supports_gold_rate": 0.36363636363636365,
+      "localized_supports_whole_verse": 104,
+      "localized_supports_whole_verse_rate": 0.33766233766233766,
+      "localized_disagrees_with_whole_verse": 40,
+      "gold_supported_by_class": {
+        "idgham": {
+          "supported": 35,
+          "total": 39,
+          "rate": 0.8974358974358975
+        },
+        "ikhfa": {
+          "supported": 77,
+          "total": 78,
+          "rate": 0.9871794871794872
+        },
+        "none": {
+          "supported": 0,
+          "total": 191,
+          "rate": 0.0
+        }
+      },
+      "whole_verse_supported_by_class": {
+        "idgham": {
+          "supported": 31,
+          "total": 35,
+          "rate": 0.8857142857142857
+        },
+        "ikhfa": {
+          "supported": 73,
+          "total": 84,
+          "rate": 0.8690476190476191
+        },
+        "none": {
+          "supported": 0,
+          "total": 189,
+          "rate": 0.0
+        }
+      }
+    }
+  },
+  "delta": {
+    "with_thresholds_accuracy": 0.8345238095238096,
+    "without_thresholds_accuracy": 0.8523809523809524,
+    "delta_accuracy_without_minus_with": 0.017857142857142794,
+    "with_thresholds_errors": 138,
+    "without_thresholds_errors": 124
+  }
+}

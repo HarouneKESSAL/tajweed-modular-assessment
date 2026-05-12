@@ -1,0 +1,72 @@
+version: 1
+scale: 3.0
+
+categories:
+  content:
+    wrong_word:
+      weight: 10.0
+      severity: critical
+      lahn_type: jali
+
+    missing_word:
+      weight: 10.0
+      severity: critical
+      lahn_type: jali
+
+    extra_word:
+      weight: 8.0
+      severity: major
+      lahn_type: jali
+
+    letter_substitution:
+      weight: 7.0
+      severity: major
+      lahn_type: jali
+
+    minor_text_normalization_difference:
+      weight: 1.0
+      severity: minor
+      lahn_type: technical
+
+  duration:
+    severe_madd_error:
+      weight: 4.0
+      severity: medium
+      lahn_type: khafi
+
+    minor_madd_duration_error:
+      weight: 2.0
+      severity: minor
+      lahn_type: khafi
+
+    ghunnah_duration_error:
+      weight: 3.0
+      severity: medium
+      lahn_type: khafi
+
+  transition:
+    wrong_transition_rule:
+      weight: 4.0
+      severity: medium
+      lahn_type: khafi
+
+    missing_ghunnah_transition:
+      weight: 4.0
+      severity: medium
+      lahn_type: khafi
+
+    weak_ikhfa:
+      weight: 3.0
+      severity: medium
+      lahn_type: khafi
+
+  burst:
+    missing_qalqalah:
+      weight: 3.0
+      severity: medium
+      lahn_type: khafi
+
+    weak_qalqalah:
+      weight: 2.0
+      severity: minor
+      lahn_type: khafi

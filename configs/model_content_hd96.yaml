@@ -1,0 +1,4 @@
+ssl_model_name: WAV2VEC2_BASE
+hidden_dim: 96
+dropout: 0.1
+num_phonemes: 11

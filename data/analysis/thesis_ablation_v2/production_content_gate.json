@@ -1,0 +1,15 @@
+{
+  "content_gate_model_dir": "checkpoints/content_asr_whisper_medium_quran_v2_weighted",
+  "content_gate_error_report": "data/analysis/whisper_quran_medium_v2_weighted_content_gate_errors_normfix.json",
+  "content_gate_policy": "data/analysis/whisper_quran_medium_v2_weighted_gate_policy.json",
+  "decision": "promote_v2_normfix",
+  "reason": {
+    "v1_exact_after_rate": 0.7346437346437347,
+    "v2_exact_after_rate": 0.7395577395577395,
+    "v1_cer_after": 0.02053279051243473,
+    "v2_cer_after": 0.018939729179573414,
+    "v1_errors_after_muqattaat": 108,
+    "v2_errors_after_muqattaat": 106,
+    "muqattaat_remaining_errors": 0
+  }
+}

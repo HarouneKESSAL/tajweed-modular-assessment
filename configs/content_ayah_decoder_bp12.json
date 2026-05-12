@@ -1,0 +1,7 @@
+{
+  "decoder": "greedy",
+  "blank_penalty": 1.2,
+  "model_family": "content_ayah_hf_v2_balanced",
+  "checkpoint": "checkpoints/content_ayah_hf_v2_balanced_hd96.pt",
+  "notes": "HF ayah/full-verse decoder. v2 balanced bp1.2 achieved char_accuracy ~= 0.762 and edit_distance ~= 6.446 on clean HF ayah val."
+}

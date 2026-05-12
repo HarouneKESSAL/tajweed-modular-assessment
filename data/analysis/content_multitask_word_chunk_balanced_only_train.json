@@ -1,0 +1,15 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_multitask_word_chunk_balanced_only.pt",
+  "stage_results": [
+    {
+      "stage_name": "balanced_only",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_ckpt_safe_stage1_balanced.jsonl",
+      "best_metrics": {
+        "samples": 500.0,
+        "exact_match": 0.822,
+        "char_accuracy": 0.930838095238095,
+        "edit_distance": 0.448
+      }
+    }
+  ]
+}

@@ -3,3 +3,6 @@ torchaudio>=2.1
 PyYAML>=6.0
 numpy>=1.26
 pytest>=8.0
+transformers>=4.45
+accelerate>=0.34
+safetensors>=0.4
