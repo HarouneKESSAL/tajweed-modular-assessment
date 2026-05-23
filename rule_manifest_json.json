@@ -1,0 +1,1474 @@
+{
+  "manifest_version": "1.0.0",
+  "project": {
+    "name": "modular_tajweed_assessment",
+    "purpose": "Rule metadata used to transform structured diagnosis reports into pedagogical learner-facing feedback.",
+    "primary_language": "en",
+    "secondary_language": "ar"
+  },
+  "recitation_profile": {
+    "riwayah": "Hafs_an_Asim",
+    "duration_unit": "harakah_count",
+    "default_message_style": {
+      "en": "simple_pedagogical",
+      "ar": "مبسّط_تعليمي"
+    },
+    "note": {
+      "en": "Exact duration counts may be overridden by occurrence-level metadata in the annotated Qur'an reference.",
+      "ar": "يمكن أن تُعدَّل أزمنة المد أو الغنة حسب البيانات الخاصة بكل موضع في ملف القرآن المعلَّم."
+    }
+  },
+  "integration": {
+    "lookup_key": "expected_rule",
+    "content_priority": true,
+    "severity_policy_enabled": true,
+    "rule_feedback_condition": "Generate rule feedback only when content_judgment is correct or accepted.",
+    "fallback_policy": "If diagnosis_label or error_type is not available, use the rule-level generic_error message and the main corrective_message.",
+    "diagnosis_inputs": [
+      "sample_id",
+      "surah_name",
+      "verse_key",
+      "position",
+      "char",
+      "word",
+      "aligned_interval",
+      "content_judgment",
+      "expected_rule",
+      "predicted_rule",
+      "source_module",
+      "confidence",
+      "detail",
+      "evidence",
+      "diagnosis_label"
+    ],
+    "recommended_output_fields": [
+      "feedback_type",
+      "rule_id",
+      "display_name",
+      "location",
+      "classical_severity",
+      "severity_level",
+      "severity_score",
+      "feedback_priority",
+      "default_error_message",
+      "corrective_message",
+      "positive_message",
+      "priority"
+    ]
+  },
+  "severity_policy": {
+    "purpose": {
+      "en": "Defines how multiple detected errors are ordered so that the learner receives the most important feedback first.",
+      "ar": "تحدد هذه السياسة كيفية ترتيب الأخطاء المتعددة حتى يتلقى المتعلم أهم الملاحظات أولًا."
+    },
+    "classical_categories": {
+      "lahn_jali": {
+        "arabic_name": "اللحن الجلي",
+        "english_name": "Obvious or manifest error",
+        "system_scope": "content_level_errors",
+        "severity_level": "critical",
+        "base_score": 100,
+        "description": {
+          "en": "A content-level deviation that changes the canonical recited unit, such as substitution, deletion, insertion, or vowel distortion affecting word identity or meaning.",
+          "ar": "خطأ ظاهر يمسّ النص المقروء نفسه، مثل الاستبدال أو الحذف أو الزيادة أو تغيير الحركة بما يؤثر في هوية الكلمة أو معناها."
+        },
+        "system_action": {
+          "en": "Prioritise content correction and suppress normal rule feedback at the same position until the content is valid.",
+          "ar": "تُقدَّم ملاحظة تصحيح المحتوى أولًا، ولا تُعرض ملاحظة الحكم التجويدي العادية في الموضع نفسه حتى يصح المحتوى."
+        }
+      },
+      "lahn_khafi": {
+        "arabic_name": "اللحن الخفي",
+        "english_name": "Hidden or subtle error",
+        "system_scope": "rule_level_tajweed_errors",
+        "severity_level": "major_to_minor",
+        "base_score_range": [30, 90],
+        "description": {
+          "en": "A rule-level Tajweed deviation where the recited content is identifiable but the expected manner of recitation was not correctly realised.",
+          "ar": "خطأ خفي يتعلق بطريقة أداء الحكم التجويدي، مع بقاء اللفظ القرآني معروفًا ومميزًا."
+        },
+        "system_action": {
+          "en": "Generate rule feedback after content validity is established, then order errors by rule impact, confidence, and pedagogical usefulness.",
+          "ar": "تُولَّد ملاحظات الأحكام بعد التأكد من صحة المحتوى، ثم تُرتَّب حسب أثر الحكم ودرجة الثقة والفائدة التعليمية."
+        }
+      }
+    },
+    "severity_levels": {
+      "critical": {
+        "rank": 1,
+        "score_range": [90, 100],
+        "display_label": {
+          "en": "Critical",
+          "ar": "شديد جدًا"
+        },
+        "meaning": {
+          "en": "Content-level problem or a high-impact error that must be corrected before detailed rule feedback.",
+          "ar": "مشكلة في المحتوى أو خطأ مؤثر جدًا يجب تصحيحه قبل الدخول في تفاصيل الأحكام."
+        }
+      },
+      "high": {
+        "rank": 2,
+        "score_range": [70, 89],
+        "display_label": {
+          "en": "High priority",
+          "ar": "أولوية عالية"
+        },
+        "meaning": {
+          "en": "Major Tajweed realisation error that is clearly audible and pedagogically important.",
+          "ar": "خطأ تجويدي مؤثر ومسموع بوضوح وله أهمية تعليمية عالية."
+        }
+      },
+      "medium": {
+        "rank": 3,
+        "score_range": [45, 69],
+        "display_label": {
+          "en": "Medium priority",
+          "ar": "أولوية متوسطة"
+        },
+        "meaning": {
+          "en": "Rule-level issue that should be corrected but is less severe than content or major rule errors.",
+          "ar": "ملاحظة على الحكم التجويدي ينبغي تصحيحها، لكنها أقل شدة من أخطاء المحتوى أو الأخطاء التجويدية الكبرى."
+        }
+      },
+      "low": {
+        "rank": 4,
+        "score_range": [20, 44],
+        "display_label": {
+          "en": "Low priority",
+          "ar": "أولوية منخفضة"
+        },
+        "meaning": {
+          "en": "Minor, uncertain, or refinement-level observation that can be shown after more important feedback.",
+          "ar": "ملاحظة بسيطة أو غير مؤكدة أو متعلقة بالتحسين، وتُعرض بعد الملاحظات الأهم."
+        }
+      }
+    },
+    "default_ordering_rules": [
+      {
+        "order": 1,
+        "criterion": "content_before_rule",
+        "description": {
+          "en": "Content errors are always shown before rule-level errors at the same or nearby position.",
+          "ar": "تُعرض أخطاء المحتوى دائمًا قبل أخطاء الأحكام في الموضع نفسه أو المواضع القريبة."
+        }
+      },
+      {
+        "order": 2,
+        "criterion": "severity_score_descending",
+        "description": {
+          "en": "Within the same category, show the highest severity score first.",
+          "ar": "داخل الفئة نفسها، تُعرض الملاحظة ذات درجة الخطورة الأعلى أولًا."
+        }
+      },
+      {
+        "order": 3,
+        "criterion": "confidence_descending",
+        "description": {
+          "en": "When severity is similar, show higher-confidence errors first.",
+          "ar": "عند تقارب الخطورة، تُعرض الأخطاء ذات الثقة الأعلى أولًا."
+        }
+      },
+      {
+        "order": 4,
+        "criterion": "canonical_position_ascending",
+        "description": {
+          "en": "When severity and confidence are similar, preserve Qur'anic order.",
+          "ar": "عند تقارب الخطورة والثقة، يُحافَظ على ترتيب المواضع في الآية."
+        }
+      }
+    ],
+    "severity_score_formula": {
+      "description": {
+        "en": "A practical score used for feedback ordering. It can be computed by the aggregation layer or feedback layer.",
+        "ar": "درجة عملية تُستخدم لترتيب الملاحظات، ويمكن حسابها في طبقة التجميع أو طبقة التغذية الراجعة."
+      },
+      "formula": "severity_score = base_score + confidence_adjustment + repetition_adjustment + evidence_adjustment",
+      "components": {
+        "base_score": "From content template or rule_severity_defaults.",
+        "confidence_adjustment": "Add up to +5 for high confidence; subtract up to -10 for low confidence.",
+        "repetition_adjustment": "Add up to +10 when the same error type repeats several times in the same recitation.",
+        "evidence_adjustment": "Add up to +5 when acoustic evidence is strong or measured deviation is large."
+      },
+      "clamp_range": [0, 100]
+    },
+    "content_severity_defaults": {
+      "deletion": {
+        "classical_severity": "lahn_jali",
+        "severity_level": "critical",
+        "base_score": 100
+      },
+      "substitution": {
+        "classical_severity": "lahn_jali",
+        "severity_level": "critical",
+        "base_score": 100
+      },
+      "insertion": {
+        "classical_severity": "lahn_jali",
+        "severity_level": "critical",
+        "base_score": 95
+      },
+      "vowel_distortion": {
+        "classical_severity": "lahn_jali",
+        "severity_level": "critical",
+        "base_score": 95
+      },
+      "low_alignment_confidence": {
+        "classical_severity": "uncertain",
+        "severity_level": "medium",
+        "base_score": 55
+      }
+    },
+    "rule_severity_defaults": {
+      "ghunnah": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "high",
+        "base_score": 80,
+        "reason": {
+          "en": "Ghunnah is a core audible rule and is often central to learner correction.",
+          "ar": "الغنة حكم مسموع وأساسي، وغالبًا ما يكون تصحيحه مهمًا للمتعلم."
+        }
+      },
+      "madd": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "high",
+        "base_score": 75,
+        "reason": {
+          "en": "Madd duration errors are salient and directly measurable, especially when the elongation is clearly too short or too long.",
+          "ar": "أخطاء زمن المد واضحة وقابلة للقياس، خاصة عندما يكون المد أقصر أو أطول من المطلوب بوضوح."
+        }
+      },
+      "ikhfa": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "high",
+        "base_score": 78,
+        "reason": {
+          "en": "Ikhfa combines transition and ghunnah, so incorrect realisation often affects the audible quality of the rule.",
+          "ar": "الإخفاء يجمع بين الانتقال والغنة، لذلك فإن الخطأ فيه يؤثر غالبًا في جودة الحكم المسموعة."
+        }
+      },
+      "idgham_bighunnah": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "high",
+        "base_score": 78,
+        "reason": {
+          "en": "Incorrect merging or missing ghunnah changes the expected transition behaviour.",
+          "ar": "ضعف الإدغام أو غياب الغنة يغيّر طريقة الانتقال المتوقعة بين الحروف."
+        }
+      },
+      "idgham_bilaghunnah": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "high",
+        "base_score": 76,
+        "reason": {
+          "en": "This rule is high priority because adding or omitting the merge changes the expected recitation manner.",
+          "ar": "هذا الحكم ذو أولوية عالية لأن ترك الإدغام أو إضافة الغنة يغيّر طريقة الأداء المتوقعة."
+        }
+      },
+      "iqlab": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "high",
+        "base_score": 78,
+        "reason": {
+          "en": "Iqlab requires a specific conversion with ghunnah before ba, so missing it is a major rule-level deviation.",
+          "ar": "الإقلاب يحتاج إلى قلب مخصوص مع الغنة قبل الباء، وتركه يُعد خطأً مهمًا على مستوى الحكم."
+        }
+      },
+      "qalqalah": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "medium",
+        "base_score": 60,
+        "reason": {
+          "en": "Qalqalah is important but often treated after content, duration, and major transition issues unless it is completely missing or exaggerated.",
+          "ar": "القلقلة مهمة، لكنها غالبًا تأتي بعد أخطاء المحتوى والمدة والانتقال الكبرى، إلا إذا كانت مفقودة تمامًا أو مبالغًا فيها."
+        }
+      },
+      "hamzat_wasl": {
+        "classical_severity": "lahn_khafi_or_jali_context_dependent",
+        "severity_level": "medium",
+        "base_score": 55,
+        "reason": {
+          "en": "Its severity depends on whether the error changes the recited content or only affects connected realisation.",
+          "ar": "تعتمد شدته على ما إذا كان الخطأ يغيّر المحتوى المقروء أو يقتصر على هيئة الوصل."
+        }
+      },
+      "lam_shamsiyyah": {
+        "classical_severity": "lahn_khafi",
+        "severity_level": "medium",
+        "base_score": 58,
+        "reason": {
+          "en": "It is a contextual assimilation issue and is usually prioritised after content and major duration or transition errors.",
+          "ar": "هو خطأ إدغام سياقي، وعادة يُرتَّب بعد أخطاء المحتوى وأخطاء المدة أو الانتقال الكبرى."
+        }
+      },
+      "silent_letters": {
+        "classical_severity": "context_dependent",
+        "severity_level": "low",
+        "base_score": 40,
+        "reason": {
+          "en": "Silent segment issues should be escalated only when they create a clear insertion or content-level deviation.",
+          "ar": "ترتفع أولوية المواضع غير المنطوقة فقط إذا أدت إلى زيادة واضحة أو خطأ في المحتوى."
+        }
+      }
+    },
+    "presentation_policy": {
+      "max_feedback_items_default": 3,
+      "group_repeated_errors": true,
+      "grouping_message": {
+        "en": "This error occurred several times; practise the rule as a repeated pattern.",
+        "ar": "تكرر هذا الخطأ عدة مرات؛ تدرّب على الحكم كنمط متكرر."
+      },
+      "show_low_confidence_items": "only_if_no_higher_priority_errors",
+      "do_not_show_rule_feedback_when_content_error_same_position": true
+    }
+  },
+  "content_feedback": {
+    "feedback_type": "content",
+    "feedback_priority": "critical",
+    "classical_severity": "lahn_jali",
+    "severity_level": "critical",
+    "base_score": 100,
+    "principle": {
+      "en": "If the expected Qur'anic content is omitted, substituted, inserted, or not reliably aligned, content feedback must be produced before rule feedback.",
+      "ar": "إذا حُذف النص القرآني المتوقع أو استُبدل أو أُضيف صوت زائد أو لم يكن الاصطفاف موثوقًا، فيجب تقديم ملاحظة المحتوى قبل ملاحظة الحكم التجويدي."
+    },
+    "templates": {
+      "deletion": {
+        "diagnosis_label": "content_deletion",
+        "default_error_message": {
+          "en": "The expected sound or word at this position was not clearly recited.",
+          "ar": "لم يظهر الصوت أو اللفظ المتوقع في هذا الموضع بوضوح."
+        },
+        "corrective_message": {
+          "en": "First recite the missing Qur'anic unit correctly, then repeat the segment and apply the Tajweed rule after the content is present.",
+          "ar": "ابدأ أولًا بتصحيح اللفظ القرآني الناقص، ثم أعد قراءة المقطع وطبّق الحكم التجويدي بعد ظهور اللفظ الصحيح."
+        }
+      },
+      "substitution": {
+        "diagnosis_label": "content_substitution",
+        "default_error_message": {
+          "en": "A different sound or word seems to have been recited at this position.",
+          "ar": "يبدو أنه تم نطق صوت أو كلمة مختلفة في هذا الموضع."
+        },
+        "corrective_message": {
+          "en": "Focus first on reciting the correct Qur'anic unit. After the word or sound is correct, repeat it with the required Tajweed rule.",
+          "ar": "ركّز أولًا على نطق اللفظ القرآني الصحيح. وبعد تصحيح الكلمة أو الصوت، أعده مع تطبيق الحكم التجويدي المطلوب."
+        }
+      },
+      "insertion": {
+        "diagnosis_label": "content_insertion",
+        "default_error_message": {
+          "en": "An extra sound seems to have been inserted near this position.",
+          "ar": "يبدو أنه أُضيف صوت زائد قرب هذا الموضع."
+        },
+        "corrective_message": {
+          "en": "Repeat the segment slowly and avoid adding sounds that are not present in the canonical text.",
+          "ar": "أعد قراءة المقطع ببطء، وتجنّب إضافة أصوات غير موجودة في النص القرآني."
+        }
+      },
+      "low_alignment_confidence": {
+        "diagnosis_label": "uncertain_content_alignment",
+        "default_error_message": {
+          "en": "The system could not align this part of the recitation with enough confidence.",
+          "ar": "لم يتمكن النظام من مطابقة هذا الجزء من التلاوة بثقة كافية."
+        },
+        "corrective_message": {
+          "en": "Repeat this part more clearly and at a steady pace so the recited content can be checked accurately.",
+          "ar": "أعد قراءة هذا الجزء بوضوح وبسرعة معتدلة حتى يمكن التحقق من المحتوى بدقة."
+        }
+      }
+    }
+  },
+  "rule_aliases": {
+    "idgham": {
+      "resolution_type": "contextual_alias",
+      "description": {
+        "en": "Resolve generic idgham into idgham_bighunnah or idgham_bilaghunnah using the following letter when available.",
+        "ar": "يُحوَّل الإدغام العام إلى إدغام بغنة أو إدغام بلا غنة حسب الحرف التالي عند توفره."
+      },
+      "conditions": [
+        {
+          "if_next_letter_in": ["ي", "ن", "م", "و"],
+          "resolve_to": "idgham_bighunnah"
+        },
+        {
+          "if_next_letter_in": ["ل", "ر"],
+          "resolve_to": "idgham_bilaghunnah"
+        }
+      ],
+      "fallback_rule_id": "idgham_bighunnah"
+    },
+    "idgom": {
+      "resolve_to": "idgham"
+    },
+    "ikhfaa": {
+      "resolve_to": "ikhfa"
+    },
+    "ikhfa_haqiqi": {
+      "resolve_to": "ikhfa"
+    },
+    "mad": {
+      "resolve_to": "madd"
+    },
+    "al_mad": {
+      "resolve_to": "madd"
+    }
+  },
+  "rules": {
+    "madd": {
+      "rule_id": "madd",
+      "arabic_name": "المد",
+      "english_name": "Elongation",
+      "display_name": {
+        "en": "Madd",
+        "ar": "المد"
+      },
+      "family": "madd",
+      "status": "active",
+      "acoustic_category": "duration",
+      "source_module": "duration",
+      "pedagogical_description": {
+        "en": "Madd is the elongation of a vowel sound when a madd letter or madd condition occurs. The learner must sustain the vowel for the required number of counts according to the specific madd type.",
+        "ar": "المد هو إطالة صوت الحركة عند وجود حرف مد أو سبب من أسباب المد. ويجب على المتعلم أن يحافظ على زمن المد المطلوب حسب نوع المد في ذلك الموضع."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Maintain the elongated vowel smoothly for the expected duration without cutting it short or extending it beyond the accepted range.",
+          "ar": "حافظ على صوت المد بسلاسة طوال الزمن المطلوب، دون تقصيره أو إطالته أكثر من الحد المقبول."
+        },
+        "default_duration_counts": {
+          "min": 2,
+          "target": 2,
+          "max": 6,
+          "note": {
+            "en": "The exact count depends on the madd subtype. Occurrence-level metadata should override this default when available.",
+            "ar": "يعتمد العدد الدقيق للحركات على نوع المد، ويُفضَّل الاعتماد على بيانات الموضع إذا كانت متوفرة."
+          }
+        },
+        "acoustic_cues": [
+          "stable_vowel_continuation",
+          "sufficient_temporal_duration",
+          "no_abrupt_early_cutoff",
+          "no_unnecessary_added_vowel"
+        ],
+        "learner_cues": {
+          "en": [
+            "Keep the vowel sound continuous.",
+            "Do not stop the sound too early.",
+            "Do not add an extra syllable after the madd."
+          ],
+          "ar": [
+            "اجعل صوت المد متصلًا دون انقطاع.",
+            "لا تقطع الصوت قبل اكتمال الزمن المطلوب.",
+            "لا تضف مقطعًا زائدًا بعد المد."
+          ]
+        }
+      },
+      "variants": {
+        "madd_tabi_i": {
+          "arabic_name": "المد الطبيعي",
+          "display_name": {
+            "en": "Natural Madd",
+            "ar": "المد الطبيعي"
+          },
+          "duration_counts": {
+            "min": 2,
+            "target": 2,
+            "max": 2
+          }
+        },
+        "madd_muttasil": {
+          "arabic_name": "المد المتصل",
+          "display_name": {
+            "en": "Connected Madd",
+            "ar": "المد المتصل"
+          },
+          "duration_counts": {
+            "min": 4,
+            "target": 4,
+            "max": 5
+          }
+        },
+        "madd_munfasil": {
+          "arabic_name": "المد المنفصل",
+          "display_name": {
+            "en": "Separated Madd",
+            "ar": "المد المنفصل"
+          },
+          "duration_counts": {
+            "min": 4,
+            "target": 4,
+            "max": 5
+          }
+        },
+        "madd_lazim": {
+          "arabic_name": "المد اللازم",
+          "display_name": {
+            "en": "Compulsory Madd",
+            "ar": "المد اللازم"
+          },
+          "duration_counts": {
+            "min": 6,
+            "target": 6,
+            "max": 6
+          }
+        },
+        "madd_arid_lissukun": {
+          "arabic_name": "المد العارض للسكون",
+          "display_name": {
+            "en": "Temporary Madd due to stopping",
+            "ar": "المد العارض للسكون"
+          },
+          "duration_counts": {
+            "allowed": [2, 4, 6]
+          }
+        }
+      },
+      "error_types": {
+        "too_short": {
+          "diagnosis_label": "insufficient_duration",
+          "default_error_message": {
+            "en": "The madd at this position was shorter than expected.",
+            "ar": "كان المد في هذا الموضع أقصر من المطلوب."
+          },
+          "corrective_message": {
+            "en": "Sustain the madd vowel for the required count. Recite it slowly and keep the sound continuous until the count is complete.",
+            "ar": "أَطِل صوت المد بمقدار الحركات المطلوبة، واقرأه بهدوء مع إبقاء الصوت متصلًا حتى يكتمل الزمن."
+          }
+        },
+        "too_long": {
+          "diagnosis_label": "excessive_duration",
+          "default_error_message": {
+            "en": "The madd at this position was held longer than the expected range.",
+            "ar": "تمت إطالة المد في هذا الموضع أكثر من الحد المطلوب."
+          },
+          "corrective_message": {
+            "en": "Reduce the elongation so that the vowel stays within the accepted madd count for this rule.",
+            "ar": "قلّل الإطالة حتى يبقى صوت المد ضمن عدد الحركات المقبول لهذا الحكم."
+          }
+        },
+        "unstable": {
+          "diagnosis_label": "unstable_madd",
+          "default_error_message": {
+            "en": "The madd sound was not stable during the elongation.",
+            "ar": "لم يكن صوت المد ثابتًا أثناء الإطالة."
+          },
+          "corrective_message": {
+            "en": "Keep the vowel steady and avoid breaking, shaking, or changing the sound during the madd.",
+            "ar": "حافظ على ثبات صوت المد، وتجنب قطعه أو اضطرابه أو تغييره أثناء الإطالة."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "The madd was not realised with the expected duration or stability.",
+          "ar": "لم يُؤدَّ المد بالزمن أو الثبات المطلوب."
+        },
+        "corrective_message": {
+          "en": "Repeat the word and maintain the madd vowel according to its required count.",
+          "ar": "أعد الكلمة وحافظ على صوت المد حسب عدد الحركات المطلوب."
+        }
+      },
+      "positive_message": {
+        "en": "The madd was maintained with an acceptable duration.",
+        "ar": "تم الحفاظ على المد بزمن مقبول."
+      },
+      "feedback_priority": "medium"
+    },
+    "ghunnah": {
+      "rule_id": "ghunnah",
+      "arabic_name": "الغنة",
+      "english_name": "Nasalization",
+      "display_name": {
+        "en": "Ghunnah",
+        "ar": "الغنة"
+      },
+      "family": "nasalization",
+      "status": "active",
+      "acoustic_category": "duration",
+      "source_module": "duration",
+      "pedagogical_description": {
+        "en": "Ghunnah is a nasal sound produced through the nasal passage, especially with noon or meem carrying shaddah and in several noon sakinah or tanween rules. It should be sustained clearly for its expected count.",
+        "ar": "الغنة صوت يخرج من الخيشوم، وتظهر خصوصًا في النون أو الميم المشددتين وفي بعض أحكام النون الساكنة والتنوين. ويجب أن تُؤدَّى بوضوح مع المحافظة على زمنها المطلوب."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Produce a clear nasal resonance and sustain it for about two counts without turning it into a plain oral sound.",
+          "ar": "أدِّ الغنة بصوت أنفي واضح، وحافظ عليها بمقدار حركتين تقريبًا دون تحويلها إلى صوت عادي من الفم."
+        },
+        "duration_counts": {
+          "min": 2,
+          "target": 2,
+          "max": 2
+        },
+        "acoustic_cues": [
+          "nasal_resonance",
+          "sustained_sound",
+          "continuity_across_nasal_segment",
+          "no_abrupt_early_release"
+        ],
+        "learner_cues": {
+          "en": [
+            "Let the sound pass through the nose.",
+            "Hold the nasal sound for two counts.",
+            "Do not replace it with a plain vowel stretch."
+          ],
+          "ar": [
+            "اجعل الصوت يخرج من الخيشوم.",
+            "أمسك صوت الغنة بمقدار حركتين.",
+            "لا تجعلها مجرد إطالة لحركة عادية."
+          ]
+        }
+      },
+      "error_types": {
+        "too_short": {
+          "diagnosis_label": "insufficient_ghunnah_duration",
+          "default_error_message": {
+            "en": "The ghunnah at this position was too short.",
+            "ar": "كانت الغنة في هذا الموضع أقصر من المطلوب."
+          },
+          "corrective_message": {
+            "en": "Hold the nasal sound for two counts. Let the sound pass through the nose before moving to the next letter.",
+            "ar": "أَطِل صوت الغنة بمقدار حركتين، واجعل الصوت يخرج من الخيشوم قبل الانتقال إلى الحرف التالي."
+          }
+        },
+        "missing_nasalization": {
+          "diagnosis_label": "missing_ghunnah",
+          "default_error_message": {
+            "en": "The expected nasal quality of the ghunnah was not clearly produced.",
+            "ar": "لم تظهر الصفة الأنفية للغنة بوضوح."
+          },
+          "corrective_message": {
+            "en": "Repeat the segment while keeping a clear nasal resonance. You should feel the sound resonate through the nose.",
+            "ar": "أعد قراءة المقطع مع إظهار صوت أنفي واضح، وحاول أن تشعر برنين الصوت في الخيشوم."
+          }
+        },
+        "confused_with_madd": {
+          "diagnosis_label": "duration_rule_confusion",
+          "default_error_message": {
+            "en": "This position required ghunnah, but the sound was closer to a madd-like elongation.",
+            "ar": "هذا الموضع يحتاج إلى غنة، لكن الأداء كان أقرب إلى إطالة تشبه المد."
+          },
+          "corrective_message": {
+            "en": "Do not only lengthen the vowel. Focus on producing nasal resonance for the noon or meem sound.",
+            "ar": "لا تكتفِ بإطالة الصوت، بل ركّز على إظهار الرنين الأنفي في النون أو الميم."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "The ghunnah was not realised clearly enough.",
+          "ar": "لم تُؤدَّ الغنة بوضوح كافٍ."
+        },
+        "corrective_message": {
+          "en": "Repeat the position with clear nasal resonance and keep it for two counts.",
+          "ar": "أعد الموضع مع إظهار رنين أنفي واضح والمحافظة عليه بمقدار حركتين."
+        }
+      },
+      "positive_message": {
+        "en": "The ghunnah was clear and sustained for the expected duration.",
+        "ar": "كانت الغنة واضحة وممتدة بالزمن المطلوب."
+      },
+      "feedback_priority": "high"
+    },
+    "ikhfa": {
+      "rule_id": "ikhfa",
+      "arabic_name": "الإخفاء",
+      "english_name": "Concealment",
+      "display_name": {
+        "en": "Ikhfa",
+        "ar": "الإخفاء"
+      },
+      "family": "nun_sakinah_tanween",
+      "status": "active",
+      "acoustic_category": "transition",
+      "source_module": "transition",
+      "trigger_summary": {
+        "en": "Noon sakinah or tanween followed by one of the ikhfa letters.",
+        "ar": "نُون ساكنة أو تنوين يأتي بعدهما حرف من حروف الإخفاء."
+      },
+      "trigger_letters": ["ت", "ث", "ج", "د", "ذ", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ف", "ق", "ك"],
+      "pedagogical_description": {
+        "en": "Ikhfa is a concealed pronunciation of noon sakinah or tanween before specific letters. The sound is neither fully clear like izhar nor fully merged like idgham, and it is accompanied by ghunnah.",
+        "ar": "الإخفاء هو نطق النون الساكنة أو التنوين بحالة بين الإظهار والإدغام قبل حروف مخصوصة، مع وجود غنة. فلا تُظهر النون إظهارًا كاملًا ولا تُدغم إدغامًا كاملًا."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Conceal the noon or tanween while preparing for the following letter, with a nasal sound held for about two counts.",
+          "ar": "أخفِ النون أو التنوين مع التهيؤ للحرف التالي، وحافظ على الغنة بمقدار حركتين تقريبًا."
+        },
+        "duration_counts": {
+          "min": 2,
+          "target": 2,
+          "max": 2
+        },
+        "acoustic_cues": [
+          "partial_concealment",
+          "nasal_resonance",
+          "smooth_transition_to_next_letter",
+          "no_full_clear_noon_release"
+        ],
+        "learner_cues": {
+          "en": [
+            "Do not pronounce the noon fully.",
+            "Do not merge it completely into the next letter.",
+            "Keep a nasal sound during the hidden part."
+          ],
+          "ar": [
+            "لا تُظهر النون إظهارًا كاملًا.",
+            "لا تُدغمها إدغامًا كاملًا في الحرف التالي.",
+            "حافظ على صوت الغنة أثناء الإخفاء."
+          ]
+        }
+      },
+      "error_types": {
+        "too_clear": {
+          "diagnosis_label": "ikhfa_realized_as_izhar",
+          "default_error_message": {
+            "en": "The ikhfa was pronounced too clearly, as if the noon or tanween was fully shown.",
+            "ar": "نُطق الإخفاء بوضوح زائد، كأن النون أو التنوين أُظهِرا إظهارًا كاملًا."
+          },
+          "corrective_message": {
+            "en": "Do not pronounce the noon fully. Keep it hidden between clarity and merging, and sustain the nasal sound before the next letter.",
+            "ar": "لا تُظهر النون كاملة. اجعلها بين الإظهار والإدغام، وحافظ على الغنة قبل الحرف التالي."
+          }
+        },
+        "too_merged": {
+          "diagnosis_label": "ikhfa_realized_as_idgham",
+          "default_error_message": {
+            "en": "The ikhfa was too strongly merged into the following letter.",
+            "ar": "كان الإخفاء مدمجًا بقوة في الحرف التالي وكأنه إدغام."
+          },
+          "corrective_message": {
+            "en": "Keep some concealment before the next letter instead of fully merging the noon or tanween into it.",
+            "ar": "أبقِ شيئًا من الإخفاء قبل الحرف التالي بدل إدغام النون أو التنوين فيه إدغامًا كاملًا."
+          }
+        },
+        "missing_ghunnah": {
+          "diagnosis_label": "ikhfa_without_ghunnah",
+          "default_error_message": {
+            "en": "The ikhfa was missing its nasal sound.",
+            "ar": "لم تظهر الغنة المصاحبة للإخفاء."
+          },
+          "corrective_message": {
+            "en": "Add a clear ghunnah during the concealed part and hold it for about two counts.",
+            "ar": "أظهر غنة واضحة أثناء الإخفاء، وحافظ عليها بمقدار حركتين تقريبًا."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "The ikhfa transition was not realised correctly.",
+          "ar": "لم يُؤدَّ انتقال الإخفاء بطريقة صحيحة."
+        },
+        "corrective_message": {
+          "en": "Repeat the transition with the noon or tanween concealed and with clear ghunnah before the next letter.",
+          "ar": "أعد الانتقال مع إخفاء النون أو التنوين وإظهار الغنة قبل الحرف التالي."
+        }
+      },
+      "positive_message": {
+        "en": "The ikhfa was concealed correctly with nasalization.",
+        "ar": "تم الإخفاء بطريقة صحيحة مع وجود الغنة."
+      },
+      "feedback_priority": "high"
+    },
+    "idgham_bighunnah": {
+      "rule_id": "idgham_bighunnah",
+      "arabic_name": "الإدغام بغنة",
+      "english_name": "Assimilation with nasalization",
+      "display_name": {
+        "en": "Idgham with Ghunnah",
+        "ar": "الإدغام بغنة"
+      },
+      "family": "nun_sakinah_tanween",
+      "status": "active",
+      "acoustic_category": "transition",
+      "source_module": "transition",
+      "trigger_summary": {
+        "en": "Noon sakinah or tanween followed by ya, noon, meem, or waw when the rule context applies.",
+        "ar": "نُون ساكنة أو تنوين يأتي بعدهما أحد حروف: ي، ن، م، و، عند تحقق شرط الحكم."
+      },
+      "trigger_letters": ["ي", "ن", "م", "و"],
+      "pedagogical_description": {
+        "en": "Idgham with ghunnah merges the noon sakinah or tanween into the following letter while preserving nasalization.",
+        "ar": "الإدغام بغنة هو إدخال النون الساكنة أو التنوين في الحرف التالي مع بقاء صوت الغنة."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Merge into the following letter smoothly while keeping a clear nasal sound for about two counts.",
+          "ar": "ادمج النون أو التنوين في الحرف التالي بسلاسة، مع إبقاء غنة واضحة بمقدار حركتين تقريبًا."
+        },
+        "duration_counts": {
+          "min": 2,
+          "target": 2,
+          "max": 2
+        },
+        "acoustic_cues": [
+          "assimilation_into_next_letter",
+          "nasal_resonance",
+          "smooth_boundary_transition",
+          "absence_of_fully_separate_noon"
+        ],
+        "learner_cues": {
+          "en": [
+            "Do not separate the noon sound.",
+            "Merge into the next letter.",
+            "Keep the nasal sound during the merge."
+          ],
+          "ar": [
+            "لا تفصل صوت النون.",
+            "ادمجه في الحرف التالي.",
+            "حافظ على الغنة أثناء الإدغام."
+          ]
+        }
+      },
+      "error_types": {
+        "not_merged": {
+          "diagnosis_label": "missing_idgham",
+          "default_error_message": {
+            "en": "The noon or tanween was not sufficiently merged into the following letter.",
+            "ar": "لم تُدمج النون أو التنوين في الحرف التالي بالقدر المطلوب."
+          },
+          "corrective_message": {
+            "en": "Avoid separating the noon sound. Move smoothly into the next letter while keeping the ghunnah.",
+            "ar": "تجنب فصل صوت النون، وانتقل بسلاسة إلى الحرف التالي مع المحافظة على الغنة."
+          }
+        },
+        "missing_ghunnah": {
+          "diagnosis_label": "idgham_without_ghunnah",
+          "default_error_message": {
+            "en": "The idgham was produced without the expected ghunnah.",
+            "ar": "أُدّي الإدغام دون الغنة المطلوبة."
+          },
+          "corrective_message": {
+            "en": "Keep the merge, but add nasal resonance and sustain it for about two counts.",
+            "ar": "حافظ على الإدغام، لكن أضف صوت الغنة وأمسكه بمقدار حركتين تقريبًا."
+          }
+        },
+        "too_clear": {
+          "diagnosis_label": "idgham_realized_as_izhar",
+          "default_error_message": {
+            "en": "The idgham was too clear, as if the noon or tanween was pronounced separately.",
+            "ar": "كان الإدغام واضحًا أكثر من اللازم، كأن النون أو التنوين نُطقا منفصلين."
+          },
+          "corrective_message": {
+            "en": "Merge the noon or tanween into the following letter instead of showing it separately.",
+            "ar": "أدمج النون أو التنوين في الحرف التالي بدل إظهارهما منفصلين."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "The idgham with ghunnah was not realised correctly.",
+          "ar": "لم يُؤدَّ الإدغام بغنة بطريقة صحيحة."
+        },
+        "corrective_message": {
+          "en": "Merge smoothly into the following letter and keep the nasal sound for about two counts.",
+          "ar": "ادمج بسلاسة في الحرف التالي، وحافظ على صوت الغنة بمقدار حركتين تقريبًا."
+        }
+      },
+      "positive_message": {
+        "en": "The idgham with ghunnah was merged correctly with nasalization.",
+        "ar": "تم الإدغام بغنة بطريقة صحيحة مع بقاء الصوت الأنفي."
+      },
+      "feedback_priority": "high"
+    },
+    "idgham_bilaghunnah": {
+      "rule_id": "idgham_bilaghunnah",
+      "arabic_name": "الإدغام بلا غنة",
+      "english_name": "Assimilation without nasalization",
+      "display_name": {
+        "en": "Idgham without Ghunnah",
+        "ar": "الإدغام بلا غنة"
+      },
+      "family": "nun_sakinah_tanween",
+      "status": "active",
+      "acoustic_category": "transition",
+      "source_module": "transition",
+      "trigger_summary": {
+        "en": "Noon sakinah or tanween followed by lam or ra when the rule context applies.",
+        "ar": "نُون ساكنة أو تنوين يأتي بعدهما اللام أو الراء عند تحقق شرط الحكم."
+      },
+      "trigger_letters": ["ل", "ر"],
+      "pedagogical_description": {
+        "en": "Idgham without ghunnah merges the noon sakinah or tanween into the following lam or ra without preserving nasalization.",
+        "ar": "الإدغام بلا غنة هو إدخال النون الساكنة أو التنوين في اللام أو الراء دون إبقاء صوت الغنة."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Merge directly into the following lam or ra without adding nasal resonance.",
+          "ar": "أدمج النون أو التنوين مباشرة في اللام أو الراء دون إضافة غنة."
+        },
+        "acoustic_cues": [
+          "assimilation_into_next_letter",
+          "smooth_transition",
+          "absence_of_separate_noon",
+          "absence_of_ghunnah"
+        ],
+        "learner_cues": {
+          "en": [
+            "Do not separate the noon sound.",
+            "Do not add nasalization.",
+            "Move directly into lam or ra."
+          ],
+          "ar": [
+            "لا تفصل صوت النون.",
+            "لا تضف غنة.",
+            "انتقل مباشرة إلى اللام أو الراء."
+          ]
+        }
+      },
+      "error_types": {
+        "not_merged": {
+          "diagnosis_label": "missing_idgham",
+          "default_error_message": {
+            "en": "The noon or tanween was not sufficiently merged into the following letter.",
+            "ar": "لم تُدمج النون أو التنوين في الحرف التالي بالقدر المطلوب."
+          },
+          "corrective_message": {
+            "en": "Merge the noon or tanween into the following lam or ra without separating it.",
+            "ar": "أدمج النون أو التنوين في اللام أو الراء دون فصلهما."
+          }
+        },
+        "extra_ghunnah": {
+          "diagnosis_label": "unwanted_ghunnah",
+          "default_error_message": {
+            "en": "A nasal sound was added, but this idgham should be without ghunnah.",
+            "ar": "أُضيف صوت غنة، لكن هذا الإدغام يكون بلا غنة."
+          },
+          "corrective_message": {
+            "en": "Remove the nasal resonance and merge directly into the following letter.",
+            "ar": "احذف الرنين الأنفي، وأدمج مباشرة في الحرف التالي."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "The idgham without ghunnah was not realised correctly.",
+          "ar": "لم يُؤدَّ الإدغام بلا غنة بطريقة صحيحة."
+        },
+        "corrective_message": {
+          "en": "Merge directly into the next lam or ra without adding nasalization.",
+          "ar": "أدمج مباشرة في اللام أو الراء دون إضافة غنة."
+        }
+      },
+      "positive_message": {
+        "en": "The idgham without ghunnah was merged correctly.",
+        "ar": "تم الإدغام بلا غنة بطريقة صحيحة."
+      },
+      "feedback_priority": "high"
+    },
+    "iqlab": {
+      "rule_id": "iqlab",
+      "arabic_name": "الإقلاب",
+      "english_name": "Conversion",
+      "display_name": {
+        "en": "Iqlab",
+        "ar": "الإقلاب"
+      },
+      "family": "nun_sakinah_tanween",
+      "status": "active",
+      "acoustic_category": "transition",
+      "source_module": "transition",
+      "trigger_summary": {
+        "en": "Noon sakinah or tanween followed by ba.",
+        "ar": "نُون ساكنة أو تنوين يأتي بعدهما حرف الباء."
+      },
+      "trigger_letters": ["ب"],
+      "pedagogical_description": {
+        "en": "Iqlab changes the noon sakinah or tanween into a hidden meem-like sound before ba, with ghunnah.",
+        "ar": "الإقلاب هو قلب النون الساكنة أو التنوين إلى صوت يشبه الميم المخفاة قبل الباء، مع وجود الغنة."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Convert the noon or tanween into a concealed meem-like sound before ba, with nasalization for about two counts.",
+          "ar": "حوّل النون أو التنوين إلى صوت ميم مخفاة قبل الباء، مع غنة بمقدار حركتين تقريبًا."
+        },
+        "duration_counts": {
+          "min": 2,
+          "target": 2,
+          "max": 2
+        },
+        "acoustic_cues": [
+          "meem_like_conversion",
+          "nasal_resonance",
+          "smooth_preparation_for_ba",
+          "no_clear_noon_pronunciation"
+        ],
+        "learner_cues": {
+          "en": [
+            "Do not pronounce a clear noon.",
+            "Prepare the lips for a hidden meem before ba.",
+            "Keep the nasal sound for two counts."
+          ],
+          "ar": [
+            "لا تنطق النون واضحة.",
+            "هيّئ الشفتين لصوت ميم مخفاة قبل الباء.",
+            "حافظ على الغنة بمقدار حركتين."
+          ]
+        }
+      },
+      "error_types": {
+        "not_converted": {
+          "diagnosis_label": "missing_iqlab",
+          "default_error_message": {
+            "en": "The expected iqlab conversion was not clearly produced.",
+            "ar": "لم يظهر قلب النون أو التنوين إلى ميم مخفاة بوضوح."
+          },
+          "corrective_message": {
+            "en": "Change the noon or tanween into a concealed meem-like sound before pronouncing ba.",
+            "ar": "حوّل النون أو التنوين إلى صوت ميم مخفاة قبل نطق الباء."
+          }
+        },
+        "missing_ghunnah": {
+          "diagnosis_label": "iqlab_without_ghunnah",
+          "default_error_message": {
+            "en": "The iqlab was missing its nasal sound.",
+            "ar": "لم تظهر الغنة المصاحبة للإقلاب."
+          },
+          "corrective_message": {
+            "en": "Keep the converted meem-like sound nasal and sustain it for about two counts before ba.",
+            "ar": "اجعل صوت الميم المخفاة أنفيًا، وحافظ عليه بمقدار حركتين تقريبًا قبل الباء."
+          }
+        },
+        "too_clear_noon": {
+          "diagnosis_label": "iqlab_realized_as_izhar",
+          "default_error_message": {
+            "en": "The noon or tanween was pronounced too clearly instead of being converted before ba.",
+            "ar": "نُطقت النون أو التنوين بوضوح زائد بدل قلبهما قبل الباء."
+          },
+          "corrective_message": {
+            "en": "Avoid showing the noon clearly. Convert it into a hidden meem-like sound with ghunnah before ba.",
+            "ar": "تجنب إظهار النون بوضوح، وحوّلها إلى ميم مخفاة مع الغنة قبل الباء."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "The iqlab was not realised correctly.",
+          "ar": "لم يُؤدَّ الإقلاب بطريقة صحيحة."
+        },
+        "corrective_message": {
+          "en": "Convert the noon or tanween into a hidden meem-like sound and keep the ghunnah before ba.",
+          "ar": "حوّل النون أو التنوين إلى ميم مخفاة، وحافظ على الغنة قبل الباء."
+        }
+      },
+      "positive_message": {
+        "en": "The iqlab was converted correctly with nasalization.",
+        "ar": "تم الإقلاب بطريقة صحيحة مع الغنة."
+      },
+      "feedback_priority": "high"
+    },
+    "qalqalah": {
+      "rule_id": "qalqalah",
+      "arabic_name": "القلقلة",
+      "english_name": "Echoing or bouncing release",
+      "display_name": {
+        "en": "Qalqalah",
+        "ar": "القلقلة"
+      },
+      "family": "qalqalah",
+      "status": "active",
+      "acoustic_category": "burst",
+      "source_module": "burst",
+      "trigger_letters": ["ق", "ط", "ب", "ج", "د"],
+      "pedagogical_description": {
+        "en": "Qalqalah is a light echoing release produced on specific consonants when they are sakin or when stopping on them. It should create a brief release without adding a full vowel.",
+        "ar": "القلقلة هي اضطراب أو نبرة خفيفة تظهر عند حروف مخصوصة إذا كانت ساكنة أو عند الوقف عليها. وينبغي أن تكون إطلاقًا قصيرًا مضبوطًا دون إضافة حركة كاملة."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Produce a short, controlled release or bounce on the qalqalah letter without turning it into an added vowel.",
+          "ar": "أخرج حرف القلقلة بإطلاق قصير مضبوط دون تحويله إلى حركة زائدة."
+        },
+        "acoustic_cues": [
+          "brief_local_release",
+          "clear_consonant_burst",
+          "short_bounce_like_event",
+          "no_full_added_vowel_after_consonant"
+        ],
+        "learner_cues": {
+          "en": [
+            "Let the consonant release briefly.",
+            "Do not exaggerate the bounce.",
+            "Do not add a full vowel after the letter."
+          ],
+          "ar": [
+            "أظهر إطلاق الحرف بصورة قصيرة.",
+            "لا تبالغ في القلقلة.",
+            "لا تضف حركة كاملة بعد الحرف."
+          ]
+        }
+      },
+      "error_types": {
+        "missing_release": {
+          "diagnosis_label": "missing_qalqalah",
+          "default_error_message": {
+            "en": "The qalqalah release was not clearly produced.",
+            "ar": "لم تظهر قلقلة الحرف بوضوح."
+          },
+          "corrective_message": {
+            "en": "Give the qalqalah letter a short controlled bounce, especially at the point of release, without adding a full vowel.",
+            "ar": "أعطِ حرف القلقلة نبرة قصيرة مضبوطة عند خروجه، دون إضافة حركة كاملة بعده."
+          }
+        },
+        "excessive_release": {
+          "diagnosis_label": "excessive_qalqalah",
+          "default_error_message": {
+            "en": "The qalqalah was exaggerated.",
+            "ar": "كانت القلقلة مبالغًا فيها."
+          },
+          "corrective_message": {
+            "en": "Make the release shorter and lighter. The sound should bounce briefly, not become a long or heavy extra syllable.",
+            "ar": "اجعل القلقلة أقصر وأخف. ينبغي أن تكون نبرة قصيرة، لا مقطعًا طويلًا أو ثقيلًا."
+          }
+        },
+        "added_vowel": {
+          "diagnosis_label": "qalqalah_with_added_vowel",
+          "default_error_message": {
+            "en": "The qalqalah sounded like an added vowel after the consonant.",
+            "ar": "بدت القلقلة كأنها حركة زائدة بعد الحرف."
+          },
+          "corrective_message": {
+            "en": "Keep the qalqalah as a brief release only. Do not add a full fatha, damma, or kasra after the letter.",
+            "ar": "اجعل القلقلة إطلاقًا قصيرًا فقط، ولا تضف فتحة أو ضمة أو كسرة كاملة بعد الحرف."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "The qalqalah was not realised correctly.",
+          "ar": "لم تُؤدَّ القلقلة بطريقة صحيحة."
+        },
+        "corrective_message": {
+          "en": "Repeat the letter with a short, controlled release and avoid adding an extra vowel.",
+          "ar": "أعد الحرف مع إطلاق قصير مضبوط، وتجنب إضافة حركة زائدة."
+        }
+      },
+      "positive_message": {
+        "en": "The qalqalah release was clear and controlled.",
+        "ar": "كانت القلقلة واضحة ومضبوطة."
+      },
+      "feedback_priority": "medium"
+    },
+    "hamzat_wasl": {
+      "rule_id": "hamzat_wasl",
+      "arabic_name": "همزة الوصل",
+      "english_name": "Connecting Hamzah",
+      "display_name": {
+        "en": "Hamzat al-Wasl",
+        "ar": "همزة الوصل"
+      },
+      "family": "contextual_realisation",
+      "status": "planned",
+      "acoustic_category": "contextual",
+      "source_module": "contextual",
+      "pedagogical_description": {
+        "en": "Hamzat al-Wasl is pronounced when beginning from it, but it is dropped in connected recitation when preceded by another pronounced sound.",
+        "ar": "همزة الوصل تُنطق عند البدء بها، وتسقط في درج الكلام إذا سبقها صوت منطوق."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Pronounce the hamzah only when starting from it, and omit it during connected recitation when it should be joined to the previous word.",
+          "ar": "انطق الهمزة عند البدء فقط، واتركها في الوصل عندما يجب وصل الكلمة بما قبلها."
+        },
+        "acoustic_cues": [
+          "context_dependent_presence_or_absence",
+          "no_extra_glottal_onset_in_connected_reading",
+          "clear_onset_when_starting"
+        ],
+        "learner_cues": {
+          "en": [
+            "When connecting, do not add a new hamzah sound.",
+            "When starting from the word, pronounce the beginning correctly."
+          ],
+          "ar": [
+            "عند الوصل، لا تضف صوت همزة جديدًا.",
+            "عند البدء بالكلمة، انطق بدايتها بطريقة صحيحة."
+          ]
+        }
+      },
+      "error_types": {
+        "pronounced_when_connected": {
+          "diagnosis_label": "extra_hamzat_wasl_in_connected_recitation",
+          "default_error_message": {
+            "en": "Hamzat al-Wasl was pronounced even though this position should be connected.",
+            "ar": "نُطقت همزة الوصل مع أن الموضع يحتاج إلى الوصل."
+          },
+          "corrective_message": {
+            "en": "Connect this word to the previous word without adding a new hamzah sound.",
+            "ar": "صِل هذه الكلمة بما قبلها دون إضافة صوت همزة جديد."
+          }
+        },
+        "missing_when_starting": {
+          "diagnosis_label": "missing_hamzat_wasl_at_start",
+          "default_error_message": {
+            "en": "The beginning hamzah was not clearly pronounced when starting from this word.",
+            "ar": "لم تُنطق همزة البدء بوضوح عند الابتداء بهذه الكلمة."
+          },
+          "corrective_message": {
+            "en": "When starting from this word, pronounce the initial hamzah clearly according to the correct vowel.",
+            "ar": "عند البدء بهذه الكلمة، انطق همزة الوصل بوضوح حسب حركتها الصحيحة."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "Hamzat al-Wasl was not realised according to the recitation context.",
+          "ar": "لم تُؤدَّ همزة الوصل حسب سياق القراءة."
+        },
+        "corrective_message": {
+          "en": "Check whether you are starting or connecting, then pronounce or omit the hamzah accordingly.",
+          "ar": "تأكد هل أنت مبتدئ بالكلمة أم واصل لها بما قبلها، ثم انطق الهمزة أو اتركها بناءً على ذلك."
+        }
+      },
+      "positive_message": {
+        "en": "Hamzat al-Wasl was handled correctly according to the recitation context.",
+        "ar": "أُدِّيت همزة الوصل بطريقة صحيحة حسب سياق القراءة."
+      },
+      "feedback_priority": "medium"
+    },
+    "lam_shamsiyyah": {
+      "rule_id": "lam_shamsiyyah",
+      "arabic_name": "اللام الشمسية",
+      "english_name": "Solar Lam Assimilation",
+      "display_name": {
+        "en": "Lam Shamsiyyah",
+        "ar": "اللام الشمسية"
+      },
+      "family": "contextual_realisation",
+      "status": "planned",
+      "acoustic_category": "contextual",
+      "source_module": "contextual",
+      "trigger_letters": ["ت", "ث", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ل", "ن"],
+      "pedagogical_description": {
+        "en": "Lam Shamsiyyah occurs when the lam of the definite article is not pronounced and the following solar letter is strengthened.",
+        "ar": "اللام الشمسية تكون عندما لا تُنطق لام التعريف، ويُشدَّد الحرف الشمسي الذي بعدها."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Do not pronounce the lam of the definite article; move directly into the following solar letter with its strengthened sound.",
+          "ar": "لا تنطق لام التعريف، وانتقل مباشرة إلى الحرف الشمسي التالي مع تشديده."
+        },
+        "acoustic_cues": [
+          "lam_suppression",
+          "assimilation_into_solar_letter",
+          "strengthened_following_consonant",
+          "no_separate_lam_release"
+        ],
+        "learner_cues": {
+          "en": [
+            "Do not say the lam separately.",
+            "Strengthen the next solar letter.",
+            "Connect smoothly into the following consonant."
+          ],
+          "ar": [
+            "لا تنطق اللام منفصلة.",
+            "شدّد الحرف الشمسي التالي.",
+            "انتقل بسلاسة إلى الحرف الذي بعد اللام."
+          ]
+        }
+      },
+      "error_types": {
+        "lam_pronounced": {
+          "diagnosis_label": "lam_shamsiyyah_pronounced_as_lam_qamariyyah",
+          "default_error_message": {
+            "en": "The lam was pronounced, but this position requires Lam Shamsiyyah assimilation.",
+            "ar": "نُطقت اللام، مع أن هذا الموضع يحتاج إلى إدغام اللام الشمسية."
+          },
+          "corrective_message": {
+            "en": "Do not pronounce the lam separately. Merge it into the following solar letter and strengthen that letter.",
+            "ar": "لا تنطق اللام منفصلة، بل أدمجها في الحرف الشمسي التالي وشدّد ذلك الحرف."
+          }
+        },
+        "weak_following_letter": {
+          "diagnosis_label": "weak_solar_letter_after_lam",
+          "default_error_message": {
+            "en": "The following solar letter was not strengthened enough after the lam.",
+            "ar": "لم يُشدَّد الحرف الشمسي بعد اللام بالقدر الكافي."
+          },
+          "corrective_message": {
+            "en": "After omitting the lam sound, give the following solar letter its strengthened pronunciation.",
+            "ar": "بعد ترك صوت اللام، أعطِ الحرف الشمسي التالي تشديده الصحيح."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "Lam Shamsiyyah was not realised correctly.",
+          "ar": "لم تُؤدَّ اللام الشمسية بطريقة صحيحة."
+        },
+        "corrective_message": {
+          "en": "Do not pronounce the lam separately; merge it into the following solar letter.",
+          "ar": "لا تنطق اللام منفصلة، بل أدمجها في الحرف الشمسي التالي."
+        }
+      },
+      "positive_message": {
+        "en": "Lam Shamsiyyah was assimilated correctly.",
+        "ar": "تم إدغام اللام الشمسية بطريقة صحيحة."
+      },
+      "feedback_priority": "medium"
+    },
+    "silent_letters": {
+      "rule_id": "silent_letters",
+      "arabic_name": "الحروف غير المنطوقة",
+      "english_name": "Silent or non-pronounced segments",
+      "display_name": {
+        "en": "Silent Segment",
+        "ar": "موضع غير منطوق"
+      },
+      "family": "contextual_realisation",
+      "status": "planned",
+      "acoustic_category": "contextual",
+      "source_module": "contextual",
+      "pedagogical_description": {
+        "en": "Some written segments are not pronounced in connected recitation or in specific Qur'anic orthographic contexts. These cases require the system to compare the expected recitation form with the written form.",
+        "ar": "بعض المواضع المكتوبة لا تُنطق في الوصل أو في سياقات رسمية مخصوصة في القرآن. وهذه الحالات تحتاج إلى مقارنة هيئة القراءة المتوقعة بصورة الكتابة."
+      },
+      "expected_behavior": {
+        "summary": {
+          "en": "Avoid pronouncing a segment that should remain silent in the current recitation context.",
+          "ar": "تجنب نطق الجزء الذي يجب أن يبقى غير منطوق في سياق القراءة الحالي."
+        },
+        "acoustic_cues": [
+          "absence_of_expected_silent_segment",
+          "context_conditioned_suppression",
+          "no_extra_inserted_sound"
+        ],
+        "learner_cues": {
+          "en": [
+            "Check whether the written symbol should be pronounced here.",
+            "Do not add a sound if the recitation form omits it."
+          ],
+          "ar": [
+            "تحقق هل الرمز المكتوب يُنطق في هذا الموضع أم لا.",
+            "لا تضف صوتًا إذا كانت هيئة القراءة تتركه."
+          ]
+        }
+      },
+      "error_types": {
+        "pronounced_silent_segment": {
+          "diagnosis_label": "extra_pronunciation_of_silent_segment",
+          "default_error_message": {
+            "en": "A segment that should be silent in this context appears to have been pronounced.",
+            "ar": "يبدو أنه تم نطق جزء يجب أن يكون غير منطوق في هذا السياق."
+          },
+          "corrective_message": {
+            "en": "Repeat the phrase and omit this written segment according to the expected recitation form.",
+            "ar": "أعد العبارة واترك هذا الجزء المكتوب حسب هيئة القراءة الصحيحة."
+          }
+        },
+        "unexpected_pause_or_break": {
+          "diagnosis_label": "unexpected_break_in_contextual_realisation",
+          "default_error_message": {
+            "en": "There was an unexpected break around a context-dependent silent segment.",
+            "ar": "ظهر انقطاع غير متوقع قرب موضع يعتمد نطقه على السياق."
+          },
+          "corrective_message": {
+            "en": "Repeat the phrase smoothly while following the expected connected recitation form.",
+            "ar": "أعد العبارة بسلاسة مع اتباع هيئة القراءة المتصلة المتوقعة."
+          }
+        }
+      },
+      "generic_error": {
+        "default_error_message": {
+          "en": "This context-dependent silent segment was not handled correctly.",
+          "ar": "لم يُتعامل مع هذا الموضع غير المنطوق بطريقة صحيحة."
+        },
+        "corrective_message": {
+          "en": "Check the expected recitation form and avoid adding sounds that should not be pronounced.",
+          "ar": "راجع هيئة القراءة المتوقعة وتجنب إضافة أصوات لا ينبغي نطقها."
+        }
+      },
+      "positive_message": {
+        "en": "The silent or context-dependent segment was handled correctly.",
+        "ar": "تم التعامل مع الموضع غير المنطوق أو المعتمد على السياق بطريقة صحيحة."
+      },
+      "feedback_priority": "low"
+    }
+  },
+  "feedback_templates": {
+    "rule_error_compact": {
+      "en": "At {location}, the expected rule is {rule_name}. {default_error_message} {corrective_message}",
+      "ar": "في {location}، الحكم المتوقع هو {rule_name}. {default_error_message} {corrective_message}"
+    },
+    "rule_error_with_confidence": {
+      "en": "At {location}, the expected rule is {rule_name}. {default_error_message} {corrective_message} Confidence: {confidence}.",
+      "ar": "في {location}، الحكم المتوقع هو {rule_name}. {default_error_message} {corrective_message} درجة الثقة: {confidence}."
+    },
+    "content_error_compact": {
+      "en": "At {location}, there is a content-level issue. {default_error_message} {corrective_message}",
+      "ar": "في {location}، توجد مشكلة في المحتوى المقروء. {default_error_message} {corrective_message}"
+    },
+    "positive_rule_compact": {
+      "en": "At {location}, {positive_message}",
+      "ar": "في {location}، {positive_message}"
+    }
+  },
+  "error_type_inference": {
+    "duration": [
+      {
+        "if_detail_contains_any": ["too short", "shorter", "insufficient", "duration shorter"],
+        "prefer_error_type": "too_short"
+      },
+      {
+        "if_detail_contains_any": ["too long", "longer", "excessive", "over-extended"],
+        "prefer_error_type": "too_long"
+      },
+      {
+        "if_expected_rule": "ghunnah",
+        "if_predicted_rule": "madd",
+        "prefer_error_type": "confused_with_madd"
+      }
+    ],
+    "transition": [
+      {
+        "if_detail_contains_any": ["too clear", "realized as izhar", "shown clearly"],
+        "prefer_error_type": "too_clear"
+      },
+      {
+        "if_detail_contains_any": ["not merged", "missing idgham", "separate noon"],
+        "prefer_error_type": "not_merged"
+      },
+      {
+        "if_detail_contains_any": ["missing ghunnah", "without ghunnah", "no nasal"],
+        "prefer_error_type": "missing_ghunnah"
+      },
+      {
+        "if_detail_contains_any": ["extra ghunnah", "unwanted ghunnah"],
+        "prefer_error_type": "extra_ghunnah"
+      }
+    ],
+    "burst": [
+      {
+        "if_detail_contains_any": ["missing release", "weak release", "no burst"],
+        "prefer_error_type": "missing_release"
+      },
+      {
+        "if_detail_contains_any": ["excessive", "exaggerated", "too strong"],
+        "prefer_error_type": "excessive_release"
+      },
+      {
+        "if_detail_contains_any": ["added vowel", "extra vowel"],
+        "prefer_error_type": "added_vowel"
+      }
+    ],
+    "content": [
+      {
+        "if_content_judgment": "deleted",
+        "prefer_template": "deletion"
+      },
+      {
+        "if_content_judgment": "substitution",
+        "prefer_template": "substitution"
+      },
+      {
+        "if_content_judgment": "insertion",
+        "prefer_template": "insertion"
+      },
+      {
+        "if_content_judgment": "low_alignment_confidence",
+        "prefer_template": "low_alignment_confidence"
+      }
+    ]
+  }
+}

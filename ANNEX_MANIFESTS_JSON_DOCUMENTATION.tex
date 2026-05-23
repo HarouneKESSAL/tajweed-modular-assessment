@@ -1,0 +1,887 @@
+
+\section{Annex: Data Manifests and JSON Documentation}
+
+This annex provides comprehensive documentation of all data manifests and JSON files used in the Tajweed Modular Assessment project. All data is stored in JSONL (JSON Lines) format, where each line represents a complete JSON object. This documentation includes detailed schema descriptions and real examples extracted from the project datasets.
+
+\textbf{Key Storage Location:} \texttt{data/manifests/}
+
+\textbf{Format:} JSONL (one JSON object per line)
+
+\newpage
+
+\section{Core Manifest Types}
+
+The project utilizes six primary manifest categories, each serving a specific functional role:
+
+\subsection*{Manifest Categories Summary}
+
+The project uses six primary manifest types:
+
+\begin{itemize}
+  \item \textbf{Content} (\texttt{content\_v6a\_short\_hf\_ayah*.jsonl}) — Audio-text pairs with metadata
+  \item \textbf{Rules} (\texttt{quranjson\_rules.jsonl}) — Tajweed rules and textual spans
+  \item \textbf{Burst} (\texttt{retasy\_burst\_subset.jsonl}) — Phonetic stress patterns
+  \item \textbf{Duration} (\texttt{retasy\_duration\_subset.jsonl}) — Ayah-level timing analysis
+  \item \textbf{Transition} (\texttt{retasy\_transition\_subset.jsonl}) — Word-to-word connection rules
+  \item \textbf{Content Chunks} (\texttt{retasy\_content\_chunks.jsonl}) — Sub-ayah level chunks with timing
+\end{itemize}
+
+\newpage
+
+\section{Content Manifests}
+
+\subsection{Purpose}
+Content manifests map Quranic text to audio files with metadata about sources, locations, and data splits.
+
+\subsection{Schema Fields}
+
+\begin{itemize}
+  \item \texttt{id} — Unique identifier for the content sample
+  \item \texttt{audio\_path} — Relative path to audio file (MP3/WAV)
+  \item \texttt{normalized\_text} — Standardized Quranic text (diacritics removed)
+  \item \texttt{text} — Original text with diacritics
+  \item \texttt{source\_kind} — Content granularity (word, ayah, chunk)
+  \item \texttt{source\_dataset} — Source repository (e.g., Buraaq/quran-md-words)
+  \item \texttt{surah\_name} — English surah (chapter) name
+  \item \texttt{surah\_name\_ar} — Arabic surah name
+  \item \texttt{quranjson\_surah\_number} — Surah index (1-114)
+  \item \texttt{quranjson\_verse\_key} — Verse reference (e.g., verse\_216)
+  \item \texttt{word\_index} — Position within verse (for word-level data)
+  \item \texttt{start\_sec} — Audio start time in seconds
+  \item \texttt{end\_sec} — Audio end time in seconds
+  \item \texttt{audio\_duration\_sec} — Total duration in seconds
+  \item \texttt{split} — Data partition (train, val, test)
+\end{itemize}
+
+\subsection{Example: Content Word-Level Entry}
+
+\begin{lstlisting}[language=json, caption=Content Manifest Example (Word-Level)]
+{
+  "id": "quran_md_word_002_216_010_004085",
+  "audio_path": "data\\raw\\hf_quran_md_words_pilot5000_r8\\quran-md-words_004085.mp3",
+  "normalized_text": "شييا",
+  "text": "شييا",
+  "source_kind": "word",
+  "source_dataset": "Buraaq/quran-md-words",
+  "surah_name": "The Cow",
+  "surah_name_ar": "البقرة",
+  "quranjson_surah_number": 2,
+  "quranjson_verse_key": "verse_216",
+  "word_index": 10,
+  "start_sec": 0.0,
+  "end_sec": 1.5161678004535148,
+  "audio_duration_sec": 1.5161678004535148,
+  "split": "train"
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Rules/Tajweed Manifests}
+
+\subsection{Purpose}
+Rules manifests document Tajweed rules and their character-level spans within Quranic verses. These are extracted from the QuranjSON structured reference.
+
+\subsection{Schema Fields}
+
+\begin{itemize}
+  \item \texttt{source\_json\_path} — Path to QuranjSON tajweed reference file
+  \item \texttt{surah\_number} — Surah index (1-114)
+  \item \texttt{verse\_key} — Verse reference (e.g., verse\_1)
+  \item \texttt{verse\_index} — Verse position within surah
+  \item \texttt{verse\_text} — Full verse text with diacritics
+  \item \texttt{verse\_text\_norm} — Normalized verse (diacritics removed)
+  \item \texttt{rule\_spans} — Array of rule annotations with objects containing:
+  \begin{itemize}
+    \item \texttt{start} — Character-level start position
+    \item \texttt{end} — Character-level end position
+    \item \texttt{rule} — Tajweed rule name
+    \item \texttt{extra} — Additional rule-specific metadata
+  \end{itemize}
+\end{itemize}
+
+\subsection{Example: Rules Manifest Entry}
+
+The following example shows a verse entry with Tajweed rule annotations. The \texttt{verse\_text} field contains: \textarabic{بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ} (Bismillah ar-Rahman ar-Rahim), and the normalized version is: \textarabic{بسم الله الرحمن الرحيم}.
+
+\begin{lstlisting}[language=json, caption=Rules Manifest Example]
+{
+  "source_json_path": "external\\quranjson-tajwid\\source\\tajweed\\surah_1.json",
+  "surah_number": 1,
+  "verse_key": "verse_1",
+  "verse_index": 1,
+  "verse_text": "(see Arabic text above)",
+  "verse_text_norm": "(see Arabic text above)",
+  "rule_spans": [
+    {
+      "start": 7,
+      "end": 8,
+      "rule": "hamzat_wasl",
+      "extra": {}
+    },
+    {
+      "start": 15,
+      "end": 16,
+      "rule": "hamzat_wasl",
+      "extra": {}
+    },
+    {
+      "start": 16,
+      "end": 17,
+      "rule": "lam_shamsiyyah",
+      "extra": {}
+    },
+    {
+      "start": 24,
+      "end": 25,
+      "rule": "madd_2",
+      "extra": {}
+    }
+  ]
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Burst Manifests}
+
+\subsection{Purpose}
+Burst manifests track phonetic stress patterns and acoustic bursts in learner recitations. Used for analyzing utterance naturalness and emphasis patterns.
+
+\subsection{Schema Fields}
+
+\begin{itemize}
+  \item \texttt{sample\_id} — Unique recitation sample identifier
+  \item \texttt{audio\_path} — Path to audio WAV file
+  \item \texttt{text} — Recited Quranic text
+  \item \texttt{reciter\_id} — UUID identifying the reciter
+  \item \texttt{surah\_name} — Surah name
+  \item \texttt{quranjson\_verse\_key} — Verse reference
+  \item \texttt{canonical\_phonemes} — Expected phoneme sequence
+  \item \texttt{canonical\_rules} — List of expected rules
+  \item \texttt{burst\_label} — Burst classification (0=none, 1=present)
+  \item \texttt{rule\_spans} — Tajweed rule annotations (same as Rules)
+  \item \texttt{feature\_path} — Path to extracted features (if available)
+\end{itemize}
+
+\subsection{Example: Burst Manifest Entry}
+
+The \texttt{text} field in this example contains the recited Quranic text: \textarabic{اذا جاء نصر الله والفتح} (When the help of Allah comes and the conquest).
+
+\begin{lstlisting}[language=json, caption=Burst Manifest Example]
+{
+  "sample_id": "retasy_train_003984",
+  "audio_path": "data\\raw\\retasy_train_audio\\003984_an_nasr.wav",
+  "feature_path": "",
+  "canonical_phonemes": null,
+  "canonical_rules": ["none"],
+  "text": "(Quranic text - see Arabic above)",
+  "reciter_id": "911ab88e-81de-4df5-adfb-91d44153560b",
+  "surah_name": "An-Nasr",
+  "quranjson_verse_key": "verse_1",
+  "burst_label": 0,
+  "rule_spans": [
+    {
+      "start": 47,
+      "end": 49,
+      "rule": "madd_muttasil",
+      "extra": {}
+    },
+    {
+      "start": 59,
+      "end": 60,
+      "rule": "hamzat_wasl",
+      "extra": {}
+    }
+  ]
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Duration Manifests}
+
+\subsection{Purpose}
+Duration manifests provide ayah-level timing analysis and learner annotations from crowdsourced evaluation. Critical for duration-based error detection.
+
+\subsection{Schema Fields}
+
+\begin{itemize}
+  \item \texttt{id} — Unique sample identifier
+  \item \texttt{hf\_index} — Hugging Face dataset index
+  \item \texttt{surah\_name} — Surah name
+  \item \texttt{quranjson\_surah\_number} — Surah number (1-114)
+  \item \texttt{quranjson\_verse\_key} — Verse reference
+  \item \texttt{aya\_text} — Full ayah with diacritics
+  \item \texttt{aya\_text\_norm} — Normalized ayah
+  \item \texttt{duration\_ms} — Total ayah duration in milliseconds
+  \item \texttt{reciter\_id} — Reciter UUID
+  \item \texttt{reciter\_country} — Reciter country code
+  \item \texttt{reciter\_gender} — Reciter gender (male, female)
+  \item \texttt{reciter\_age} — Age group (e.g., 14-18, Unknown)
+  \item \texttt{reciter\_qiraah} — Quranic recitation style (hafs)
+  \item \texttt{audio\_path} — Path to WAV file
+  \item \texttt{duration\_rules} — List of duration-relevant rules
+  \item \texttt{rule\_spans} — Tajweed rule annotations
+  \item \texttt{final\_label} — Annotator label (correct, in\_correct)
+  \item \texttt{golden} — Whether sample is gold-standard
+  \item \texttt{annotation\_metadata} — Crowdsourced annotator details
+\end{itemize}
+
+\subsection{Example: Duration Manifest Entry}
+
+This example shows a learner recitation of \textit{Ayat al-Kursi}. The \texttt{aya\_text} field contains: \textarabic{اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ}, and normalized as: \textarabic{الله لا اله الا هو الحي القيوم}.
+
+\begin{lstlisting}[language=json, caption=Duration Manifest Example]
+{
+  "id": "retasy_train_000009",
+  "hf_index": 9,
+  "surah_name": "Ayat al-Kursi",
+  "hf_surah_number": null,
+  "quranjson_surah_number": 3,
+  "quranjson_verse_key": "verse_2",
+  "aya_text": "(Ayat al-Kursi - see Arabic above)",
+  "aya_text_norm": "(normalized form - see Arabic above)",
+  "duration_ms": 1344,
+  "final_label": null,
+  "golden": false,
+  "reciter_id": "c718d23a-c510-4c92-af83-fa7ed024979c",
+  "reciter_country": "KZ",
+  "reciter_gender": "male",
+  "reciter_age": "14-18",
+  "reciter_qiraah": "hafs",
+  "audio_path": "data\\raw\\retasy_train_audio\\000009_ayat_al_kursi.wav",
+  "duration_rules": ["madd_2", "madd_246", "madd_munfasil"],
+  "rule_spans": [
+    {
+      "start": 10,
+      "end": 12,
+      "rule": "madd_munfasil",
+      "extra": {}
+    },
+    {
+      "start": 17,
+      "end": 18,
+      "rule": "madd_2",
+      "extra": {}
+    }
+  ],
+  "annotation_metadata": {}
+}
+\end{lstlisting}
+
+\textbf{Note:} The \texttt{annotation\_metadata} field may contain crowdsourced evaluator information when multiple annotators are involved:
+
+\begin{lstlisting}[language=json, caption=Annotation Metadata Example]
+"annotation_metadata": {
+  "label_1": "in_correct",
+  "annotator1_id": "2",
+  "annotator1_SCT": "115",
+  "annotator1_MCC": "0.86",
+  "annotator1_ACC": "0.91",
+  "annotator1_F1": "0.91",
+  "label_2": "in_correct",
+  "annotator2_id": "143",
+  "label_3": "correct",
+  "annotator3_id": "144"
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Transition Manifests}
+
+\subsection{Purpose}
+Transition manifests track word-to-word connections and transition rules between segments in recitations.
+
+\subsection{Schema Fields}
+
+\begin{itemize}
+  \item \texttt{sample\_id} — Unique sample identifier
+  \item \texttt{audio\_path} — Path to audio WAV file
+  \item \texttt{text} — Recited text
+  \item \texttt{reciter\_id} — Reciter UUID
+  \item \texttt{surah\_name} — Surah name
+  \item \texttt{quranjson\_verse\_key} — Verse reference
+  \item \texttt{transition\_rules} — Expected transition rules
+  \item \texttt{rule\_spans} — Tajweed rule annotations
+  \item \texttt{feature\_path} — Feature extraction path
+  \item \texttt{canonical\_phonemes} — Expected phoneme sequence
+  \item \texttt{canonical\_rules} — Expected canonical rules
+\end{itemize}
+
+\subsection{Example: Transition Manifest Entry}
+
+The recited text in this example is: \textarabic{اياك نعبد واياك نستعين} (You alone we worship, and You alone we ask for help).
+
+\begin{lstlisting}[language=json, caption=Transition Manifest Example]
+{
+  "sample_id": "retasy_train_001964",
+  "audio_path": "data\\raw\\retasy_train_audio\\001964_al_faatihah.wav",
+  "feature_path": "",
+  "canonical_phonemes": null,
+  "canonical_rules": ["none"],
+  "text": "(see Arabic text above)",
+  "reciter_id": "ad0fa045-1ff8-4640-91d6-d26a820f130b",
+  "surah_name": "Al-Faatihah",
+  "quranjson_verse_key": "verse_5",
+  "transition_rules": [],
+  "rule_spans": [
+    {
+      "start": 37,
+      "end": 38,
+      "rule": "madd_246",
+      "extra": {}
+    }
+  ]
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Content Chunks Manifests}
+
+\subsection{Purpose}
+Content chunks manifests provide sub-ayah level segmentation with precise audio timing and word-level boundary information. Used for fine-grained error localization.
+
+\subsection{Schema Fields}
+
+\begin{itemize}
+  \item \texttt{id} — Unique chunk identifier (parent\_id\_chunk\_XX)
+  \item \texttt{parent\_id} — Parent ayah sample ID
+  \item \texttt{audio\_path} — Path to parent audio file
+  \item \texttt{surah\_name} — Surah name
+  \item \texttt{quranjson\_verse\_key} — Verse reference
+  \item \texttt{reciter\_id} — Reciter UUID
+  \item \texttt{normalized\_text} — Chunk text (normalized)
+  \item \texttt{start\_sec} — Chunk start time in seconds
+  \item \texttt{end\_sec} — Chunk end time in seconds
+  \item \texttt{word\_count} — Number of words in chunk
+  \item \texttt{char\_count} — Number of characters
+  \item \texttt{word\_spans} — Word-level segmentation array with objects containing:
+  \begin{itemize}
+    \item \texttt{word\_index} — Word position in chunk
+    \item \texttt{text} — Word text
+    \item \texttt{char\_start} — Character start position
+    \item \texttt{char\_end} — Character end position
+    \item \texttt{start\_sec} — Word audio start time
+    \item \texttt{end\_sec} — Word audio end time
+  \end{itemize}
+\end{itemize}
+
+\subsection{Example: Content Chunks Manifest Entry}
+
+The chunk text is: \textarabic{الرحمن} (The Merciful).
+
+\begin{lstlisting}[language=json, caption=Content Chunks Manifest Example]
+{
+  "id": "retasy_train_000020_chunk_00",
+  "parent_id": "retasy_train_000020",
+  "audio_path": "data\\raw\\retasy_train_audio\\000020_al_faatihah.wav",
+  "surah_name": "Al-Faatihah",
+  "quranjson_verse_key": "verse_3",
+  "reciter_id": "Unknown",
+  "normalized_text": "(see Arabic above)",
+  "start_sec": 0.1504921875,
+  "end_sec": 1.7346484375000002,
+  "word_count": 1,
+  "char_count": 6,
+  "word_spans": [
+    {
+      "word_index": 0,
+      "text": "(see Arabic above)",
+      "char_start": 0,
+      "char_end": 6,
+      "start_sec": 0.1804921875,
+      "end_sec": 1.7046484375000002
+    }
+  ]
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Rule Manifest JSON}
+
+\subsection{Purpose}
+
+The \texttt{rule\_manifest\_json.json} file is the central configuration resource for the feedback generation pipeline. It contains:
+
+\begin{itemize}
+    \item Project metadata and recitation profile
+    \item Integration policies and severity classification system
+    \item Pedagogical descriptions of all 10+ Tajweed rules
+    \item Error templates and corrective feedback messages
+    \item Rule aliases and resolution strategies
+    \item Severity scoring formula and presentation policy
+\end{itemize}
+
+\textbf{Primary Purpose:} Transform diagnostic outputs into learner-facing pedagogical feedback.
+
+\subsection{Top-Level Structure}
+
+\begin{lstlisting}[language=json, caption=Rule Manifest JSON Top-Level Structure]
+{
+  "manifest_version": "1.0.0",
+  "project": {
+    "name": "modular_tajweed_assessment",
+    "purpose": "Rule metadata used to transform structured diagnosis reports 
+               into pedagogical learner-facing feedback.",
+    "primary_language": "en",
+    "secondary_language": "ar"
+  },
+  "recitation_profile": { ... },
+  "integration": { ... },
+  "severity_policy": { ... },
+  "content_feedback": { ... },
+  "rule_aliases": { ... },
+  "rules": { ... }
+}
+\end{lstlisting}
+
+\subsection{Severity Policy System}
+
+The system implements a dual-category severity framework:
+
+\subsubsection{Classical Categories}
+
+\begin{itemize}
+  \item \textbf{Lahn Jali} (اللحن الجلي) — Content-level errors that change canonical text. Critical severity (Score: 90-100)
+  \item \textbf{Lahn Khafi} (اللحن الخفي) — Rule-level deviations in manner of recitation. Major to Minor severity (Score: 30-90)
+\end{itemize}
+
+\subsubsection{Severity Levels}
+
+\begin{itemize}
+  \item \textbf{Critical} (Rank 1, Score 90-100) — Content-level problem requiring immediate correction
+  \item \textbf{High} (Rank 2, Score 70-89) — Major Tajweed error, clearly audible and important
+  \item \textbf{Medium} (Rank 3, Score 45-69) — Rule-level issue requiring correction
+  \item \textbf{Low} (Rank 4, Score 20-44) — Minor observation or refinement
+\end{itemize}
+
+\subsection{Ordering Rules}
+
+Feedback is presented following these priorities:
+
+\begin{enumerate}
+    \item Content errors before rule-level errors (at same position)
+    \item Highest severity score first
+    \item Higher confidence errors first (when severity similar)
+    \item Preserve Quranic order (when others equal)
+\end{enumerate}
+
+\subsection{Severity Score Formula}
+
+\[
+\text{severity\_score} = \text{base\_score} + \text{confidence\_adj} + \text{repetition\_adj} + \text{evidence\_adj}
+\]
+
+\begin{itemize}
+    \item \textbf{Confidence adjustment:} $+5$ (high) to $-10$ (low)
+    \item \textbf{Repetition adjustment:} $+10$ for repeated patterns
+    \item \textbf{Evidence adjustment:} $+5$ for strong acoustic evidence
+    \item \textbf{Clamped to:} [0, 100]
+\end{itemize}
+
+\subsection{Content Error Templates}
+
+The system distinguishes four primary content error types:
+
+\subsubsection{Deletion}
+
+\begin{lstlisting}[language=json, caption=Content Deletion Error Template]
+{
+  "diagnosis_label": "content_deletion",
+  "classical_severity": "lahn_jali",
+  "severity_level": "critical",
+  "base_score": 100,
+  "default_error_message": {
+    "en": "The expected sound or word at this position was not clearly recited.",
+    "ar": "lm ydhhr alswt aw allafz almtwq@ fii hdha almwd@ bwdwh."
+  },
+  "corrective_message": {
+    "en": "First recite the missing Qur'anic unit correctly, then repeat 
+           the segment and apply the Tajweed rule after the content is present.",
+    "ar": "ابدأ أولًا بتصحيح اللفظ القرآني الناقص، ثم أعد قراءة المقطع 
+           وطبّق الحكم التجويدي بعد ظهور اللفظ الصحيح."
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Substitution}
+
+\begin{lstlisting}[language=json, caption=Content Substitution Error Template]
+{
+  "diagnosis_label": "content_substitution",
+  "classical_severity": "lahn_jali",
+  "severity_level": "critical",
+  "base_score": 100,
+  "default_error_message": {
+    "en": "A different sound or word seems to have been recited at this position.",
+    "ar": "ybdw nh tm nTq swt aw klm@h mkhtlf@h fii hdha almwd@."
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Insertion}
+
+\begin{lstlisting}[language=json, caption=Content Insertion Error Template]
+{
+  "diagnosis_label": "content_insertion",
+  "classical_severity": "lahn_jali",
+  "severity_level": "critical",
+  "base_score": 95,
+  "default_error_message": {
+    "en": "An extra sound seems to have been inserted near this position.",
+    "ar": "ybdw nh @df swt z@'d qrb hdha almwd@."
+  }
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection{Core Tajweed Rules}
+
+\subsubsection{Madd (المد) - Elongation}
+
+\begin{lstlisting}[language=json, caption=Madd Rule Definition (Excerpt)]
+{
+  "rule_id": "madd",
+  "arabic_name": "al-Madd",
+  "english_name": "Elongation",
+  "display_name": {"en": "Madd", "ar": "al-Madd"},
+  "family": "madd",
+  "status": "active",
+  "acoustic_category": "duration",
+  "source_module": "duration",
+  "pedagogical_description": {
+    "en": "Madd is the elongation of a vowel sound when a madd letter or 
+           madd condition occurs. The learner must sustain the vowel for 
+           the required number of counts according to the specific madd type.",
+    "ar": "al-Madd huwa itahlat sawt al-haraka..."
+  },
+  "variants": {
+    "madd_tabi_i": {
+      "arabic_name": "al-Madd al-Tabiyi",
+      "display_name": {"en": "Natural Madd", "ar": "al-Madd al-Tabiyi"},
+      "duration_counts": {"min": 2, "target": 2, "max": 2}
+    },
+    "madd_muttasil": {
+      "arabic_name": "al-Madd al-Muttasil",
+      "display_name": {"en": "Connected Madd", "ar": "al-Madd al-Muttasil"},
+      "duration_counts": {"min": 4, "target": 4, "max": 5}
+    },
+    "madd_munfasil": {
+      "arabic_name": "al-Madd al-Munfasil",
+      "display_name": {"en": "Separated Madd", "ar": "al-Madd al-Munfasil"},
+      "duration_counts": {"min": 4, "target": 4, "max": 5}
+    },
+    "madd_lazim": {
+      "arabic_name": "al-Madd al-Lazim",
+      "display_name": {"en": "Compulsory Madd", "ar": "al-Madd al-Lazim"},
+      "duration_counts": {"min": 6, "target": 6, "max": 6}
+    }
+  },
+  "error_types": {
+    "too_short": {
+      "diagnosis_label": "insufficient_duration",
+      "default_error_message": {
+        "en": "The madd at this position was shorter than expected.",
+        "ar": "كان المد في هذا الموضع أقصر من المطلوب."
+      }
+    },
+    "too_long": {
+      "diagnosis_label": "excessive_duration",
+      "default_error_message": {
+        "en": "The madd was held longer than the expected range.",
+        "ar": "تمت إطالة المد أكثر من الحد المطلوب."
+      }
+    }
+  },
+  "feedback_priority": "medium"
+}
+\end{lstlisting}
+
+\subsubsection{Ghunnah (الغنة) - Nasalization}
+
+\textbf{Option 1: Simple Formatted Text}
+
+\noindent
+\texttt{
+\{\\
+\quad "rule\_id": "ghunnah",\\
+\quad "arabic\_name": "}\textarabic{الغنة}\texttt{",\\
+\quad "english\_name": "Nasalization",\\
+\quad "acoustic\_category": "duration",\\
+\quad "pedagogical\_description": \{\\
+\quad\quad "en": "Ghunnah is a nasal sound produced through the nasal passage",\\
+\quad\quad "ar": "}\textarabic{الغنة صوت يخرج من الخيشوم}\texttt{"\\
+\quad \},\\
+\quad "expected\_behavior": \{\\
+\quad\quad "summary": \{\\
+\quad\quad\quad "en": "Produce a clear nasal resonance and sustain for two counts",\\
+\quad\quad\quad "ar": "}\textarabic{أدِّ الغنة بصوت أنفي واضح، وحافظ عليها بمقدار حركتين}\texttt{"\\
+\quad\quad \},\\
+\quad\quad "duration\_counts": \{"min": 2, "target": 2, "max": 2\}\\
+\quad \},\\
+\quad "feedback\_priority": "high"\\
+\}
+}
+
+\bigskip
+
+\textbf{Option 3: Verbatim with Frame (alternative)}
+
+\begin{Verbatim}[frame=single, framesep=3mm, fontfamily=tt, fontsize=\small]
+{
+  "rule_id": "ghunnah",
+  "arabic_name": "\textarabic{الغنة}",
+  "english_name": "Nasalization",
+  "acoustic_category": "duration",
+  "pedagogical_description": {
+    "en": "Ghunnah is a nasal sound...",
+    "ar": "\textarabic{الغنة صوت يخرج من الخيشوم...}"
+  },
+  "expected_behavior": {
+    "summary": {
+      "en": "Produce a clear nasal resonance...",
+      "ar": "\textarabic{أدِّ الغنة بصوت أنفي واضح...}"
+    }
+  }
+}
+\end{Verbatim}
+
+\subsubsection{Ikhfa (الإخفاء) - Concealment}
+
+\begin{lstlisting}[language=json, caption=Ikhfa Rule Definition (Excerpt)]
+{
+  "rule_id": "ikhfa",
+  "arabic_name": "al-Ikhfa",
+  "english_name": "Concealment",,
+  "display_name": {"en": "Ikhfa", "ar": "al-Ikhfa"},
+  "family": "nun_sakinah_tanween",
+  "acoustic_category": "transition",
+  "trigger_letters": ["ta", "tha", "jeem", "dal", "dhal", "zay", "seen", "sheen", 
+                      "sad", "dad", "tah", "zah", "fah", "qaf", "kaf"],
+  "pedagogical_description": {
+    "en": "Ikhfa is a concealed pronunciation of noon sakinah or tanween 
+           before specific letters. The sound is neither fully clear like 
+           izhar nor fully merged like idgham, and it is accompanied by ghunnah.",
+    "ar": "al-Ikhfa huwa naTq al-noon al-sAkinah aw al-tanween..."
+  },
+  "feedback_priority": "high"
+}
+\end{lstlisting}
+
+\subsubsection{Additional Rules}
+
+The manifest includes complete definitions for:
+
+\begin{itemize}
+    \item \textbf{Idgham Bighunnah} (الإدغام بغنة) - Assimilation with nasalization
+    \item \textbf{Idgham Bilaghunnah} (الإدغام بلا غنة) - Assimilation without nasalization
+    \item \textbf{Iqlab} (الإقلاب) - Conversion of noon to hidden meem before ba
+    \item \textbf{Qalqalah} (القلقلة) - Echoing (applied to specific letter pairs)
+    \item \textbf{Hamzat Wasl} (همزة الوصل) - Hamza of connection
+    \item \textbf{Lam Shamsiyyah} (اللام الشمسية) - Assimilation of definite article lam
+    \item \textbf{Madd Variants} - Various elongation types with duration targets
+\end{itemize}
+
+Each rule includes:
+\begin{itemize}
+    \item Trigger conditions and contextual letters
+    \item Pedagogical descriptions (bilingual)
+    \item Expected acoustic behaviors
+    \item Learner cues in English and Arabic
+    \item Error type templates with diagnosis labels
+    \item Corrective and positive feedback messages
+\end{itemize}
+
+\subsection{Rule Aliases}
+
+The manifest supports rule name normalization through aliases:
+
+\begin{lstlisting}[language=json, caption=Rule Aliases Example]
+{
+  "rule_aliases": {
+    "idgham": {
+      "resolution_type": "contextual_alias",
+      "description": {
+        "en": "Resolve generic idgham into idgham_bighunnah or idgham_bilaghunnah",
+        "ar": "يُحوَّل الإدغام العام إلى إدغام بغنة أو إدغام بلا غنة"
+      },
+      "conditions": [
+        {
+          "if_next_letter_in": ["ي", "ن", "م", "و"],
+          "resolve_to": "idgham_bighunnah"
+        },
+        {
+          "if_next_letter_in": ["ل", "ر"],
+          "resolve_to": "idgham_bilaghunnah"
+        }
+      ]
+    },
+    "ikhfaa": {"resolve_to": "ikhfa"},
+    "mad": {"resolve_to": "madd"}
+  }
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Annotated Qur'an Reference (QuranjSON)}
+
+\subsection{Purpose}
+
+The QuranjSON tajweed reference (\texttt{external/quranjson-tajwid/}) provides structural Quranic content with character-level Tajweed rule annotations across all 114 surahs and 6236 verses. This serves as:
+
+\begin{itemize}
+    \item Ground truth for rule location and classification
+    \item Weak supervision source for training
+    \item Reference for learner recitation evaluation
+\end{itemize}
+
+\subsection{File Organization}
+
+\begin{lstlisting}
+external/quranjson-tajwid/
+├── source/
+│   └── tajweed/
+│       ├── surah_1.json
+│       ├── surah_2.json
+│       ├── ... 
+│       └── surah_114.json
+└── README.md
+\end{lstlisting}
+
+\subsection{Verse Entry Structure}
+
+Each QuranjSON file contains one JSON object per verse with the following structure:
+
+\begin{lstlisting}[language=json, caption=QuranjSON Verse Structure]
+{
+  "source_json_path": "external\\quranjson-tajwid\\source\\tajweed\\surah_1.json",
+  "surah_number": 1,
+  "verse_key": "verse_1",
+  "verse_index": 1,
+  "verse_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+  "verse_text_norm": "بسم الله الرحمن الرحيم",
+  "rule_spans": [
+    {
+      "start": 7,
+      "end": 8,
+      "rule": "hamzat_wasl",
+      "extra": {}
+    },
+    {
+      "start": 15,
+      "end": 16,
+      "rule": "hamzat_wasl",
+      "extra": {}
+    },
+    {
+      "start": 16,
+      "end": 17,
+      "rule": "lam_shamsiyyah",
+      "extra": {}
+    },
+    {
+      "start": 24,
+      "end": 25,
+      "rule": "madd_2",
+      "extra": {}
+    },
+    {
+      "start": 28,
+      "end": 29,
+      "rule": "hamzat_wasl",
+      "extra": {}
+    },
+    {
+      "start": 29,
+      "end": 30,
+      "rule": "lam_shamsiyyah",
+      "extra": {}
+    },
+    {
+      "start": 35,
+      "end": 36,
+      "rule": "madd_246",
+      "extra": {}
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Character Position Mapping}
+
+Rule spans use character-level indices into the \texttt{verse\_text\_norm} field:
+
+\begin{itemize}
+    \item \textbf{Indices are 0-based}
+    \item \textbf{start} = position of first character
+    \item \textbf{end} = position of character after last character (exclusive)
+    \item Example: rule span $\{$start: 7, end: 8$\}$ covers character at index 7
+\end{itemize}
+
+\textbf{Usage in Project:} The QuranjSON annotations are automatically mapped to recitation samples for diagnosis generation.
+
+\newpage
+
+\section{Integration with Feedback System}
+
+\subsection{Diagnosis-to-Feedback Pipeline}
+
+\begin{verbatim}
+Diagnosis Output
+    ↓
+    [sample_id, surah, verse, position, content_judgment, 
+     expected_rule, predicted_rule, confidence, evidence]
+    ↓
+Rule Manifest Lookup
+    ↓
+    • Resolve rule aliases
+    • Determine severity level
+    • Apply ordering policies
+    • Generate feedback templates
+    ↓
+Learner-Facing Feedback
+    [rule_id, severity, error_message, corrective_message, priority]
+\end{verbatim}
+
+\subsection{Lookup Key}
+
+The primary lookup key in the feedback system is \texttt{expected\_rule}, which must match a rule ID in the \texttt{rules} section of the manifest.
+
+\textbf{Content Priority Policy:} If \texttt{content\_judgment} is not correct or accepted, content feedback is generated first, and rule feedback is suppressed at the same position.
+
+\subsection{Severity Scoring Example}
+
+For a hypothetical \texttt{madd\_muttasil} error:
+
+\begin{itemize}
+    \item Base score: 75 (rule\_severity\_defaults[madd])
+    \item Confidence adjustment: +5 (high confidence 0.92)
+    \item Repetition adjustment: +10 (3 occurrences in recitation)
+    \item Evidence adjustment: +3 (moderate acoustic evidence)
+    \item \textbf{Final score:} $75 + 5 + 10 + 3 = 93$ (High priority)
+\end{itemize}
+
+\newpage
+
+
+\section{Conclusions}
+
+This project employs a carefully structured data architecture:
+
+\begin{itemize}
+    \item \textbf{Six manifest types} capture different granularities (word, chunk, ayah, verse, recitation)
+    \item \textbf{Consistent JSON schema} enables integration across data sources
+    \item \textbf{Character-level rule annotations} allow precise error localization
+    \item \textbf{Bilingual metadata} (English/Arabic) supports international deployment
+    \item \textbf{Rule manifest JSON} bridges diagnostics to pedagogical feedback
+    \item \textbf{QuranjSON integration} provides authoritative ground truth
+\end{itemize}
+
+The design enables automated, modular assessment and feedback generation while maintaining pedagogical clarity and scholarly rigor in Tajweed rule representation.
+
