@@ -1,0 +1,9 @@
+{
+  "base_model": "checkpoints\\content_asr_whisper_medium_quran_v1_clean_no_juhaynee",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_hf_ayah_clean_no_juhaynee_v2_weighted.jsonl",
+  "train_split": "train",
+  "eval_split": "val",
+  "train_rows": 6165,
+  "eval_rows": 407,
+  "compact_targets": false
+}
