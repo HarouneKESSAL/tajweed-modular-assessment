@@ -280,6 +280,16 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", default="data/manifests/retasy_duration_alignment_corpus_torchaudio_strict.jsonl")
     parser.add_argument("--sample-index", type=int, default=0)
+    parser.add_argument(
+        "--audio-override",
+        default="",
+        help="Optional audio path to use instead of row['audio_path']; keeps manifest metadata/rules but scores this audio.",
+    )
+    parser.add_argument(
+        "--output-json",
+        default="",
+        help="Optional path to save a compact JSON result for app/API integration.",
+    )
     parser.add_argument("--show-matches", action="store_true")
     parser.add_argument(
         "--error-weights",
@@ -359,6 +369,20 @@ def main() -> None:
 
     row = rows[args.sample_index]
     audio_path = row["audio_path"]
+
+    if args.audio_override:
+        override_path = Path(args.audio_override)
+        if not override_path.is_absolute():
+            override_path = PROJECT_ROOT / override_path
+        if not override_path.exists():
+            raise FileNotFoundError(f"--audio-override not found: {override_path}")
+
+        # Keep the selected manifest row metadata/rules, but force all downstream
+        # acoustic extraction and optional predictors to use the uploaded user audio.
+        row = dict(row)
+        audio_path = str(override_path)
+        row["audio_path"] = audio_path
+
     error_weight_config = None
     if args.error_weights:
         weights_path = Path(args.error_weights)
@@ -561,6 +585,50 @@ def main() -> None:
             device=args.ayah_content_device,
         )
         print_ayah_content_report(result)
+
+    if args.output_json:
+        output_path = Path(args.output_json)
+        if not output_path.is_absolute():
+            output_path = PROJECT_ROOT / output_path
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        def _jsonable(value):
+            if hasattr(value, "to_dict"):
+                return value.to_dict()
+            if isinstance(value, dict):
+                return {str(k): _jsonable(v) for k, v in value.items()}
+            if isinstance(value, (list, tuple)):
+                return [_jsonable(v) for v in value]
+            if hasattr(value, "item"):
+                try:
+                    return value.item()
+                except Exception:
+                    pass
+            try:
+                json.dumps(value)
+                return value
+            except Exception:
+                return str(value)
+
+        output_payload = {
+            "sample_id": row.get("id") or row.get("sample_id"),
+            "audio_path": audio_path,
+            "audio_override_used": bool(args.audio_override),
+            "manifest": args.manifest,
+            "sample_index": args.sample_index,
+            "text": row.get("normalized_text") or row.get("text") or row.get("original_text"),
+            "routing_plan": _jsonable(result.get("routing_plan") if isinstance(result, dict) else None),
+            "diagnosis": _jsonable(result),
+        }
+
+        try:
+            output_payload["weighted_score"] = _jsonable(weighted_score)
+        except NameError:
+            output_payload["weighted_score"] = None
+
+        output_path.write_text(json.dumps(output_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"\nsaved inference JSON: {output_path}")
+
 
 
 if __name__ == "__main__":
