@@ -178,7 +178,7 @@ def run_user_audio_inference(
 
         gate = run_content_gate(
             audio_path=audio_path,
-            gold_text=reference["text"],
+            gold_text=reference.get("content_text") or reference["text"],
             mode="cer" if decision.get("accepted") else "strict",
             pred_text=pred_text,
         )
@@ -229,7 +229,7 @@ def run_user_audio_inference(
 
     gate = run_content_gate(
         audio_path=audio_path,
-        gold_text=reference["text"],
+        gold_text=reference.get("content_text") or reference["text"],
         mode="strict",
     )
 
