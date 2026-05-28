@@ -26,17 +26,24 @@ def find_ffmpeg() -> str:
     )
 
 
-async def save_and_convert_upload(upload: UploadFile, output_wav_path: Path) -> Path:
+async def save_and_convert_upload(audio: UploadFile, wav_path: Path) -> Path:
     """
-    Save an uploaded browser audio file and convert it to 16 kHz mono PCM WAV.
+    Save an uploaded audio file to a temporary raw path, then convert it to
+    16 kHz mono PCM WAV.
+
+    Important: the raw input path and final WAV output path must be different,
+    because FFmpeg cannot convert a file in-place.
     """
-    output_wav_path.parent.mkdir(parents=True, exist_ok=True)
+    wav_path = Path(wav_path)
+    wav_path.parent.mkdir(parents=True, exist_ok=True)
 
-    suffix = Path(upload.filename or "audio.webm").suffix or ".input"
-    raw_path = output_wav_path.with_suffix(suffix)
+    original_name = audio.filename or "upload.webm"
+    suffix = Path(original_name).suffix.lower() or ".webm"
 
-    with raw_path.open("wb") as f:
-        shutil.copyfileobj(upload.file, f)
+    raw_path = wav_path.with_name(f"{wav_path.stem}_raw{suffix}")
+
+    contents = await audio.read()
+    raw_path.write_bytes(contents)
 
     ffmpeg = find_ffmpeg()
 
@@ -51,7 +58,7 @@ async def save_and_convert_upload(upload: UploadFile, output_wav_path: Path) -> 
         "16000",
         "-acodec",
         "pcm_s16le",
-        str(output_wav_path),
+        str(wav_path),
     ]
 
     completed = subprocess.run(
@@ -59,6 +66,11 @@ async def save_and_convert_upload(upload: UploadFile, output_wav_path: Path) -> 
         capture_output=True,
         text=True,
     )
+
+    try:
+        raw_path.unlink(missing_ok=True)
+    except Exception:
+        pass
 
     if completed.returncode != 0:
         raise RuntimeError(
@@ -68,5 +80,4 @@ async def save_and_convert_upload(upload: UploadFile, output_wav_path: Path) -> 
             f"stderr:\n{completed.stderr}"
         )
 
-    raw_path.unlink(missing_ok=True)
-    return output_wav_path
+    return wav_path
