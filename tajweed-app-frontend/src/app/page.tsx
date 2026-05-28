@@ -17,6 +17,39 @@ type Match = {
   edit_distance: number;
 };
 
+type RangeMatch = {
+  surah: number;
+  ayah_start: number;
+  ayah_end: number;
+  ayah_count?: number;
+  text?: string;
+  content_text?: string;
+  cer?: number;
+  char_similarity?: number;
+  edit_distance?: number;
+  pred_text?: string;
+};
+
+type AutodetectDecision = {
+  accepted?: boolean;
+  needs_confirmation?: boolean;
+  verdict?: string;
+  confidence?: number;
+};
+
+type AutodetectPayload = {
+  accepted?: boolean;
+  needs_confirmation?: boolean;
+  verdict?: string;
+  confidence?: number;
+  pred?: string;
+  recognized_text?: string;
+  best_match?: Match;
+  matches?: Match[];
+  best_range?: RangeMatch | null;
+  decision?: AutodetectDecision;
+};
+
 type LocalizedText = {
   en?: string;
   ar?: string;
@@ -129,7 +162,7 @@ type TajweedPayload = {
 type ApiResult = {
   ok: boolean;
   request_id?: string;
-  mode?: "guided" | "autodetect" | "guided_multi";
+  mode?: "guided" | "autodetect" | "guided_multi" | "autodetect_multi";
   segmentation_strategy?: string;
   audio_path?: string;
   surah?: number;
@@ -141,15 +174,7 @@ type ApiResult = {
     text_compact: string;
     source_id?: string;
   } | null;
-  autodetect?: {
-    accepted: boolean;
-    needs_confirmation: boolean;
-    verdict: string;
-    confidence: number;
-    pred: string;
-    best_match?: Match;
-    matches?: Match[];
-  };
+  autodetect?: AutodetectPayload;
   ayah_start?: number;
   ayah_end?: number;
   expected_segments?: number;
@@ -314,7 +339,23 @@ export default function Home() {
 
  const gate = result?.content_gate;
 const autodetect = result?.autodetect;
-const isMultiAyah = result?.mode === "guided_multi";
+const autodetectAccepted = Boolean(
+  autodetect?.accepted ?? autodetect?.decision?.accepted,
+);
+const autodetectNeedsConfirmation = Boolean(
+  autodetect?.needs_confirmation ?? autodetect?.decision?.needs_confirmation,
+);
+const autodetectVerdict =
+  autodetect?.verdict ?? autodetect?.decision?.verdict ?? "autodetect_result";
+const autodetectConfidence =
+  autodetect?.confidence ?? autodetect?.decision?.confidence ?? null;
+const autodetectRecognized =
+  autodetect?.pred ??
+  autodetect?.recognized_text ??
+  autodetect?.best_range?.pred_text ??
+  null;
+const isMultiAyah =
+  result?.mode === "guided_multi" || result?.mode === "autodetect_multi";
 const ayahResults = result?.ayah_results ?? [];
 const aggregate = result?.aggregate;
 const mushaf = result?.mushaf;
@@ -459,27 +500,59 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
             {autodetect && (
               <div className="mb-5 rounded-2xl bg-slate-800 p-4">
                 <p className="mb-2 text-sm uppercase tracking-wider text-slate-400">
-                  Auto-detected ayah
+                  Auto-detected recitation
                 </p>
 
                 <div
                   className={`rounded-xl p-4 ${
-                    autodetect.accepted
+                    autodetectAccepted
                       ? "bg-emerald-950"
-                      : autodetect.needs_confirmation
+                      : autodetectNeedsConfirmation
                       ? "bg-yellow-950"
                       : "bg-red-950"
                   }`}
                 >
                   <p className="font-semibold">
-                    {autodetect.verdict.replaceAll("_", " ")}
+                    {autodetectVerdict.replaceAll("_", " ")}
                   </p>
                   <p className="text-sm text-slate-300">
-                    Confidence: {(autodetect.confidence * 100).toFixed(2)}%
+                    Confidence:{" "}
+                    {autodetectConfidence !== null
+                      ? `${(autodetectConfidence * 100).toFixed(2)}%`
+                      : "N/A"}
                   </p>
                 </div>
 
-                {result.reference && (
+                {autodetectRecognized && (
+                  <div className="mt-3 rounded-xl bg-slate-900/70 p-3">
+                    <p className="text-xs uppercase tracking-wider text-slate-500">
+                      Recognized
+                    </p>
+                    <p dir="rtl" className="mt-1 text-lg leading-loose text-slate-100">
+                      {autodetectRecognized}
+                    </p>
+                  </div>
+                )}
+
+                {autodetect.best_range && (
+                  <div className="mt-4">
+                    <p className="text-sm text-slate-400">
+                      Detected range: Surah {autodetect.best_range.surah}, Ayah{" "}
+                      {autodetect.best_range.ayah_start}
+                      {autodetect.best_range.ayah_end !==
+                      autodetect.best_range.ayah_start
+                        ? ` to ${autodetect.best_range.ayah_end}`
+                        : ""}
+                    </p>
+                    {autodetect.best_range.content_text && (
+                      <p dir="rtl" className="mt-1 text-2xl leading-loose">
+                        {autodetect.best_range.content_text}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {!autodetect.best_range && result.reference && (
                   <div className="mt-4">
                     <p className="text-sm text-slate-400">
                       Surah {result.reference.surah}, Ayah {result.reference.ayah}
@@ -493,209 +566,129 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
             )}
 
             {isMultiAyah && (
-              <div className="mt-4 rounded-2xl border border-slate-700 bg-slate-900/70 p-4">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-base font-semibold text-white">
-                      Multi-ayah guided assessment
-                    </h3>
+                <div className="mt-4 rounded-2xl border border-slate-700 bg-slate-900/70 p-4">
+                  <h3 className="text-lg font-semibold text-white">
+                    {result.mode === "autodetect_multi"
+                      ? "Free recitation multi-ayah assessment"
+                      : "Multi-ayah guided assessment"}
+                  </h3>
 
-                    <p className="mt-1 text-sm text-slate-400">
-                      Surah {result.surah}, Ayah {result.ayah_start} to{" "}
-                      {result.ayah_end}
+                  <p className="mt-1 text-sm text-slate-300">
+                    Surah {result.surah}, Ayah {result.ayah_start} to {result.ayah_end}
+                  </p>
+                  {result.segmentation_strategy && (
+                    <p className="mt-1 text-xs text-slate-400">
+                      Segmentation: {result.segmentation_strategy.replaceAll("_", " ")}
                     </p>
+                  )}
 
-                    {result.segmentation_strategy && (
-                      <p className="mt-1 text-xs text-slate-500">
-                        Segmentation:{" "}
-                        {result.segmentation_strategy.replaceAll("_", " ")}
+                  <div className="mt-4 grid gap-3 md:grid-cols-4">
+                    <div className="rounded-xl bg-slate-800 p-3">
+                      <p className="text-xs text-slate-400">Segments</p>
+                      <p className="text-xl font-bold text-white">
+                        {result.detected_segments}/{result.expected_segments}
                       </p>
-                    )}
-                  </div>
-                </div>
+                    </div>
 
-                <div className="mt-4 grid gap-3 md:grid-cols-4">
-                  <div className="rounded-xl bg-slate-800 p-3">
-                    <p className="text-xs text-slate-400">Segments</p>
-                    <p className="text-xl font-bold text-white">
-                      {result.detected_segments}/{result.expected_segments}
-                    </p>
-                  </div>
+                    <div className="rounded-xl bg-slate-800 p-3">
+                      <p className="text-xs text-slate-400">Content accepted</p>
+                      <p className="text-xl font-bold text-white">
+                        {aggregate?.content_accepted_count}/{aggregate?.content_total}
+                      </p>
+                    </div>
 
-                  <div className="rounded-xl bg-slate-800 p-3">
-                    <p className="text-xs text-slate-400">Content accepted</p>
-                    <p className="text-xl font-bold text-white">
-                      {aggregate?.content_accepted_count}/{aggregate?.content_total}
-                    </p>
-                  </div>
+                    <div className="rounded-xl bg-slate-800 p-3">
+                      <p className="text-xs text-slate-400">Average Tajweed score</p>
+                      <p className="text-xl font-bold text-white">
+                        {aggregate?.average_tajweed_score !== null &&
+                        aggregate?.average_tajweed_score !== undefined
+                          ? Number(aggregate.average_tajweed_score).toFixed(2)
+                          : "N/A"}
+                      </p>
+                    </div>
 
-                  <div className="rounded-xl bg-slate-800 p-3">
-                    <p className="text-xs text-slate-400">Average Tajweed score</p>
-                    <p className="text-xl font-bold text-white">
-                      {aggregate?.average_tajweed_score !== null &&
-                      aggregate?.average_tajweed_score !== undefined
-                        ? Number(aggregate.average_tajweed_score).toFixed(2)
-                        : "N/A"}
-                    </p>
+                    <div className="rounded-xl bg-slate-800 p-3">
+                      <p className="text-xs text-slate-400">Total errors</p>
+                      <p className="text-xl font-bold text-white">
+                        {aggregate?.total_errors ?? 0}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="rounded-xl bg-slate-800 p-3">
-                    <p className="text-xs text-slate-400">Total errors</p>
-                    <p className="text-xl font-bold text-white">
-                      {aggregate?.total_errors ?? 0}
-                    </p>
-                  </div>
-                </div>
+                  <div className="mt-5 space-y-4">
+                    {ayahResults.map((item) => {
+                      const accepted = Boolean(item.content_gate?.accepted);
+                      const score = item.tajweed_score?.score;
 
-                <div className="mt-5 space-y-3">
-                  {ayahResults.map((item) => {
-                    const accepted = Boolean(item.content_gate?.accepted);
-                    const score = item.tajweed_score?.score;
-                    const feedbackItems = item.tajweed_ui?.readable_feedback ?? [];
-                    const hasTajweedErrors = Boolean(item.tajweed_score?.num_errors);
-                    const hasContentFeedback = Boolean(
-                      item.content_feedback?.items?.length
-                    );
-
-                    const statusLabel = accepted
-                      ? hasTajweedErrors
-                        ? "Tajweed needs attention"
-                        : "Accepted"
-                      : "Content rejected";
-
-                    const statusClass = accepted
-                      ? hasTajweedErrors
-                        ? "bg-amber-500/20 text-amber-200"
-                        : "bg-emerald-500/20 text-emerald-200"
-                      : "bg-red-500/20 text-red-200";
-
-                    return (
-                      <div
-                        key={`${item.surah}-${item.ayah}`}
-                        className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4"
-                      >
-                        <div className="flex flex-wrap items-start justify-between gap-3">
-                          <div>
-                            <h4 className="font-semibold text-white">
-                              Ayah {item.ayah}
-                            </h4>
-                            <p className="text-xs text-slate-400">
-                              Segment {item.segment?.index} •{" "}
-                              {item.segment?.start_sec?.toFixed?.(2)}s →{" "}
-                              {item.segment?.end_sec?.toFixed?.(2)}s
-                            </p>
-                          </div>
-
-                          <div className="flex flex-wrap gap-2">
-                            <span
-                              className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClass}`}
-                            >
-                              {statusLabel}
-                            </span>
-
-                            <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-200">
-                              Score{" "}
-                              {score !== undefined && score !== null
-                                ? Number(score).toFixed(2)
-                                : "N/A"}
-                            </span>
-                          </div>
-                        </div>
-
-                        {item.reference?.text && (
-                          <p
-                            dir="rtl"
-                            className="mt-3 text-right text-xl leading-loose text-white"
-                          >
-                            {item.reference.text}
-                          </p>
-                        )}
-
-                        {item.content_gate && (
-                          <div className="mt-3 rounded-xl bg-slate-900/80 p-3 text-sm text-slate-300">
-                            <p className="truncate">
-                              <span className="font-semibold text-slate-200">
-                                Recognized:
-                              </span>{" "}
-                              <span dir="rtl">{item.content_gate.pred}</span>
-                            </p>
-
-                            <p className="mt-1 text-xs text-slate-400">
-                              CER: {(item.content_gate.cer * 100).toFixed(2)}% |
-                              Character accuracy:{" "}
-                              {(item.content_gate.char_accuracy * 100).toFixed(2)}%
-                            </p>
-                          </div>
-                        )}
-
-                        {!accepted && item.content_feedback && (
-                          <div className="mt-3 rounded-xl border border-red-900/60 bg-red-950/40 p-3">
-                            <p className="text-sm font-semibold text-red-100">
-                              Content needs correction before Tajweed scoring.
-                            </p>
-
-                            {item.content_feedback.items?.slice(0, 2).map((fb, index) => (
-                              <p
-                                key={`${fb.expected}-${fb.recognized}-${index}`}
-                                className="mt-2 text-xs text-red-100/90"
-                              >
-                                Expected{" "}
-                                <span className="font-semibold">“{fb.expected}”</span>,
-                                but recognized{" "}
-                                <span className="font-semibold">
-                                  “{fb.recognized}”
-                                </span>
-                                .
+                      return (
+                        <div
+                          key={`${item.surah}-${item.ayah}`}
+                          className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4"
+                        >
+                          <div className="flex flex-wrap items-center justify-between gap-3">
+                            <div>
+                              <h4 className="font-semibold text-white">
+                                Ayah {item.ayah}
+                              </h4>
+                              <p className="text-sm text-slate-400">
+                                Segment {item.segment?.index} •{" "}
+                                {item.segment?.start_sec?.toFixed?.(2)}s →{" "}
+                                {item.segment?.end_sec?.toFixed?.(2)}s
                               </p>
-                            ))}
-                          </div>
-                        )}
-
-                        {accepted && hasTajweedErrors && feedbackItems.length > 0 && (
-                          <div className="mt-3 rounded-xl border border-amber-900/60 bg-amber-950/30 p-3">
-                            <p className="text-sm font-semibold text-amber-100">
-                              {item.tajweed_score?.num_errors} Tajweed issue
-                              {item.tajweed_score?.num_errors === 1 ? "" : "s"}{" "}
-                              detected.
-                            </p>
-
-                            <p className="mt-1 line-clamp-2 text-xs text-amber-100/80">
-                              {feedbackItems[0]?.message}
-                            </p>
-                          </div>
-                        )}
-
-                        {accepted && !hasTajweedErrors && (
-                          <div className="mt-3 rounded-xl border border-emerald-900/60 bg-emerald-950/30 p-3">
-                            <p className="text-sm font-semibold text-emerald-100">
-                              No Tajweed errors detected.
-                            </p>
-                          </div>
-                        )}
-
-                        {(hasContentFeedback || feedbackItems.length > 0) && (
-                          <details className="mt-3 rounded-xl border border-slate-700 bg-slate-900/60 p-3">
-                            <summary className="cursor-pointer text-sm font-semibold text-slate-200">
-                              Show detailed feedback
-                            </summary>
-
-                            <div className="mt-3 space-y-3">
-                              {!accepted && item.content_feedback && (
-                                <ContentFeedback feedback={item.content_feedback} />
-                              )}
-
-                              {accepted && feedbackItems.length > 0 && (
-                                <ReadableFeedback items={feedbackItems} />
-                              )}
                             </div>
-                          </details>
-                        )}
-                      </div>
-                    );
-                  })}
+
+                            <div className="flex gap-2">
+                              <span
+                                className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                                  accepted
+                                    ? "bg-emerald-500/20 text-emerald-200"
+                                    : "bg-red-500/20 text-red-200"
+                                }`}
+                              >
+                                {accepted ? "Content accepted" : "Content rejected"}
+                              </span>
+
+                              <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-200">
+                                Score{" "}
+                                {score !== undefined && score !== null
+                                  ? Number(score).toFixed(2)
+                                  : "N/A"}
+                              </span>
+                            </div>
+                          </div>
+
+                          {item.reference?.text && (
+                            <p className="mt-3 text-right text-2xl leading-loose text-white">
+                              {item.reference.text}
+                            </p>
+                          )}
+
+                          {item.content_gate && (
+                            <div className="mt-3 rounded-xl bg-slate-900 p-3 text-sm text-slate-300">
+                              <p>
+                                <span className="font-semibold">Recognized:</span>{" "}
+                                {item.content_gate.pred}
+                              </p>
+                              <p className="mt-1">
+                                CER: {(item.content_gate.cer * 100).toFixed(2)}% | Character
+                                accuracy: {(item.content_gate.char_accuracy * 100).toFixed(2)}%
+                              </p>
+                            </div>
+                          )}
+
+                          {item.content_feedback && !accepted && (
+                            <ContentFeedback feedback={item.content_feedback} />
+                          )}
+
+                          {accepted && item.tajweed_ui?.readable_feedback && (
+                            <ReadableFeedback items={item.tajweed_ui.readable_feedback} />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
            {!isMultiAyah && gate && (
               <div className="space-y-4">
@@ -841,7 +834,7 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
 
             {autodetect?.matches &&
               autodetect.matches.length > 1 &&
-              !autodetect.accepted && (
+              !autodetectAccepted && (
               <div className="mt-6">
                 <h3 className="mb-3 text-lg font-semibold">
                   Similar ayah matches
