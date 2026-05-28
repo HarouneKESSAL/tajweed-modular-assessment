@@ -5,7 +5,7 @@ import subprocess
 import wave
 from dataclasses import dataclass
 from pathlib import Path
-
+from typing import Sequence
 from app.services.audio_io import find_ffmpeg
 
 
@@ -161,6 +161,104 @@ def extract_wav_segment(
             f"stderr:\n{completed.stderr}"
         )
 
+def select_split_points_for_expected_count(
+    candidate_points: list[float],
+    *,
+    duration_sec: float,
+    expected_segment_count: int,
+    segment_weights: Sequence[float] | None = None,
+    min_segment_sec: float = 0.7,
+) -> list[float]:
+    """
+    Select exactly expected_segment_count - 1 split points from silence candidates.
+
+    In guided multi-ayah mode, we know how many ayahs are expected.
+    Instead of splitting at every pause, this selects the silence boundaries that
+    best match the expected ayah duration proportions.
+    """
+    if expected_segment_count <= 1:
+        return []
+
+    required_splits = expected_segment_count - 1
+
+    candidates = sorted(
+        point
+        for point in candidate_points
+        if point >= min_segment_sec and duration_sec - point >= min_segment_sec
+    )
+
+    if len(candidates) <= required_splits:
+        return candidates
+
+    if segment_weights and len(segment_weights) == expected_segment_count:
+        weights = [max(float(w), 1.0) for w in segment_weights]
+    else:
+        weights = [1.0 for _ in range(expected_segment_count)]
+
+    total_weight = sum(weights)
+    cumulative = 0.0
+    targets: list[float] = []
+
+    for idx in range(required_splits):
+        cumulative += weights[idx]
+        targets.append(duration_sec * cumulative / total_weight)
+
+    # Dynamic programming: choose ordered candidates closest to target boundaries.
+    n = len(candidates)
+    k = required_splits
+
+    dp = [[float("inf")] * n for _ in range(k)]
+    prev = [[-1] * n for _ in range(k)]
+
+    for i, candidate in enumerate(candidates):
+        dp[0][i] = (candidate - targets[0]) ** 2
+
+    for split_idx in range(1, k):
+        for i, candidate in enumerate(candidates):
+            cost = (candidate - targets[split_idx]) ** 2
+
+            for prev_i in range(i):
+                previous_candidate = candidates[prev_i]
+
+                if candidate - previous_candidate < min_segment_sec:
+                    continue
+
+                candidate_cost = dp[split_idx - 1][prev_i] + cost
+
+                if candidate_cost < dp[split_idx][i]:
+                    dp[split_idx][i] = candidate_cost
+                    prev[split_idx][i] = prev_i
+
+    best_last = min(range(n), key=lambda i: dp[k - 1][i])
+
+    if dp[k - 1][best_last] == float("inf"):
+        # Fallback: greedily choose closest available candidates.
+        selected: list[float] = []
+
+        for target in targets:
+            remaining = [
+                point
+                for point in candidates
+                if all(abs(point - chosen) >= min_segment_sec for chosen in selected)
+            ]
+
+            if not remaining:
+                break
+
+            selected.append(min(remaining, key=lambda point: abs(point - target)))
+
+        return sorted(selected[:required_splits])
+
+    selected = []
+    current = best_last
+
+    for split_idx in range(k - 1, -1, -1):
+        selected.append(candidates[current])
+        current = prev[split_idx][current]
+
+    return sorted(selected)
+
+
 
 def segment_audio_by_silence(
     audio_path: Path,
@@ -171,6 +269,8 @@ def segment_audio_by_silence(
     min_silence_sec: float = 0.35,
     min_segment_sec: float = 0.7,
     drop_edge_segments_shorter_than_sec: float = 1.0,
+    expected_segment_count: int | None = None,
+    segment_weights: Sequence[float] | None = None,
 ) -> list[AudioSegmentInfo]:
     """
     Split a long recitation into ayah-level candidate segments using pauses.
@@ -192,11 +292,22 @@ def segment_audio_by_silence(
         min_silence_sec=min_silence_sec,
     )
 
-    split_points = build_split_points(
-        silences,
-        duration_sec=duration_sec,
-        min_segment_sec=min_segment_sec,
-    )
+    candidate_split_points = build_split_points(
+    silences,
+    duration_sec=duration_sec,
+    min_segment_sec=min_segment_sec,
+)
+
+    if expected_segment_count is not None and expected_segment_count > 1:
+        split_points = select_split_points_for_expected_count(
+            candidate_split_points,
+            duration_sec=duration_sec,
+            expected_segment_count=expected_segment_count,
+            segment_weights=segment_weights,
+            min_segment_sec=min_segment_sec,
+        )
+    else:
+        split_points = candidate_split_points
 
     boundaries = [0.0, *split_points, duration_sec]
 
@@ -212,12 +323,14 @@ def segment_audio_by_silence(
 
         spans.append((start, end))
 
-    # Drop short leading/trailing pieces, usually silence before/after recitation.
-    if spans and (spans[0][1] - spans[0][0]) < drop_edge_segments_shorter_than_sec:
-        spans = spans[1:]
+    # Drop short leading/trailing pieces only in free segmentation mode.
+    # In expected-count guided mode, selected boundaries already produce the target count.
+    if expected_segment_count is None:
+        if spans and (spans[0][1] - spans[0][0]) < drop_edge_segments_shorter_than_sec:
+            spans = spans[1:]
 
-    if spans and (spans[-1][1] - spans[-1][0]) < drop_edge_segments_shorter_than_sec:
-        spans = spans[:-1]
+        if spans and (spans[-1][1] - spans[-1][0]) < drop_edge_segments_shorter_than_sec:
+            spans = spans[:-1]
 
     segments: list[AudioSegmentInfo] = []
 

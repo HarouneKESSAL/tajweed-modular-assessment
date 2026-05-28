@@ -236,11 +236,40 @@ def run_multi_ayah_guided(
     expected_count = ayah_end - ayah_start + 1
     output_dir = SEGMENTS_ROOT / request_id
 
-    segments = segment_audio_by_silence(
+    reference_rows = [
+    get_ayah_reference(surah, ayah_start + offset)
+    for offset in range(expected_count)
+    ]
+
+    segment_weights = [
+        max(1, len(str(ref.get("text_compact") or ref.get("text") or "")))
+        for ref in reference_rows
+    ]
+
+    # First attempt: natural pause-based segmentation.
+    # This is preferred when the learner clearly pauses between ayahs.
+    natural_output_dir = output_dir / "natural"
+    natural_segments = segment_audio_by_silence(
         audio_path=Path(audio_path),
-        output_dir=output_dir,
-        request_id=request_id,
+        output_dir=natural_output_dir,
+        request_id=f"{request_id}_natural",
     )
+
+    if len(natural_segments) == expected_count:
+        segments = natural_segments
+        segmentation_strategy = "natural_pause"
+    else:
+        # Fallback: guided expected-count segmentation.
+        # This forces the number of segments to match the selected ayah range.
+        expected_output_dir = output_dir / "expected_count"
+        segments = segment_audio_by_silence(
+            audio_path=Path(audio_path),
+            output_dir=expected_output_dir,
+            request_id=f"{request_id}_expected",
+            expected_segment_count=expected_count,
+            segment_weights=segment_weights,
+        )
+    segmentation_strategy = "expected_count_fallback"
 
     segment_payload = [
         {
@@ -263,6 +292,7 @@ def run_multi_ayah_guided(
             "ayah_end": ayah_end,
             "expected_segments": expected_count,
             "detected_segments": len(segments),
+            "segmentation_strategy": segmentation_strategy,
             "segments": segment_payload,
             "error": (
                 f"Expected {expected_count} ayah segments but detected "
@@ -320,6 +350,7 @@ def run_multi_ayah_guided(
         "ok": True,
         "mode": "guided_multi",
         "request_id": request_id,
+        "segmentation_strategy": segmentation_strategy,
         "audio_path": str(audio_path),
         "surah": surah,
         "ayah_start": ayah_start,
