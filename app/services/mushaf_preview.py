@@ -89,9 +89,9 @@ def _choose_label_rule(label: dict[str, Any]) -> tuple[str | None, str | None]:
             raw_rule = detail.get("rule")
             if coarse == wanted:
                 color = (
-                    detail.get("color")
-                    or COARSE_RULE_COLORS.get(str(coarse))
+                    COARSE_RULE_COLORS.get(str(coarse))
                     or RAW_RULE_COLORS.get(str(raw_rule))
+                    or detail.get("color")
                     or DEFAULT_COLOR
                 )
                 return str(coarse), str(color)

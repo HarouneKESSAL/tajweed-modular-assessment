@@ -15,6 +15,31 @@ type MushafPayload = {
 
 const fallbackColor = "#111827";
 
+const ruleColors: Record<string, string> = {
+  madd: "#dc2626",
+  madd_2: "#dc2626",
+  madd_4: "#b91c1c",
+  madd_6: "#991b1b",
+
+  ghunnah: "#16a34a",
+
+  // make these clearly different
+  ikhfa: "#d97706",      // orange
+  idgham: "#7c3aed",    // purple
+
+  qalqalah: "#2563eb",
+  iqlab: "#0891b2",
+  hamzat_wasl: "#6b7280",
+  silent: "#111827",
+  lam_shamsiyyah: "#0284c7",
+  lam_qamariyyah: "#38bdf8",
+};
+
+function getRuleColor(rule?: string | null, apiColor?: string | null) {
+  const key = String(rule || "").trim().toLowerCase();
+  return ruleColors[key] || apiColor || fallbackColor;
+}
+
 const ruleLabels: Record<string, string> = {
   madd: "Madd",
   ghunnah: "Ghunnah",
@@ -25,10 +50,11 @@ const ruleLabels: Record<string, string> = {
 };
 
 const fallbackLegend = [
-  { rule: "madd", label: "Madd", color: "#FF6666" },
-  { rule: "ikhfa", label: "Ikhfa", color: "#00AA00" },
-  { rule: "idgham", label: "Idgham", color: "#7c3aed" },
-  { rule: "qalqalah", label: "Qalqalah", color: "#0066FF" },
+  { rule: "madd", label: "Madd", color: ruleColors.madd },
+  { rule: "ghunnah", label: "Ghunnah", color: ruleColors.ghunnah },
+  { rule: "ikhfa", label: "Ikhfa", color: ruleColors.ikhfa },
+  { rule: "idgham", label: "Idgham", color: ruleColors.idgham },
+  { rule: "qalqalah", label: "Qalqalah", color: ruleColors.qalqalah },
 ];
 
 export default function MushafPreviewCard({
@@ -88,7 +114,7 @@ export default function MushafPreviewCard({
                 title={seg.rule || ""}
                 className="whitespace-pre-wrap"
                 style={{
-                  color: seg.color || fallbackColor,
+                  color: getRuleColor(seg.rule, seg.color),
                   fontWeight: seg.rule ? 700 : 500,
                 }}
               >
@@ -126,7 +152,7 @@ function buildLegend(segments: MushafSegment[]) {
     seen.set(rule, {
       rule,
       label: ruleLabels[rule] || rule,
-      color: seg.color,
+      color: getRuleColor(rule, seg.color),
     });
   }
 
