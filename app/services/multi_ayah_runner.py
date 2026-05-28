@@ -140,7 +140,7 @@ def run_single_ayah_segment(
     gate = (
         run_content_gate(
             audio_path=segment_path,
-            gold_text=reference["text"],
+            gold_text=reference.get("content_text") or reference["text"],
             mode="strict",
         )
         or {
