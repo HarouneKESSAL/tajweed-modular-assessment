@@ -10,7 +10,7 @@ from app.services.inference_runner import run_user_audio_inference
 from app.services.multi_ayah_runner import run_multi_ayah_guided
 from app.services.quran_range_matcher import classify_range_match, find_best_ayah_range
 from app.services.whisper_gate import content_compare_compact, transcribe_audio
-
+from app.services.segment_alignment import align_segments_to_contiguous_range, classify_alignment
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SEGMENTS_ROOT = PROJECT_ROOT / "data" / "uploads" / "segments"
@@ -136,11 +136,12 @@ def detect_range_from_segments(
     max_segments: int = 20,
 ) -> dict[str, Any] | None:
     """
-    Free-mode detection by segmentation.
+    Free-mode detection by constrained contiguous alignment.
 
-    Instead of transcribing the whole recording once, this splits the audio
-    first, transcribes each segment, and matches each segment to one ayah.
-    This is better for the current ayah-level content model.
+    Steps:
+    1. Split free recitation into pause-based segments.
+    2. Transcribe each segment.
+    3. Align all segments together to one contiguous Quran range.
     """
     output_dir = SEGMENTS_ROOT / request_id / "free_detect"
 
@@ -161,26 +162,32 @@ def detect_range_from_segments(
             "confidence": 0.0,
             "segments": [
                 {
-                    "index": s.index,
-                    "start_sec": s.start_sec,
-                    "end_sec": s.end_sec,
-                    "duration_sec": s.duration_sec,
-                    "audio_path": s.audio_path,
-                    "method": s.method,
+                    "segment": {
+                        "index": s.index,
+                        "start_sec": s.start_sec,
+                        "end_sec": s.end_sec,
+                        "duration_sec": s.duration_sec,
+                        "audio_path": s.audio_path,
+                        "method": s.method,
+                    }
                 }
                 for s in segments
             ],
             "message": f"Detected {len(segments)} segments, which is too many for free-mode automatic matching.",
         }
 
-    segment_matches: list[dict[str, Any]] = []
+    segment_transcripts: list[str] = []
+    raw_segment_payloads: list[dict[str, Any]] = []
 
     for segment in segments:
         pred_text = transcribe_audio(Path(segment.audio_path))
-        best = find_best_single_ayah_match(pred_text)
-        decision = classify_segment_match(best)
+        segment_transcripts.append(pred_text)
 
-        segment_matches.append(
+        # Keep independent best match only for debugging/explanation.
+        best_independent = find_best_single_ayah_match(pred_text)
+        independent_decision = classify_segment_match(best_independent)
+
+        raw_segment_payloads.append(
             {
                 "segment": {
                     "index": segment.index,
@@ -191,77 +198,110 @@ def detect_range_from_segments(
                     "method": segment.method,
                 },
                 "recognized_text": pred_text,
-                "best_ayah": best,
-                "decision": decision,
+                "best_ayah_independent": best_independent,
+                "independent_decision": independent_decision,
             }
         )
 
-    if not segment_matches or any(item.get("best_ayah") is None for item in segment_matches):
+    # Rough full-range hint from the combined segment transcript.
+    # This is only used as a hint; the final decision comes from contiguous alignment.
+    combined_transcript = normalize_text(" ".join(segment_transcripts))
+    rough_range = find_best_ayah_range(
+        combined_transcript,
+        max_ayahs=max(20, len(segment_transcripts) + 4),
+    )
+
+    rough_decision = classify_range_match(rough_range)
+    candidate_surah = int(rough_range["surah"]) if rough_range else None
+
+    # First try the hinted surah if available.
+    hinted_alignment = (
+        align_segments_to_contiguous_range(
+            segment_transcripts,
+            candidate_surah=candidate_surah,
+        )
+        if candidate_surah is not None
+        else None
+    )
+
+    hinted_decision = classify_alignment(hinted_alignment)
+
+    # If the hinted surah is not good enough, search globally.
+    if hinted_decision.get("accepted") or hinted_decision.get("needs_confirmation"):
+        alignment = hinted_alignment
+        alignment_decision = hinted_decision
+        alignment_strategy = "hinted_surah_contiguous_alignment"
+    else:
+        alignment = align_segments_to_contiguous_range(segment_transcripts)
+        alignment_decision = classify_alignment(alignment)
+        alignment_strategy = "global_contiguous_alignment"
+
+    if alignment is None:
         return {
             "accepted": False,
-            "needs_confirmation": True,
-            "verdict": "segment_matching_failed",
+            "needs_confirmation": False,
+            "verdict": "contiguous_alignment_failed",
             "confidence": 0.0,
-            "segments": segment_matches,
+            "segments": raw_segment_payloads,
+            "rough_range": rough_range,
+            "rough_decision": rough_decision,
         }
 
-    best_rows = [item["best_ayah"] for item in segment_matches]
-    surahs = [int(row["surah"]) for row in best_rows]
-    ayahs = [int(row["ayah"]) for row in best_rows]
+    pair_scores = alignment.get("pair_scores", [])
 
-    same_surah = len(set(surahs)) == 1
-    contiguous = all(
-        ayahs[idx] == ayahs[0] + idx
-        for idx in range(len(ayahs))
-    )
+    aligned_segments: list[dict[str, Any]] = []
 
-    avg_cer = sum(float(row["cer"]) for row in best_rows) / len(best_rows)
-    avg_similarity = sum(float(row["char_similarity"]) for row in best_rows) / len(best_rows)
-    avg_confidence = max(0.0, min(1.0, 1.0 - avg_cer))
+    for idx, item in enumerate(raw_segment_payloads):
+        pair = pair_scores[idx] if idx < len(pair_scores) else {}
 
-    all_reasonable = all(
-        item["decision"].get("accepted") or item["decision"].get("needs_confirmation")
-        for item in segment_matches
-    )
+        aligned_segments.append(
+            {
+                **item,
+                "aligned_ayah": {
+                    "surah": pair.get("surah"),
+                    "ayah": pair.get("ayah"),
+                    "text": pair.get("text", ""),
+                    "content_text": pair.get("content_text", ""),
+                    "cer": pair.get("cer", 1.0),
+                    "char_similarity": pair.get("char_similarity", 0.0),
+                    "edit_distance": pair.get("edit_distance", 0),
+                },
+            }
+        )
 
-    if same_surah and contiguous and all_reasonable and (avg_cer <= 0.20 or avg_similarity >= 0.85):
-        accepted = True
-        needs_confirmation = False
-        verdict = "segment_range_accepted"
-    elif same_surah and contiguous:
-        accepted = False
-        needs_confirmation = True
-        verdict = "segment_range_needs_confirmation"
-    else:
-        accepted = False
-        needs_confirmation = True
-        verdict = "segment_range_not_contiguous"
-
-    surah = surahs[0] if same_surah else None
-    ayah_start = min(ayahs) if same_surah else None
-    ayah_end = max(ayahs) if same_surah else None
-
-    if same_surah and contiguous:
-        detected_text = " ".join(str(row.get("text") or "") for row in best_rows)
-        detected_content_text = " ".join(str(row.get("content_text") or row.get("text") or "") for row in best_rows)
-    else:
-        detected_text = ""
-        detected_content_text = ""
+    detected_ayah_sequence = [
+        {
+            "segment_index": int(item["segment"]["index"]),
+            "surah": int(item["aligned_ayah"]["surah"]),
+            "ayah": int(item["aligned_ayah"]["ayah"]),
+            "recognized_text": item.get("recognized_text", ""),
+            "expected_text": item["aligned_ayah"].get("content_text", ""),
+            "cer": float(item["aligned_ayah"].get("cer", 1.0)),
+            "char_similarity": float(item["aligned_ayah"].get("char_similarity", 0.0)),
+        }
+        for item in aligned_segments
+        if item.get("aligned_ayah", {}).get("surah") is not None
+    ]
 
     return {
-        "accepted": accepted,
-        "needs_confirmation": needs_confirmation,
-        "verdict": verdict,
-        "confidence": float(avg_confidence),
-        "avg_cer": float(avg_cer),
-        "avg_char_similarity": float(avg_similarity),
-        "surah": surah,
-        "ayah_start": ayah_start,
-        "ayah_end": ayah_end,
-        "ayah_count": len(segment_matches),
-        "text": normalize_text(detected_text),
-        "content_text": normalize_text(detected_content_text),
-        "segments": segment_matches,
+        "accepted": bool(alignment_decision.get("accepted")),
+        "needs_confirmation": bool(alignment_decision.get("needs_confirmation")),
+        "verdict": alignment_decision.get("verdict"),
+        "confidence": float(alignment_decision.get("confidence", 0.0)),
+        "avg_cer": float(alignment.get("avg_cer", 1.0)),
+        "avg_char_similarity": float(alignment.get("avg_char_similarity", 0.0)),
+        "worst_cer": float(alignment.get("worst_cer", 1.0)),
+        "surah": int(alignment["surah"]),
+        "ayah_start": int(alignment["ayah_start"]),
+        "ayah_end": int(alignment["ayah_end"]),
+        "ayah_count": int(alignment["ayah_count"]),
+        "text": normalize_text(alignment.get("text", "")),
+        "content_text": normalize_text(alignment.get("content_text", "")),
+        "detected_ayah_sequence": detected_ayah_sequence,
+        "segments": aligned_segments,
+        "alignment_strategy": alignment_strategy,
+        "rough_range": rough_range,
+        "rough_decision": rough_decision,
     }
 
 
@@ -407,9 +447,15 @@ def run_free_recitation_assessment(
             ayah_end=ayah_end,
         )
 
-    # If segment-first produced a likely contiguous range but not enough confidence,
-    # return it for confirmation instead of falling back to a misleading single-ayah match.
-    if segment_detection and segment_detection.get("needs_confirmation"):
+    # If segment-first produced a contiguous but low-confidence range, return it
+    # for confirmation. If it produced a non-contiguous range, do not stop here:
+    # fall back to full-audio range matching, because independent segment matching
+    # can select unrelated ayahs with similar words.
+    if (
+        segment_detection
+        and segment_detection.get("needs_confirmation")
+        and segment_detection.get("verdict") != "segment_range_not_contiguous"
+    ):
         autodetect = {
             "strategy": "segment_first",
             "recognized_text": " ".join(
