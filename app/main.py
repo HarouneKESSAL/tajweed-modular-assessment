@@ -10,7 +10,7 @@ from fastapi.responses import JSONResponse
 from app.services.audio_io import save_and_convert_upload
 from app.services.inference_runner import run_user_audio_inference
 from app.services.multi_ayah_runner import run_multi_ayah_guided
-
+from app.services.free_mode_runner import run_free_recitation_assessment
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 UPLOAD_DIR = PROJECT_ROOT / "data" / "uploads"
@@ -74,8 +74,12 @@ async def assess_recitation(
             )
 
         converted_path = await save_and_convert_upload(audio, wav_path)
-
-        if (
+        if normalized_mode in {"autodetect", "free"}:
+            result = run_free_recitation_assessment(
+                audio_path=converted_path,
+                request_id=request_id,
+            )
+        elif (
             normalized_mode == "guided"
             and surah is not None
             and ayah is not None

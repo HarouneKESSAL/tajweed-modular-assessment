@@ -168,13 +168,10 @@ def run_user_audio_inference(
                 "message": "Could not identify the ayah.",
             }
 
-        reference = {
-            "surah": best["surah"],
-            "ayah": best["ayah"],
-            "text": best["text"],
-            "text_compact": best["text_compact"],
-            "source_id": best.get("source_id"),
-        }
+        reference = get_ayah_reference(
+            int(best["surah"]),
+            int(best["ayah"]),
+        )
 
         gate = run_content_gate(
             audio_path=audio_path,

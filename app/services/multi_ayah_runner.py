@@ -141,7 +141,7 @@ def run_single_ayah_segment(
         run_content_gate(
             audio_path=segment_path,
             gold_text=reference.get("content_text") or reference["text"],
-            mode="strict",
+            mode="segment",
         )
         or {
             "accepted": False,
@@ -153,7 +153,7 @@ def run_single_ayah_segment(
     content_feedback = try_build_content_feedback(
         gate=gate,
         reference=reference,
-        mode="guided",
+        mode="segment",
     )
 
     content_accepted = bool(gate.get("accepted"))
@@ -269,7 +269,7 @@ def run_multi_ayah_guided(
             expected_segment_count=expected_count,
             segment_weights=segment_weights,
         )
-    segmentation_strategy = "expected_count_fallback"
+        segmentation_strategy = "expected_count_fallback"
 
     segment_payload = [
         {

@@ -10,6 +10,11 @@ import json
 import random
 from collections import Counter
 
+import matplotlib
+matplotlib.use("Agg")
+
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset
 
@@ -36,11 +41,13 @@ class ManifestBurstDataset(Dataset):
     ) -> None:
         self.manifest_path = Path(manifest_path)
         self.rows = []
+
         with self.manifest_path.open("r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if line:
                     self.rows.append(json.loads(line))
+
         self.sample_rate = sample_rate
         self.n_mfcc = n_mfcc
         self.speed_config = speed_config
@@ -50,12 +57,14 @@ class ManifestBurstDataset(Dataset):
 
     def __getitem__(self, idx: int):
         row = self.rows[idx]
+
         x = extract_mfcc_features(
             row["audio_path"],
             sample_rate=self.sample_rate,
             n_mfcc=self.n_mfcc,
             speed_config=self.speed_config,
         )
+
         return {
             "x": x,
             "label": torch.tensor(int(row["burst_label"]), dtype=torch.long),
@@ -68,6 +77,7 @@ def forward_fn(model, batch, device):
 
 def split_burst_indices(rows, val_fraction: float = 0.2, seed: int = 7):
     groups = {}
+
     for idx, row in enumerate(rows):
         group_key = row.get("reciter_id") or "Unknown"
         groups.setdefault(group_key, []).append(idx)
@@ -87,9 +97,11 @@ def split_burst_indices(rows, val_fraction: float = 0.2, seed: int = 7):
 
     informative_groups = []
     background_groups = []
+
     for key, indices in group_items:
         labels = labels_for_indices(indices)
         item = (key, indices, labels)
+
         if 1 in labels:
             informative_groups.append(item)
         else:
@@ -100,6 +112,7 @@ def split_burst_indices(rows, val_fraction: float = 0.2, seed: int = 7):
     for key, indices, labels in informative_groups:
         if covered_labels >= required_labels:
             break
+
         if labels - covered_labels:
             val_groups.add(key)
             val_count += len(indices)
@@ -112,11 +125,13 @@ def split_burst_indices(rows, val_fraction: float = 0.2, seed: int = 7):
     for key, indices in remaining_groups:
         if val_count >= target_val_rows:
             break
+
         val_groups.add(key)
         val_count += len(indices)
 
     train_idx = []
     val_idx = []
+
     for key, indices in groups.items():
         if key in val_groups:
             val_idx.extend(indices)
@@ -145,22 +160,35 @@ def evaluate_burst_diagnostics(model, loader, device: str):
         logits = forward_fn(model, batch, device).cpu()
         preds = logits.argmax(dim=-1)
         targets = batch["label"].cpu()
+
         for target, pred in zip(targets.tolist(), preds.tolist()):
             confusion[target, pred] += 1
 
     per_class_acc = {}
     macro_acc_values = []
     label_names = ["none", "qalqalah"]
+
     for idx, label in enumerate(label_names):
         support = int(confusion[idx].sum().item())
         correct = int(confusion[idx, idx].item())
         acc = (correct / support) if support > 0 else 0.0
-        per_class_acc[label] = {"support": support, "correct": correct, "accuracy": acc}
+
+        per_class_acc[label] = {
+            "support": support,
+            "correct": correct,
+            "accuracy": acc,
+        }
+
         if support > 0:
             macro_acc_values.append(acc)
 
     macro_acc = sum(macro_acc_values) / len(macro_acc_values) if macro_acc_values else 0.0
-    return {"confusion": confusion, "per_class_acc": per_class_acc, "macro_acc": macro_acc}
+
+    return {
+        "confusion": confusion,
+        "per_class_acc": per_class_acc,
+        "macro_acc": macro_acc,
+    }
 
 
 def print_label_counts(title: str, counts: Counter):
@@ -170,12 +198,84 @@ def print_label_counts(title: str, counts: Counter):
 def print_confusion(confusion: torch.Tensor):
     print("Validation confusion matrix (rows=gold, cols=pred):")
     print("gold\\pred".ljust(12) + "    none qalqalah")
-    print("none".ljust(12) + f"{int(confusion[0,0]):8d}{int(confusion[0,1]):9d}")
-    print("qalqalah".ljust(12) + f"{int(confusion[1,0]):8d}{int(confusion[1,1]):9d}")
+    print("none".ljust(12) + f"{int(confusion[0, 0]):8d}{int(confusion[0, 1]):9d}")
+    print("qalqalah".ljust(12) + f"{int(confusion[1, 0]):8d}{int(confusion[1, 1]):9d}")
+
+
+def save_confusion_matrix_figure(
+    confusion: torch.Tensor,
+    *,
+    labels: list[str],
+    output_prefix: str | Path,
+    title: str,
+) -> None:
+    """
+    Save a normalised confusion matrix as PDF and PNG.
+
+    Matrix convention:
+      rows = gold labels
+      columns = predicted labels
+    """
+    output_prefix = Path(output_prefix)
+    output_prefix.parent.mkdir(parents=True, exist_ok=True)
+
+    cm = confusion.detach().cpu().numpy().astype(float)
+    row_sums = cm.sum(axis=1, keepdims=True)
+
+    cm_norm = np.divide(
+        cm,
+        row_sums,
+        out=np.zeros_like(cm),
+        where=row_sums != 0,
+    )
+
+    fig, ax = plt.subplots(figsize=(6.5, 5.5))
+    im = ax.imshow(cm_norm, vmin=0.0, vmax=1.0)
+
+    ax.set_title(title)
+    ax.set_xlabel("Predicted class")
+    ax.set_ylabel("True class")
+
+    ticks = np.arange(len(labels))
+    ax.set_xticks(ticks)
+    ax.set_yticks(ticks)
+    ax.set_xticklabels(labels)
+    ax.set_yticklabels(labels)
+
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            ax.text(
+                j,
+                i,
+                f"{cm_norm[i, j]:.2f}\n({int(cm[i, j])})",
+                ha="center",
+                va="center",
+                fontsize=11,
+            )
+
+    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+
+    plt.tight_layout()
+
+    pdf_path = output_prefix.with_suffix(".pdf")
+    png_path = output_prefix.with_suffix(".png")
+
+    plt.savefig(pdf_path, bbox_inches="tight")
+    plt.savefig(png_path, dpi=300, bbox_inches="tight")
+    plt.close()
+
+    print(f"Saved {pdf_path}")
+    print(f"Saved {png_path}")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", default="")
+    parser.add_argument(
+        "--confusion-output",
+        default="figures/experiments/burst_confusion_matrix",
+        help="Output prefix for the Burst/Qalqalah confusion matrix figure.",
+    )
     args = parser.parse_args()
 
     data_cfg = load_yaml(PROJECT_ROOT / "configs" / "data.yaml")
@@ -183,8 +283,10 @@ def main() -> None:
     train_cfg = load_yaml(PROJECT_ROOT / "configs" / "train.yaml")
 
     seed_everything(train_cfg["seed"])
+
     paths = ProjectPaths(PROJECT_ROOT)
     paths.checkpoints.mkdir(parents=True, exist_ok=True)
+
     speed_config = SpeedNormalizationConfig(
         enabled=bool(data_cfg.get("normalize_speed", False)),
         target_speech_rate=float(data_cfg.get("target_speech_rate", 12.0)),
@@ -193,15 +295,18 @@ def main() -> None:
     )
 
     use_toy = not bool(args.manifest) and bool(data_cfg.get("use_toy_data", True))
+
     if use_toy:
         full_dataset = ToyBurstDataset(n_samples=64, seed=train_cfg["seed"])
         train_len = max(1, int(0.8 * len(full_dataset)))
         val_len = len(full_dataset) - train_len
+
         train_ds, val_ds = torch.utils.data.random_split(
             full_dataset,
             [train_len, val_len],
             generator=torch.Generator().manual_seed(train_cfg["seed"]),
         )
+
     else:
         full_dataset = ManifestBurstDataset(
             args.manifest,
@@ -209,7 +314,13 @@ def main() -> None:
             n_mfcc=data_cfg["n_mfcc"],
             speed_config=speed_config,
         )
-        train_idx, val_idx = split_burst_indices(full_dataset.rows, val_fraction=0.2, seed=train_cfg["seed"])
+
+        train_idx, val_idx = split_burst_indices(
+            full_dataset.rows,
+            val_fraction=0.2,
+            seed=train_cfg["seed"],
+        )
+
         train_ds = torch.utils.data.Subset(full_dataset, train_idx)
         val_ds = torch.utils.data.Subset(full_dataset, val_idx)
 
@@ -224,6 +335,7 @@ def main() -> None:
         shuffle=True,
         collate_fn=collate_sequence_classification_batch,
     )
+
     val_loader = DataLoader(
         val_ds,
         batch_size=train_cfg["batch_size"],
@@ -232,24 +344,45 @@ def main() -> None:
     )
 
     channels = tuple(model_cfg["channels"])
+
     model = QalqalahCNN(
         input_dim=model_cfg["input_dim"],
         channels=channels,
         num_classes=model_cfg["num_classes"],
         dropout=model_cfg["dropout"],
     )
+
     optimizer = torch.optim.Adam(model.parameters(), lr=train_cfg["learning_rate"])
     checkpoint = ModelCheckpoint(paths.checkpoints, filename="burst_module.pt")
 
     best_score = float("-inf")
     device = train_cfg.get("device", "cpu")
+
     model = model.to(device)
     checkpoint_path = paths.checkpoints / "burst_module.pt"
 
     for epoch in range(1, train_cfg["epochs"] + 1):
-        train_metrics = train_classifier_epoch(model, train_loader, optimizer, forward_fn, device=device)
-        val_metrics = evaluate_classifier_epoch(model, val_loader, forward_fn, device=device)
-        diagnostics = evaluate_burst_diagnostics(model, val_loader, device=device)
+        train_metrics = train_classifier_epoch(
+            model,
+            train_loader,
+            optimizer,
+            forward_fn,
+            device=device,
+        )
+
+        val_metrics = evaluate_classifier_epoch(
+            model,
+            val_loader,
+            forward_fn,
+            device=device,
+        )
+
+        diagnostics = evaluate_burst_diagnostics(
+            model,
+            val_loader,
+            device=device,
+        )
+
         score = diagnostics["macro_acc"]
 
         if score > best_score:
@@ -258,7 +391,10 @@ def main() -> None:
                 -score,
                 {
                     "model_state_dict": model.state_dict(),
-                    "config": {"model": model_cfg, "train": train_cfg},
+                    "config": {
+                        "model": model_cfg,
+                        "train": train_cfg,
+                    },
                 },
             )
             print(f"saved best checkpoint to {checkpoint_path}")
@@ -274,13 +410,31 @@ def main() -> None:
 
     state = load_checkpoint(checkpoint_path)
     model.load_state_dict(state["model_state_dict"])
-    final_diagnostics = evaluate_burst_diagnostics(model, val_loader, device=device)
+
+    final_diagnostics = evaluate_burst_diagnostics(
+        model,
+        val_loader,
+        device=device,
+    )
+
     print(f"best checkpoint: {checkpoint_path}")
     print_confusion(final_diagnostics["confusion"])
+
+    save_confusion_matrix_figure(
+        final_diagnostics["confusion"],
+        labels=["none", "qalqalah"],
+        output_prefix=args.confusion_output,
+        title="Burst/Qalqalah confusion matrix",
+    )
+
     for label in ["none", "qalqalah"]:
         stats = final_diagnostics["per_class_acc"][label]
-        print(f"{label}: support={stats['support']} correct={stats['correct']} acc={stats['accuracy']:.3f}")
+        print(
+            f"{label}: support={stats['support']} "
+            f"correct={stats['correct']} "
+            f"acc={stats['accuracy']:.3f}"
+        )
+
 
 if __name__ == "__main__":
     main()
-

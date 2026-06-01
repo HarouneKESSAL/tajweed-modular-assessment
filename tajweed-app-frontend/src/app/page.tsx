@@ -1,11 +1,9 @@
 "use client";
 
 import ContentFeedback from "@/components/ContentFeedback";
-
 import MushafPreviewCard from "@/components/MushafPreviewCard";
 import ReadableFeedback from "@/components/ReadableFeedback";
 import SupportedRules from "@/components/SupportedRules";
-
 import { useRef, useState } from "react";
 
 type Match = {
@@ -15,6 +13,44 @@ type Match = {
   cer: number;
   char_similarity: number;
   edit_distance: number;
+};
+
+type RangeMatch = {
+  surah?: number | null;
+  ayah_start?: number | null;
+  ayah_end?: number | null;
+  ayah_count?: number;
+  text?: string;
+  content_text?: string;
+  cer?: number;
+  avg_cer?: number;
+  char_similarity?: number;
+  avg_char_similarity?: number;
+  edit_distance?: number;
+  pred_text?: string;
+  verdict?: string;
+  confidence?: number;
+};
+
+type AutodetectDecision = {
+  accepted?: boolean;
+  needs_confirmation?: boolean;
+  verdict?: string;
+  confidence?: number;
+};
+
+type AutodetectPayload = {
+  accepted?: boolean;
+  needs_confirmation?: boolean;
+  verdict?: string;
+  confidence?: number;
+  pred?: string;
+  recognized_text?: string;
+  strategy?: string;
+  best_match?: Match;
+  matches?: Match[];
+  best_range?: RangeMatch | null;
+  decision?: AutodetectDecision;
 };
 
 type LocalizedText = {
@@ -126,10 +162,28 @@ type TajweedPayload = {
   };
 };
 
+type ContentGatePayload = {
+  accepted: boolean;
+  verdict: string;
+  mode: string;
+  exact: boolean;
+  gold: string;
+  pred: string;
+  gold_compact: string;
+  pred_compact: string;
+  char_accuracy: number;
+  cer: number;
+  edit_distance: number;
+  gold_len: number;
+  pred_len: number;
+  segment_tolerance_applied?: boolean;
+};
+
 type ApiResult = {
   ok: boolean;
   request_id?: string;
-  mode?: "guided" | "autodetect" | "guided_multi";
+  mode?: "guided" | "autodetect" | "guided_multi" | "autodetect_multi";
+  segmentation_strategy?: string;
   audio_path?: string;
   surah?: number;
   ayah?: number;
@@ -140,15 +194,11 @@ type ApiResult = {
     text_compact: string;
     source_id?: string;
   } | null;
-  autodetect?: {
-    accepted: boolean;
-    needs_confirmation: boolean;
-    verdict: string;
-    confidence: number;
-    pred: string;
-    best_match?: Match;
-    matches?: Match[];
-  };
+  autodetect?: AutodetectPayload;
+  detected_surah?: number;
+  detected_ayah?: number;
+  detected_ayah_start?: number;
+  detected_ayah_end?: number;
   ayah_start?: number;
   ayah_end?: number;
   expected_segments?: number;
@@ -156,21 +206,7 @@ type ApiResult = {
   segments?: SegmentPayload[];
   ayah_results?: AyahResult[];
   aggregate?: MultiAyahAggregate;
-  content_gate?: {
-    accepted: boolean;
-    verdict: string;
-    mode: string;
-    exact: boolean;
-    gold: string;
-    pred: string;
-    gold_compact: string;
-    pred_compact: string;
-    char_accuracy: number;
-    cer: number;
-    edit_distance: number;
-    gold_len: number;
-    pred_len: number;
-  } | null;
+  content_gate?: ContentGatePayload | null;
   mushaf?: MushafPayload | null;
   tajweed_ui?: {
     supported_rules?: SupportedRule[];
@@ -181,7 +217,6 @@ type ApiResult = {
   message?: string;
   error?: string;
 };
-
 
 type SegmentPayload = {
   index: number;
@@ -203,7 +238,8 @@ type AyahResult = {
     text_compact?: string;
     source_id?: string;
   };
-  content_gate?: ApiResult["content_gate"];
+  mushaf?: MushafPayload | null;
+  content_gate?: ContentGatePayload | null;
   content_feedback?: ContentFeedbackPayload | null;
   tajweed?: TajweedPayload | null;
   tajweed_ui?: {
@@ -222,6 +258,67 @@ type MultiAyahAggregate = {
   average_tajweed_score?: number | null;
   total_errors?: number;
 };
+
+function formatPercent(value?: number | null): string {
+  if (value === undefined || value === null || Number.isNaN(value)) return "N/A";
+  return `${(value * 100).toFixed(2)}%`;
+}
+
+function formatScore(value?: number | null): string {
+  if (value === undefined || value === null || Number.isNaN(value)) return "N/A";
+  return Number(value).toFixed(2);
+}
+
+function formatAutodetectVerdict(verdict?: string | null): string {
+  const labels: Record<string, string> = {
+    contiguous_alignment_accepted: "Auto-detected range accepted",
+    contiguous_alignment_needs_confirmation: "Detected range needs confirmation",
+    contiguous_alignment_rejected: "Could not confirm detected range",
+    segment_range_accepted: "Segmented range accepted",
+    segment_range_needs_confirmation: "Segmented range needs confirmation",
+    segment_range_not_contiguous: "Segmented ayahs were not contiguous",
+    autodetect_range_accepted: "Auto-detected range accepted",
+    autodetect_range_needs_confirmation: "Auto-detected range needs confirmation",
+    autodetect_range_rejected_low_confidence: "Low-confidence auto-detection",
+    accepted_exact: "Accepted — exact match",
+    accepted_segment_tolerant: "Accepted — minor ASR variation",
+    rejected_content_mismatch: "Content mismatch",
+  };
+
+  if (!verdict) return "Auto-detection result";
+  return labels[verdict] ?? verdict.replaceAll("_", " ");
+}
+
+function getAutodetectMessage(verdict?: string | null): string {
+  if (!verdict) return "";
+
+  if (verdict.includes("accepted")) {
+    return "The system detected the recited range and started assessment automatically.";
+  }
+
+  if (verdict.includes("needs_confirmation")) {
+    return "The system found a likely range, but confidence was not high enough for automatic Tajweed scoring.";
+  }
+
+  if (verdict.includes("not_contiguous")) {
+    return "The detected ayahs were not continuous. Try again with clearer pauses between ayahs.";
+  }
+
+  return "The system could not confidently detect the recited range.";
+}
+
+function getAutodetectState(autodetect?: AutodetectPayload) {
+  const decision = autodetect?.decision;
+  const accepted = Boolean(autodetect?.accepted ?? decision?.accepted);
+  const needsConfirmation = Boolean(
+    autodetect?.needs_confirmation ?? decision?.needs_confirmation
+  );
+  const verdict = autodetect?.verdict ?? decision?.verdict ?? null;
+  const confidence = autodetect?.confidence ?? decision?.confidence ?? null;
+
+  return { accepted, needsConfirmation, verdict, confidence };
+}
+
 export default function Home() {
   const [mode, setMode] = useState<"guided" | "autodetect">("autodetect");
   const [surah, setSurah] = useState("1");
@@ -244,8 +341,8 @@ export default function Home() {
     setAudioUrl(null);
 
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
     const recorder = new MediaRecorder(stream);
+
     recorderRef.current = recorder;
     chunksRef.current = [];
 
@@ -302,31 +399,28 @@ export default function Home() {
       const data = await response.json();
       setResult(data);
     } catch (error) {
-      setResult({
-        ok: false,
-        error: String(error),
-      });
+      setResult({ ok: false, error: String(error) });
     } finally {
       setLoading(false);
     }
   }
 
- const gate = result?.content_gate;
-const autodetect = result?.autodetect;
-const isMultiAyah = result?.mode === "guided_multi";
-const ayahResults = result?.ayah_results ?? [];
-const aggregate = result?.aggregate;
-const mushaf = result?.mushaf;
-const tajweedUi = result?.tajweed_ui;
-const contentFeedback = result?.content_feedback;
-const tajweed = result?.tajweed;
-const tajweedScore =
-  tajweed?.result?.weighted_score ??
-  tajweed?.result?.diagnosis?.weighted_score ??
-  tajweed?.result?.diagnosis?.weighted_score ??
-  null;
-const tajweedDiagnosis = tajweed?.result?.diagnosis ?? null;
-const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? [];
+  const gate = result?.content_gate;
+  const autodetect = result?.autodetect;
+  const autodetectState = getAutodetectState(autodetect);
+  const isMultiAyah = result?.mode === "guided_multi" || result?.mode === "autodetect_multi";
+  const ayahResults = result?.ayah_results ?? [];
+  const aggregate = result?.aggregate;
+  const mushaf = result?.mushaf;
+  const tajweedUi = result?.tajweed_ui;
+  const contentFeedback = result?.content_feedback;
+  const tajweed = result?.tajweed;
+  const tajweedScore =
+    tajweed?.result?.weighted_score ??
+    tajweed?.result?.diagnosis?.weighted_score ??
+    null;
+  const tajweedDiagnosis = tajweed?.result?.diagnosis ?? null;
+  const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? [];
 
   return (
     <main className="min-h-screen bg-slate-950 p-6 text-white">
@@ -354,7 +448,8 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
             >
               <div className="text-lg font-semibold">Free Recitation</div>
               <div className="text-sm text-slate-300">
-                Record without selecting an ayah. The backend auto-detects it.
+                Record without selecting an ayah. For multi-ayah recitation, pause
+                briefly between ayahs.
               </div>
             </button>
 
@@ -374,13 +469,13 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
           </div>
 
           {mode === "guided" && (
-            <div className="mb-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="mb-5 grid grid-cols-1 gap-4 md:grid-cols-3">
               <label className="space-y-2">
                 <span className="text-sm text-slate-300">Surah number</span>
                 <input
                   className="w-full rounded-xl bg-slate-800 px-3 py-2 outline-none ring-1 ring-slate-700 focus:ring-blue-400"
                   value={surah}
-                  onChange={(e) => setSurah(e.target.value)}
+                  onChange={(event) => setSurah(event.target.value)}
                 />
               </label>
 
@@ -389,17 +484,17 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
                 <input
                   className="w-full rounded-xl bg-slate-800 px-3 py-2 outline-none ring-1 ring-slate-700 focus:ring-blue-400"
                   value={ayah}
-                  onChange={(e) => setAyah(e.target.value)}
+                  onChange={(event) => setAyah(event.target.value)}
                 />
               </label>
 
-              <label className="text-xs text-slate-300">
-                To ayah number
+              <label className="space-y-2">
+                <span className="text-sm text-slate-300">To ayah number</span>
                 <input
                   value={ayahEnd}
-                  onChange={(e) => setAyahEnd(e.target.value)}
+                  onChange={(event) => setAyahEnd(event.target.value)}
                   placeholder="optional"
-                  className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-white"
+                  className="w-full rounded-xl bg-slate-800 px-3 py-2 text-white outline-none ring-1 ring-slate-700 focus:ring-blue-400"
                 />
               </label>
             </div>
@@ -458,27 +553,58 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
             {autodetect && (
               <div className="mb-5 rounded-2xl bg-slate-800 p-4">
                 <p className="mb-2 text-sm uppercase tracking-wider text-slate-400">
-                  Auto-detected ayah
+                  Auto-detected recitation
                 </p>
 
                 <div
                   className={`rounded-xl p-4 ${
-                    autodetect.accepted
+                    autodetectState.accepted
                       ? "bg-emerald-950"
-                      : autodetect.needs_confirmation
+                      : autodetectState.needsConfirmation
                       ? "bg-yellow-950"
                       : "bg-red-950"
                   }`}
                 >
                   <p className="font-semibold">
-                    {autodetect.verdict.replaceAll("_", " ")}
+                    {formatAutodetectVerdict(autodetectState.verdict)}
                   </p>
                   <p className="text-sm text-slate-300">
-                    Confidence: {(autodetect.confidence * 100).toFixed(2)}%
+                    Confidence: {formatPercent(autodetectState.confidence)}
                   </p>
+                  {getAutodetectMessage(autodetectState.verdict) && (
+                    <p className="mt-1 text-xs text-slate-300">
+                      {getAutodetectMessage(autodetectState.verdict)}
+                    </p>
+                  )}
                 </div>
 
-                {result.reference && (
+                {(autodetect.recognized_text || autodetect.pred) && (
+                  <div className="mt-4 rounded-xl bg-slate-900 p-3">
+                    <p className="mb-1 text-xs uppercase tracking-wider text-slate-500">
+                      Recognized
+                    </p>
+                    <p dir="rtl" className="text-lg leading-loose text-white">
+                      {autodetect.recognized_text ?? autodetect.pred}
+                    </p>
+                  </div>
+                )}
+
+                {autodetect.best_range && (
+                  <div className="mt-4">
+                    <p className="text-sm text-slate-400">
+                      Detected range: Surah {autodetect.best_range.surah ?? "?"}, Ayah{" "}
+                      {autodetect.best_range.ayah_start ?? "?"} to{" "}
+                      {autodetect.best_range.ayah_end ?? "?"}
+                    </p>
+                    {(autodetect.best_range.text || autodetect.best_range.content_text) && (
+                      <p dir="rtl" className="mt-1 text-xl leading-loose">
+                        {autodetect.best_range.text ?? autodetect.best_range.content_text}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {result.reference && !isMultiAyah && (
                   <div className="mt-4">
                     <p className="text-sm text-slate-400">
                       Surah {result.reference.surah}, Ayah {result.reference.ayah}
@@ -492,124 +618,196 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
             )}
 
             {isMultiAyah && (
-                <div className="mt-4 rounded-2xl border border-slate-700 bg-slate-900/70 p-4">
-                  <h3 className="text-lg font-semibold text-white">
-                    Multi-ayah guided assessment
-                  </h3>
+              <div className="mt-4 rounded-2xl border border-slate-700 bg-slate-900/70 p-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-base font-semibold text-white">
+                      {result.mode === "autodetect_multi"
+                        ? "Free recitation multi-ayah assessment"
+                        : "Multi-ayah guided assessment"}
+                    </h3>
 
-                  <p className="mt-1 text-sm text-slate-300">
-                    Surah {result.surah}, Ayah {result.ayah_start} to {result.ayah_end}
-                  </p>
+                    <p className="mt-1 text-sm text-slate-400">
+                      Surah {result.surah}, Ayah {result.ayah_start} to {result.ayah_end}
+                    </p>
 
-                  <div className="mt-4 grid gap-3 md:grid-cols-4">
-                    <div className="rounded-xl bg-slate-800 p-3">
-                      <p className="text-xs text-slate-400">Segments</p>
-                      <p className="text-xl font-bold text-white">
-                        {result.detected_segments}/{result.expected_segments}
+                    {result.segmentation_strategy && (
+                      <p className="mt-1 text-xs text-slate-500">
+                        Segmentation: {result.segmentation_strategy.replaceAll("_", " ")}
                       </p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-800 p-3">
-                      <p className="text-xs text-slate-400">Content accepted</p>
-                      <p className="text-xl font-bold text-white">
-                        {aggregate?.content_accepted_count}/{aggregate?.content_total}
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-800 p-3">
-                      <p className="text-xs text-slate-400">Average Tajweed score</p>
-                      <p className="text-xl font-bold text-white">
-                        {aggregate?.average_tajweed_score !== null &&
-                        aggregate?.average_tajweed_score !== undefined
-                          ? Number(aggregate.average_tajweed_score).toFixed(2)
-                          : "N/A"}
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-800 p-3">
-                      <p className="text-xs text-slate-400">Total errors</p>
-                      <p className="text-xl font-bold text-white">
-                        {aggregate?.total_errors ?? 0}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 space-y-4">
-                    {ayahResults.map((item) => {
-                      const accepted = Boolean(item.content_gate?.accepted);
-                      const score = item.tajweed_score?.score;
-
-                      return (
-                        <div
-                          key={`${item.surah}-${item.ayah}`}
-                          className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4"
-                        >
-                          <div className="flex flex-wrap items-center justify-between gap-3">
-                            <div>
-                              <h4 className="font-semibold text-white">
-                                Ayah {item.ayah}
-                              </h4>
-                              <p className="text-sm text-slate-400">
-                                Segment {item.segment?.index} •{" "}
-                                {item.segment?.start_sec?.toFixed?.(2)}s →{" "}
-                                {item.segment?.end_sec?.toFixed?.(2)}s
-                              </p>
-                            </div>
-
-                            <div className="flex gap-2">
-                              <span
-                                className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                                  accepted
-                                    ? "bg-emerald-500/20 text-emerald-200"
-                                    : "bg-red-500/20 text-red-200"
-                                }`}
-                              >
-                                {accepted ? "Content accepted" : "Content rejected"}
-                              </span>
-
-                              <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-200">
-                                Score{" "}
-                                {score !== undefined && score !== null
-                                  ? Number(score).toFixed(2)
-                                  : "N/A"}
-                              </span>
-                            </div>
-                          </div>
-
-                          {item.reference?.text && (
-                            <p className="mt-3 text-right text-2xl leading-loose text-white">
-                              {item.reference.text}
-                            </p>
-                          )}
-
-                          {item.content_gate && (
-                            <div className="mt-3 rounded-xl bg-slate-900 p-3 text-sm text-slate-300">
-                              <p>
-                                <span className="font-semibold">Recognized:</span>{" "}
-                                {item.content_gate.pred}
-                              </p>
-                              <p className="mt-1">
-                                CER: {(item.content_gate.cer * 100).toFixed(2)}% | Character
-                                accuracy: {(item.content_gate.char_accuracy * 100).toFixed(2)}%
-                              </p>
-                            </div>
-                          )}
-
-                          {item.content_feedback && !accepted && (
-                            <ContentFeedback feedback={item.content_feedback} />
-                          )}
-
-                          {accepted && item.tajweed_ui?.readable_feedback && (
-                            <ReadableFeedback items={item.tajweed_ui.readable_feedback} />
-                          )}
-                        </div>
-                      );
-                    })}
+                    )}
                   </div>
                 </div>
-              )}
 
-           {!isMultiAyah && gate && (
+                <div className="mt-4 grid gap-3 md:grid-cols-4">
+                  <div className="rounded-xl bg-slate-800 p-3">
+                    <p className="text-xs text-slate-400">Segments</p>
+                    <p className="text-xl font-bold text-white">
+                      {result.detected_segments}/{result.expected_segments}
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-800 p-3">
+                    <p className="text-xs text-slate-400">Content accepted</p>
+                    <p className="text-xl font-bold text-white">
+                      {aggregate?.content_accepted_count}/{aggregate?.content_total}
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-800 p-3">
+                    <p className="text-xs text-slate-400">Average Tajweed score</p>
+                    <p className="text-xl font-bold text-white">
+                      {formatScore(aggregate?.average_tajweed_score)}
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-800 p-3">
+                    <p className="text-xs text-slate-400">Total errors</p>
+                    <p className="text-xl font-bold text-white">
+                      {aggregate?.total_errors ?? 0}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-5 space-y-3">
+                  {ayahResults.map((item) => {
+                    const accepted = Boolean(item.content_gate?.accepted);
+                    const score = item.tajweed_score?.score;
+                    const feedbackItems = item.tajweed_ui?.readable_feedback ?? [];
+                    const hasTajweedErrors = Boolean(item.tajweed_score?.num_errors);
+                    const hasContentFeedback = Boolean(item.content_feedback?.items?.length);
+
+                    const statusLabel = accepted
+                      ? hasTajweedErrors
+                        ? "Tajweed needs attention"
+                        : "Accepted"
+                      : "Content rejected";
+
+                    const statusClass = accepted
+                      ? hasTajweedErrors
+                        ? "bg-amber-500/20 text-amber-200"
+                        : "bg-emerald-500/20 text-emerald-200"
+                      : "bg-red-500/20 text-red-200";
+
+                    return (
+                      <div
+                        key={`${item.surah}-${item.ayah}`}
+                        className="rounded-2xl border border-slate-700 bg-slate-800/70 p-4"
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div>
+                            <h4 className="font-semibold text-white">Ayah {item.ayah}</h4>
+                            <p className="text-xs text-slate-400">
+                              Segment {item.segment?.index} •{" "}
+                              {item.segment?.start_sec?.toFixed?.(2)}s →{" "}
+                              {item.segment?.end_sec?.toFixed?.(2)}s
+                            </p>
+                          </div>
+
+                          <div className="flex flex-wrap gap-2">
+                            <span className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClass}`}>
+                              {statusLabel}
+                            </span>
+
+                            <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-200">
+                              Score {formatScore(score)}
+                            </span>
+                          </div>
+                        </div>
+
+                        {item.reference?.text && (
+                          <p dir="rtl" className="mt-3 text-right text-xl leading-loose text-white">
+                            {item.reference.text}
+                          </p>
+                        )}
+
+                        {item.mushaf && (
+                          <details className="mt-3 rounded-xl border border-slate-700 bg-slate-900/60 p-3">
+                            <summary className="cursor-pointer text-sm font-semibold text-slate-200">
+                              Show reference Mushaf Moulawan preview
+                            </summary>
+
+                            <div className="mt-3">
+                              <MushafPreviewCard mushaf={item.mushaf} />
+                            </div>
+                          </details>
+                        )}
+
+                        {item.content_gate && (
+                          <div className="mt-3 rounded-xl bg-slate-900/80 p-3 text-sm text-slate-300">
+                            <p className="truncate">
+                              <span className="font-semibold text-slate-200">Recognized:</span>{" "}
+                              <span dir="rtl">{item.content_gate.pred}</span>
+                            </p>
+                            <p className="mt-1 text-xs text-slate-400">
+                              CER: {formatPercent(item.content_gate.cer)} | Character accuracy:{" "}
+                              {formatPercent(item.content_gate.char_accuracy)}
+                              {item.content_gate.segment_tolerance_applied && (
+                                <span className="ml-2 text-emerald-300">
+                                  Accepted with segment tolerance
+                                </span>
+                              )}
+                            </p>
+                          </div>
+                        )}
+
+                        {!accepted && item.content_feedback && (
+                          <div className="mt-3 rounded-xl border border-red-900/60 bg-red-950/40 p-3">
+                            <p className="text-sm font-semibold text-red-100">
+                              Content needs correction before Tajweed scoring.
+                            </p>
+                            {item.content_feedback.items?.slice(0, 2).map((feedback, index) => (
+                              <p key={index} className="mt-2 text-xs text-red-100/90">
+                                Expected <span className="font-semibold">“{feedback.expected}”</span>, but
+                                recognized <span className="font-semibold">“{feedback.recognized}”</span>.
+                              </p>
+                            ))}
+                          </div>
+                        )}
+
+                        {accepted && hasTajweedErrors && feedbackItems.length > 0 && (
+                          <div className="mt-3 rounded-xl border border-amber-900/60 bg-amber-950/30 p-3">
+                            <p className="text-sm font-semibold text-amber-100">
+                              {item.tajweed_score?.num_errors} Tajweed issue
+                              {item.tajweed_score?.num_errors === 1 ? "" : "s"} detected.
+                            </p>
+                            <p className="mt-1 text-xs text-amber-100/80">
+                              {feedbackItems[0]?.message}
+                            </p>
+                          </div>
+                        )}
+
+                        {accepted && !hasTajweedErrors && (
+                          <div className="mt-3 rounded-xl border border-emerald-900/60 bg-emerald-950/30 p-3">
+                            <p className="text-sm font-semibold text-emerald-100">
+                              No Tajweed errors detected.
+                            </p>
+                          </div>
+                        )}
+
+                        {(hasContentFeedback || feedbackItems.length > 0) && (
+                          <details className="mt-3 rounded-xl border border-slate-700 bg-slate-900/60 p-3">
+                            <summary className="cursor-pointer text-sm font-semibold text-slate-200">
+                              Show detailed feedback
+                            </summary>
+                            <div className="mt-3 space-y-3">
+                              {!accepted && item.content_feedback && (
+                                <ContentFeedback feedback={item.content_feedback} />
+                              )}
+                              {accepted && feedbackItems.length > 0 && (
+                                <ReadableFeedback items={feedbackItems} />
+                              )}
+                            </div>
+                          </details>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {!isMultiAyah && gate && (
               <div className="space-y-4">
                 <div
                   className={`rounded-2xl p-4 ${
@@ -617,12 +815,10 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
                   }`}
                 >
                   <p className="text-lg font-semibold">
-                    {gate.accepted ? "Accepted" : "Rejected"} —{" "}
-                    {gate.verdict.replaceAll("_", " ")}
+                    {gate.accepted ? "Accepted" : "Rejected"} — {formatAutodetectVerdict(gate.verdict)}
                   </p>
                   <p className="text-sm text-slate-300">
-                    CER: {(gate.cer * 100).toFixed(2)}% | Character accuracy:{" "}
-                    {(gate.char_accuracy * 100).toFixed(2)}% | Edit distance:{" "}
+                    CER: {formatPercent(gate.cer)} | Character accuracy: {formatPercent(gate.char_accuracy)} | Edit distance:{" "}
                     {gate.edit_distance}
                   </p>
                 </div>
@@ -649,115 +845,104 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
                   </p>
                 )}
 
-              <ContentFeedback feedback={contentFeedback} />
+                <ContentFeedback feedback={contentFeedback} />
+                <MushafPreviewCard mushaf={mushaf} />
+                <SupportedRules items={tajweedUi?.supported_rules} />
+                <ReadableFeedback items={tajweedUi?.readable_feedback} />
 
-              <MushafPreviewCard mushaf={mushaf} />
+                {tajweed && (
+                  <div className="rounded-2xl bg-slate-800 p-4">
+                    <h3 className="mb-3 text-lg font-semibold">Tajweed assessment</h3>
 
-              <SupportedRules items={tajweedUi?.supported_rules} />
+                    {!tajweed.available && (
+                      <div className="rounded-xl bg-yellow-950 p-4 text-yellow-100">
+                        <p className="font-semibold">Tajweed not available for this ayah yet</p>
+                        <p className="mt-1 text-sm">{tajweed.reason}</p>
+                      </div>
+                    )}
 
-              <ReadableFeedback items={tajweedUi?.readable_feedback} />
+                    {tajweed.available && (
+                      <div className="space-y-4">
+                        <div className="rounded-xl bg-emerald-950 p-4">
+                          <p className="text-lg font-semibold">
+                            Score: {formatScore(tajweedScore?.score)}/100
+                          </p>
 
-{!isMultiAyah && tajweed && (
-  <div className="rounded-2xl bg-slate-800 p-4">
-    <h3 className="mb-3 text-lg font-semibold">Tajweed assessment</h3>
+                          {tajweedScore && (
+                            <p className="text-sm text-slate-300">
+                              Errors: {tajweedScore.num_errors ?? 0} | Weighted error sum:{" "}
+                              {tajweedScore.weighted_error_sum ?? 0}
+                            </p>
+                          )}
+                        </div>
 
-    {!tajweed.available && (
-      <div className="rounded-xl bg-yellow-950 p-4 text-yellow-100">
-        <p className="font-semibold">Tajweed not available for this ayah yet</p>
-        <p className="mt-1 text-sm">{tajweed.reason}</p>
-      </div>
-    )}
+                        {tajweed.matched_row && (
+                          <div className="rounded-xl bg-slate-900 p-4">
+                            <p className="text-sm text-slate-400">Matched Tajweed row</p>
+                            <p className="mt-1 text-sm">
+                              {tajweed.matched_row.sample_id} — sample index{" "}
+                              {tajweed.matched_row.sample_index}
+                            </p>
+                            <p dir="rtl" className="mt-2 text-xl leading-loose">
+                              {tajweed.matched_row.text}
+                            </p>
+                          </div>
+                        )}
 
-    {tajweed.available && (
-      <div className="space-y-4">
-        <div className="rounded-xl bg-emerald-950 p-4">
-          <p className="text-lg font-semibold">
-            Score:{" "}
-            {tajweedScore?.score !== undefined
-              ? Number(tajweedScore.score).toFixed(2)
-              : "N/A"}
-            /100
-          </p>
+                        {tajweedDiagnosis?.feedback && (
+                          <div className="rounded-xl bg-slate-900 p-4">
+                            <p className="mb-2 text-sm text-slate-400">Feedback</p>
+                            <ul className="list-inside list-disc space-y-1 text-slate-200">
+                              {tajweedDiagnosis.feedback.map((item, index) => (
+                                <li key={index}>{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
 
-          {tajweedScore && (
-            <p className="text-sm text-slate-300">
-              Errors: {tajweedScore.num_errors ?? 0} | Weighted error sum:{" "}
-              {tajweedScore.weighted_error_sum ?? 0}
-            </p>
-          )}
-        </div>
+                        {moduleJudgments.length > 0 && (
+                          <div className="rounded-xl bg-slate-900 p-4">
+                            <p className="mb-3 text-sm text-slate-400">Rule-level findings</p>
 
-        {tajweed.matched_row && (
-          <div className="rounded-xl bg-slate-900 p-4">
-            <p className="text-sm text-slate-400">Matched Tajweed row</p>
-            <p className="mt-1 text-sm">
-              {tajweed.matched_row.sample_id} — sample index{" "}
-              {tajweed.matched_row.sample_index}
-            </p>
-            <p dir="rtl" className="mt-2 text-xl leading-loose">
-              {tajweed.matched_row.text}
-            </p>
-          </div>
-        )}
+                            <div className="space-y-3">
+                              {moduleJudgments.slice(0, 10).map((judgment, index) => (
+                                <div
+                                  key={index}
+                                  className={`rounded-xl p-3 ${
+                                    judgment.is_correct ? "bg-emerald-950" : "bg-red-950"
+                                  }`}
+                                >
+                                  <div className="flex flex-wrap justify-between gap-2">
+                                    <p className="font-semibold">
+                                      {judgment.rule} at position {judgment.position}
+                                    </p>
+                                    <p className="text-sm">
+                                      {judgment.is_correct ? "Correct" : "Needs attention"}
+                                    </p>
+                                  </div>
 
-        {tajweedDiagnosis?.feedback && (
-          <div className="rounded-xl bg-slate-900 p-4">
-            <p className="mb-2 text-sm text-slate-400">Feedback</p>
-            <ul className="list-inside list-disc space-y-1 text-slate-200">
-              {tajweedDiagnosis.feedback.map((item: string, index: number) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {moduleJudgments.length > 0 && (
-          <div className="rounded-xl bg-slate-900 p-4">
-            <p className="mb-3 text-sm text-slate-400">Rule-level findings</p>
-
-            <div className="space-y-3">
-              {moduleJudgments.slice(0, 10).map((j, index: number) => (
-                <div
-                  key={index}
-                  className={`rounded-xl p-3 ${
-                    j.is_correct ? "bg-emerald-950" : "bg-red-950"
-                  }`}
-                >
-                  <div className="flex flex-wrap justify-between gap-2">
-                    <p className="font-semibold">
-                      {j.rule} at position {j.position}
-                    </p>
-                    <p className="text-sm">
-                      {j.is_correct ? "Correct" : "Needs attention"}
-                    </p>
+                                  <p className="mt-1 text-sm text-slate-300">
+                                    Predicted: {judgment.predicted_rule ?? "N/A"} | Source:{" "}
+                                    {judgment.source_module ?? "N/A"} | Confidence:{" "}
+                                    {judgment.confidence !== undefined
+                                      ? Number(judgment.confidence).toFixed(3)
+                                      : "N/A"}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-
-                  <p className="mt-1 text-sm text-slate-300">
-                    Predicted: {j.predicted_rule ?? "N/A"} | Source:{" "}
-                    {j.source_module ?? "N/A"} | Confidence:{" "}
-                    {j.confidence !== undefined
-                      ? Number(j.confidence).toFixed(3)
-                      : "N/A"}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    )}
-  </div>
-)}
+                )}
               </div>
             )}
 
-            {autodetect?.matches &&
-              autodetect.matches.length > 1 &&
-              !autodetect.accepted && (
+            {autodetect?.matches && autodetect.matches.length > 1 && !autodetectState.accepted && (
               <div className="mt-6">
-                <h3 className="mb-3 text-lg font-semibold">
-                  Similar ayah matches
-                </h3>
+                <h3 className="mb-3 text-lg font-semibold">Similar ayah matches</h3>
 
                 <div className="space-y-3">
                   {autodetect.matches.slice(0, 5).map((match, index) => (
@@ -769,7 +954,7 @@ const moduleJudgments: ModuleJudgment[] = tajweedDiagnosis?.module_judgments ?? 
                         <span>
                           Surah {match.surah}, Ayah {match.ayah}
                         </span>
-                        <span>CER {(match.cer * 100).toFixed(2)}%</span>
+                        <span>CER {formatPercent(match.cer)}</span>
                       </div>
                       <p dir="rtl" className="text-xl leading-loose">
                         {match.text}

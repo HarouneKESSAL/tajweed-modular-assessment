@@ -1,0 +1,30 @@
+learned_router_v2:
+  checkpoint: checkpoints/learned_router_v2.pt
+
+  target_names:
+    - use_duration
+    - use_transition
+    - use_burst
+
+  thresholds:
+    tuned_val:
+      use_duration: 0.30
+      use_transition: 0.70
+      use_burst: 0.30
+
+    balanced_safe:
+      use_duration: 0.30
+      use_transition: 0.70
+      use_burst: 0.50
+
+    default:
+      use_duration: 0.50
+      use_transition: 0.50
+      use_burst: 0.50
+
+  recommended_for_system: balanced_safe
+
+  notes:
+    - tuned_val was selected by threshold search on learned_routing_dataset_v2 validation split.
+    - balanced_safe keeps the same validation metrics but uses a more conservative burst threshold.
+    - The learned router remains optional until compared end-to-end against the current routing path.
