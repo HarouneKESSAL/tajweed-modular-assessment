@@ -113,7 +113,148 @@ def extract_snippet(text: str, position: int, radius: int = 8) -> str:
 
     return text[start:end].strip()
 
+def _display_index_to_compact_index(text: str, display_index: int) -> int:
+    text = str(text or "")
 
+    if display_index < 0:
+        return -1
+
+    compact_i = 0
+
+    for i, ch in enumerate(text):
+        if i >= display_index:
+            return compact_i
+
+        if not ch.isspace():
+            compact_i += 1
+
+    return compact_i
+
+
+def _find_word_bounds_from_display_index(text: str, display_index: int) -> tuple[int, int]:
+    text = str(text or "")
+
+    if not text:
+        return 0, 0
+
+    display_index = max(0, min(display_index, len(text) - 1))
+
+    if text[display_index].isspace():
+        left = display_index - 1
+        right = display_index + 1
+
+        while left >= 0 or right < len(text):
+            if left >= 0 and not text[left].isspace():
+                display_index = left
+                break
+
+            if right < len(text) and not text[right].isspace():
+                display_index = right
+                break
+
+            left -= 1
+            right += 1
+
+    start = display_index
+    end = display_index + 1
+
+    while start > 0 and not text[start - 1].isspace():
+        start -= 1
+
+    while end < len(text) and not text[end].isspace():
+        end += 1
+
+    return start, end
+
+
+def _find_explicit_word_bounds(text: str, word: str) -> tuple[int, int]:
+    text = str(text or "")
+    word = str(word or "").strip()
+
+    if not text or not word:
+        return -1, -1
+
+    idx = text.find(word)
+    if idx >= 0:
+        return idx, idx + len(word)
+
+    return -1, -1
+
+
+def extract_target_location(
+    text: str,
+    position: int,
+    err: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """
+    Convert a technical compact character position into the learner-friendly
+    word that contains the Tajweed issue.
+    """
+    text = str(text or "").strip()
+    err = err or {}
+
+    explicit_word = ""
+
+    for key in [
+        "target_word",
+        "word",
+        "expected_word",
+        "reference_word",
+        "matched_word",
+        "location_word",
+    ]:
+        value = err.get(key)
+        if value:
+            explicit_word = str(value).strip()
+            break
+
+    display_i = _compact_index_to_display_index(text, position)
+    target_letter = ""
+
+    if 0 <= display_i < len(text) and not text[display_i].isspace():
+        target_letter = text[display_i]
+
+    if explicit_word:
+        start, end = _find_explicit_word_bounds(text, explicit_word)
+
+        return {
+            "target_word": explicit_word,
+            "word": explicit_word,
+            "target_letter": target_letter,
+            "word_start": start,
+            "word_end": end,
+            "compact_word_start": _display_index_to_compact_index(text, start) if start >= 0 else -1,
+            "compact_word_end": _display_index_to_compact_index(text, end) if end >= 0 else -1,
+            "from_error_payload": True,
+        }
+
+    if not text:
+        return {
+            "target_word": "",
+            "word": "",
+            "target_letter": "",
+            "word_start": -1,
+            "word_end": -1,
+            "compact_word_start": -1,
+            "compact_word_end": -1,
+            "from_error_payload": False,
+        }
+
+    start, end = _find_word_bounds_from_display_index(text, display_i)
+    word = text[start:end].strip()
+
+    return {
+        "target_word": word,
+        "word": word,
+        "target_letter": target_letter,
+        "word_start": start,
+        "word_end": end,
+        "compact_word_start": _display_index_to_compact_index(text, start),
+        "compact_word_end": _display_index_to_compact_index(text, end),
+        "from_error_payload": False,
+    }
+    
+    
 def _next_non_space_char(text: str, compact_position: int) -> str:
     display_i = _compact_index_to_display_index(text, compact_position)
 
@@ -481,13 +622,32 @@ def build_readable_feedback(
         corrective_ar = _text(error_entry.get("corrective_message"), "ar")
 
         snippet = extract_snippet(reference_text, position)
+        target_location = extract_target_location(reference_text, position, err)
+        target_word = str(target_location.get("target_word") or "").strip()
+        target_letter = str(target_location.get("target_letter") or "").strip()
 
         confidence = _safe_float(err.get("confidence"), 0.0)
         score = severity_score(rule_id, err)
         sev_defaults = _severity_defaults(rule_id)
 
-        message_en = f"{rule_name_en} needs attention near “{snippet}”. {default_en} {corrective_en}".strip()
-        message_ar = f"{rule_name_ar} يحتاج إلى مراجعة قرب «{snippet}». {default_ar} {corrective_ar}".strip()
+        if target_word:
+            learner_title_en = f"{rule_name_en} in “{target_word}”"
+            learner_title_ar = f"{rule_name_ar} في كلمة «{target_word}»"
+            location_en = f"in the word “{target_word}”"
+            location_ar = f"في كلمة «{target_word}»"
+        elif snippet:
+            learner_title_en = f"{rule_name_en} needs attention"
+            learner_title_ar = f"{rule_name_ar} يحتاج إلى مراجعة"
+            location_en = f"near “{snippet}”"
+            location_ar = f"قرب «{snippet}»"
+        else:
+            learner_title_en = f"{rule_name_en} needs attention"
+            learner_title_ar = f"{rule_name_ar} يحتاج إلى مراجعة"
+            location_en = "in this ayah"
+            location_ar = "في هذه الآية"
+
+        message_en = f"{learner_title_en}. {default_en} {corrective_en}".strip()
+        message_ar = f"{learner_title_ar}. {default_ar} {corrective_ar}".strip()
 
         items.append(
             {
@@ -497,8 +657,26 @@ def build_readable_feedback(
                 "display_name": display_name,
                 "rule_name_en": rule_name_en,
                 "rule_name_ar": rule_name_ar,
+                # Raw technical position is kept for debugging, but the frontend should
+                # show target_word / learner_title instead of "position 41".
                 "position": position,
-                "location": snippet,
+                "location": target_word or snippet,
+                "snippet": snippet,
+
+                "target_word": target_word,
+                "target_letter": target_letter,
+                "word_start": target_location.get("word_start", -1),
+                "word_end": target_location.get("word_end", -1),
+                "compact_word_start": target_location.get("compact_word_start", -1),
+                "compact_word_end": target_location.get("compact_word_end", -1),
+
+                "location_en": location_en,
+                "location_ar": location_ar,
+                "learner_title": learner_title_en,
+                "learner_title_ar": learner_title_ar,
+                "learner_message": message_en,
+                "learner_message_ar": message_ar,
+
                 "confidence": confidence,
                 "source_module": _source_module(rule_id, err),
                 "predicted_rule": err.get("predicted") or err.get("predicted_rule") or err.get("pred"),

@@ -15,3 +15,5 @@ data/manifests/retasy_content_weak_chunks*.jsonl
 !data/uploads/.gitkeep
 !data/manifests/.gitkeep
 !data/external/.gitkeep
+
+.idea/

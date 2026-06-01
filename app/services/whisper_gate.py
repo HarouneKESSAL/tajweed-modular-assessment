@@ -7,7 +7,7 @@ import wave
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
-
+import os
 import numpy as np
 import torch
 from transformers import WhisperForConditionalGeneration, WhisperProcessor
@@ -18,6 +18,11 @@ from transformers import WhisperForConditionalGeneration, WhisperProcessor
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MODEL_DIR = PROJECT_ROOT / "checkpoints" / "content_asr_whisper_medium_quran_v2_weighted"
+
+CONTENT_ASR_MODEL = os.getenv(
+    "CONTENT_ASR_MODEL",
+    str(DEFAULT_MODEL_DIR),
+)
 
 
 # Fixed muqatta'at normalization only.
@@ -30,19 +35,32 @@ MUQATTAAT_COMPACT_MAP: dict[str, str] = {
     "الفلامميم": "الم",
     "اليفلامميم": "الم",
 
+    # Common ASR variants for "ألف لام ميم"
+    "الفلاميم": "الم",
+    "الفلامم": "الم",
+    "الفلام": "الم",
+    "اليفلاميم": "الم",
+    "اليفلامم": "الم",
+    "اليفلام": "الم",
+
     # الأعراف
     "المص": "المص",
     "الفلامميمصاد": "المص",
+    "الفلاميمصاد": "المص",
 
     # يونس، هود، يوسف، إبراهيم، الحجر
     "الر": "الر",
     "الفلامراء": "الر",
     "الفلامرا": "الر",
+    "اليفلامراء": "الر",
+    "اليفلامرا": "الر",
 
     # الرعد
     "المر": "المر",
     "الفلامميمراء": "المر",
     "الفلامميمرا": "المر",
+    "الفلاميمراء": "المر",
+    "الفلاميمرا": "المر",
 
     # مريم
     "كهيعص": "كهيعص",
@@ -76,6 +94,8 @@ MUQATTAAT_COMPACT_MAP: dict[str, str] = {
     "حم": "حم",
     "حاميم": "حم",
     "حاءميم": "حم",
+    "حامم": "حم",
+    "حام": "حم",
 
     # الشورى
     "عسق": "عسق",
@@ -240,14 +260,13 @@ def load_pcm16_wav_16k_mono(audio_path: Path) -> np.ndarray:
 
     return audio
 
-
 @lru_cache(maxsize=1)
 def load_whisper() -> tuple[WhisperProcessor, WhisperForConditionalGeneration, str]:
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model_dir = str(DEFAULT_MODEL_DIR)
+    model_id = CONTENT_ASR_MODEL
 
-    processor = WhisperProcessor.from_pretrained(model_dir)
-    model = WhisperForConditionalGeneration.from_pretrained(model_dir)
+    processor = WhisperProcessor.from_pretrained(model_id)
+    model = WhisperForConditionalGeneration.from_pretrained(model_id)
     model.to(device)
     model.eval()
 
@@ -258,29 +277,59 @@ def load_whisper() -> tuple[WhisperProcessor, WhisperForConditionalGeneration, s
 
     return processor, model, device
 
+def get_audio_duration_sec(audio_path: Path) -> float:
+    with wave.open(str(audio_path), "rb") as wf:
+        return wf.getnframes() / float(wf.getframerate())
 
-def transcribe_audio(audio_path: Path, max_new_tokens: int = 128) -> str:
+
+def estimate_max_new_tokens(audio_path: Path) -> int:
+    """
+    Estimate a safer generation length from audio duration.
+
+    This reduces hallucination on short clips such as muqatta'at and prevents
+    Whisper from generating too much text for a short audio segment.
+    """
+    duration_sec = get_audio_duration_sec(audio_path)
+
+    return max(16, min(192, int(duration_sec * 8) + 16))
+
+
+def transcribe_audio(audio_path: Path, max_new_tokens: int | None = None) -> str:
     processor, model, device = load_whisper()
     audio = load_pcm16_wav_16k_mono(audio_path)
+
+    if max_new_tokens is None:
+        max_new_tokens = estimate_max_new_tokens(audio_path)
 
     inputs = processor(
         audio,
         sampling_rate=16000,
         return_tensors="pt",
+        return_attention_mask=True,
     )
 
     input_features = inputs.input_features.to(device)
 
+    generate_kwargs = {
+        "max_new_tokens": max_new_tokens,
+        "num_beams": 5,
+        "do_sample": False,
+        "repetition_penalty": 1.05,
+        "no_repeat_ngram_size": 4,
+        "early_stopping": True,
+    }
+
+    if "attention_mask" in inputs:
+        generate_kwargs["attention_mask"] = inputs.attention_mask.to(device)
+
     with torch.no_grad():
         pred_ids = model.generate(
             input_features,
-            max_new_tokens=max_new_tokens,
+            **generate_kwargs,
         )
 
     pred = processor.batch_decode(pred_ids, skip_special_tokens=True)[0]
     return normalize_text(pred)
-
-
 def run_content_gate(
     audio_path: Path,
     gold_text: str,
@@ -308,11 +357,15 @@ def run_content_gate(
         accepted = exact
     elif mode == "cer":
         accepted = cer <= 0.03
+    elif mode == "segment":
+        accepted = exact or cer <= 0.05 or acc >= 0.95
     else:
         accepted = exact
 
     if exact:
         verdict = "accepted_exact"
+    elif accepted and mode == "segment":
+        verdict = "accepted_segment_tolerant"
     elif accepted:
         verdict = "accepted_cer"
     else:
@@ -323,7 +376,7 @@ def run_content_gate(
         "verdict": verdict,
         "mode": mode,
         "exact": bool(exact),
-
+        "segment_tolerance_applied": bool(mode == "segment" and accepted and not exact),
         "gold": gold_norm,
         "pred": pred_norm,
 

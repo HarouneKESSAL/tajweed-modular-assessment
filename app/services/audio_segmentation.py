@@ -271,6 +271,8 @@ def segment_audio_by_silence(
     drop_edge_segments_shorter_than_sec: float = 1.0,
     expected_segment_count: int | None = None,
     segment_weights: Sequence[float] | None = None,
+    start_padding_sec: float = 0.15,
+    end_padding_sec: float = 0.20,
 ) -> list[AudioSegmentInfo]:
     """
     Split a long recitation into ayah-level candidate segments using pauses.
@@ -335,21 +337,24 @@ def segment_audio_by_silence(
     segments: list[AudioSegmentInfo] = []
 
     for idx, (start, end) in enumerate(spans, start=1):
-        seg_duration = end - start
+        padded_start = max(0.0, start - start_padding_sec)
+        padded_end = min(duration_sec, end + end_padding_sec)
+
+        seg_duration = padded_end - padded_start
         segment_path = output_dir / f"{request_id}_segment_{idx:03d}.wav"
 
         extract_wav_segment(
             input_path=audio_path,
             output_path=segment_path,
-            start_sec=start,
-            end_sec=end,
+            start_sec=padded_start,
+            end_sec=padded_end,
         )
 
         segments.append(
             AudioSegmentInfo(
                 index=idx,
-                start_sec=round(start, 3),
-                end_sec=round(end, 3),
+                start_sec=round(padded_start, 3),
+                end_sec=round(padded_end, 3),
                 duration_sec=round(seg_duration, 3),
                 audio_path=str(segment_path),
             )

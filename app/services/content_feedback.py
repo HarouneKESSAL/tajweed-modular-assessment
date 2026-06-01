@@ -17,6 +17,7 @@ ARABIC_DIACRITICS_RE = re.compile(r"[\u064B-\u065F\u0670\u06D6-\u06ED]")
 def normalize_arabic(text: str) -> str:
     text = str(text or "")
     text = ARABIC_DIACRITICS_RE.sub("", text)
+    text = text.replace("ـ", "")
     text = text.replace("أ", "ا").replace("إ", "ا").replace("آ", "ا").replace("ٱ", "ا")
     text = text.replace("ى", "ي").replace("ة", "ه")
     text = re.sub(r"[^\w\s\u0600-\u06FF]", " ", text)
@@ -24,14 +25,29 @@ def normalize_arabic(text: str) -> str:
     return text
 
 
-def tokenize_with_norm(text: str) -> list[dict[str, str]]:
-    words = re.findall(r"[\u0600-\u06FF]+|[A-Za-z0-9]+", str(text or ""))
-    out = []
+def tokenize_with_norm(text: str) -> list[dict[str, Any]]:
+    """
+    Tokenize into display words and normalized comparison words.
 
-    for word in words:
+    start/end are token offsets in the original display string. They are useful
+    for UI highlighting/debugging, but the learner should mainly see
+    word_to_correct / expected_word / recognized_word.
+    """
+    out: list[dict[str, Any]] = []
+
+    for match in re.finditer(r"[\u0600-\u06FF]+|[A-Za-z0-9]+", str(text or "")):
+        word = match.group(0)
         norm = normalize_arabic(word)
+
         if norm:
-            out.append({"display": word, "norm": norm})
+            out.append(
+                {
+                    "display": word,
+                    "norm": norm,
+                    "start": match.start(),
+                    "end": match.end(),
+                }
+            )
 
     return out
 
@@ -44,11 +60,7 @@ def _text(value: Any, lang: str = "en") -> str:
 
 def _content_template(kind: str) -> dict[str, Any]:
     manifest = load_rule_manifest()
-    templates = (
-        manifest
-        .get("content_feedback", {})
-        .get("templates", {})
-    )
+    templates = manifest.get("content_feedback", {}).get("templates", {})
 
     template = templates.get(kind)
     if isinstance(template, dict):
@@ -61,8 +73,8 @@ def _content_template(kind: str) -> dict[str, Any]:
                 "ar": "لم يظهر اللفظ أو الصوت المتوقع بوضوح.",
             },
             "corrective_message": {
-                "en": "First recite the missing Qur'anic unit correctly, then repeat the segment.",
-                "ar": "ابدأ أولًا بتصحيح اللفظ القرآني الناقص، ثم أعد قراءة المقطع.",
+                "en": "First recite the missing Qur'anic word correctly, then repeat the segment.",
+                "ar": "ابدأ أولًا بتصحيح الكلمة القرآنية الناقصة، ثم أعد قراءة المقطع.",
             },
         },
         "insertion": {
@@ -81,8 +93,8 @@ def _content_template(kind: str) -> dict[str, Any]:
                 "ar": "يبدو أنه تم نطق لفظ أو صوت مختلف.",
             },
             "corrective_message": {
-                "en": "Focus first on reciting the correct Qur'anic unit. After it is correct, repeat it with Tajweed.",
-                "ar": "ركّز أولًا على نطق اللفظ القرآني الصحيح، وبعد تصحيحه أعده مع تطبيق التجويد.",
+                "en": "Focus first on reciting the correct Qur'anic word. After it is correct, repeat it with Tajweed.",
+                "ar": "ركّز أولًا على نطق الكلمة القرآنية الصحيحة، وبعد تصحيحها أعدها مع تطبيق التجويد.",
             },
         },
         "low_alignment_confidence": {
@@ -102,11 +114,7 @@ def _content_template(kind: str) -> dict[str, Any]:
 
 def _content_severity(kind: str) -> dict[str, Any]:
     manifest = load_rule_manifest()
-    defaults = (
-        manifest
-        .get("severity_policy", {})
-        .get("content_severity_defaults", {})
-    )
+    defaults = manifest.get("severity_policy", {}).get("content_severity_defaults", {})
 
     value = defaults.get(kind)
     if isinstance(value, dict):
@@ -119,19 +127,47 @@ def _content_severity(kind: str) -> dict[str, Any]:
     }
 
 
-def _join_display(tokens: list[dict[str, str]]) -> str:
-    return " ".join(t["display"] for t in tokens).strip()
+def _join_display(tokens: list[dict[str, Any]]) -> str:
+    return " ".join(str(t.get("display") or "") for t in tokens).strip()
 
 
-def _join_norm(tokens: list[dict[str, str]]) -> str:
-    return " ".join(t["norm"] for t in tokens).strip()
+def _join_norm(tokens: list[dict[str, Any]]) -> str:
+    return " ".join(str(t.get("norm") or "") for t in tokens).strip()
+
+
+def _first_start(tokens: list[dict[str, Any]]) -> int:
+    if not tokens:
+        return -1
+    try:
+        return int(tokens[0].get("start", -1))
+    except Exception:
+        return -1
+
+
+def _last_end(tokens: list[dict[str, Any]]) -> int:
+    if not tokens:
+        return -1
+    try:
+        return int(tokens[-1].get("end", -1))
+    except Exception:
+        return -1
+
+
+def _item_title(kind: str) -> tuple[str, str]:
+    if kind == "deletion":
+        return "Missing word", "كلمة ناقصة"
+    if kind == "insertion":
+        return "Extra recognized word", "كلمة زائدة"
+    if kind == "substitution":
+        return "Different word recognized", "كلمة مختلفة"
+    return "Uncertain content alignment", "مطابقة غير مؤكدة"
 
 
 def _build_item(
     *,
     kind: str,
-    expected_tokens: list[dict[str, str]],
-    recognized_tokens: list[dict[str, str]],
+    expected_tokens: list[dict[str, Any]],
+    recognized_tokens: list[dict[str, Any]],
     gold_word_index: int,
     pred_word_index: int,
 ) -> dict[str, Any]:
@@ -146,26 +182,41 @@ def _build_item(
     default_ar = _text(template.get("default_error_message"), "ar")
     corrective_ar = _text(template.get("corrective_message"), "ar")
 
+    title_en, title_ar = _item_title(kind)
+
+    # The exact learner-facing word.
     if kind == "deletion":
-        title_en = "Missing expected text"
-        title_ar = "نص متوقع ناقص"
-        main_en = f"Expected “{expected}”, but it was not clearly recognized."
-        main_ar = f"المتوقع «{expected}»، لكنه لم يظهر بوضوح في التعرّف."
+        word_to_correct = expected
+        main_en = f'The word to correct is “{word_to_correct}”. It was expected but was not clearly recognized.'
+        main_ar = f"الكلمة التي تحتاج إلى تصحيح هي «{word_to_correct}». كانت متوقعة لكنها لم تظهر بوضوح في التعرّف."
     elif kind == "insertion":
-        title_en = "Extra recognized text"
-        title_ar = "نص زائد"
-        main_en = f"The system recognized extra text: “{recognized}”."
-        main_ar = f"تعرّف النظام على نص زائد: «{recognized}»."
+        word_to_correct = recognized
+        main_en = f'The extra recognized word is “{word_to_correct}”. Check that you are reciting only the selected ayah.'
+        main_ar = f"الكلمة الزائدة التي تم التعرف عليها هي «{word_to_correct}». تأكد من قراءة الآية المحددة فقط."
     elif kind == "substitution":
-        title_en = "Different text recognized"
-        title_ar = "نص مختلف"
-        main_en = f"Expected “{expected}”, but recognized “{recognized}”."
-        main_ar = f"المتوقع «{expected}»، لكن المتعرّف عليه «{recognized}»."
+        word_to_correct = expected or recognized
+        main_en = f'Word to correct: “{expected}”. The system recognized it as “{recognized}”.'
+        main_ar = f"الكلمة التي تحتاج إلى تصحيح: «{expected}». تعرّف النظام عليها كـ «{recognized}»."
     else:
-        title_en = "Uncertain content alignment"
-        title_ar = "مطابقة غير مؤكدة"
-        main_en = "The system could not align this part confidently."
-        main_ar = "لم يتمكن النظام من مطابقة هذا الجزء بثقة كافية."
+        word_to_correct = expected or recognized
+        main_en = (
+            f'This part needs clearer recitation: “{word_to_correct}”.'
+            if word_to_correct
+            else "The system could not align this part confidently."
+        )
+        main_ar = (
+            f"هذا الجزء يحتاج إلى قراءة أوضح: «{word_to_correct}»."
+            if word_to_correct
+            else "لم يتمكن النظام من مطابقة هذا الجزء بثقة كافية."
+        )
+
+    message_en = f"{main_en} {default_en} {corrective_en}".strip()
+    message_ar = f"{main_ar} {default_ar} {corrective_ar}".strip()
+
+    expected_start = _first_start(expected_tokens)
+    expected_end = _last_end(expected_tokens)
+    recognized_start = _first_start(recognized_tokens)
+    recognized_end = _last_end(recognized_tokens)
 
     return {
         "feedback_type": "content",
@@ -174,17 +225,38 @@ def _build_item(
             "en": title_en,
             "ar": title_ar,
         },
+
+        # Word-level fields for the frontend.
+        "word_to_correct": word_to_correct,
+        "target_word": word_to_correct,
+        "expected_word": expected,
+        "recognized_word": recognized,
+
+        # Compatibility with your existing frontend.
+        "expected": expected,
+        "recognized": recognized,
+
+        # Normalized debug fields.
+        "expected_norm": _join_norm(expected_tokens),
+        "recognized_norm": _join_norm(recognized_tokens),
+
+        # Word indices are learner-friendly compared with character position,
+        # but still mostly useful for debugging/highlighting.
         "position": {
             "expected_word_index": gold_word_index,
             "recognized_word_index": pred_word_index,
         },
-        "expected": expected,
-        "recognized": recognized,
-        "expected_norm": _join_norm(expected_tokens),
-        "recognized_norm": _join_norm(recognized_tokens),
+        "expected_word_index": gold_word_index,
+        "recognized_word_index": pred_word_index,
+        "expected_word_start": expected_start,
+        "expected_word_end": expected_end,
+        "recognized_word_start": recognized_start,
+        "recognized_word_end": recognized_end,
+
         "classical_severity": sev.get("classical_severity", "lahn_jali"),
         "severity_level": sev.get("severity_level", "critical"),
         "severity_score": sev.get("base_score", 100),
+
         "default_error_message": {
             "en": default_en,
             "ar": default_ar,
@@ -193,11 +265,130 @@ def _build_item(
             "en": corrective_en,
             "ar": corrective_ar,
         },
+
+        # New direct learner-friendly message fields.
+        "learner_title": title_en,
+        "learner_title_ar": title_ar,
+        "learner_message": message_en,
+        "learner_message_ar": message_ar,
+
+        # Existing bilingual message shape.
         "message": {
-            "en": f"{main_en} {default_en} {corrective_en}".strip(),
-            "ar": f"{main_ar} {default_ar} {corrective_ar}".strip(),
+            "en": message_en,
+            "ar": message_ar,
         },
     }
+
+
+def _append_items_for_opcode(
+    *,
+    items: list[dict[str, Any]],
+    tag: str,
+    gold_tokens: list[dict[str, Any]],
+    pred_tokens: list[dict[str, Any]],
+    i1: int,
+    i2: int,
+    j1: int,
+    j2: int,
+    max_items: int,
+) -> None:
+    """
+    Convert a SequenceMatcher opcode into exact word-level feedback items.
+
+    For replacements, this avoids returning a whole phrase when only one or two
+    words are wrong. It pairs words one-by-one, then treats leftovers as
+    deletion/insertion.
+    """
+    if len(items) >= max_items:
+        return
+
+    if tag == "delete":
+        for offset, token in enumerate(gold_tokens[i1:i2]):
+            if len(items) >= max_items:
+                return
+            items.append(
+                _build_item(
+                    kind="deletion",
+                    expected_tokens=[token],
+                    recognized_tokens=[],
+                    gold_word_index=i1 + offset,
+                    pred_word_index=j1,
+                )
+            )
+        return
+
+    if tag == "insert":
+        for offset, token in enumerate(pred_tokens[j1:j2]):
+            if len(items) >= max_items:
+                return
+            items.append(
+                _build_item(
+                    kind="insertion",
+                    expected_tokens=[],
+                    recognized_tokens=[token],
+                    gold_word_index=i1,
+                    pred_word_index=j1 + offset,
+                )
+            )
+        return
+
+    if tag == "replace":
+        expected_part = gold_tokens[i1:i2]
+        recognized_part = pred_tokens[j1:j2]
+        pair_count = min(len(expected_part), len(recognized_part))
+
+        for offset in range(pair_count):
+            if len(items) >= max_items:
+                return
+            items.append(
+                _build_item(
+                    kind="substitution",
+                    expected_tokens=[expected_part[offset]],
+                    recognized_tokens=[recognized_part[offset]],
+                    gold_word_index=i1 + offset,
+                    pred_word_index=j1 + offset,
+                )
+            )
+
+        # Remaining expected words are missing.
+        for offset in range(pair_count, len(expected_part)):
+            if len(items) >= max_items:
+                return
+            items.append(
+                _build_item(
+                    kind="deletion",
+                    expected_tokens=[expected_part[offset]],
+                    recognized_tokens=[],
+                    gold_word_index=i1 + offset,
+                    pred_word_index=j2,
+                )
+            )
+
+        # Remaining recognized words are extra.
+        for offset in range(pair_count, len(recognized_part)):
+            if len(items) >= max_items:
+                return
+            items.append(
+                _build_item(
+                    kind="insertion",
+                    expected_tokens=[],
+                    recognized_tokens=[recognized_part[offset]],
+                    gold_word_index=i2,
+                    pred_word_index=j1 + offset,
+                )
+            )
+        return
+
+    if len(items) < max_items:
+        items.append(
+            _build_item(
+                kind="low_alignment_confidence",
+                expected_tokens=gold_tokens[i1:i2],
+                recognized_tokens=pred_tokens[j1:j2],
+                gold_word_index=i1,
+                pred_word_index=j1,
+            )
+        )
 
 
 def build_content_feedback(
@@ -208,9 +399,13 @@ def build_content_feedback(
     max_items: int = 5,
 ) -> dict[str, Any] | None:
     """
-    Builds bilingual learner-facing content feedback.
+    Build bilingual learner-facing content feedback.
 
     Returns None when content is accepted.
+
+    The important behavior is word-level feedback:
+      - no whole-ayah error as the main message
+      - exact word_to_correct / expected_word / recognized_word fields
     """
     if not gate:
         return None
@@ -218,14 +413,23 @@ def build_content_feedback(
     if gate.get("accepted"):
         return None
 
-    gold = str(gate.get("gold") or (reference or {}).get("text") or "")
+    reference = reference or {}
+
+    # Use content_text first because the content gate compares against ASR-friendly
+    # Quran text, not the Tajweed/Mushaf text.
+    gold = str(
+        gate.get("gold")
+        or reference.get("content_text")
+        or reference.get("text")
+        or ""
+    )
     pred = str(gate.get("pred") or "")
 
     gold_tokens = tokenize_with_norm(gold)
     pred_tokens = tokenize_with_norm(pred)
 
-    gold_norm = [t["norm"] for t in gold_tokens]
-    pred_norm = [t["norm"] for t in pred_tokens]
+    gold_norm = [str(t["norm"]) for t in gold_tokens]
+    pred_norm = [str(t["norm"]) for t in pred_tokens]
 
     items: list[dict[str, Any]] = []
 
@@ -235,34 +439,27 @@ def build_content_feedback(
         if tag == "equal":
             continue
 
-        expected_part = gold_tokens[i1:i2]
-        recognized_part = pred_tokens[j1:j2]
-
-        if tag == "delete":
-            kind = "deletion"
-        elif tag == "insert":
-            kind = "insertion"
-        elif tag == "replace":
-            kind = "substitution"
-        else:
-            kind = "low_alignment_confidence"
-
-        items.append(
-            _build_item(
-                kind=kind,
-                expected_tokens=expected_part,
-                recognized_tokens=recognized_part,
-                gold_word_index=i1,
-                pred_word_index=j1,
-            )
+        _append_items_for_opcode(
+            items=items,
+            tag=tag,
+            gold_tokens=gold_tokens,
+            pred_tokens=pred_tokens,
+            i1=i1,
+            i2=i2,
+            j1=j1,
+            j2=j2,
+            max_items=max_items,
         )
 
-    if not items and gold != pred:
+        if len(items) >= max_items:
+            break
+
+    if not items and normalize_arabic(gold) != normalize_arabic(pred):
         items.append(
             _build_item(
                 kind="low_alignment_confidence",
-                expected_tokens=gold_tokens,
-                recognized_tokens=pred_tokens,
+                expected_tokens=gold_tokens[:1],
+                recognized_tokens=pred_tokens[:1],
                 gold_word_index=0,
                 pred_word_index=0,
             )
@@ -271,7 +468,8 @@ def build_content_feedback(
     items.sort(
         key=lambda x: (
             -int(x.get("severity_score") or 0),
-            int(x.get("position", {}).get("expected_word_index") or 0),
+            int(x.get("expected_word_index") or 0),
+            int(x.get("recognized_word_index") or 0),
         )
     )
 
@@ -293,6 +491,9 @@ def build_content_feedback(
             "content_before_tajweed": True,
             "tajweed_skipped": True,
         },
+
+        # Full texts are kept for debug/display if needed, but the frontend
+        # should prioritize item.word_to_correct / item.expected_word.
         "expected": gold,
         "recognized": pred,
         "metrics": {
