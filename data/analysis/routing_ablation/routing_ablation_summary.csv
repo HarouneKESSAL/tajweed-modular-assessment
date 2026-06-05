@@ -1,0 +1,5 @@
+﻿module,rule_aware_calls,rule_agnostic_calls,agnostic_irrelevant_calls,call_reduction_percent
+duration,6084,6348,264,4.16
+transition,3140,6348,3208,50.54
+burst,2507,6348,3841,60.51
+overall,11731,19044,7313,38.4
