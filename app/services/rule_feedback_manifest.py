@@ -216,17 +216,22 @@ def extract_target_location(
 
     if explicit_word:
         start, end = _find_explicit_word_bounds(text, explicit_word)
+        if start >= 0 and end > start:
+            explicit_display_i = start
+            target_letter_local = ""
+            if explicit_display_i < len(text) and not text[explicit_display_i].isspace():
+                target_letter_local = text[explicit_display_i]
 
-        return {
-            "target_word": explicit_word,
-            "word": explicit_word,
-            "target_letter": target_letter,
-            "word_start": start,
-            "word_end": end,
-            "compact_word_start": _display_index_to_compact_index(text, start) if start >= 0 else -1,
-            "compact_word_end": _display_index_to_compact_index(text, end) if end >= 0 else -1,
-            "from_error_payload": True,
-        }
+            return {
+                "target_word": explicit_word,
+                "word": explicit_word,
+                "target_letter": target_letter_local,
+                "word_start": start,
+                "word_end": end,
+                "compact_word_start": _display_index_to_compact_index(text, start),
+                "compact_word_end": _display_index_to_compact_index(text, end),
+                "from_error_payload": True,
+            }
 
     if not text:
         return {
@@ -558,8 +563,8 @@ def build_readable_feedback(
                     "severity_score": 0,
                     "position": -1,
                     "location": "",
-                    "message": "Excellent recitation. The ayah content was correct, and no Tajweed errors were detected.",
-                    "message_ar": "تلاوة ممتازة. كان نص الآية صحيحًا، ولم يتم اكتشاف أخطاء تجويدية.",
+                    "message": "Excellent recitation. No Tajweed errors were detected.",
+                    "message_ar": "تلاوة ممتازة. لم يتم اكتشاف أخطاء تجويدية.",
                     "default_error_message": {"en": "", "ar": ""},
                     "corrective_message": {
                         "en": "Keep practising with the same clarity and steadiness.",
@@ -624,6 +629,9 @@ def build_readable_feedback(
         snippet = extract_snippet(reference_text, position)
         target_location = extract_target_location(reference_text, position, err)
         target_word = str(target_location.get("target_word") or "").strip()
+        
+        if target_word and snippet and target_word not in snippet and snippet not in target_word:
+            target_word = ""
         target_letter = str(target_location.get("target_letter") or "").strip()
 
         confidence = _safe_float(err.get("confidence"), 0.0)

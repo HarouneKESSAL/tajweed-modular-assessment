@@ -477,21 +477,13 @@ def run_free_recitation_assessment(
             "request_id": request_id,
             "audio_path": str(audio_path),
             "autodetect": autodetect,
-            "content_gate": {
-                "accepted": False,
-                "verdict": segment_detection.get("verdict"),
-                "mode": "autodetect_segment_range",
-                "exact": False,
-                "gold": segment_detection.get("content_text", ""),
-                "pred": autodetect["recognized_text"],
-                "gold_compact": content_compare_compact(segment_detection.get("content_text", "")),
-                "pred_compact": content_compare_compact(autodetect["recognized_text"]),
-                "char_accuracy": float(segment_detection.get("avg_char_similarity", 0.0)),
-                "cer": float(segment_detection.get("avg_cer", 1.0)),
-                "edit_distance": 0,
-                "gold_len": len(content_compare_compact(segment_detection.get("content_text", ""))),
-                "pred_len": len(content_compare_compact(autodetect["recognized_text"])),
-            },
+            "reference": None,
+            "reference_audio": None,
+            "content_gate": None,        # ← removed wrong gate
+            "content_feedback": None,
+            "mushaf": None,
+            "tajweed": None,
+            "tajweed_ui": None,
             "message": "Could not confidently confirm the segmented ayah range.",
         }
 
@@ -515,11 +507,13 @@ def run_free_recitation_assessment(
             "request_id": request_id,
             "audio_path": str(audio_path),
             "autodetect": autodetect,
-            "content_gate": make_rejected_content_gate(
-                pred_text=pred_text,
-                best=best,
-                verdict=decision.get("verdict"),
-            ),
+            "reference": None,
+            "reference_audio": None,
+            "content_gate": None,        # ← no wrong comparison
+            "content_feedback": None,    # ← no false feedback
+            "mushaf": None,
+            "tajweed": None,
+            "tajweed_ui": None,
             "message": "Could not confidently detect the recited ayah range.",
         }
 

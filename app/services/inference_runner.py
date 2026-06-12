@@ -9,7 +9,7 @@ from app.services.ayah_reference import (
     get_ayah_reference,
 )
 from app.services.whisper_gate import run_content_gate, transcribe_audio
-
+from app.services.audio_reference import get_reference_audio_url
 
 def try_run_tajweed_for_user_audio(
     audio_path: Path,
@@ -145,6 +145,13 @@ def run_user_audio_inference(
         pred_text = transcribe_audio(audio_path)
 
         matches = find_best_ayah_matches(pred_text, top_k=5)
+        print("=== AUTODETECT DEBUG ===")
+        print(f"pred_text: {pred_text}")
+        for m in matches:
+            print(f"  Surah {m['surah']} Ayah {m['ayah']} | CER={m['cer']:.3f} | sim={m['char_similarity']:.3f} | len_ratio={m.get('length_ratio', '?'):.3f}")
+            print(f"    gold: {m['content_text'][:60]}")
+        print(f"decision: {decision}")
+        print("========================")
         best = matches[0] if matches else None
         decision = classify_autodetect_match(best)
 
@@ -168,17 +175,44 @@ def run_user_audio_inference(
                 "message": "Could not identify the ayah.",
             }
 
-        reference = get_ayah_reference(
-            int(best["surah"]),
-            int(best["ayah"]),
-        )
+        # ✅ ADD THIS — bail out early if confidence is too low
+        if not decision["accepted"] and not decision["needs_confirmation"]:
+            return {
+                "ok": True,
+                "request_id": request_id,
+                "audio_path": str(audio_path),
+                "mode": "autodetect",
+                "autodetect": {
+                    **decision,
+                    "pred": pred_text,
+                    "recognized_text": pred_text,
+                    "best_match": best,
+                    "matches": matches,
+                    "best_range": None,
+                },
+                "reference": None,
+                "reference_audio": None,
+                "mushaf": None,
+                "content_gate": None,       # ← no wrong comparison shown
+                "content_feedback": None,   # ← no false rejection shown
+                "tajweed": None,
+                "tajweed_ui": try_build_tajweed_ui_payload(None, None),
+                "message": "Could not confidently detect the recited ayah range.",
+            }
 
+        # Only reaches here if accepted=True or needs_confirmation=True
+        reference = get_ayah_reference(int(best["surah"]), int(best["ayah"]))
+        reference_audio = get_reference_audio_url(
+            surah=int(reference["surah"]),
+            ayah=int(reference["ayah"]),
+        )
         gate = run_content_gate(
             audio_path=audio_path,
             gold_text=reference.get("content_text") or reference["text"],
             mode="cer" if decision.get("accepted") else "strict",
             pred_text=pred_text,
         )
+        
 
         content_feedback = try_build_content_feedback(
             gate=gate,
@@ -203,6 +237,7 @@ def run_user_audio_inference(
             "surah": reference["surah"],
             "ayah": reference["ayah"],
             "reference": reference,
+            "reference_audio": reference_audio,
             "mushaf": mushaf,
             "autodetect": {
                 **decision,
@@ -224,10 +259,14 @@ def run_user_audio_inference(
     # Guided mode.
     reference = get_ayah_reference(int(surah), int(ayah))
 
+    reference_audio = get_reference_audio_url(
+            surah=int(surah or reference["surah"]),
+            ayah=int(ayah or reference["ayah"]),
+        )
     gate = run_content_gate(
         audio_path=audio_path,
         gold_text=reference.get("content_text") or reference["text"],
-        mode="strict",
+        mode="cer",
     )
 
     content_feedback = try_build_content_feedback(
@@ -253,6 +292,7 @@ def run_user_audio_inference(
         "surah": int(surah),
         "ayah": int(ayah),
         "reference": reference,
+        "reference_audio": reference_audio,
         "mushaf": mushaf,
         "content_gate": gate,
         "content_feedback": content_feedback,

@@ -6,6 +6,7 @@ from typing import Any
 from app.services.audio_segmentation import AudioSegmentInfo, segment_audio_by_silence
 from app.services.ayah_reference import get_ayah_reference
 from app.services.whisper_gate import run_content_gate
+from app.services.audio_reference import get_reference_audio_url
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SEGMENTS_ROOT = PROJECT_ROOT / "data" / "uploads" / "segments"
@@ -169,7 +170,7 @@ def run_single_ayah_segment(
     )
 
     mushaf = try_get_mushaf_preview(reference)
-
+    reference_audio = get_reference_audio_url(surah=surah, ayah=ayah)
     if content_accepted:
         tajweed_ui = try_build_tajweed_ui_payload(reference, tajweed)
     else:
@@ -199,6 +200,7 @@ def run_single_ayah_segment(
         },
         "reference": reference,
         "mushaf": mushaf,
+        "reference_audio": reference_audio, 
         "content_gate": gate,
         "content_feedback": content_feedback,
         "tajweed": tajweed,
@@ -294,6 +296,10 @@ def run_multi_ayah_guided(
             "detected_segments": len(segments),
             "segmentation_strategy": segmentation_strategy,
             "segments": segment_payload,
+            "reference_audio": [                                      # ← ADD THIS
+                get_reference_audio_url(surah=surah, ayah=ayah_start + offset)
+                for offset in range(expected_count)
+            ],
             "error": (
                 f"Expected {expected_count} ayah segments but detected "
                 f"{len(segments)}. Please pause clearly between ayahs and try again."
