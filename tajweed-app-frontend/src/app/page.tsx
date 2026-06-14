@@ -391,10 +391,13 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/assess-recitation", {
-        method: "POST",
-        body: form,
-      });
+      const response = await fetch(
+        "https://monitor-donor-nevertheless-subscription.trycloudflare.com/api/assess-recitation",
+        {
+          method: "POST",
+          body: form,
+        }
+      );
 
       const data = await response.json();
       setResult(data);
