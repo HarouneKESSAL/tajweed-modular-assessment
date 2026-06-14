@@ -3,6 +3,7 @@
 import ContentFeedback from "@/components/ContentFeedback";
 import MushafPreviewCard from "@/components/MushafPreviewCard";
 import ReadableFeedback from "@/components/ReadableFeedback";
+import ReferenceAudioPlayer from "@/components/ReferenceAudioPlayer";
 import SupportedRules from "@/components/SupportedRules";
 import { useRef, useState } from "react";
 
@@ -194,6 +195,14 @@ type ApiResult = {
     text_compact: string;
     source_id?: string;
   } | null;
+  reference_audio?: {
+    available: boolean;
+    url: string;
+    reciter: string;
+    surah: number;
+    ayah: number;
+    format: string;
+  } | null;
   autodetect?: AutodetectPayload;
   detected_surah?: number;
   detected_ayah?: number;
@@ -238,6 +247,14 @@ type AyahResult = {
     text_compact?: string;
     source_id?: string;
   };
+  reference_audio?: {
+  available: boolean;
+  url: string;
+  reciter: string;
+  surah: number;
+  ayah: number;
+  format: string;
+} | null;
   mushaf?: MushafPayload | null;
   content_gate?: ContentGatePayload | null;
   content_feedback?: ContentFeedbackPayload | null;
@@ -391,13 +408,14 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch(
-        "https://monitor-donor-nevertheless-subscription.trycloudflare.com/api/assess-recitation",
-        {
-          method: "POST",
-          body: form,
-        }
-      );
+      const response = await fetch("https://upset-mails-cross.loca.lt/api/assess-recitation", {
+        method: "POST",
+        body: form,
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-cache",
+        },
+      });
 
       const data = await response.json();
       setResult(data);
@@ -723,7 +741,7 @@ export default function Home() {
                             {item.reference.text}
                           </p>
                         )}
-
+                        <ReferenceAudioPlayer audio={item.reference_audio} />
                         {item.mushaf && (
                           <details className="mt-3 rounded-xl border border-slate-700 bg-slate-900/60 p-3">
                             <summary className="cursor-pointer text-sm font-semibold text-slate-200">
@@ -850,6 +868,7 @@ export default function Home() {
 
                 <ContentFeedback feedback={contentFeedback} />
                 <MushafPreviewCard mushaf={mushaf} />
+                <ReferenceAudioPlayer audio={result.reference_audio} />
                 <SupportedRules items={tajweedUi?.supported_rules} />
                 <ReadableFeedback items={tajweedUi?.readable_feedback} />
 

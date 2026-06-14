@@ -273,29 +273,45 @@ def find_best_ayah_matches(pred_text: str, top_k: int = 5) -> list[dict[str, Any
         gold_compact = str(reference["content_text_compact"])
 
         edit_distance = levenshtein(gold_compact, pred_compact)
-        cer = edit_distance / max(1, len(gold_compact))
+
+        # 🔴 OLD (biased by gold length):
+        # cer = edit_distance / max(1, len(gold_compact))
+
+        # ✅ NEW (symmetric — penalizes length mismatch too):
+        max_len = max(len(gold_compact), len(pred_compact), 1)
+        cer = edit_distance / max_len
+
         similarity = char_similarity(gold_compact, pred_compact)
 
-        rows.append(
-            {
-                "surah": reference["surah"],
-                "ayah": reference["ayah"],
-                "text": reference["text"],
-                "content_text": reference["content_text"],
-                "text_compact": reference["text_compact"],
-                "content_text_compact": gold_compact,
-                "source_id": reference.get("source_id"),
-                "cer": float(cer),
-                "char_similarity": float(similarity),
-                "edit_distance": int(edit_distance),
-                "gold_len": len(gold_compact),
-                "pred_len": len(pred_compact),
-            }
-        )
+        # Also add a length ratio penalty to deprioritize very short ayahs
+        length_ratio = min(len(gold_compact), len(pred_compact)) / max_len
 
-    rows.sort(key=lambda item: (item["cer"], -item["char_similarity"], item["surah"], item["ayah"]))
+        rows.append({
+            "surah": reference["surah"],
+            "ayah": reference["ayah"],
+            "text": reference["text"],
+            "content_text": reference["content_text"],
+            "text_compact": reference["text_compact"],
+            "content_text_compact": gold_compact,
+            "source_id": reference.get("source_id"),
+            "cer": float(cer),
+            "char_similarity": float(similarity),
+            "length_ratio": float(length_ratio),
+            "edit_distance": int(edit_distance),
+            "gold_len": len(gold_compact),
+            "pred_len": len(pred_compact),
+        })
+
+    # ✅ NEW sort: CER first, then similarity, then length_ratio (prefer same-length ayahs)
+    rows.sort(key=lambda item: (
+        round(item["cer"], 3),
+        -round(item["char_similarity"], 3),
+        -item["length_ratio"],   # prefer ayahs closer in length to what was recited
+        item["surah"],
+        item["ayah"],
+    ))
+
     return rows[:top_k]
-
 
 def classify_autodetect_match(best: dict[str, Any] | None) -> dict[str, Any]:
     if best is None:
@@ -314,8 +330,8 @@ def classify_autodetect_match(best: dict[str, Any] | None) -> dict[str, Any]:
         accepted = cer == 0.0
         needs_confirmation = (not accepted) and cer <= 0.35
     else:
-        accepted = cer <= 0.05 or similarity >= 0.95
-        needs_confirmation = (not accepted) and (cer <= 0.15 or similarity >= 0.88)
+        accepted = cer <= 0.10 or similarity >= 0.92
+        needs_confirmation = (not accepted) and (cer <= 0.25 or similarity >= 0.82)
 
     confidence = max(0.0, min(1.0, 1.0 - cer))
 
