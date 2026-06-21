@@ -1,0 +1,43 @@
+{
+  "surahs_seen": 114,
+  "rows": 6348,
+  "missing_source": [],
+  "missing_colored": [],
+  "rule_counts": {
+    "hamzat_wasl": 13588,
+    "lam_shamsiyyah": 2957,
+    "madd_2": 9140,
+    "madd_246": 4655,
+    "madd_6": 148,
+    "idghaam_no_ghunnah": 1035,
+    "silent": 4174,
+    "ghunnah": 4946,
+    "qalqalah": 3436,
+    "ikhfa": 5301,
+    "madd_munfasil": 3172,
+    "madd_muttasil": 1997,
+    "idghaam_ghunnah": 3933,
+    "ikhfa_shafawi": 496,
+    "idghaam_shafawi": 832,
+    "iqlab": 562,
+    "idghaam_mutajanisayn": 58,
+    "idghaam_mutaqaribayn": 13
+  },
+  "coarse_counts": {
+    "madd": 19112,
+    "ghunnah": 9914,
+    "qalqalah": 3436,
+    "ikhfa": 5797
+  },
+  "module_counts": {
+    "duration": 29026,
+    "burst": 3436,
+    "transition": 5797
+  },
+  "rows_with_supported_rules": 6191,
+  "rows_by_module": {
+    "duration": 6084,
+    "transition": 3140,
+    "burst": 2507
+  }
+}

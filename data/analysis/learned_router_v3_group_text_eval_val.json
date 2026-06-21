@@ -1,0 +1,889 @@
+{
+  "dataset": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\learned_routing_dataset_v3_group_text.jsonl",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\learned_router_v3_group_text.pt",
+  "split": "val",
+  "samples": 434,
+  "exact_match": 0.20506912442396313,
+  "macro_f1": 0.5423365479597264,
+  "per_label": {
+    "use_duration": {
+      "accuracy": 0.8917050691244239,
+      "precision": 1.0,
+      "recall": 0.7344632768361582,
+      "f1": 0.8469055374592833,
+      "tp": 130,
+      "fp": 0,
+      "fn": 47,
+      "tn": 257
+    },
+    "use_transition": {
+      "accuracy": 0.6797235023041475,
+      "precision": 0.5192307692307693,
+      "recall": 0.3776223776223776,
+      "f1": 0.43724696356275305,
+      "tp": 54,
+      "fp": 50,
+      "fn": 89,
+      "tn": 241
+    },
+    "use_burst": {
+      "accuracy": 0.5230414746543779,
+      "precision": 0.9818181818181818,
+      "recall": 0.2076923076923077,
+      "f1": 0.34285714285714286,
+      "tp": 54,
+      "fp": 1,
+      "fn": 206,
+      "tn": 173
+    }
+  },
+  "mistakes": [
+    {
+      "id": "retasy_train_000029",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8379668593406677,
+        "use_transition": 0.002683777827769518,
+        "use_burst": 0.00032237256527878344
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000150",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9601338505744934,
+        "use_transition": 0.736729621887207,
+        "use_burst": 0.027368854731321335
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000184",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9733527302742004,
+        "use_transition": 0.9907087087631226,
+        "use_burst": 0.17825552821159363
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000225",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8054254055023193,
+        "use_transition": 0.0019434283021837473,
+        "use_burst": 0.0002850992896128446
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000355",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7311301231384277,
+        "use_transition": 0.0019145536934956908,
+        "use_burst": 0.000434072338975966
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000373",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7719986438751221,
+        "use_transition": 0.002133060246706009,
+        "use_burst": 0.0004033606091979891
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000404",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7277393937110901,
+        "use_transition": 0.002257940825074911,
+        "use_burst": 0.0005320680211298168
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000448",
+      "text": "ان شانيك هو الابتر",
+      "sources": [
+        "duration",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.07118229568004608,
+        "use_transition": 4.199099203106016e-05,
+        "use_burst": 0.0005126039613969624
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000489",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9654225707054138,
+        "use_transition": 0.9922926425933838,
+        "use_burst": 0.24543534219264984
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000494",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8240249156951904,
+        "use_transition": 0.0024220068007707596,
+        "use_burst": 0.000308275775751099
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000501",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8056376576423645,
+        "use_transition": 0.002339754020795226,
+        "use_burst": 0.0003493093536235392
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000556",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8166828155517578,
+        "use_transition": 0.002387412590906024,
+        "use_burst": 0.00034564692759886384
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000575",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7662641406059265,
+        "use_transition": 0.001672523096203804,
+        "use_burst": 0.0003114633436780423
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000579",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration",
+        "transition"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9724481701850891,
+        "use_transition": 0.9909135103225708,
+        "use_burst": 0.1862121969461441
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000586",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7975974082946777,
+        "use_transition": 0.0018948628567159176,
+        "use_burst": 0.0002849857264664024
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000601",
+      "text": "ان شانيك هو الابتر",
+      "sources": [
+        "duration",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.0808117464184761,
+        "use_transition": 4.5469401811715215e-05,
+        "use_burst": 0.000499740825034678
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000611",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9748830199241638,
+        "use_transition": 0.9910359382629395,
+        "use_burst": 0.1750694364309311
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000635",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9740747213363647,
+        "use_transition": 0.9907510876655579,
+        "use_burst": 0.17541293799877167
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000662",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration",
+        "transition"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9742878675460815,
+        "use_transition": 0.9912198185920715,
+        "use_burst": 0.1803450733423233
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000682",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.968140721321106,
+        "use_transition": 0.988899290561676,
+        "use_burst": 0.18370243906974792
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000724",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8497537970542908,
+        "use_transition": 0.0028078826144337654,
+        "use_burst": 0.0003037496644537896
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000747",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.814781665802002,
+        "use_transition": 0.0023468651343137026,
+        "use_burst": 0.0003225084219593555
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000776",
+      "text": "ان شانيك هو الابتر",
+      "sources": [
+        "duration",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.05592765659093857,
+        "use_transition": 3.8505026168422773e-05,
+        "use_burst": 0.0005873632617294788
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000810",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7989944219589233,
+        "use_transition": 0.0022103250958025455,
+        "use_burst": 0.0003451164811849594
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000843",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8475660681724548,
+        "use_transition": 0.0029582965653389692,
+        "use_burst": 0.00032964005367830396
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000888",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration",
+        "transition"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9685993790626526,
+        "use_transition": 0.9910222291946411,
+        "use_burst": 0.21734634041786194
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000912",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9722599387168884,
+        "use_transition": 0.990440845489502,
+        "use_burst": 0.1807444840669632
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000918",
+      "text": "من شر الوسواس الخناس",
+      "sources": [
+        "duration",
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8153920769691467,
+        "use_transition": 0.0022606258280575275,
+        "use_burst": 0.00033286912366747856
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000973",
+      "text": "ان شانيك هو الابتر",
+      "sources": [
+        "duration",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.06616190820932388,
+        "use_transition": 4.323076791479252e-05,
+        "use_burst": 0.0005493707722052932
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000986",
+      "text": "لا اعبد ما تعبدون",
+      "sources": [
+        "duration"
+      ],
+      "gold": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": true,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.9714233875274658,
+        "use_transition": 0.9904356002807617,
+        "use_burst": 0.18520469963550568
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    }
+  ]
+}

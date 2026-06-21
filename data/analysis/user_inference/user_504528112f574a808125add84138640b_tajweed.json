@@ -1,0 +1,53 @@
+{
+  "sample_id": "quran_tajweed_054_046",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\user_504528112f574a808125add84138640b.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 4943,
+  "text": "بل الساعه موعدهم والساعه ادهي وامر",
+  "routing_plan": {
+    "use_duration": false,
+    "use_duration_localizer": false,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": true
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": false,
+      "use_duration_localizer": false,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": true
+    },
+    "module_judgments": [
+      {
+        "position": 22,
+        "source_module": "burst",
+        "rule": "qalqalah",
+        "predicted_rule": "qalqalah",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.8138982057571411
+      }
+    ],
+    "report": {
+      "word": "بل الساعه موعدهم والساعه ادهي وامر",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [],
+      "errors": []
+    },
+    "weighted_score": {
+      "score": 100.0,
+      "weighted_error_sum": 0,
+      "scale": 3.0,
+      "num_errors": 0,
+      "severity_counts": {},
+      "errors": []
+    },
+    "feedback": [
+      "No errors were detected."
+    ]
+  },
+  "weighted_score": null
+}

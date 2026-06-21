@@ -1,0 +1,46 @@
+{
+  "dataset": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\learned_routing_dataset_v5_retasy_hf_rule_aware_group_text.jsonl",
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\learned_router_v5_retasy_hf_rule_aware_group_text.pt",
+  "best_metrics": {
+    "exact_match": 0.8946406841278076,
+    "macro_f1": 0.9755208526087333,
+    "per_label": {
+      "use_duration": {
+        "accuracy": 0.9451887941534713,
+        "precision": 0.981638418079096,
+        "recall": 0.9559834938101788,
+        "f1": 0.9686411149825783,
+        "positives": 1454,
+        "predicted_positive": 1416,
+        "tp": 1390,
+        "fp": 26,
+        "fn": 64,
+        "tn": 162
+      },
+      "use_transition": {
+        "accuracy": 0.9835566382460414,
+        "precision": 0.9794344473007712,
+        "recall": 0.9973821989528796,
+        "f1": 0.9883268482490273,
+        "positives": 1146,
+        "predicted_positive": 1167,
+        "tp": 1143,
+        "fp": 24,
+        "fn": 3,
+        "tn": 472
+      },
+      "use_burst": {
+        "accuracy": 0.9451887941534713,
+        "precision": 0.9534883720930233,
+        "recall": 0.9862542955326461,
+        "f1": 0.9695945945945946,
+        "positives": 1455,
+        "predicted_positive": 1505,
+        "tp": 1435,
+        "fp": 70,
+        "fn": 20,
+        "tn": 117
+      }
+    }
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "dataset": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\learned_routing_dataset_v2.jsonl",
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\learned_router_v2.pt",
+  "split": "val",
+  "samples": 395,
+  "exact_match": 0.9772151898734177,
+  "macro_f1": 0.9789877158954465,
+  "per_label": {
+    "use_duration": {
+      "accuracy": 0.9924050632911392,
+      "precision": 0.9851485148514851,
+      "recall": 1.0,
+      "f1": 0.9925187032418953,
+      "tp": 199,
+      "fp": 3,
+      "fn": 0,
+      "tn": 193
+    },
+    "use_transition": {
+      "accuracy": 0.9848101265822785,
+      "precision": 0.8947368421052632,
+      "recall": 1.0,
+      "f1": 0.9444444444444444,
+      "tp": 51,
+      "fp": 6,
+      "fn": 0,
+      "tn": 338
+    },
+    "use_burst": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 138,
+      "fp": 0,
+      "fn": 0,
+      "tn": 257
+    }
+  },
+  "mistakes": [
+    {
+      "id": "retasy_train_003084",
+      "text": "ما اغني عنه ماله وما كسب",
+      "sources": [
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": true,
+        "use_burst": true
+      },
+      "probabilities": {
+        "use_duration": 0.19374212622642517,
+        "use_transition": 0.5764399766921997,
+        "use_burst": 0.6506714224815369
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_002305",
+      "text": "ما اغني عنه ماله وما كسب",
+      "sources": [
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": true,
+        "use_burst": true
+      },
+      "probabilities": {
+        "use_duration": 0.18672306835651398,
+        "use_transition": 0.6605977416038513,
+        "use_burst": 0.7224586606025696
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_001751",
+      "text": "نار الله الموقدة",
+      "sources": [
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7703554630279541,
+        "use_transition": 0.0009683029493317008,
+        "use_burst": 0.007108534220606089
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_005774",
+      "text": "نار الله الموقدة",
+      "sources": [
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.7566201090812683,
+        "use_transition": 0.0008055047364905477,
+        "use_burst": 0.005564631894230843
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_001648",
+      "text": "ما اغني عنه ماله وما كسب",
+      "sources": [
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": true,
+        "use_burst": true
+      },
+      "probabilities": {
+        "use_duration": 0.19216322898864746,
+        "use_transition": 0.6812736988067627,
+        "use_burst": 0.73075932264328
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_003272",
+      "text": "ما اغني عنه ماله وما كسب",
+      "sources": [
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": true,
+        "use_burst": true
+      },
+      "probabilities": {
+        "use_duration": 0.18460537493228912,
+        "use_transition": 0.6445183753967285,
+        "use_burst": 0.7219581604003906
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000978",
+      "text": "ما اغني عنه ماله وما كسب",
+      "sources": [
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": true,
+        "use_burst": true
+      },
+      "probabilities": {
+        "use_duration": 0.1974029242992401,
+        "use_transition": 0.6012723445892334,
+        "use_burst": 0.6443681716918945
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_000473",
+      "text": "ما اغني عنه ماله وما كسب",
+      "sources": [
+        "transition",
+        "burst"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": true
+      },
+      "predicted": {
+        "use_duration": false,
+        "use_transition": true,
+        "use_burst": true
+      },
+      "probabilities": {
+        "use_duration": 0.18418040871620178,
+        "use_transition": 0.6879149675369263,
+        "use_burst": 0.7864415645599365
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    },
+    {
+      "id": "retasy_train_003438",
+      "text": "نار الله الموقدة",
+      "sources": [
+        "transition"
+      ],
+      "gold": {
+        "use_duration": false,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "predicted": {
+        "use_duration": true,
+        "use_transition": false,
+        "use_burst": false
+      },
+      "probabilities": {
+        "use_duration": 0.8401418328285217,
+        "use_transition": 0.001923638628795743,
+        "use_burst": 0.010910656303167343
+      },
+      "thresholds": {
+        "use_duration": 0.5,
+        "use_transition": 0.5,
+        "use_burst": 0.5
+      }
+    }
+  ]
+}

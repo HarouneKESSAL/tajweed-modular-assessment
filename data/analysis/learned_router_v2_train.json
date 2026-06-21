@@ -1,0 +1,46 @@
+{
+  "dataset": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\learned_routing_dataset_v2.jsonl",
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\learned_router_v2.pt",
+  "best_metrics": {
+    "exact_match": 0.9772151708602905,
+    "macro_f1": 0.9789877158954465,
+    "per_label": {
+      "use_duration": {
+        "accuracy": 0.9924050632911392,
+        "precision": 0.9851485148514851,
+        "recall": 1.0,
+        "f1": 0.9925187032418953,
+        "positives": 199,
+        "predicted_positive": 202,
+        "tp": 199,
+        "fp": 3,
+        "fn": 0,
+        "tn": 193
+      },
+      "use_transition": {
+        "accuracy": 0.9848101265822785,
+        "precision": 0.8947368421052632,
+        "recall": 1.0,
+        "f1": 0.9444444444444444,
+        "positives": 51,
+        "predicted_positive": 57,
+        "tp": 51,
+        "fp": 6,
+        "fn": 0,
+        "tn": 338
+      },
+      "use_burst": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "positives": 138,
+        "predicted_positive": 138,
+        "tp": 138,
+        "fp": 0,
+        "fn": 0,
+        "tn": 257
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "sample_id": "quran_tajweed_001_005",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\segments\\user_5441c14ba6344179b291f3d0c78dc264\\natural\\user_5441c14ba6344179b291f3d0c78dc264_natural_segment_005.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 4,
+  "text": "اياك نعبد واياك نستعين",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 17,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.8743420839309692,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.8441950082778931,
+          "ghunnah": 0.15580496191978455
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.32246842980384827,
+          "madd": 0.8233663439750671
+        },
+        "localized_clip_probability": 0.8233663439750671,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 2,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 307,
+          "end_frame": 370,
+          "start_sec": 3.0700000000000003,
+          "end_sec": 3.7,
+          "max_prob": 0.8233663439750671,
+          "mean_prob": 0.6805456280708313
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      }
+    ],
+    "report": {
+      "word": "اياك نعبد واياك نستعين",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "a",
+        "l"
+      ],
+      "errors": []
+    },
+    "weighted_score": {
+      "score": 100.0,
+      "weighted_error_sum": 0,
+      "scale": 3.0,
+      "num_errors": 0,
+      "severity_counts": {},
+      "errors": []
+    },
+    "feedback": [
+      "No errors were detected."
+    ]
+  },
+  "weighted_score": null
+}

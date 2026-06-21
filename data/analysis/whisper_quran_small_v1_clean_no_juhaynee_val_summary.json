@@ -1,0 +1,13 @@
+{
+  "model_dir": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_asr_whisper_small_quran_v1_clean_no_juhaynee",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_hf_ayah_clean_no_juhaynee.jsonl",
+  "split": "val",
+  "samples": 407,
+  "exact_norm_rate": 0.5798525798525799,
+  "exact_compact_rate": 0.6068796068796068,
+  "avg_char_accuracy": 0.9485922195350539,
+  "cer": 0.033100274360562884,
+  "wer": 0.11731634182908546,
+  "avg_gold_char_len": 27.76167076167076,
+  "avg_pred_char_len": 27.724815724815723
+}

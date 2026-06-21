@@ -1,0 +1,156 @@
+{
+  "sample_id": "quran_tajweed_001_007",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\segments\\user_32b01be596a2423f96937137745b4228\\expected_count\\user_32b01be596a2423f96937137745b4228_expected_segment_007.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 6,
+  "text": "صرط الذين انعمت عليهم غير المغضوب عليهم ولا الضالين",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 1,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.7532172203063965,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9080594778060913,
+          "ghunnah": 0.09194054454565048
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.22500896453857422,
+          "madd": 0.6696227192878723
+        },
+        "localized_clip_probability": 0.6696227192878723,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 2,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1064,
+          "end_frame": 1079,
+          "start_sec": 10.64,
+          "end_sec": 10.790000000000001,
+          "max_prob": 0.6696227192878723,
+          "mean_prob": 0.5855088829994202
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 39,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9311079978942871,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9744884371757507,
+          "ghunnah": 0.025511503219604492
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.22500896453857422,
+          "madd": 0.6696227192878723
+        },
+        "localized_clip_probability": 0.6696227192878723,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 2,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1064,
+          "end_frame": 1079,
+          "start_sec": 10.64,
+          "end_sec": 10.790000000000001,
+          "max_prob": 0.6696227192878723,
+          "mean_prob": 0.5855088829994202
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 41,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9215955138206482,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.8157036304473877,
+          "ghunnah": 0.1842963695526123
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.22500896453857422,
+          "madd": 0.6696227192878723
+        },
+        "localized_clip_probability": 0.6696227192878723,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 2,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1064,
+          "end_frame": 1079,
+          "start_sec": 10.64,
+          "end_sec": 10.790000000000001,
+          "max_prob": 0.6696227192878723,
+          "mean_prob": 0.5855088829994202
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      }
+    ],
+    "report": {
+      "word": "صرط الذين انعمت عليهم غير المغضوب عليهم ولا الضالين",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "a",
+        "l"
+      ],
+      "errors": []
+    },
+    "weighted_score": {
+      "score": 100.0,
+      "weighted_error_sum": 0,
+      "scale": 3.0,
+      "num_errors": 0,
+      "severity_counts": {},
+      "errors": []
+    },
+    "feedback": [
+      "No errors were detected."
+    ]
+  },
+  "weighted_score": null
+}

@@ -1,0 +1,21 @@
+{
+  "samples": 407,
+  "accepted_exact_estimated": 299,
+  "remaining_errors": 108,
+  "near_misses_ge_095": 61,
+  "strong_near_misses_ge_098": 6,
+  "recommended_policy": {
+    "accepted_exact": "auto-pass content gate",
+    "review_near_exact": "do not auto-pass; send to review/evidence",
+    "rejected": "stop content gate",
+    "review_char_acc": 0.95,
+    "review_max_edits": 2
+  },
+  "important_counts": {
+    "single_edit_errors": 71,
+    "two_edit_errors": 21,
+    "short_predictions_len_delta_le_minus2": 8,
+    "long_predictions_len_delta_ge_2": 6,
+    "muqattaat_remaining_errors": 0
+  }
+}

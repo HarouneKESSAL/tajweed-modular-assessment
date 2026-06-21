@@ -1,0 +1,25 @@
+{
+  "sample_id": "hf_quran_md_ayah_route_saood_ash_shuraym_003_082_011220",
+  "audio_path": "data\\raw\\hf_quran_md_ayah_routing_weak_all_ayahs_r1\\hf_quran_md_ayah_route_saood_ash_shuraym_003_082_011220.wav",
+  "model_dir": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_asr_whisper_medium_quran_v1_clean_no_juhaynee",
+  "gold_text": "فمن تولي بعد ذلك فاولئك هم الفاسقون",
+  "pred_text": "فمن تولي بعد ذلك فاولئك هم الفاسقون",
+  "content_gate": {
+    "accepted": true,
+    "verdict": "accepted_exact",
+    "mode": "strict",
+    "gold_norm": "فمن تولي بعد ذلك فاولئك هم الفاسقون",
+    "pred_norm_raw": "فمن تولي بعد ذلك فاولئك هم الفاسقون",
+    "pred_norm": "فمن تولي بعد ذلك فاولئك هم الفاسقون",
+    "gold_compact": "فمنتوليبعدذلكفاولئكهمالفاسقون",
+    "pred_compact_raw": "فمنتوليبعدذلكفاولئكهمالفاسقون",
+    "pred_compact": "فمنتوليبعدذلكفاولئكهمالفاسقون",
+    "exact_compact": true,
+    "char_accuracy": 1.0,
+    "cer": 0.0,
+    "edit_distance": 0,
+    "gold_len": 29,
+    "pred_len": 29,
+    "muqattaat_normalized": false
+  }
+}

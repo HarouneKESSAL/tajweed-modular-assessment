@@ -1,0 +1,9 @@
+{
+  "mode": "open_recognition",
+  "blank_penalty": 1.0,
+  "use_cleanup": false,
+  "decoder": "greedy",
+  "beam_width": 1,
+  "lexicon_source": "train",
+  "notes": "Ablation config: same open greedy decoder as official content, but blank penalty is reset to 1.0."
+}

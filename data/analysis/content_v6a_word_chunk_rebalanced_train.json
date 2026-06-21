@@ -1,0 +1,25 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6a_word_chunk_rebalanced.pt",
+  "stage_results": [
+    {
+      "stage_name": "word_chunk_rebalance",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_word_chunk_rebalance.jsonl",
+      "best_metrics": {
+        "samples": 1389.0,
+        "exact_match": 0.0007199424046076314,
+        "char_accuracy": 0.335588529541013,
+        "edit_distance": 4.787616990640749
+      }
+    },
+    {
+      "stage_name": "anchor_refresh",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_stage1_anchor.jsonl",
+      "best_metrics": {
+        "samples": 1000.0,
+        "exact_match": 0.001,
+        "char_accuracy": 0.4217574781910523,
+        "edit_distance": 8.843
+      }
+    }
+  ]
+}

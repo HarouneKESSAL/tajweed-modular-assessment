@@ -1,0 +1,83 @@
+{
+  "sample_id": "quran_tajweed_078_003",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\segments\\user_3e924501917149dcaff27ad7109b6e50\\expected_count\\user_3e924501917149dcaff27ad7109b6e50_expected_segment_003.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 5750,
+  "text": "الذي هم فيه مختلفون",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 14,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9470935463905334,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.8705098628997803,
+          "ghunnah": 0.1294901818037033
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.8218427300453186,
+          "madd": 0.8913688659667969
+        },
+        "localized_clip_probability": 0.8913688659667969,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 5,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 90,
+          "end_frame": 128,
+          "start_sec": 0.9,
+          "end_sec": 1.28,
+          "max_prob": 0.8913688659667969,
+          "mean_prob": 0.7197957038879395
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      }
+    ],
+    "report": {
+      "word": "الذي هم فيه مختلفون",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "l"
+      ],
+      "errors": []
+    },
+    "weighted_score": {
+      "score": 100.0,
+      "weighted_error_sum": 0,
+      "scale": 3.0,
+      "num_errors": 0,
+      "severity_counts": {},
+      "errors": []
+    },
+    "feedback": [
+      "No errors were detected."
+    ]
+  },
+  "weighted_score": null
+}

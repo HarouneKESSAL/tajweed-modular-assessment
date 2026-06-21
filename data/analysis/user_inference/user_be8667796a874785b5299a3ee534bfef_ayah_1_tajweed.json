@@ -1,0 +1,84 @@
+{
+  "sample_id": "quran_tajweed_002_001",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\segments\\user_be8667796a874785b5299a3ee534bfef\\expected_count\\user_be8667796a874785b5299a3ee534bfef_expected_segment_001.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 8,
+  "text": "الم",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 2,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.8032206892967224,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9544929265975952,
+          "ghunnah": 0.04550710320472717
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.8162449598312378,
+          "madd": 0.7519565224647522
+        },
+        "localized_clip_probability": 0.7519565224647522,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 2,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 170,
+          "end_frame": 264,
+          "start_sec": 1.7,
+          "end_sec": 2.64,
+          "max_prob": 0.7519565224647522,
+          "mean_prob": 0.6295691132545471
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      }
+    ],
+    "report": {
+      "word": "الم",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "a",
+        "l"
+      ],
+      "errors": []
+    },
+    "weighted_score": {
+      "score": 100.0,
+      "weighted_error_sum": 0,
+      "scale": 3.0,
+      "num_errors": 0,
+      "severity_counts": {},
+      "errors": []
+    },
+    "feedback": [
+      "No errors were detected."
+    ]
+  },
+  "weighted_score": null
+}

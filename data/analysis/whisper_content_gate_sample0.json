@@ -1,0 +1,25 @@
+{
+  "sample_id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_001_000210",
+  "audio_path": "data\\raw\\hf_quran_md_ayah_routing_weak_all_ayahs_r1\\hf_quran_md_ayah_route_saood_ash_shuraym_002_001_000210.wav",
+  "model_dir": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_asr_whisper_medium_quran_v1_clean_no_juhaynee",
+  "gold_text": "الم",
+  "pred_text": "الافلاميم",
+  "content_gate": {
+    "accepted": true,
+    "verdict": "accepted_exact",
+    "mode": "strict",
+    "gold_norm": "الم",
+    "pred_norm_raw": "الافلاميم",
+    "pred_norm": "الم",
+    "gold_compact": "الم",
+    "pred_compact_raw": "الافلاميم",
+    "pred_compact": "الم",
+    "exact_compact": true,
+    "char_accuracy": 1.0,
+    "cer": 0.0,
+    "edit_distance": 0,
+    "gold_len": 3,
+    "pred_len": 3,
+    "muqattaat_normalized": true
+  }
+}

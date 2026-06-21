@@ -1,441 +1,527 @@
 # Tajweed Modular Assessment
 
-This repository contains a modular Tajweed assessment system. The goal is to analyze a recitation audio sample and evaluate different Tajweed rule families with specialized modules instead of using one large monolithic model.
+Système modulaire d'évaluation du Tajweed coranique. Analyse une récitation audio et évalue les règles de Tajweed avec des modules spécialisés (durée, transition, burst, contenu).
 
-The system is organized around five main parts:
+**Auteurs** : HADDAD Ahmed Ayoub & KESSAL Haroune  
+**Encadrants** : Dr. CHENAIT Manel & Dr. BERKANI Lamia
 
-- **Duration module**: detects and evaluates duration-based rules such as `madd` and `ghunnah`.
-- **Transition module**: detects rules around letter transitions such as `ikhfa` and `idgham`.
-- **Burst module**: detects burst/articulation rules such as `qalqalah`.
-- **Content module**: checks whether the recited content matches the expected Arabic text.
-- **System layer**: routes samples to the right modules, combines outputs, evaluates the full pipeline, and produces feedback.
+---
 
-## Current Baseline Snapshot
+## Sommaire
 
-The latest thesis-oriented baseline separates content recognition from Tajweed-rule diagnosis:
+1. [Structure du projet](#1-structure-du-projet)
+2. [Configuration obligatoire](#2-configuration-obligatoire)
+3. [Fichiers de configuration](#3-fichiers-de-configuration)
+4. [Installation](#4-installation)
+5. [Lancement](#5-lancement)
+6. [Modules principaux](#6-modules-principaux)
+7. [Scripts](#7-scripts)
+8. [Données](#8-données)
+9. [Checkpoints](#9-checkpoints)
+10. [Résultats clés](#10-résultats-clés)
+11. [Remarques](#11-remarques)
 
-- **Content gate**: Whisper-medium Quran ASR gate with muqattaat normalization.
-- **Tajweed modules**: duration, transition, and burst are evaluated on annotated Tajweed manifests.
-- **Ablation reports**: module-level and whole-system comparisons are stored under `data/analysis/thesis_ablation_v2/`.
+---
 
-Current headline results:
+## 1. Structure du projet
 
-| Component | Metric | Result |
-|---|---:|---:|
-| Content gate | exact after muqattaat normalization | 73.96% |
-| Content gate | character accuracy after normalization | 98.17% |
-| Content gate | CER after normalization | 1.89% |
-| Duration module | accuracy | 99.27% |
-| Transition module | accuracy | 91.01% |
-| Burst module | accuracy | 87.54% |
-
-Important interpretation: the old chunked CTC content module is now kept mainly as a legacy ablation baseline. The learner-facing content path is the Whisper-medium Quran ASR content gate.
-
-## Repository Structure
-
-```text
+```
 tajweed-modular-assessment/
-  checkpoints/          Small decoder/threshold config files. Large .pt model weights are ignored by Git.
-  configs/              YAML configuration files for data, training, and model hyperparameters.
-  data/                 Manifests, alignments, and analysis outputs used by training/evaluation.
-  docs/                 Extra documentation or supporting notes.
-  external/             External reference datasets/repos, such as Quran/Tajweed rule references.
-  notebooks/            Optional notebooks for exploration.
-  scripts/              Runnable training, evaluation, analysis, and data-preparation scripts.
-  src/                  Main Python package used by the scripts.
-  tests/                Unit tests for datasets, models, aggregation, and preprocessing behavior.
-  *.md                  Reports, summaries, architecture notes, and presentation/project documentation.
+│
+├── README.md                      ← CE FICHIER
+├── requirements.txt               ← Dépendances Python principales
+├── requirements-whisper.txt       ← Dépendances optionnelles Whisper
+├── .gitignore / .gitattributes    ← Config Git
+│
+├── app/                           ← API applicative (FastAPI)
+│   ├── __init__.py
+│   └── main.py                    ← Point d'entrée serveur
+│
+├── configs/                       ← Fichiers de configuration (25 fichiers)
+│   ├── data.yaml                  ← Config audio/données : sample_rate, MFCC
+│   ├── train.yaml                 ← Config entraînement : seed, batch_size, lr, epochs
+│   ├── train_content_whisper_ctc.yaml ← Entraînement Whisper CTC
+│   ├── model_duration.yaml        ← Architecture modèle durée (BiLSTM)
+│   ├── model_transition.yaml      ← Architecture modèle transition (BiLSTM)
+│   ├── model_burst.yaml           ← Architecture modèle burst (CNN)
+│   ├── model_content.yaml         ← Architecture contenu legacy (wav2vec+CTC)
+│   ├── model_content_hd96.yaml    ← Architecture contenu HD96 (principal)
+│   ├── model_content_whisper.yaml ← Architecture Whisper
+│   ├── model_content_whisper_ctc.yaml ← Whisper + CTC
+│   ├── model_content_whisper_ctc_bilstm.yaml ← Whisper + CTC + BiLSTM
+│   ├── error_weights.yaml         ← Poids des erreurs par module
+│   ├── learned_router_thresholds.yaml ← Seuils routeur v1
+│   ├── learned_router_v5_thresholds.yaml ← Seuils routeur v5 (principal)
+│   ├── transition_multilabel_thresholds.yaml ← Seuils transition multi-label
+│   ├── learned_routing_features_v1.json ← Features routage v1
+│   ├── learned_routing_features_v2.json ← Features routage v2
+│   ├── learned_routing_features_v3_group_text.json ← Features routage v3
+│   ├── learned_routing_features_v4_rule_aware_group_text.json ← v4 rule-aware
+│   ├── learned_routing_features_v5_retasy_hf_rule_aware_group_text.json ← v5
+│   ├── content_ayah_decoder_bp12.json ← Décodeur ayah (blank penalty 1.2)
+│   ├── content_chunked_decoder_beam_bp04.json ← Décodeur beam (bp 0.4)
+│   ├── content_chunked_decoder_eval_lexicon_bp04.json ← Décodeur lexique eval
+│   ├── production_content_gate.json ← Config production content gate
+│   ├── whole_system_baseline_v2.json ← Baseline système complet v2
+│   └── rule_manifest_json.json    ← Manifest des règles de Tajweed supportées
+│
+├── checkpoints/                   ← Poids des modèles entraînés (70 Go, ignoré par Git)
+│   ├── duration_module.pt         ← Modèle de durée (99.27% accuracy)
+│   ├── transition_module.pt       ← Modèle de transition (91.01% accuracy)
+│   ├── burst_module.pt            ← Modèle burst/qalqalah (87.54% accuracy)
+│   ├── content_chunked_module_hd96_reciter.pt ← Contenu principal
+│   ├── duration_fusion_calibrator_approved.pt ← Calibrateur fusion durée
+│   ├── learned_router_v5_retasy_hf_rule_aware_group_text.pt ← Routeur appris
+│   ├── content_asr_whisper_medium_quran_v2_weighted/ ← Content gate (23 Go)
+│   ├── content_asr_whisper_*/      ← Autres checkpoints Whisper
+│   ├── content_chunked_module_*.pt ← Variantes contenu (~50 fichiers)
+│   ├── localized_duration_model.pt ← Localisation temporelle durée
+│   ├── localized_transition_model.pt ← Localisation temporelle transition
+│   ├── learned_router_v*.pt        ← Routeurs appris (v1-v5)
+│   ├── duration_fusion_calibrator*.pt ← Calibrateurs fusion
+│   ├── content_multitask_*.pt      ← Modèles multi-tâches
+│   ├── content_v6*.pt              ← Modèles contenu v6
+│   ├── content_quran_md_*.pt       ← Modèles Quran-MD
+│   ├── content_ayah_hf_*.pt        ← Modèles par ayah HuggingFace
+│   └── *.json                      ← Configs décodeurs/seuils (10 fichiers)
+│
+├── data/                           ← Données du projet
+│   ├── alignment/                  ← Alignements temporels (12 fichiers .jsonl)
+│   ├── analysis/                   ← Résultats d'évaluation (200+ fichiers JSON/MD/CSV)
+│   │   ├── thesis_ablation_v2/     ← Résumés d'ablation thèse
+│   │   ├── ablations/              ← Sorties d'ablation
+│   │   ├── modular_suite_*.json    ← Évaluations modulaires
+│   │   └── whole_system_status_report_v2.md ← Rapport final
+│   ├── external/                   ← Références externes
+│   ├── interim/                    ← Données intermédiaires (ignoré par Git)
+│   ├── manifests/                  ← Manifests d'entraînement (87 fichiers .jsonl)
+│   │   ├── retasy_train.jsonl      ← Dataset principal Retasy
+│   │   ├── retasy_duration_*.jsonl ← Manifests durée
+│   │   ├── retasy_transition_*.jsonl ← Manifests transition
+│   │   ├── retasy_burst_subset.jsonl ← Manifest burst
+│   │   ├── retasy_content_chunks*.jsonl ← Manifests contenu
+│   │   ├── learned_routing_dataset_v*.jsonl ← Datasets routage
+│   │   ├── content_ayah_hf_*.jsonl ← Contenu par ayah
+│   │   ├── content_v6*.jsonl       ← Manifests v6
+│   │   ├── multitask_content_*.jsonl ← Manifests multi-tâches
+│   │   ├── hf_quran_md_*.jsonl     ← Manifests Quran-MD
+│   │   ├── quran_content_reference_full.jsonl ← Référence texte Quran
+│   │   ├── quran_tajweed_reference_full.jsonl ← Référence règles Tajweed
+│   │   └── quranjson_rules.jsonl   ← Règles extraites du Quran JSON
+│   ├── processed/                  ← Données transformées (ignoré par Git)
+│   ├── raw/                        ← Audio brut (ignoré par Git)
+│   └── uploads/                    ← Uploads utilisateurs (ignoré par Git)
+│
+├── docs/                           ← Documentation supplémentaire
+│   ├── architecture_notes.md       ← Notes d'architecture
+│   ├── content_scoring_architecture.md ← Architecture scoring contenu
+│   ├── experiment_plan.md          ← Plan d'expérimentation
+│   ├── folder_roles.md             ← Rôles des dossiers
+│   └── repo_tree.txt               ← Arborescence du dépôt
+│
+├── external/                       ← Références externes
+│   └── quranjson-tajwid/           ← Données Quran/Tajweed de référence
+│
+├── figures/                        ← Figures générées
+│   └── experiments/                ← Figures expérimentales
+│
+├── notebooks/                      ← Notebooks Jupyter d'exploration
+│
+├── papers/                         ← Documents PDF du mémoire
+│   ├── Chapitre_Conception.pdf
+│   ├── chapitre_etat_de_art.pdf
+│   └── Conceptual_Framework.pdf
+│
+├── src/tajweed_assessment/         ← Package Python principal
+│   ├── __init__.py
+│   ├── settings.py                 ← ⚙️ Configuration centrale des chemins
+│   ├── alignment/                  ← Alignement et projection temporelle
+│   │   ├── __init__.py
+│   │   ├── prep.py                 ← Préparation alignements
+│   │   └── time_projection.py      ← Projection règles → temps
+│   ├── data/                       ← Gestion des données
+│   │   ├── audio.py                ← Chargement audio
+│   │   ├── collate.py              ← Collation des batches
+│   │   ├── dataset.py              ← Logique de dataset
+│   │   ├── hf_retasy.py            ← Helper HuggingFace/Retasy
+│   │   ├── labels.py               ← Gestion des labels
+│   │   ├── localized_duration_dataset.py ← Dataset durée localisée
+│   │   ├── localized_transition_dataset.py ← Dataset transition localisée
+│   │   ├── manifests.py            ← Chargement manifests
+│   │   ├── merge_manifest.py       ← Fusion de manifests
+│   │   ├── quranjson_rules.py      ← Extraction règles Quran JSON
+│   │   ├── real_duration_audio_dataset.py ← Dataset audio durée réelle
+│   │   ├── real_duration_dataset.py ← Dataset durée réelle
+│   │   └── speed.py                ← Normalisation vitesse
+│   ├── evaluation/                 ← Évaluation
+│   │   ├── __init__.py
+│   │   ├── content_metrics.py      ← Métriques de contenu
+│   │   └── transition_multilabel_profiles.py ← Profils transition
+│   ├── features/                   ← Extraction de features
+│   │   ├── mfcc.py                 ← MFCC (caractéristiques acoustiques)
+│   │   ├── routing.py              ← Routage basé sur les règles
+│   │   └── ssl.py                  ← Features self-supervised (wav2vec)
+│   ├── models/                     ← Définitions des modèles
+│   │   ├── burst/qalqalah_cnn.py   ← Module Qalqalah (CNN)
+│   │   ├── common/                 ← Composants partagés
+│   │   │   ├── bilstm_encoder.py   ← Encodeur BiLSTM
+│   │   │   ├── ctc_head.py         ← Tête CTC
+│   │   │   ├── decoding.py         ← Décodage
+│   │   │   ├── losses.py           ← Fonctions de perte
+│   │   │   └── rule_head.py        ← Tête classification règles
+│   │   ├── content/                ← Modèles de contenu
+│   │   │   ├── aligner.py          ← Aligneur contenu
+│   │   │   ├── wav2vec_ctc.py      ← wav2vec + CTC
+│   │   │   ├── whisper_adapter.py  ← Adaptateur Whisper
+│   │   │   └── whisper_ctc.py      ← Whisper CTC
+│   │   ├── duration/madd_ghunnah_module.py ← Module Madd/Ghunnah
+│   │   ├── fusion/                 ← Fusion et feedback
+│   │   │   ├── aggregator.py       ← Agrégation des scores
+│   │   │   ├── duration_fusion_calibrator.py ← Calibrateur fusion durée
+│   │   │   ├── feedback.py         ← Génération de feedback
+│   │   │   └── schemas.py          ← Schémas de données
+│   │   ├── routing/learned_router.py ← Routeur appris
+│   │   └── transition/             ← Modèles de transition
+│   │       ├── idgham_ikhfa_module.py ← Module Ikhfa/Idgham
+│   │       └── multilabel_transition_module.py ← Transition multi-label
+│   ├── inference/                  ← Pipeline d'inférence
+│   │   ├── learned_routing.py      ← Routage appris
+│   │   ├── pipeline.py             ← Pipeline principale
+│   │   └── transition_multilabel.py ← Transition multi-label
+│   ├── training/                   ← Entraînement
+│   │   ├── callbacks.py            ← Checkpoints
+│   │   ├── engine.py               ← Boucle d'entraînement
+│   │   └── metrics.py              ← Métriques
+│   ├── scoring/                    ← Scoring
+│   │   ├── __init__.py
+│   │   ├── error_types.py          ← Types d'erreurs
+│   │   ├── inference_adapter.py    ← Adaptateur inférence
+│   │   └── weighted_score.py       ← Score pondéré
+│   ├── text/                       ← Traitement de texte
+│   │   ├── __init__.py
+│   │   └── normalization.py        ← Normalisation texte arabe
+│   └── utils/                      ← Utilitaires
+│       ├── io.py                    ← Entrées/sorties
+│       ├── logging.py               ← Logging
+│       └── seed.py                  ← Gestion des seeds
+│
+├── scripts/                        ← Scripts d'exécution (130+ fichiers)
+│   ├── README.md                   ← Documentation des scripts
+│   ├── burst/                      ← Module Qalqalah (2 scripts)
+│   ├── content/                    ← Module contenu (35 scripts)
+│   ├── data/                       ← Préparation données (12 scripts)
+│   ├── duration/                   ← Module durée (30 scripts)
+│   ├── eval/                       ← Évaluation comparative (5 scripts)
+│   ├── plots/                      ← Génération de figures (4 scripts)
+│   ├── routing/                    ← Routage appris (10 scripts)
+│   ├── system/                     ← Système complet (18 scripts)
+│   └── transition/                 ← Module transition (18 scripts)
+│
+├── tests/                          ← Tests unitaires (14 fichiers)
+│   ├── test_aggregator.py
+│   ├── test_alignment.py
+│   ├── test_ayah_content_strict_acceptance.py
+│   ├── test_content_metrics.py
+│   ├── test_dataset.py
+│   ├── test_inference_scoring_adapter.py
+│   ├── test_learned_router.py
+│   ├── test_models.py
+│   ├── test_multilabel_transition.py
+│   ├── test_speed.py
+│   ├── test_text_normalization.py
+│   ├── test_transition_multilabel_inference.py
+│   ├── test_weighted_score.py
+│   ├── test_whisper_adapter.py
+│   └── test_whisper_ctc_model.py
+│
+└── tajweed-app-frontend/           ← Frontend Next.js
+    ├── package.json / package-lock.json
+    ├── tsconfig.json / next.config.ts
+    ├── postcss.config.mjs / eslint.config.mjs
+    ├── public/                     ← Assets statiques
+    └── src/
+        ├── app/                    ← Pages Next.js
+        │   ├── page.tsx            ← Page principale
+        │   ├── layout.tsx          ← Layout racine
+        │   ├── globals.css         ← Styles globaux
+        │   └── favicon.ico
+        └── components/             ← Composants React
+            ├── ContentFeedback.tsx  ← Feedback contenu
+            ├── MushafPreviewCard.tsx ← Aperçu Mushaf
+            ├── ReadableFeedback.tsx ← Feedback lisible
+            └── SupportedRules.tsx   ← Règles supportées
 ```
 
-## Important Top-Level Files
+---
 
-- `README.md`: this guide.
-- `requirements.txt`: Python dependencies needed to run the project.
-- `requirements-whisper.txt`: optional dependencies for Whisper/Quran ASR content-gate experiments.
-- `.gitignore`: excludes virtual environments, caches, interim features, and large checkpoint weights.
-- `PROGRESS_REPORT_EN.md`: detailed English progress report for teachers.
-- `TECHNICAL_METHODS_REPORT.md`: deeper explanation of techniques such as MFCC, wav2vec, CTC, routing, and modular evaluation.
-- `RESULTS_SUMMARY.md`: compact summary of current model results.
-- `CODEBASE_ARCHITECTURE_NOTES.md`: notes about the current architecture and future cleanup.
-- `PRESENTATION_REPORT.md`: report-style presentation text.
-- `COLLEAGUE_HANDOFF_REPORT.md`: handoff summary for another developer or teammate.
-- `SOUTENANCE_EVALUATION_REPORT.md`: teacher-facing evaluation checklist and progress report.
-- `FINAL_REPORT_CHAPTER_TECHNIQUES_RESULTS.md`: final-report chapter draft covering methods, results, and requested evaluation points.
-- `sec7_development_experimentation.tex`: LaTeX chapter version of the development, experimentation, and results section.
-- `latex_test_project/`: one-file and wrapper LaTeX test project for compiling the chapter outside the main thesis.
-- `Conceptual_Framework.pdf`: conceptual framework document used as project background.
+## 2. Configuration obligatoire
 
-## `configs/`
+À faire dans l'ordre **avant toute exécution**.
 
-This folder contains YAML files that control training and evaluation behavior.
-
-- `configs/data.yaml`: audio/data settings such as sample rate, MFCC settings, and speed normalization.
-- `configs/model_duration.yaml`: architecture settings for the duration model.
-- `configs/model_content.yaml`: architecture settings for the content model, including wav2vec feature settings and hidden size.
-- `configs/model_transition.yaml`: architecture settings for the transition model.
-- `configs/model_burst.yaml`: architecture settings for the burst/qalqalah model.
-- `configs/train.yaml`: common training settings such as seed, epochs, batch size, learning rate, and device.
-- `configs/production_content_gate.json`: selected learner-facing content-gate configuration.
-- `configs/whole_system_baseline_v2.json`: selected whole-system baseline metadata for the thesis-oriented v2 reports.
-- `configs/content_chunked_decoder_beam_bp04.json`: beam-decoding ablation config for legacy chunked content.
-- `configs/content_chunked_decoder_eval_lexicon_bp04.json`: evaluation-lexicon decoder ablation config.
-
-## `checkpoints/`
-
-This folder is used for trained models and decoder/threshold settings.
-
-Committed files here are small JSON configs, for example:
-
-- `content_chunked_decoder.json`: closed-set/known-verse content decoder setting.
-- `content_chunked_decoder_open.json`: open content decoder setting for phrase-list-independent recognition.
-- `content_chunked_decoder_open_hd96.json`: improved open content decoder setting for the larger HD96 content model.
-- `localized_duration_decoder.json`: thresholds for localized duration span decoding.
-- `localized_transition_decoder.json`: thresholds for localized transition span decoding.
-- `transition_thresholds.json`: transition decision thresholds.
-- `real_duration_thresholds.json`: thresholds for real-duration classifiers.
-
-Large `.pt` model weights are intentionally ignored by Git because some content checkpoints are around 380 MB. They should be stored separately or with Git LFS if they need to be shared through GitHub.
-
-## `data/`
-
-This folder contains generated project data, not raw application code.
-
-### `data/manifests/`
-
-Manifest files describe audio samples, labels, rule targets, and metadata. They are usually JSONL files where each line is one sample.
-
-Examples:
-
-- `retasy_train.jsonl`: main Retasy-derived training manifest.
-- `retasy_quranjson_train.jsonl`: manifest joined with Quran/Tajweed reference labels.
-- `retasy_duration_alignment_corpus_torchaudio_strict.jsonl`: strict duration-alignment corpus.
-- `retasy_transition_subset.jsonl`: transition-rule subset.
-- `retasy_burst_subset.jsonl`: burst/qalqalah subset.
-- `retasy_content_chunks.jsonl`: chunked content-recognition dataset.
-- `quranjson_rules.jsonl`: extracted Tajweed rule information from Quran JSON references.
-
-### `data/alignment/`
-
-Alignment files map rule targets or characters to approximate audio time positions.
-
-Examples:
-
-- `duration_time_projection_strict.jsonl`: projected duration-rule timing.
-- `transition_time_projection_strict.jsonl`: projected transition-rule timing.
-- `torchaudio_forced_alignment_strict.jsonl`: torchaudio forced-alignment output.
-
-### `data/analysis/`
-
-Analysis JSON files store evaluation results, confusion matrices, hardcases, suite outputs, and experiment comparisons.
-
-Examples:
-
-- `modular_suite_content_open_hd96_textsplit.json`: full modular suite using the improved open content model.
-- `content_open_model_side_comparison.json`: comparison of open content model-side experiments.
-- `duration_fusion_verse_holdout.json`: duration fusion held-out evaluation.
-- `transition_confusions.json`: transition confusion analysis.
-- `chunked_content_lexicon_dependency.json`: analysis of content dependency on phrase-list decoding.
-- `final_baseline_results.json`: compact final baseline summary.
-- `whole_system_status_report_v2.md`: current whole-system explanation separating the Whisper content gate from Tajweed modules.
-- `thesis_ablation_v2/THESIS_ABLATION_SUMMARY.md`: thesis-ready ablation summary with content gate, Tajweed module, and threshold comparisons.
-- `thesis_ablation_v2/MODULE_INTERNAL_ABLATION_REPORT.md`: module-internal ablation report for duration, transition, burst, and content.
-- `ablations/`: supporting ablation outputs for decoder settings, routing profiles, burst thresholds, and module variants.
-
-## `external/`
-
-This folder contains external reference resources.
-
-- `external/quranjson-tajwid`: Quran/Tajweed reference data used to derive canonical rules and labels.
-
-## `scripts/`
-
-The old flat `scripts/` folder was reorganized by module. Each subfolder contains scripts for one responsibility.
-
-### `scripts/data/`
-
-Shared data-preparation scripts.
-
-- `build_manifests.py`: builds base manifests.
-- `extract_features.py`: feature extraction utility.
-- `build_torchaudio_alignment_corpus.py`: builds an alignment corpus using torchaudio outputs.
-- `run_torchaudio_forced_alignment.py`: runs torchaudio forced alignment.
-- `build_hf_quran_md_ayah_routing_weak.py`: imports Quran-MD ayah audio and builds weak routing labels for scalability/routing experiments.
-
-### `scripts/duration/`
-
-Scripts for duration rules such as `madd` and `ghunnah`.
-
-- `train_duration.py`: trains the main duration model with CTC phoneme output and rule classification.
-- `analyze_duration_rule_confusions.py`: prints confusion matrices for duration rule predictions.
-- `train_localized_duration_model.py`: trains a localized support model that predicts where duration rules occur in time.
-- `evaluate_localized_duration_spans.py`: evaluates localized duration spans.
-- `train_duration_fusion_calibrator.py`: trains the learned fusion/calibration layer.
-- `mine_duration_hardcases.py`: extracts difficult duration examples for analysis.
-- `predict_localized_duration.py`: inspects localized predictions for a sample.
-
-### `scripts/transition/`
-
-Scripts for transition rules such as `ikhfa` and `idgham`.
-
-- `build_transition_manifest.py`: builds the transition-rule dataset.
-- `train_transition.py`: trains the whole-clip transition classifier.
-- `analyze_transition_confusions.py`: analyzes transition prediction errors.
-- `train_localized_transition_model.py`: trains a localized transition support model.
-- `evaluate_localized_transition_spans.py`: evaluates localized transition spans.
-- `tune_transition_thresholds.py`: tunes transition thresholds.
-- `mine_transition_hardcases.py`: extracts hard transition examples.
-- `predict_localized_transition.py`: inspects localized transition predictions for a sample.
-- `find_transition_both_label_candidates.py`: mines candidate ayahs or clips that may contain both `ikhfa` and `idgham`.
-
-### `scripts/burst/`
-
-Scripts for burst/articulation rules such as `qalqalah`.
-
-- `build_burst_manifest.py`: builds the burst-rule subset.
-- `train_burst.py`: trains the qalqalah/burst classifier.
-
-### `scripts/content/`
-
-Scripts for content-recognition experiments.
-
-- `train_content.py`: trains the older full-verse content model.
-- `train_chunked_content.py`: trains the chunked content CTC model.
-- `evaluate_chunked_content.py`: evaluates chunked content using greedy, beam, lexicon, or open decoding.
-- `predict_chunked_content.py`: predicts text for one chunk from a manifest row or a direct audio path.
-- `tune_chunked_content_decoder.py`: tunes decoder settings.
-- `analyze_content_failures.py`: analyzes full-verse content failures.
-- `analyze_chunked_content_failures.py`: analyzes chunked content failures.
-- `mine_chunked_content_hardcases.py`: mines difficult content examples.
-- `build_chunked_content_manifest.py`: builds chunk-level content data.
-- `build_subchunk_content_manifest.py`: creates shorter word/character-window content examples from chunk manifests.
-- `build_textsplit_train_manifest.py`: builds a leakage-safe training manifest that excludes held-out source texts.
-- `evaluate_content_fullverse_buckets.py`: evaluates content recognition by full-verse length buckets.
-- `evaluate_fullverse_as_chunks.py`: probes whether full verses can be evaluated through chunk-style decoding.
-- `tune_content_decoder_blank_penalty.py`: tunes CTC blank penalty values for chunked/open content decoding.
-- `train_whisper_quran_asr.py`: fine-tunes a Whisper-style Quran ASR content model.
-- `evaluate_whisper_quran_asr.py`: evaluates Whisper/Quran ASR content predictions.
-- `run_whisper_quran_content_gate.py`: applies the learner-facing content gate and muqattaat normalization.
-- `analyze_whisper_content_gate_errors.py`: analyzes remaining content-gate errors and near misses.
-- `build_whisper_quran_v2_weighted_manifest.py`: builds the weighted v2 Whisper training/evaluation manifest.
-- `summarize_whisper_content_gate_policy.py`: summarizes the content-gate acceptance policy.
-- `analyze_chunk_content_errors.py`: analyzes legacy chunked CTC content errors.
-- `export_chunk_content_predictions.py`: exports chunked content predictions for diagnostics.
-
-### `scripts/system/`
-
-End-to-end scripts for the full modular system.
-
-- `run_inference.py`: runs inference on one sample and prints the routing plan, diagnosis report, feedback, and matched findings.
-- `evaluate_modular_pipeline.py`: evaluates the modular pipeline.
-- `evaluate_modular_suite.py`: evaluates duration, transition, burst, and content in one suite.
-- `run_ablation_study.py`: runs whole-system ablation variants with components enabled/disabled and writes JSON/Markdown summaries.
-- `build_module_internal_ablation_report.py`: builds module-internal ablation summaries.
-- `build_thesis_ablation_summary_v2.py`: creates the thesis-ready v2 ablation report.
-- `build_whole_system_status_report.py`: creates the current whole-system status report.
-- `run_inference_with_whisper_gate.py`: runs content-gated inference using the Whisper content gate before rule diagnosis.
-- `progress_check.ps1`: helper PowerShell script for checking project progress.
-
-### `scripts/routing/`
-
-Scripts for learned-routing experiments. The official system still uses rule/metadata routing, but these scripts support ablation and scalability work.
-
-- `build_learned_routing_dataset.py`: builds feature rows for learned routing experiments.
-- `build_learned_routing_dataset_grouped.py`: builds grouped/text-held-out learned-routing splits.
-- `train_learned_router.py`: trains the optional learned router.
-- `evaluate_learned_router.py`: evaluates learned-router checkpoints.
-- `tune_learned_router_thresholds.py`: tunes routing decision thresholds.
-
-### `scripts/README.md`
-
-Short summary of the script-folder layout.
-
-## `src/tajweed_assessment/`
-
-This is the main Python package. The scripts import code from here.
-
-### `src/tajweed_assessment/alignment/`
-
-Utilities for alignment and time projection.
-
-- `prep.py`: prepares alignment inputs.
-- `time_projection.py`: projects rule/character positions into time spans.
-
-### `src/tajweed_assessment/data/`
-
-Dataset and manifest utilities.
-
-- `dataset.py`: base dataset logic.
-- `audio.py`: audio loading and preprocessing.
-- `speed.py`: speed normalization.
-- `manifests.py`: manifest loading helpers.
-- `quranjson_rules.py`: extracts Tajweed labels from Quran JSON references.
-- `localized_duration_dataset.py`: dataset for localized duration training.
-- `localized_transition_dataset.py`: dataset for localized transition training.
-- `real_duration_dataset.py` and `real_duration_audio_dataset.py`: real-duration classifier datasets.
-- `merge_manifest.py`: utilities for merging manifest sources.
-- `hf_retasy.py`: helper for Retasy/Hugging Face style data.
-
-### `src/tajweed_assessment/features/`
-
-Feature extraction and routing logic.
-
-- `mfcc.py`: MFCC extraction. MFCCs are compact acoustic features used by duration, transition, and burst models.
-- `ssl.py`: self-supervised audio features, especially wav2vec-style features used by content recognition.
-- `routing.py`: decides which module should handle a sample based on expected/canonical Tajweed rules.
-
-### `src/tajweed_assessment/models/`
-
-Neural model definitions.
-
-- `models/duration/`: duration-rule model.
-- `models/transition/`: transition-rule model.
-- `models/burst/`: qalqalah/burst model.
-- `models/content/`: wav2vec + CTC content-recognition model.
-- `models/common/`: shared model pieces such as BiLSTM encoders, CTC heads, decoding, and losses.
-- `models/fusion/`: aggregation, feedback generation, and duration fusion calibration.
-
-### `src/tajweed_assessment/inference/`
-
-- `pipeline.py`: main inference pipeline that runs routed modules and produces structured diagnosis output.
-
-### `src/tajweed_assessment/training/`
-
-Training helpers.
-
-- `engine.py`: generic training/evaluation loop helpers.
-- `metrics.py`: token accuracy, sequence accuracy, and decoding metrics.
-- `callbacks.py`: checkpointing utilities.
-
-### `src/tajweed_assessment/utils/`
-
-General utilities such as I/O and seeding.
-
-## `tests/`
-
-Unit tests for important behavior.
-
-- `test_dataset.py`: dataset loading and batching behavior.
-- `test_models.py`: model forward-pass checks.
-- `test_aggregator.py`: aggregation and feedback behavior.
-- `test_speed.py`: speed normalization behavior.
-
-Run tests with:
+### Étape 1 — Installer les dépendances
 
 ```powershell
-.\.venv\Scripts\python -m pytest tests -q
-```
-
-## Common Commands
-
-Create and activate the environment:
-
-```powershell
+# Créer l'environnement virtuel
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.venv\Scripts\activate
+
+# Dépendances principales
 pip install -r requirements.txt
+
+# Dépendances Whisper (optionnel, pour le content gate)
+pip install -r requirements-whisper.txt
 ```
 
-Run the full modular suite:
+**Dépendances principales** (`requirements.txt`) : `torch`, `torchaudio`, `transformers`, `librosa`, `fastapi`, `uvicorn`, `pydantic`
+
+**Dépendances Whisper** (`requirements-whisper.txt`) : packages supplémentaires pour le fine-tuning Whisper
+
+### Étape 2 — Placer les checkpoints
+
+Le dossier `checkpoints/` est **ignoré par Git** (`.gitignore`). Les poids des modèles doivent y être placés manuellement.
+
+**Minimum requis pour l'inférence :**
+
+| Fichier | Module | Rôle |
+|---|---|---|
+| `duration_module.pt` | Durée | Classifie Madd / Ghunnah |
+| `transition_module.pt` | Transition | Classifie Ikhfa / Idgham |
+| `burst_module.pt` | Burst | Détecte Qalqalah |
+| `content_chunked_module_hd96_reciter.pt` | Contenu | Reconnaissance du texte |
+| `duration_fusion_calibrator_approved.pt` | Fusion | Combine les scores durée |
+| `content_asr_whisper_medium_quran_v2_weighted/` | Content Gate | Vérification contenu (Whisper) |
+| `learned_router_v5_retasy_hf_rule_aware_group_text.pt` | Routage | Routeur appris |
+
+### Étape 3 — Vérifier les chemins dans `settings.py`
+
+Éditer `src/tajweed_assessment/settings.py`. Ce fichier définit les chemins globaux utilisés par **tous** les modules :
+
+```python
+from dataclasses import dataclass
+from pathlib import Path
+
+@dataclass(frozen=True)
+class ProjectPaths:
+    root: Path  # ← Racine du projet
+
+    @property
+    def manifests(self) -> Path:
+        return self.root / "data" / "manifests"   # ← Les .jsonl
+
+    @property
+    def checkpoints(self) -> Path:
+        return self.root / "checkpoints"           # ← Les .pt et Whisper
+```
+
+Par défaut, `root` pointe sur le dossier courant. Adaptez si nécessaire.
+
+### Étape 4 — Vérifier la config du backend
+
+Dans `app/main.py` :
+- **Port par défaut** : `8000`
+- **Host par défaut** : `0.0.0.0`
+
+Si vous changez le port, mettez à jour l'URL dans le frontend (`tajweed-app-frontend/src/app/page.tsx` et les composants dans `src/components/`).
+
+---
+
+## 3. Fichiers de configuration
+
+### Configs d'architecture modèle (YAML) — Modifiables pour ré-entraîner
+
+| Fichier | Paramètres clés | Quand modifier |
+|---|---|---|
+| `data.yaml` | `sample_rate: 16000`, `n_mfcc: 40` | Changer fréquence ou features audio |
+| `train.yaml` | `seed: 42`, `batch_size: 16`, `lr: 0.001`, `epochs: 50` | Ajuster l'entraînement |
+| `model_duration.yaml` | `hidden_size: 128`, `num_layers: 2` | Architecture durée |
+| `model_transition.yaml` | `hidden_size: 128`, `num_layers: 2` | Architecture transition |
+| `model_burst.yaml` | `kernel_size`, `stride`, `channels` (CNN) | Architecture burst |
+| `model_content_hd96.yaml` | `hidden_size: 96`, wav2vec+CTC | **Modèle contenu principal** |
+| `model_content_whisper.yaml` | Configuration Whisper | Modèle Whisper contenu |
+| `error_weights.yaml` | `duration: 1.0`, `transition: 1.0`, `burst: 1.0`, `content: 2.0` | Ajuster importance relative des erreurs |
+
+### Configs de seuils — Modifiables pour ajuster la sensibilité
+
+| Fichier | Rôle |
+|---|---|
+| `learned_router_v5_thresholds.yaml` | **Routeur principal** — seuils de confiance |
+| `transition_multilabel_thresholds.yaml` | Seuils par classe (ikhfa, idgham...) |
+
+### Configs décodeurs/features (JSON) — Normalement ne pas modifier
+
+| Fichier | Rôle |
+|---|---|
+| `production_content_gate.json` | Config du content gate de production |
+| `whole_system_baseline_v2.json` | Baseline système complet v2 |
+| `rule_manifest_json.json` | Règles de Tajweed supportées |
+| `content_ayah_decoder_bp12.json` | Décodeur CTC par ayah |
+| `content_chunked_decoder_beam_bp04.json` | Décodeur beam search |
+| `content_chunked_decoder_eval_lexicon_bp04.json` | Décodeur avec lexique |
+
+---
+
+## 4. Installation
 
 ```powershell
-.\.venv\Scripts\python scripts\system\evaluate_modular_suite.py --output-json data\analysis\modular_suite.json
+# Créer l'environnement
+python -m venv .venv
+.venv\Scripts\activate
+
+# Installer
+pip install -r requirements.txt
+pip install -r requirements-whisper.txt   # optionnel
 ```
 
-Run the phrase-list-independent content evaluation:
+**Frontend :**
+```powershell
+cd tajweed-app-frontend
+npm install
+```
+
+---
+
+## 5. Lancement
+
+### Backend
 
 ```powershell
-.\.venv\Scripts\python scripts\system\evaluate_modular_suite.py `
-  --chunked-content-checkpoint content_chunked_module_hd96_reciter.pt `
-  --content-split val `
-  --content-split-mode text `
-  --content-decoder-config checkpoints\content_chunked_decoder_open_hd96.json `
-  --output-json data\analysis\modular_suite_content_open_hd96_textsplit.json
+.venv\Scripts\activate
+uvicorn app.main:app --reload
 ```
 
-Run the current thesis ablation study:
+Accessible sur **http://127.0.0.1:8000**
+
+### Frontend
 
 ```powershell
-.\.venv\Scripts\python scripts\system\run_ablation_study.py
+cd tajweed-app-frontend
+npm run dev
 ```
 
-Build the thesis-ready v2 ablation summary:
+Accessible sur **http://localhost:3000**
+
+### Utilisation
+
+1. Ouvrir **http://localhost:3000**
+2. Choisir un mode de récitation
+3. Enregistrer/uploader un audio
+4. Le système vérifie le contenu (Content Gate)
+5. Si accepté, les modules Tajweed analysent l'audio
+6. Diagnostic et feedback affichés
+
+---
+
+## 6. Modules principaux
+
+### Content Gate — Vérification du contenu
+- Whisper Medium fine-tuné sur le Quran
+- Normalisation des muqattaat
+- **73.96%** exact match, **98.17%** char accuracy
+
+### Module Durée — Madd, Ghunnah
+- BiLSTM sur features MFCC + localisation temporelle
+- **99.27%** accuracy
+
+### Module Transition — Ikhfa, Idgham
+- Support multi-label (plusieurs règles par clip)
+- **91.01%** accuracy
+
+### Module Burst — Qalqalah
+- CNN sur features MFCC
+- **87.54%** accuracy (seuil 0.47)
+
+### Feedback
+- Transforme les sorties techniques en messages compréhensibles
+
+---
+
+## 7. Scripts
+
+### Entraînement
 
 ```powershell
-.\.venv\Scripts\python scripts\system\build_thesis_ablation_summary_v2.py
+python scripts/duration/train_duration.py
+python scripts/transition/train_transition.py
+python scripts/burst/train_burst.py
+python scripts/content/train_chunked_content.py
 ```
 
-Build the whole-system status report:
+### Évaluation
 
 ```powershell
-.\.venv\Scripts\python scripts\system\build_whole_system_status_report.py `
-  --content-summary-json data\analysis\whisper_quran_medium_v2_weighted_val_summary.json `
-  --content-muqattaat-json data\analysis\whisper_quran_medium_v2_weighted_content_gate_errors_normfix.json `
-  --module-suite-json data\analysis\ablations\modular_burst_threshold_047_final.json `
-  --output-json data\analysis\whole_system_status_report_v2.json `
-  --output-md data\analysis\whole_system_status_report_v2.md
+python scripts/system/evaluate_modular_suite.py
 ```
 
-Run inference on one sample:
+### Inférence
 
 ```powershell
-.\.venv\Scripts\python scripts\system\run_inference.py --manifest data\manifests\retasy_transition_subset.jsonl --sample-index 1 --show-matches
+python scripts/system/run_inference.py --manifest data/manifests/retasy_transition_subset.jsonl --sample-index 1
 ```
 
-Train/evaluate individual modules:
+### Tests
 
 ```powershell
-.\.venv\Scripts\python scripts\duration\train_duration.py --manifest data\manifests\retasy_duration_alignment_corpus_torchaudio_strict.jsonl
-.\.venv\Scripts\python scripts\transition\train_transition.py --manifest data\manifests\retasy_transition_subset.jsonl
-.\.venv\Scripts\python scripts\burst\train_burst.py
-.\.venv\Scripts\python scripts\content\train_chunked_content.py
+python -m pytest tests -q
 ```
 
-Predict content for one chunk:
+---
 
-```powershell
-.\.venv\Scripts\python scripts\content\predict_chunked_content.py --sample-index 0
-```
+## 8. Données
 
-Predict content for a direct audio file:
+### `data/manifests/` — 87 fichiers .jsonl
 
-```powershell
-.\.venv\Scripts\python scripts\content\predict_chunked_content.py `
-  --audio-path data\raw\my_recording.wav `
-  --expected-text "الرحمن"
-```
+| Fichier | Contenu |
+|---|---|
+| `retasy_train.jsonl` | Dataset principal |
+| `retasy_duration_alignment_corpus_torchaudio_strict.jsonl` | Alignement durée |
+| `retasy_transition_subset.jsonl` | Sous-ensemble transition |
+| `retasy_burst_subset.jsonl` | Sous-ensemble burst |
+| `retasy_content_chunks.jsonl` | Contenu par chunks |
+| `quran_content_reference_full.jsonl` | Référence texte Quran |
+| `quran_tajweed_reference_full.jsonl` | Référence règles Tajweed |
 
-## Current Evaluation Notes
+### `data/analysis/` — Résultats d'évaluation
 
-Current important results are stored in `data/analysis/`.
+- `thesis_ablation_v2/` — Résumés d'ablation thèse
+- `modular_suite_*.json` — Évaluations modulaires
+- `whole_system_status_report_v2.md` — Rapport final
 
-Some key artifacts:
+### `data/raw/` — Audio brut (ignoré par Git)
 
-- `modular_suite_content_open_hd96_textsplit.json`: open content recognition with no phrase-list coverage.
-- `content_open_model_side_comparison.json`: before/after comparison for open content improvements.
-- `chunked_content_subchunk_texttrain_comparison.json`: leakage-safe subchunk training experiment and rejection decision.
-- `modular_suite_content_lexicon.json`: known-verse/lexicon-constrained content benchmark.
-- `duration_pipeline_verse_holdout_comparison.json`: held-out duration fusion comparison.
-- `transition_confusions_hardcase.json`: transition hardcase/confusion analysis.
-- `whole_system_status_report_v2.md`: recommended current status report for the full system.
-- `thesis_ablation_v2/THESIS_ABLATION_SUMMARY.md`: recommended thesis ablation table and interpretation.
-- `thesis_ablation_v2/whole_system_status_report_v2.md`: archived copy of the current whole-system status report.
+Fichiers WAV/MP3 d'entraînement (HuggingFace Quran-MD, Retasy).
 
-Current interpretation:
+---
 
-- The final learner-facing content gate is Whisper-medium v2 weighted with muqattaat normalization.
-- Duration is the strongest Tajweed module and reaches 99.27% accuracy on the annotated duration suite.
-- Transition reaches 91.01% accuracy; `idgham` remains the hardest transition class.
-- Burst/qalqalah reaches 87.54% accuracy after selecting the 0.47 threshold.
-- The chunked CTC content model remains useful for historical comparison, but it is not the final learner-facing content gate.
-- Whole-system scores should be explained as two layers: content acceptance first, then Tajweed-rule diagnosis on annotated rule manifests.
+## 9. Checkpoints
 
-## Notes For Future Developers
+Le dossier `checkpoints/` (~70 Go) contient tous les poids des modèles entraînés :
+- **`.pt`** : poids PyTorch (quelques Mo à ~380 Mo)
+- **Dossiers Whisper** : `model.safetensors`, `config.json`, `tokenizer.json`...
 
-- The project now uses categorized scripts. Prefer `scripts\duration\...`, `scripts\transition\...`, `scripts\content\...`, etc.
-- Large trained `.pt` checkpoints are ignored by Git. Share them separately or use Git LFS.
-- Decoder JSON files are committed because they are small and define how to reproduce evaluation settings.
-- The content module has two evaluation modes:
-  - **Known-verse mode**: lexicon decoder, useful when the expected verse/chunk is known.
-  - **Open-recognition mode**: greedy CTC decoder, more independent because it does not select from a fixed phrase list.
-- The routing module is currently rule/metadata-driven, not a learned audio router.
-- The transition module is currently simplified for one main transition class per clip; future work should support multi-label and span-level transition detection.
+Les 5 dossiers Whisper : `content_asr_whisper_small_quran_v1_*` (3.7-6.4 Go), `content_asr_whisper_medium_quran_v1_*` (12 Go), `content_asr_whisper_medium_quran_v2_weighted/` (23 Go).
+
+---
+
+## 10. Résultats clés
+
+| Composant | Métrique | Résultat |
+|---|---|---|
+| Content gate | Exact après normalisation | 73.96% |
+| Content gate | Char accuracy après normalisation | 98.17% |
+| Module durée | Accuracy | 99.27% |
+| Module transition | Accuracy | 91.01% |
+| Module burst | Accuracy | 87.54% |
+
+---
+
+## 11. Remarques
+
+1. **Checkpoints** : `checkpoints/` est ignoré par Git. Les `.pt` et dossiers Whisper doivent être récupérés séparément.
+2. **Audio brut** : `data/raw/` est ignoré par Git. Contient les WAV/MP3 d'entraînement.
+3. **Données intermédiaires** : `data/interim/`, `data/processed/`, `data/uploads/` sont ignorés par Git.
+4. **Fichiers de config** : Les YAML/JSON dans `configs/` sont versionnés et nécessaires au fonctionnement.
+5. **settings.py** : Vérifier `ProjectPaths.root` avant toute exécution.
+
+---
+
+*Dernière mise à jour : 21 juin 2026 — PFE Tajweed Modular Assessment*

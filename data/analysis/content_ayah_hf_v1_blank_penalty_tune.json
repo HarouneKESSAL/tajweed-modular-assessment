@@ -1,0 +1,3662 @@
+{
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_ayah_hf_v1_hd96.pt",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_ayah_hf_le60.jsonl",
+  "split": "val",
+  "split_mode": "text",
+  "samples": 608,
+  "best": {
+    "blank_penalty": 1.2,
+    "samples": 608,
+    "exact_match": 0.023026315789473683,
+    "char_accuracy": 0.7526621131731679,
+    "edit_distance": 6.532894736842105,
+    "avg_gold_len": 27.601973684210527,
+    "avg_pred_len": 26.304276315789473,
+    "examples": [
+      {
+        "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+        "gold": "واتقواالنارالتياعدتللكافرين",
+        "pred": "ووتقنارللتيااتترلكيافرين",
+        "char_accuracy": 0.6296296296296297,
+        "edit_distance": 10,
+        "gold_len": 27,
+        "pred_len": 24
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+        "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+        "pred": "للمانمنللااحبيهاللقابوانممهرررررالن",
+        "char_accuracy": 0.43243243243243246,
+        "edit_distance": 21,
+        "gold_len": 37,
+        "pred_len": 35
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+        "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+        "pred": "بذيتترنفيسكماادانالهيشيشكماتدنالهساافااسممااةشركون",
+        "char_accuracy": 0.28260869565217395,
+        "edit_distance": 33,
+        "gold_len": 46,
+        "pred_len": 50
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+        "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+        "pred": "والذينكلهبياياكنيمسهالعذاابمكانيسخون",
+        "char_accuracy": 0.6744186046511628,
+        "edit_distance": 14,
+        "gold_len": 43,
+        "pred_len": 36
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+        "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+        "pred": "الذيناامنولميلبلسوايمالهمبهلمناولاركلهممانوهنتدون",
+        "char_accuracy": 0.6923076923076923,
+        "edit_distance": 16,
+        "gold_len": 52,
+        "pred_len": 49
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+        "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+        "pred": "وكذنكولليبعببينمينباضبماكاايسفون",
+        "char_accuracy": 0.6052631578947368,
+        "edit_distance": 15,
+        "gold_len": 38,
+        "pred_len": 32
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+        "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+        "pred": "بهنذلجلكفلاكمفيصاركحرجمننولكنذربهوذقرالومنين",
+        "char_accuracy": 0.64,
+        "edit_distance": 18,
+        "gold_len": 50,
+        "pred_len": 44
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+        "gold": "وقاسمهماانيلكمالمنالناصحين",
+        "pred": "ققسممنيلكامالاننصيحين",
+        "char_accuracy": 0.5769230769230769,
+        "edit_distance": 11,
+        "gold_len": 26,
+        "pred_len": 21
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+        "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+        "pred": "قلاوبلااهلمناشذاووااناتصفنانتلحناولتفيرننتكلللنكلننناالقان",
+        "char_accuracy": 0.35185185185185186,
+        "edit_distance": 35,
+        "gold_len": 54,
+        "pred_len": 58
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+        "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+        "pred": "فانيناهههلالاموراتهكاننناابرينر",
+        "char_accuracy": 0.6944444444444444,
+        "edit_distance": 11,
+        "gold_len": 36,
+        "pred_len": 31
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+        "gold": "فالقيعصاهفاذاهيثعبانمبين",
+        "pred": "فااقاصهفجمذههيثعبانمدين",
+        "char_accuracy": 0.6666666666666667,
+        "edit_distance": 8,
+        "gold_len": 24,
+        "pred_len": 23
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+        "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+        "pred": "ولقداخرنعالقللععانبسينوناضسمنفماتيلععلهيلكن",
+        "char_accuracy": 0.5106382978723405,
+        "edit_distance": 23,
+        "gold_len": 47,
+        "pred_len": 43
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+        "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+        "pred": "االماكسنعمالجيذكلااجلنمبالمهاذاهمنينكصون",
+        "char_accuracy": 0.6046511627906976,
+        "edit_distance": 17,
+        "gold_len": 43,
+        "pred_len": 40
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+        "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+        "pred": "قالاضيومهالذيكمالاهنموفضلكمعللاالممين",
+        "char_accuracy": 0.625,
+        "edit_distance": 15,
+        "gold_len": 40,
+        "pred_len": 37
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+        "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+        "pred": "ولمنيمسقنبييكتابواقاهاصلااكننالالضالرلصلحخين",
+        "char_accuracy": 0.5961538461538461,
+        "edit_distance": 21,
+        "gold_len": 52,
+        "pred_len": 44
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+        "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+        "pred": "ووكذالكنفصلوااةوالعلههمممييرهجرون",
+        "char_accuracy": 0.5185185185185186,
+        "edit_distance": 13,
+        "gold_len": 27,
+        "pred_len": 33
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+        "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+        "pred": "ومنخالقوناهممكميفدونبلحتوابيهيعبيلون",
+        "char_accuracy": 0.5483870967741935,
+        "edit_distance": 14,
+        "gold_len": 31,
+        "pred_len": 36
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+        "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+        "pred": "قوذللعقوااموبارفيواارضاناجنلين",
+        "char_accuracy": 0.5625,
+        "edit_distance": 14,
+        "gold_len": 32,
+        "pred_len": 30
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+        "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+        "pred": "ههولمنامنااملقيتمنذينكفاوزفمفلاتونولذبررن",
+        "char_accuracy": 0.537037037037037,
+        "edit_distance": 25,
+        "gold_len": 54,
+        "pred_len": 41
+      },
+      {
+        "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+        "gold": "ذلكمواناللهموهنكيدالكافرين",
+        "pred": "ذلكمموعناللوونكجلكافرين",
+        "char_accuracy": 0.6923076923076923,
+        "edit_distance": 8,
+        "gold_len": 26,
+        "pred_len": 23
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+        "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+        "pred": "وقالمووسياقومانكنتماامنتنبالهفعليهتوكلومعليهتورككلونانكنتمموالسلمين",
+        "char_accuracy": 0.6153846153846154,
+        "edit_distance": 20,
+        "gold_len": 52,
+        "pred_len": 67
+      },
+      {
+        "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+        "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+        "pred": "االذيناامنوعيلصالحاتطقوبالهموحسنمااب",
+        "char_accuracy": 0.6842105263157895,
+        "edit_distance": 12,
+        "gold_len": 38,
+        "pred_len": 36
+      },
+      {
+        "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+        "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+        "pred": "قربنوخفاليولولديلالمؤمننينايماياقماحساب",
+        "char_accuracy": 0.6153846153846154,
+        "edit_distance": 15,
+        "gold_len": 39,
+        "pred_len": 39
+      },
+      {
+        "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+        "gold": "كهيعص",
+        "pred": "ملاعياص",
+        "char_accuracy": 0.0,
+        "edit_distance": 5,
+        "gold_len": 5,
+        "pred_len": 7
+      },
+      {
+        "id": "hf_quran_md_ayah_route_banna_020_027_071225",
+        "gold": "واحللعقدةمنلساني",
+        "pred": "وحلنلقدتمملسانن",
+        "char_accuracy": 0.625,
+        "edit_distance": 6,
+        "gold_len": 16,
+        "pred_len": 15
+      },
+      {
+        "id": "hf_quran_md_ayah_route_warsh_yassin_021_001_074496",
+        "gold": "اقتربللناسحسابهموهمفيغفلةمعرضون",
+        "pred": "بسملهرومانحنقتربلناسحسابهموهمثيوفلتمعرضون",
+        "char_accuracy": 0.5161290322580645,
+        "edit_distance": 15,
+        "gold_len": 31,
+        "pred_len": 41
+      },
+      {
+        "id": "hf_quran_md_ayah_route_warsh_yassin_025_001_085656",
+        "gold": "تباركالذينزلالفرقانعليعبدهليكونللعالميننذيرا",
+        "pred": "تلانارحمانحيتبوكالذينلذلالفرقانعلاعلدهيليكونااللعالميننذير",
+        "char_accuracy": 0.5454545454545454,
+        "edit_distance": 20,
+        "gold_len": 44,
+        "pred_len": 58
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_026_088717",
+        "gold": "قالربكموربابائكمالاولين",
+        "pred": "قالرضكموربضااباائكوااوونين",
+        "char_accuracy": 0.6521739130434783,
+        "edit_distance": 8,
+        "gold_len": 23,
+        "pred_len": 26
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_128_091777",
+        "gold": "اتبنونبكلريعايةتعبثون",
+        "pred": "اتذنونبكاللريياايتنتعبثون",
+        "char_accuracy": 0.6666666666666667,
+        "edit_distance": 7,
+        "gold_len": 21,
+        "pred_len": 25
+      },
+      {
+        "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_220_094537",
+        "gold": "انههوالسميعالعليم",
+        "pred": "انههعسبعالعلم",
+        "char_accuracy": 0.6470588235294117,
+        "edit_distance": 6,
+        "gold_len": 17,
+        "pred_len": 13
+      }
+    ]
+  },
+  "results": [
+    {
+      "blank_penalty": 0.0,
+      "samples": 608,
+      "exact_match": 0.019736842105263157,
+      "char_accuracy": 0.7265608606515265,
+      "edit_distance": 7.291118421052632,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 22.863486842105264,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_043_001470",
+          "gold": "واقيمواالصلاةواتواالزكاةواركعوامعالراكعين",
+          "pred": "واقيمصلاتواتازكاتوركعومعراكعين",
+          "char_accuracy": 0.6829268292682926,
+          "edit_distance": 13,
+          "gold_len": 41,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_238_007320",
+          "gold": "حافظواعليالصلواتوالصلاةالوسطيوقومواللهقانتين",
+          "pred": "حفذولصلاتوالصلاتموطاوقومولللهقانتين",
+          "char_accuracy": 0.6818181818181819,
+          "edit_distance": 14,
+          "gold_len": 44,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "وتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_167_019771",
+          "gold": "انالذينكفرواوصدواعنسبيلاللهقدضلواضلالابعيدا",
+          "pred": "انلذينكفرصتوعاسبيرالاهقدظلوضلالبعيد",
+          "char_accuracy": 0.6976744186046512,
+          "edit_distance": 13,
+          "gold_len": 43,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "لانلبهلقبونمهررران",
+          "char_accuracy": 0.3513513513513513,
+          "edit_distance": 24,
+          "gold_len": 37,
+          "pred_len": 18
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "بذيتتنفيكمادنلششكماتدنلسافسمماةشركون",
+          "char_accuracy": 0.4130434782608695,
+          "edit_distance": 27,
+          "gold_len": 46,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "ولذنكلباكنمسلعذابمكايسخون",
+          "char_accuracy": 0.5116279069767442,
+          "edit_distance": 21,
+          "gold_len": 43,
+          "pred_len": 25
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذينامنوليلبسامالمبهمولاركلهانهتدون",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكوليبببنمينبضبماكايسفون",
+          "char_accuracy": 0.5789473684210527,
+          "edit_distance": 16,
+          "gold_len": 38,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "بهذلجلكفلاكمفيصركحرجمننولكذربهوذرلمنين",
+          "char_accuracy": 0.6,
+          "edit_distance": 20,
+          "gold_len": 50,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممنيلكملاننصحين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 18
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلوبلالمناشاناتفننتحناولتفيننتكللنكننلقن",
+          "char_accuracy": 0.38888888888888884,
+          "edit_distance": 33,
+          "gold_len": 54,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فاننههللامواتاننناارين",
+          "char_accuracy": 0.5555555555555556,
+          "edit_distance": 16,
+          "gold_len": 36,
+          "pred_len": 22
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فاقصهفمههيثبانمدن",
+          "char_accuracy": 0.5833333333333333,
+          "edit_distance": 10,
+          "gold_len": 24,
+          "pred_len": 17
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقداخرنلقعانبسينونضسمنفماتلعلهيلكن",
+          "char_accuracy": 0.5957446808510638,
+          "edit_distance": 19,
+          "gold_len": 47,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "المكسنمجذلاجلنبلهاذاهيكون",
+          "char_accuracy": 0.4883720930232558,
+          "edit_distance": 22,
+          "gold_len": 43,
+          "pred_len": 25
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قلاضيماذكمالهنموفضلكمللاالمين",
+          "char_accuracy": 0.575,
+          "edit_distance": 17,
+          "gold_len": 40,
+          "pred_len": 29
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنمسقنبكتابواقصلاننلالضارلصلحخين",
+          "char_accuracy": 0.5384615384615384,
+          "edit_distance": 24,
+          "gold_len": 52,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "وكذالكفصلوااةولعلهممهجرون",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 9,
+          "gold_len": 27,
+          "pred_len": 25
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "ذلعوامبفوارضنجن",
+          "char_accuracy": 0.46875,
+          "edit_distance": 17,
+          "gold_len": 32,
+          "pred_len": 15
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_005_034922",
+          "gold": "كمااخرجكربكمنبيتكبالحقوانفريقامنالمؤمنينلكارهون",
+          "pred": "كماارجكربكمبتكذلحتياينفريقمانممننلكهون",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "هلنامنملقتمنذينكفوزفمفلاتونولبن",
+          "char_accuracy": 0.4814814814814815,
+          "edit_distance": 28,
+          "gold_len": 54,
+          "pred_len": 31
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذلكممنالنككافرين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 11,
+          "gold_len": 26,
+          "pred_len": 16
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_011_009_044433",
+          "gold": "ولئناذقناالانسانمنارحمةثمنزعناهامنهانهليئوسكفور",
+          "pred": "ولااذقنلاسنمنارمتنمنزعنهمنهانهليعوسمكو",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "ربنفالولولديلالمؤمننينيمايقماحساب",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 13,
+          "gold_len": 39,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_015_053_055624",
+          "gold": "قالوالاتوجلانانبشركبغلامعليم",
+          "pred": "قالتجلاننبششركبهلامنعليم",
+          "char_accuracy": 0.6785714285714286,
+          "edit_distance": 9,
+          "gold_len": 28,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_015_074_056254",
+          "gold": "فجعلناعاليهاسافلهاوامطرناعليهمحجارةمنسجيل",
+          "pred": "فجعناعليهاسفلهاواممطرنالحجرتنسين",
+          "char_accuracy": 0.6829268292682926,
+          "edit_distance": 13,
+          "gold_len": 41,
+          "pred_len": 32
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_017_038_061985",
+          "gold": "كلذلككانسيئهعندربكمكروها",
+          "pred": "لذالككانسيااندربكمكا",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 8,
+          "gold_len": 24,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "لعص",
+          "char_accuracy": 0.4,
+          "edit_distance": 3,
+          "gold_len": 5,
+          "pred_len": 3
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_013_070805",
+          "gold": "وانااخترتكفاستمعلمايوحي",
+          "pred": "وانخترتكفلتمعلماح",
+          "char_accuracy": 0.6956521739130435,
+          "edit_distance": 7,
+          "gold_len": 23,
+          "pred_len": 17
+        }
+      ]
+    },
+    {
+      "blank_penalty": 0.2,
+      "samples": 608,
+      "exact_match": 0.023026315789473683,
+      "char_accuracy": 0.7349655739425802,
+      "edit_distance": 7.046052631578948,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 23.41611842105263,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_043_001470",
+          "gold": "واقيمواالصلاةواتواالزكاةواركعوامعالراكعين",
+          "pred": "واقيمصلاتواتازكاتوركعومعراكعين",
+          "char_accuracy": 0.6829268292682926,
+          "edit_distance": 13,
+          "gold_len": 41,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_238_007320",
+          "gold": "حافظواعليالصلواتوالصلاةالوسطيوقومواللهقانتين",
+          "pred": "حافذولصلاتوالصلاتمولطاوقومولللاهقانتين",
+          "char_accuracy": 0.6818181818181819,
+          "edit_distance": 14,
+          "gold_len": 44,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "وتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_167_019771",
+          "gold": "انالذينكفرواوصدواعنسبيلاللهقدضلواضلالابعيدا",
+          "pred": "انلذينكفرصتوعاسبيرالاهقدظلوضلالبعيد",
+          "char_accuracy": 0.6976744186046512,
+          "edit_distance": 13,
+          "gold_len": 43,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "لانلابهلقبوانمهررران",
+          "char_accuracy": 0.3513513513513513,
+          "edit_distance": 24,
+          "gold_len": 37,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "بذيتتنفيكماادنليششكماتدنلسافسمماةشركون",
+          "char_accuracy": 0.4347826086956522,
+          "edit_distance": 26,
+          "gold_len": 46,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "ولذنكلباكنمسلعذابمكانيسخون",
+          "char_accuracy": 0.5348837209302326,
+          "edit_distance": 20,
+          "gold_len": 43,
+          "pred_len": 26
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذيناامنوليلبسامالهمبهمولاركلهانهتدون",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكوليبببنمينبضبماكاايسفون",
+          "char_accuracy": 0.6052631578947368,
+          "edit_distance": 15,
+          "gold_len": 38,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "بهذلجلكفلاكمفيصركحرجمننولكنذربهوذرلمنين",
+          "char_accuracy": 0.62,
+          "edit_distance": 19,
+          "gold_len": 50,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممنيلكملاننصيحين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 11,
+          "gold_len": 26,
+          "pred_len": 19
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلوبلالمناشاناتفننتحناولتفيننتكللنكنننلقن",
+          "char_accuracy": 0.40740740740740744,
+          "edit_distance": 32,
+          "gold_len": 54,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فاننههللامواتهاننناابرين",
+          "char_accuracy": 0.6111111111111112,
+          "edit_distance": 14,
+          "gold_len": 36,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فاقصهفمذههيثبانمدن",
+          "char_accuracy": 0.625,
+          "edit_distance": 9,
+          "gold_len": 24,
+          "pred_len": 18
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقداخرنعالقلعانبسينونضسمنفماتلعلهيلكن",
+          "char_accuracy": 0.6170212765957447,
+          "edit_distance": 18,
+          "gold_len": 47,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "الماكسنملجذلاجلنبلهاذاهيكون",
+          "char_accuracy": 0.5348837209302326,
+          "edit_distance": 20,
+          "gold_len": 43,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قلاضيومهاذكمالاهنموفضلكمللاالمين",
+          "char_accuracy": 0.575,
+          "edit_distance": 17,
+          "gold_len": 40,
+          "pred_len": 32
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنمسقنبيكتابواقهاصلاكننلالضارلصلحخين",
+          "char_accuracy": 0.5576923076923077,
+          "edit_distance": 23,
+          "gold_len": 52,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذالكفصلوااةولعلهمميهجرون",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "ذلعوامبفيوارضنجلن",
+          "char_accuracy": 0.46875,
+          "edit_distance": 17,
+          "gold_len": 32,
+          "pred_len": 17
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_005_034922",
+          "gold": "كمااخرجكربكمنبيتكبالحقوانفريقامنالمؤمنينلكارهون",
+          "pred": "كماارجكربكممبتكذلحتياينفريقمانممننلكهون",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "هلنامناملقتمنذينكفوزفمفلاتونولبرن",
+          "char_accuracy": 0.5,
+          "edit_distance": 27,
+          "gold_len": 54,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذلكممعنالنكجكافرين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 11,
+          "gold_len": 26,
+          "pred_len": 18
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_097_043803",
+          "gold": "ولوجاءتهمكلايةحتييرواالعذابالاليم",
+          "pred": "ولوجامكلنايتحتايرلعذابالالين",
+          "char_accuracy": 0.696969696969697,
+          "edit_distance": 10,
+          "gold_len": 33,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_011_009_044433",
+          "gold": "ولئناذقناالانسانمنارحمةثمنزعناهامنهانهليئوسكفور",
+          "pred": "ولااذقنلاسنمنارمتنمنزعنهمنهانهليعوسمكو",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "ربنفالولولديلالمؤمننينيمايقماحساب",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 13,
+          "gold_len": 39,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_051_032_141191",
+          "gold": "قالوااناارسلنااليقوممجرمين",
+          "pred": "قالاناءرصالنالاقوممجرنين",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 8,
+          "gold_len": 26,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_015_074_056254",
+          "gold": "فجعلناعاليهاسافلهاوامطرناعليهمحجارةمنسجيل",
+          "pred": "فجعاناعليهاسفلهاواممطرنالحجرتنسين",
+          "char_accuracy": 0.6829268292682926,
+          "edit_distance": 13,
+          "gold_len": 41,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_017_038_061985",
+          "gold": "كلذلككانسيئهعندربكمكروها",
+          "pred": "لذالككانسيااندربكمكا",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 8,
+          "gold_len": 24,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "ملعص",
+          "char_accuracy": 0.4,
+          "edit_distance": 3,
+          "gold_len": 5,
+          "pred_len": 4
+        }
+      ]
+    },
+    {
+      "blank_penalty": 0.4,
+      "samples": 608,
+      "exact_match": 0.023026315789473683,
+      "char_accuracy": 0.7408897365955313,
+      "edit_distance": 6.873355263157895,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 23.96875,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_043_001470",
+          "gold": "واقيمواالصلاةواتواالزكاةواركعوامعالراكعين",
+          "pred": "واقيمصلاتواتازكاتوركعومعراكعين",
+          "char_accuracy": 0.6829268292682926,
+          "edit_distance": 13,
+          "gold_len": 41,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_238_007320",
+          "gold": "حافظواعليالصلواتوالصلاةالوسطيوقومواللهقانتين",
+          "pred": "حافذولصلاتوالصلاتمولطاوقومولللاهقانتين",
+          "char_accuracy": 0.6818181818181819,
+          "edit_distance": 14,
+          "gold_len": 44,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "ووتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_167_019771",
+          "gold": "انالذينكفرواوصدواعنسبيلاللهقدضلواضلالابعيدا",
+          "pred": "انلذينكفرصتوعاسبيرالاهقدظلوضلالبعيد",
+          "char_accuracy": 0.6976744186046512,
+          "edit_distance": 13,
+          "gold_len": 43,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "لانمنللابيهلقابوانممهرررران",
+          "char_accuracy": 0.4054054054054054,
+          "edit_distance": 22,
+          "gold_len": 37,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "بذيتتنفيسكماادناليششكماتدنلسافسمماةشركون",
+          "char_accuracy": 0.4347826086956522,
+          "edit_distance": 26,
+          "gold_len": 46,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "ولذنكلهبياياكنمسلعذابمكانيسخون",
+          "char_accuracy": 0.5581395348837209,
+          "edit_distance": 19,
+          "gold_len": 43,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذيناامنوليلبسامالهمبهمولاركلهانهتدون",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكوليبببنمينبضبماكاايسفون",
+          "char_accuracy": 0.6052631578947368,
+          "edit_distance": 15,
+          "gold_len": 38,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "بهذلجلكفلاكمفيصركحرجمننولكنذربهوذرالمنين",
+          "char_accuracy": 0.62,
+          "edit_distance": 19,
+          "gold_len": 50,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممنيلكمالاننصيحين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلوبلالمناشاناتفننتحناولتفيننتكللنكنننالقن",
+          "char_accuracy": 0.42592592592592593,
+          "edit_distance": 31,
+          "gold_len": 54,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فاننههللامواتهاننناابرين",
+          "char_accuracy": 0.6111111111111112,
+          "edit_distance": 14,
+          "gold_len": 36,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فااقاصهفمذههيثبانمدن",
+          "char_accuracy": 0.625,
+          "edit_distance": 9,
+          "gold_len": 24,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقداخرنعالقلعانبسينونضسمنفماتلعلهيلكن",
+          "char_accuracy": 0.6170212765957447,
+          "edit_distance": 18,
+          "gold_len": 47,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "الماكسنملجذلاجلنبلهاذاهنينكون",
+          "char_accuracy": 0.5581395348837209,
+          "edit_distance": 19,
+          "gold_len": 43,
+          "pred_len": 29
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قلاضيومهالذيكمالاهنموفضلكمللاالمين",
+          "char_accuracy": 0.6,
+          "edit_distance": 16,
+          "gold_len": 40,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنمسقنبيكتابواقهاصلاكننلالضارلصلحخين",
+          "char_accuracy": 0.5576923076923077,
+          "edit_distance": 23,
+          "gold_len": 52,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذالكفصلوااةولعلهمميهجرون",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "ذللعواامبفيوارضناجلين",
+          "char_accuracy": 0.53125,
+          "edit_distance": 15,
+          "gold_len": 32,
+          "pred_len": 21
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "هلنامناملقتمنذينكفوزفمفلاتونولبرن",
+          "char_accuracy": 0.5,
+          "edit_distance": 27,
+          "gold_len": 54,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذلكمموعنالنكجكافرين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 11,
+          "gold_len": 26,
+          "pred_len": 19
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووسياقومانكنتمامنتبلهفعليهتوكلومعلهتوركلانكنتموالسلمين",
+          "char_accuracy": 0.6730769230769231,
+          "edit_distance": 17,
+          "gold_len": 52,
+          "pred_len": 59
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_097_043803",
+          "gold": "ولوجاءتهمكلايةحتييرواالعذابالاليم",
+          "pred": "ولوجامكلنايتحتايرلعذابالالين",
+          "char_accuracy": 0.696969696969697,
+          "edit_distance": 10,
+          "gold_len": 33,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+          "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+          "pred": "االذيناامنوعيلصالحتطقوبالهموحسنمااب",
+          "char_accuracy": 0.6578947368421053,
+          "edit_distance": 13,
+          "gold_len": 38,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "ربنفالولولديلالمؤمننينيمايقماحساب",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 13,
+          "gold_len": 39,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_017_038_061985",
+          "gold": "كلذلككانسيئهعندربكمكروها",
+          "pred": "ولذالككانسييااندربكمكا",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 8,
+          "gold_len": 24,
+          "pred_len": 22
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "ملعص",
+          "char_accuracy": 0.4,
+          "edit_distance": 3,
+          "gold_len": 5,
+          "pred_len": 4
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_027_071225",
+          "gold": "واحللعقدةمنلساني",
+          "pred": "وحللقدتمملسن",
+          "char_accuracy": 0.625,
+          "edit_distance": 6,
+          "gold_len": 16,
+          "pred_len": 12
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_021_001_074496",
+          "gold": "اقتربللناسحسابهموهمفيغفلةمعرضون",
+          "pred": "بسملهرومانحقتربلناسحسابهموهمثيولتمعرضون",
+          "char_accuracy": 0.5161290322580645,
+          "edit_distance": 15,
+          "gold_len": 31,
+          "pred_len": 39
+        }
+      ]
+    },
+    {
+      "blank_penalty": 0.6,
+      "samples": 608,
+      "exact_match": 0.019736842105263157,
+      "char_accuracy": 0.744292572281474,
+      "edit_distance": 6.774671052631579,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 24.50328947368421,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_238_007320",
+          "gold": "حافظواعليالصلواتوالصلاةالوسطيوقومواللهقانتين",
+          "pred": "حافذولصلاتوالصلاتمولطاوقومولللاهقانتين",
+          "char_accuracy": 0.6818181818181819,
+          "edit_distance": 14,
+          "gold_len": 44,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "ووتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "لانمنللاحبيهلقابوانممهررررران",
+          "char_accuracy": 0.4054054054054054,
+          "edit_distance": 22,
+          "gold_len": 37,
+          "pred_len": 29
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "بذيتتنفيسكماادناليشيشكماتدنلسافاسمماةشركون",
+          "char_accuracy": 0.4130434782608695,
+          "edit_distance": 27,
+          "gold_len": 46,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "ولذينكلهبياياكنيمسلعذابمكانيسخون",
+          "char_accuracy": 0.6046511627906976,
+          "edit_distance": 17,
+          "gold_len": 43,
+          "pred_len": 32
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذيناامنوليلبسامالهمبهمولاركلهمانهتدون",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 20,
+          "gold_len": 52,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكوليبببينمينبضبماكاايسفون",
+          "char_accuracy": 0.6052631578947368,
+          "edit_distance": 15,
+          "gold_len": 38,
+          "pred_len": 29
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "بهذلجلكفلاكمفيصركحرجمننولكنذربهوذرالمنين",
+          "char_accuracy": 0.62,
+          "edit_distance": 19,
+          "gold_len": 50,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممنيلكمالاننصيحين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلوبلاالمناشاناتفنانتحناولتفيننتكللنكنننالقن",
+          "char_accuracy": 0.42592592592592593,
+          "edit_distance": 31,
+          "gold_len": 54,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فاننههللامواتهكاننناابرينر",
+          "char_accuracy": 0.6111111111111112,
+          "edit_distance": 14,
+          "gold_len": 36,
+          "pred_len": 26
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فااقاصهفجمذههيثعبانمدن",
+          "char_accuracy": 0.625,
+          "edit_distance": 9,
+          "gold_len": 24,
+          "pred_len": 22
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقداخرنعالقلعانبسينونضسمنفماتلعلهيلكن",
+          "char_accuracy": 0.6170212765957447,
+          "edit_distance": 18,
+          "gold_len": 47,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "الماكسنمالجيذلااجلنبلمهاذاهنينكصون",
+          "char_accuracy": 0.5813953488372092,
+          "edit_distance": 18,
+          "gold_len": 43,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قلاضيومهالذيكمالاهنموفضلكمللاالمين",
+          "char_accuracy": 0.6,
+          "edit_distance": 16,
+          "gold_len": 40,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنيمسقنبيكتابواقهاصلاكننالالضالرلصلحخين",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذالكفصلوااةولعلهمميهجرون",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "ومنخلقوناهممكميدونبلحتوبيهيعبلون",
+          "char_accuracy": 0.6451612903225806,
+          "edit_distance": 11,
+          "gold_len": 31,
+          "pred_len": 32
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "ذللعوااموبفيواارضناجلين",
+          "char_accuracy": 0.53125,
+          "edit_distance": 15,
+          "gold_len": 32,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "هلنامنااملقتمنذينكفاوزفمفلاتونولذبرن",
+          "char_accuracy": 0.5185185185185186,
+          "edit_distance": 26,
+          "gold_len": 54,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذلكمموعنالونكجكافرين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووسياقومانكنتماامنتبلهفعليهتوكلومعلهتورككلانكنتمموالسلمين",
+          "char_accuracy": 0.6346153846153846,
+          "edit_distance": 19,
+          "gold_len": 52,
+          "pred_len": 62
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+          "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+          "pred": "االذيناامنوعيلصالحاتطقوبالهموحسنمااب",
+          "char_accuracy": 0.6842105263157895,
+          "edit_distance": 12,
+          "gold_len": 38,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "قربنوفالولولديلالمؤمننينيمايقماحساب",
+          "char_accuracy": 0.641025641025641,
+          "edit_distance": 14,
+          "gold_len": 39,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "ملعص",
+          "char_accuracy": 0.4,
+          "edit_distance": 3,
+          "gold_len": 5,
+          "pred_len": 4
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_027_071225",
+          "gold": "واحللعقدةمنلساني",
+          "pred": "وحللقدتمملسن",
+          "char_accuracy": 0.625,
+          "edit_distance": 6,
+          "gold_len": 16,
+          "pred_len": 12
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_021_001_074496",
+          "gold": "اقتربللناسحسابهموهمفيغفلةمعرضون",
+          "pred": "بسملهرومانحنقتربلناسحسابهموهمثيولتمعرضون",
+          "char_accuracy": 0.4838709677419355,
+          "edit_distance": 16,
+          "gold_len": 31,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_001_085656",
+          "gold": "تباركالذينزلالفرقانعليعبدهليكونللعالميننذيرا",
+          "pred": "لانرمانحيتبوكالذينذلالفرقانعلعلدهيليكوناللعالميننذير",
+          "char_accuracy": 0.6136363636363636,
+          "edit_distance": 17,
+          "gold_len": 44,
+          "pred_len": 52
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_220_094537",
+          "gold": "انههوالسميعالعليم",
+          "pred": "انههعسبالعلم",
+          "char_accuracy": 0.5882352941176471,
+          "edit_distance": 7,
+          "gold_len": 17,
+          "pred_len": 12
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_031_008_104288",
+          "gold": "انالذينامنواوعملواالصالحاتلهمجناتالنعيم",
+          "pred": "انلذينايمنوعمنلصارحاتلهمجناةنيم",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 13,
+          "gold_len": 39,
+          "pred_len": 31
+        }
+      ]
+    },
+    {
+      "blank_penalty": 0.8,
+      "samples": 608,
+      "exact_match": 0.02138157894736842,
+      "char_accuracy": 0.7488757385643633,
+      "edit_distance": 6.661184210526316,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 25.12171052631579,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_238_007320",
+          "gold": "حافظواعليالصلواتوالصلاةالوسطيوقومواللهقانتين",
+          "pred": "حافذولصلاتوالصلاتمولطاوقومولللاهقانتين",
+          "char_accuracy": 0.6818181818181819,
+          "edit_distance": 14,
+          "gold_len": 44,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "ووتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "لانمنللاحبيهللقابوانممهررررران",
+          "char_accuracy": 0.4054054054054054,
+          "edit_distance": 22,
+          "gold_len": 37,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "بذيتتنفيسكماادناليشيشكماتدنالهساافاسمماةشركون",
+          "char_accuracy": 0.34782608695652173,
+          "edit_distance": 30,
+          "gold_len": 46,
+          "pred_len": 45
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "ولذينكلهبياياكنيمسهالعذاابمكانيسخون",
+          "char_accuracy": 0.6511627906976745,
+          "edit_distance": 15,
+          "gold_len": 43,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذيناامنوليلبسوايمالهمبهمولاركلهمانوهتدون",
+          "char_accuracy": 0.6730769230769231,
+          "edit_distance": 17,
+          "gold_len": 52,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكولليبببينمينبضبماكاايسفون",
+          "char_accuracy": 0.5789473684210527,
+          "edit_distance": 16,
+          "gold_len": 38,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "بهذلجلكفلاكمفيصاركحرجمننولكنذربهوذرالمنين",
+          "char_accuracy": 0.62,
+          "edit_distance": 19,
+          "gold_len": 50,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممنيلكمالاننصيحين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلوبلاالمناشاوواناتفنانتحناولتفيرننتكلللنكنننالقن",
+          "char_accuracy": 0.38888888888888884,
+          "edit_distance": 33,
+          "gold_len": 54,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فانناهههللامواتهكاننناابرينر",
+          "char_accuracy": 0.6388888888888888,
+          "edit_distance": 13,
+          "gold_len": 36,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فااقاصهفجمذههيثعبانمدين",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 8,
+          "gold_len": 24,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقداخرنعالقللعانبسينونضسمنفماتلعلهيلكن",
+          "char_accuracy": 0.5957446808510638,
+          "edit_distance": 19,
+          "gold_len": 47,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "الماكسنمالجيذكلااجلنبالمهاذاهمنينكصون",
+          "char_accuracy": 0.5813953488372092,
+          "edit_distance": 18,
+          "gold_len": 43,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قلاضيومهالذيكمالاهنموفضلكمللاالمين",
+          "char_accuracy": 0.6,
+          "edit_distance": 16,
+          "gold_len": 40,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنيمسقنبييكتابواقاهاصلاكننالالضالرلصلحخين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 20,
+          "gold_len": 52,
+          "pred_len": 43
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذالكفصلوااةولعلهممميهجرون",
+          "char_accuracy": 0.5925925925925926,
+          "edit_distance": 11,
+          "gold_len": 27,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "ومنخلقوناهممكميفدونبلحتوبيهيعبلون",
+          "char_accuracy": 0.6451612903225806,
+          "edit_distance": 11,
+          "gold_len": 31,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "وذللعقوااموبفيواارضناجنلين",
+          "char_accuracy": 0.53125,
+          "edit_distance": 15,
+          "gold_len": 32,
+          "pred_len": 26
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "ههولمنامنااملقتمنذينكفاوزفمفلاتونولذبررن",
+          "char_accuracy": 0.5185185185185186,
+          "edit_distance": 26,
+          "gold_len": 54,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذلكمموعناللونكجكافرين",
+          "char_accuracy": 0.6538461538461539,
+          "edit_distance": 9,
+          "gold_len": 26,
+          "pred_len": 21
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووسياقومانكنتماامنتبالهفعليهتوكلومعليهتورككلوانكنتمموالسلمين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 20,
+          "gold_len": 52,
+          "pred_len": 65
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_012_085_050404",
+          "gold": "قالواتاللهتفتاتذكريوسفحتيتكونحرضااوتكونمنالهالكين",
+          "pred": "قالوتلهتتقتلكرلوسفحتتكونحرضناهتكنامناهلين",
+          "char_accuracy": 0.6938775510204082,
+          "edit_distance": 15,
+          "gold_len": 49,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+          "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+          "pred": "االذيناامنوعيلصالحاتطقوبالهموحسنمااب",
+          "char_accuracy": 0.6842105263157895,
+          "edit_distance": 12,
+          "gold_len": 38,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "قربنوخفالولولديلالمؤمننينيمايقماحساب",
+          "char_accuracy": 0.641025641025641,
+          "edit_distance": 14,
+          "gold_len": 39,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "ملعص",
+          "char_accuracy": 0.4,
+          "edit_distance": 3,
+          "gold_len": 5,
+          "pred_len": 4
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_027_071225",
+          "gold": "واحللعقدةمنلساني",
+          "pred": "وحللقدتمملسانن",
+          "char_accuracy": 0.6875,
+          "edit_distance": 5,
+          "gold_len": 16,
+          "pred_len": 14
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_021_001_074496",
+          "gold": "اقتربللناسحسابهموهمفيغفلةمعرضون",
+          "pred": "بسملهرومانحنقتربلناسحسابهموهمثيولتمعرضون",
+          "char_accuracy": 0.4838709677419355,
+          "edit_distance": 16,
+          "gold_len": 31,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_001_085656",
+          "gold": "تباركالذينزلالفرقانعليعبدهليكونللعالميننذيرا",
+          "pred": "لانارمانحيتبوكالذينلذلالفرقانعلاعلدهيليكوناللعالميننذير",
+          "char_accuracy": 0.5909090909090908,
+          "edit_distance": 18,
+          "gold_len": 44,
+          "pred_len": 55
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_026_088717",
+          "gold": "قالربكموربابائكمالاولين",
+          "pred": "قالرضكموربضاابااكوااوونين",
+          "char_accuracy": 0.6521739130434783,
+          "edit_distance": 8,
+          "gold_len": 23,
+          "pred_len": 25
+        }
+      ]
+    },
+    {
+      "blank_penalty": 1.0,
+      "samples": 608,
+      "exact_match": 0.02138157894736842,
+      "char_accuracy": 0.7517013277015948,
+      "edit_distance": 6.567434210526316,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 25.68421052631579,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "ووتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "للانمنللاحبيهللقابوانممهررررران",
+          "char_accuracy": 0.4054054054054054,
+          "edit_distance": 22,
+          "gold_len": 37,
+          "pred_len": 31
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "بذيتترنفيسكماادنالهيشيشكماتدنالهساافاسممااةشركون",
+          "char_accuracy": 0.30434782608695654,
+          "edit_distance": 32,
+          "gold_len": 46,
+          "pred_len": 48
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "ولذينكلهبياياكنيمسهالعذاابمكانيسخون",
+          "char_accuracy": 0.6511627906976745,
+          "edit_distance": 15,
+          "gold_len": 43,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذيناامنوليلبسوايمالهمبهماولاركلهممانوهنتدون",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 16,
+          "gold_len": 52,
+          "pred_len": 45
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكولليبعببينمينباضبماكاايسفون",
+          "char_accuracy": 0.6052631578947368,
+          "edit_distance": 15,
+          "gold_len": 38,
+          "pred_len": 32
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "بهنذلجلكفلاكمفيصاركحرجمننولكنذربهوذرالمنين",
+          "char_accuracy": 0.64,
+          "edit_distance": 18,
+          "gold_len": 50,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممنيلكامالاننصيحين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 11,
+          "gold_len": 26,
+          "pred_len": 21
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلوبلاالمناشاووااناتصفنانتلحناولتفيرننتكلللنكنننالقن",
+          "char_accuracy": 0.35185185185185186,
+          "edit_distance": 35,
+          "gold_len": 54,
+          "pred_len": 52
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فانيناهههلالامواتهكاننناابرينر",
+          "char_accuracy": 0.6944444444444444,
+          "edit_distance": 11,
+          "gold_len": 36,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فااقاصهفجمذههيثعبانمدين",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 8,
+          "gold_len": 24,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقداخرنعالقللععانبسينوناضسمنفماتلععلهيلكن",
+          "char_accuracy": 0.5319148936170213,
+          "edit_distance": 22,
+          "gold_len": 47,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "الماكسنمالجيذكلااجلنبالمهاذاهمنينكصون",
+          "char_accuracy": 0.5813953488372092,
+          "edit_distance": 18,
+          "gold_len": 43,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قالاضيومهالذيكمالاهنموفضلكمعللاالممين",
+          "char_accuracy": 0.625,
+          "edit_distance": 15,
+          "gold_len": 40,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنيمسقنبييكتابواقاهاصلاكننالالضالرلصلحخين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 20,
+          "gold_len": 52,
+          "pred_len": 43
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذالكفصلوااةوالعلههممميهجرون",
+          "char_accuracy": 0.5185185185185186,
+          "edit_distance": 13,
+          "gold_len": 27,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "ومنخالقوناهممكميفدونبلحتوبيهيعبلون",
+          "char_accuracy": 0.6129032258064516,
+          "edit_distance": 12,
+          "gold_len": 31,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "قوذللعقوااموبارفيواارضناجنلين",
+          "char_accuracy": 0.5625,
+          "edit_distance": 14,
+          "gold_len": 32,
+          "pred_len": 29
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "ههولمنامنااملقيتمنذينكفاوزفمفلاتونولذبررن",
+          "char_accuracy": 0.537037037037037,
+          "edit_distance": 25,
+          "gold_len": 54,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذلكمموعناللونكجلكافرين",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 8,
+          "gold_len": 26,
+          "pred_len": 22
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووسياقومانكنتماامنتبالهفعليهتوكلومعليهتورككلونانكنتمموالسلمين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 20,
+          "gold_len": 52,
+          "pred_len": 66
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+          "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+          "pred": "االذيناامنوعيلصالحاتطقوبالهموحسنمااب",
+          "char_accuracy": 0.6842105263157895,
+          "edit_distance": 12,
+          "gold_len": 38,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "قربنوخفاليولولديلالمؤمننينيمايقماحساب",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 13,
+          "gold_len": 39,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "ملاعص",
+          "char_accuracy": 0.4,
+          "edit_distance": 3,
+          "gold_len": 5,
+          "pred_len": 5
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_027_071225",
+          "gold": "واحللعقدةمنلساني",
+          "pred": "وحللقدتمملسانن",
+          "char_accuracy": 0.6875,
+          "edit_distance": 5,
+          "gold_len": 16,
+          "pred_len": 14
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_021_001_074496",
+          "gold": "اقتربللناسحسابهموهمفيغفلةمعرضون",
+          "pred": "بسملهرومانحنقتربلناسحسابهموهمثيوفلتمعرضون",
+          "char_accuracy": 0.5161290322580645,
+          "edit_distance": 15,
+          "gold_len": 31,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_001_085656",
+          "gold": "تباركالذينزلالفرقانعليعبدهليكونللعالميننذيرا",
+          "pred": "تلانارحمانحيتبوكالذينلذلالفرقانعلاعلدهيليكوناللعالميننذير",
+          "char_accuracy": 0.5681818181818181,
+          "edit_distance": 19,
+          "gold_len": 44,
+          "pred_len": 57
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_026_088717",
+          "gold": "قالربكموربابائكمالاولين",
+          "pred": "قالرضكموربضاابااكوااوونين",
+          "char_accuracy": 0.6521739130434783,
+          "edit_distance": 8,
+          "gold_len": 23,
+          "pred_len": 25
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_128_091777",
+          "gold": "اتبنونبكلريعايةتعبثون",
+          "pred": "اتذنونبكاللريياايتنتعبثون",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 7,
+          "gold_len": 21,
+          "pred_len": 25
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_220_094537",
+          "gold": "انههوالسميعالعليم",
+          "pred": "انههعسبعالعلم",
+          "char_accuracy": 0.6470588235294117,
+          "edit_distance": 6,
+          "gold_len": 17,
+          "pred_len": 13
+        }
+      ]
+    },
+    {
+      "blank_penalty": 1.2,
+      "samples": 608,
+      "exact_match": 0.023026315789473683,
+      "char_accuracy": 0.7526621131731679,
+      "edit_distance": 6.532894736842105,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 26.304276315789473,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "ووتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 24
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "للمانمنللااحبيهاللقابوانممهرررررالن",
+          "char_accuracy": 0.43243243243243246,
+          "edit_distance": 21,
+          "gold_len": 37,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "بذيتترنفيسكماادانالهيشيشكماتدنالهساافااسممااةشركون",
+          "char_accuracy": 0.28260869565217395,
+          "edit_distance": 33,
+          "gold_len": 46,
+          "pred_len": 50
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "والذينكلهبياياكنيمسهالعذاابمكانيسخون",
+          "char_accuracy": 0.6744186046511628,
+          "edit_distance": 14,
+          "gold_len": 43,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذيناامنولميلبلسوايمالهمبهلمناولاركلهممانوهنتدون",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 16,
+          "gold_len": 52,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكولليبعببينمينباضبماكاايسفون",
+          "char_accuracy": 0.6052631578947368,
+          "edit_distance": 15,
+          "gold_len": 38,
+          "pred_len": 32
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "بهنذلجلكفلاكمفيصاركحرجمننولكنذربهوذقرالومنين",
+          "char_accuracy": 0.64,
+          "edit_distance": 18,
+          "gold_len": 50,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممنيلكامالاننصيحين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 11,
+          "gold_len": 26,
+          "pred_len": 21
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلاوبلااهلمناشذاووااناتصفنانتلحناولتفيرننتكلللنكلننناالقان",
+          "char_accuracy": 0.35185185185185186,
+          "edit_distance": 35,
+          "gold_len": 54,
+          "pred_len": 58
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فانيناهههلالاموراتهكاننناابرينر",
+          "char_accuracy": 0.6944444444444444,
+          "edit_distance": 11,
+          "gold_len": 36,
+          "pred_len": 31
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فااقاصهفجمذههيثعبانمدين",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 8,
+          "gold_len": 24,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقداخرنعالقللععانبسينوناضسمنفماتيلععلهيلكن",
+          "char_accuracy": 0.5106382978723405,
+          "edit_distance": 23,
+          "gold_len": 47,
+          "pred_len": 43
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "االماكسنعمالجيذكلااجلنمبالمهاذاهمنينكصون",
+          "char_accuracy": 0.6046511627906976,
+          "edit_distance": 17,
+          "gold_len": 43,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قالاضيومهالذيكمالاهنموفضلكمعللاالممين",
+          "char_accuracy": 0.625,
+          "edit_distance": 15,
+          "gold_len": 40,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنيمسقنبييكتابواقاهاصلااكننالالضالرلصلحخين",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذالكنفصلوااةوالعلههمممييرهجرون",
+          "char_accuracy": 0.5185185185185186,
+          "edit_distance": 13,
+          "gold_len": 27,
+          "pred_len": 33
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "ومنخالقوناهممكميفدونبلحتوابيهيعبيلون",
+          "char_accuracy": 0.5483870967741935,
+          "edit_distance": 14,
+          "gold_len": 31,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "قوذللعقوااموبارفيواارضاناجنلين",
+          "char_accuracy": 0.5625,
+          "edit_distance": 14,
+          "gold_len": 32,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "ههولمنامنااملقيتمنذينكفاوزفمفلاتونولذبررن",
+          "char_accuracy": 0.537037037037037,
+          "edit_distance": 25,
+          "gold_len": 54,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذلكمموعناللوونكجلكافرين",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 8,
+          "gold_len": 26,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووسياقومانكنتماامنتنبالهفعليهتوكلومعليهتورككلونانكنتمموالسلمين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 20,
+          "gold_len": 52,
+          "pred_len": 67
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+          "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+          "pred": "االذيناامنوعيلصالحاتطقوبالهموحسنمااب",
+          "char_accuracy": 0.6842105263157895,
+          "edit_distance": 12,
+          "gold_len": 38,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "قربنوخفاليولولديلالمؤمننينايماياقماحساب",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 15,
+          "gold_len": 39,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "ملاعياص",
+          "char_accuracy": 0.0,
+          "edit_distance": 5,
+          "gold_len": 5,
+          "pred_len": 7
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_027_071225",
+          "gold": "واحللعقدةمنلساني",
+          "pred": "وحلنلقدتمملسانن",
+          "char_accuracy": 0.625,
+          "edit_distance": 6,
+          "gold_len": 16,
+          "pred_len": 15
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_021_001_074496",
+          "gold": "اقتربللناسحسابهموهمفيغفلةمعرضون",
+          "pred": "بسملهرومانحنقتربلناسحسابهموهمثيوفلتمعرضون",
+          "char_accuracy": 0.5161290322580645,
+          "edit_distance": 15,
+          "gold_len": 31,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_001_085656",
+          "gold": "تباركالذينزلالفرقانعليعبدهليكونللعالميننذيرا",
+          "pred": "تلانارحمانحيتبوكالذينلذلالفرقانعلاعلدهيليكونااللعالميننذير",
+          "char_accuracy": 0.5454545454545454,
+          "edit_distance": 20,
+          "gold_len": 44,
+          "pred_len": 58
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_026_088717",
+          "gold": "قالربكموربابائكمالاولين",
+          "pred": "قالرضكموربضااباائكوااوونين",
+          "char_accuracy": 0.6521739130434783,
+          "edit_distance": 8,
+          "gold_len": 23,
+          "pred_len": 26
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_128_091777",
+          "gold": "اتبنونبكلريعايةتعبثون",
+          "pred": "اتذنونبكاللريياايتنتعبثون",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 7,
+          "gold_len": 21,
+          "pred_len": 25
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_220_094537",
+          "gold": "انههوالسميعالعليم",
+          "pred": "انههعسبعالعلم",
+          "char_accuracy": 0.6470588235294117,
+          "edit_distance": 6,
+          "gold_len": 17,
+          "pred_len": 13
+        }
+      ]
+    },
+    {
+      "blank_penalty": 1.6,
+      "samples": 608,
+      "exact_match": 0.018092105263157895,
+      "char_accuracy": 0.7461358701386407,
+      "edit_distance": 6.715460526315789,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 27.592105263157894,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_242_007440",
+          "gold": "كذلكيبيناللهلكماياتهلعلكمتعقلون",
+          "pred": "جكذالنكيبيلوالالهالكمااياتهيلعللكمتعقلون",
+          "char_accuracy": 0.6774193548387097,
+          "edit_distance": 10,
+          "gold_len": 31,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_003_082_011220",
+          "gold": "فمنتوليبعدذلكفاولئكهمالفاسقون",
+          "pred": "فمانتواللابعدذالكفعلائيكهمالفاسقون",
+          "char_accuracy": 0.6896551724137931,
+          "edit_distance": 9,
+          "gold_len": 29,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "وتقنارللتيااتترلكيافرين",
+          "char_accuracy": 0.6296296296296297,
+          "edit_distance": 10,
+          "gold_len": 27,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "للموانمنللااحبيهالالقابوانممهرررررايلن",
+          "char_accuracy": 0.43243243243243246,
+          "edit_distance": 21,
+          "gold_len": 37,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "يبلذيتترهرنفيسكمااتدواناليهيشيشكماتدوونالهساافااسممااةشركون",
+          "char_accuracy": 0.28260869565217395,
+          "edit_distance": 33,
+          "gold_len": 46,
+          "pred_len": 59
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذينااامنولمميلبلسوايمالهمبهلمناولاركلهمماهنوهنتدون",
+          "char_accuracy": 0.6538461538461539,
+          "edit_distance": 18,
+          "gold_len": 52,
+          "pred_len": 52
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكولليبعببينمينباضبماكاااويتسفون",
+          "char_accuracy": 0.5789473684210527,
+          "edit_distance": 16,
+          "gold_len": 38,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "يباهنذلجلهكفلاكامفيصاركحرجمننولكنذرابهييواذقرالومنين",
+          "char_accuracy": 0.54,
+          "edit_distance": 23,
+          "gold_len": 50,
+          "pred_len": 52
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_014_029012",
+          "gold": "قالانظرنيالييوميبعثون",
+          "pred": "قالااظيبنيااليميبعثن",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 7,
+          "gold_len": 21,
+          "pred_len": 20
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممانيلكامالاننصيحين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 22
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلاوبلاابهلمنافشذاووااناتصفيناناتلحناولتفيرنناتكلللنكليننمناالقاشين",
+          "char_accuracy": 0.31481481481481477,
+          "edit_distance": 37,
+          "gold_len": 54,
+          "pred_len": 67
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فاانيناههاههلالاموراتهكانتنيناابرينر",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 12,
+          "gold_len": 36,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فااقاصهفجمذههيثعبانمدين",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 8,
+          "gold_len": 24,
+          "pred_len": 23
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقدااخرنعالقللععانبسينوناضسمنفماتيلععلاهنيلكون",
+          "char_accuracy": 0.4893617021276596,
+          "edit_distance": 24,
+          "gold_len": 47,
+          "pred_len": 47
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "االمماكسنعمالجيذكلااجلنرمبالموهواذاهمنينكصون",
+          "char_accuracy": 0.5581395348837209,
+          "edit_distance": 19,
+          "gold_len": 43,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قالاضيومهالذيكمالاهنموفضلكمعللااالممين",
+          "char_accuracy": 0.625,
+          "edit_distance": 15,
+          "gold_len": 40,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "ولمنيمسقنقبييكتابوااقااهاصلااكننالالضاليرالمصلحخين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 22,
+          "gold_len": 52,
+          "pred_len": 50
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذالكنفصلولاياةوالعلههمممييرهجرون",
+          "char_accuracy": 0.5925925925925926,
+          "edit_distance": 11,
+          "gold_len": 27,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "ومنخالقونااهممكميفدونبلحتوابيهيعبيلون",
+          "char_accuracy": 0.5483870967741935,
+          "edit_distance": 14,
+          "gold_len": 31,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "قوذللعقوااامروبارفيواارضاانالجنيلين",
+          "char_accuracy": 0.53125,
+          "edit_distance": 15,
+          "gold_len": 32,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_005_034922",
+          "gold": "كمااخرجكربكمنبيتكبالحقوانفريقامنالمؤمنينلكارهون",
+          "pred": "كمااارجاكربكممبيتكذلحتياينفاريقمانمواؤمنينلكاههون",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "اههيولمنامناامالقيتمنذينكفاوزفمفلاتونولاذبررن",
+          "char_accuracy": 0.5925925925925926,
+          "edit_distance": 22,
+          "gold_len": 54,
+          "pred_len": 45
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذالكمموعناللووونكجالكافرين",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 8,
+          "gold_len": 26,
+          "pred_len": 26
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووسياقومانكنتماامنتنبالاهفعليهتوكلومعليهتورككلونانكنتمموالسلمين",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 68
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_097_043803",
+          "gold": "ولوجاءتهمكلايةحتييرواالعذابالاليم",
+          "pred": "ولوجااتتهامكلناايتنحتايرروالعذابالالين",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 11,
+          "gold_len": 33,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+          "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+          "pred": "االذينااامنوعيلصالحاتطقوبالهموحسنمااب",
+          "char_accuracy": 0.6842105263157895,
+          "edit_distance": 12,
+          "gold_len": 38,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_014_041_053704",
+          "gold": "ربنااغفرليولوالديوللمؤمنينيوميقومالحساب",
+          "pred": "قربنوخفاليولولديالالمؤمننينايهماياقمالحساب",
+          "char_accuracy": 0.641025641025641,
+          "edit_distance": 14,
+          "gold_len": 39,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_017_038_061985",
+          "gold": "كلذلككانسيئهعندربكمكروها",
+          "pred": "وقالذالككانسيياانندربكمكوها",
+          "char_accuracy": 0.625,
+          "edit_distance": 9,
+          "gold_len": 24,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_001_067505",
+          "gold": "كهيعص",
+          "pred": "مليراعياص",
+          "char_accuracy": 0.0,
+          "edit_distance": 6,
+          "gold_len": 5,
+          "pred_len": 9
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_027_071225",
+          "gold": "واحللعقدةمنلساني",
+          "pred": "وحلنالاقدتمملسانن",
+          "char_accuracy": 0.5625,
+          "edit_distance": 7,
+          "gold_len": 16,
+          "pred_len": 17
+        }
+      ]
+    },
+    {
+      "blank_penalty": 2.0,
+      "samples": 608,
+      "exact_match": 0.018092105263157895,
+      "char_accuracy": 0.7305537234838108,
+      "edit_distance": 7.0805921052631575,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 28.87171052631579,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_242_007440",
+          "gold": "كذلكيبيناللهلكماياتهلعلكمتعقلون",
+          "pred": "جكذالنكيبيلوالالهالكمااياتهيالعللكمتعقعلون",
+          "char_accuracy": 0.6129032258064516,
+          "edit_distance": 12,
+          "gold_len": 31,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_003_082_011220",
+          "gold": "فمنتوليبعدذلكفاولئكهمالفاسقون",
+          "pred": "فمانتواللابعدذالكفعلائيكهمالفاسقون",
+          "char_accuracy": 0.6896551724137931,
+          "edit_distance": 9,
+          "gold_len": 29,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_167_019771",
+          "gold": "انالذينكفرواوصدواعنسبيلاللهقدضلواضلالابعيدا",
+          "pred": "اينالذينكفروصاتوعااسبيرالاهقدظرلوضلالمبعيداي",
+          "char_accuracy": 0.6511627906976745,
+          "edit_distance": 15,
+          "gold_len": 43,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "عللموانمنللااحبيهالالقابوانمماهررررروايلن",
+          "char_accuracy": 0.4054054054054054,
+          "edit_distance": 22,
+          "gold_len": 37,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "يبلذيتتارهرنفيسكمااتدوانالييهيشيشكماتدوونالهسااوفااسمنمااةشركوون",
+          "char_accuracy": 0.21739130434782605,
+          "edit_distance": 36,
+          "gold_len": 46,
+          "pred_len": 64
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "والذينكلووهبياياكنيمسوهاولعذاابمااكانهايسخون",
+          "char_accuracy": 0.6744186046511628,
+          "edit_distance": 14,
+          "gold_len": 43,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "الذينااامنوالمميلبلسوايمالهمبهلمناولاركلهمماهنوهنتدون",
+          "char_accuracy": 0.6730769230769231,
+          "edit_distance": 17,
+          "gold_len": 52,
+          "pred_len": 53
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "وكذنكولليبعاببوينمينبااضبماكاااويتسفون",
+          "char_accuracy": 0.5526315789473684,
+          "edit_distance": 17,
+          "gold_len": 38,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "يباهمنذلجلهكفلاكامفيصادركحرجمننولكنذرابهيييواذقراللمومنين",
+          "char_accuracy": 0.56,
+          "edit_distance": 22,
+          "gold_len": 50,
+          "pred_len": 57
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_014_029012",
+          "gold": "قالانظرنيالييوميبعثون",
+          "pred": "قالااظيبنياالايميبعاثن",
+          "char_accuracy": 0.6190476190476191,
+          "edit_distance": 8,
+          "gold_len": 21,
+          "pred_len": 22
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسممامنيلكامالاهلناناصيحين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 27
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلاوبلاابهولمنافاشذاوواانااتراصفيناناتلحناوالتفيرنناتكلللنكمملينانمنااللقااشين",
+          "char_accuracy": 0.14814814814814814,
+          "edit_distance": 46,
+          "gold_len": 54,
+          "pred_len": 78
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_061_030422",
+          "gold": "قالياقومليسبيضلالةولكنيرسولمنربالعالمين",
+          "pred": "ضاالياقهملسفييقلاالةوولاكينيرسولمنوربالعامعين",
+          "char_accuracy": 0.641025641025641,
+          "edit_distance": 14,
+          "gold_len": 39,
+          "pred_len": 45
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فاانيناههاههلهالاموراتهكانتنينانابرينر",
+          "char_accuracy": 0.6944444444444444,
+          "edit_distance": 11,
+          "gold_len": 36,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_106_031772",
+          "gold": "قالانكنتجئتبايةفاتبهاانكنتمنالصادقين",
+          "pred": "قاعللنكنتجاتبااةنفاااتيبياايننكنتمنالصادقين",
+          "char_accuracy": 0.6944444444444444,
+          "edit_distance": 11,
+          "gold_len": 36,
+          "pred_len": 43
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فاااقااصهفجمذاههيثععبانمعدين",
+          "char_accuracy": 0.5416666666666667,
+          "edit_distance": 11,
+          "gold_len": 24,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقدااخرنعالقللععانبسمينوناضسمنفماتيلععلاهنميلكواون",
+          "char_accuracy": 0.46808510638297873,
+          "edit_distance": 25,
+          "gold_len": 47,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "االمماكسنعمالجيذكلااجلنرمنبالموهواذاهمنينكصون",
+          "char_accuracy": 0.5348837209302326,
+          "edit_distance": 20,
+          "gold_len": 43,
+          "pred_len": 45
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قالاضيورمهاالذيكمالاهنموافضلكمعلالعااالممين",
+          "char_accuracy": 0.575,
+          "edit_distance": 17,
+          "gold_len": 40,
+          "pred_len": 43
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "والمينيمسقونقبييكتابوااقااهاصلااكننالالضاليرالمصلحخين",
+          "char_accuracy": 0.6346153846153846,
+          "edit_distance": 19,
+          "gold_len": 52,
+          "pred_len": 53
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذاالكنفصلولاياةوالععلههاممميرهمجرون",
+          "char_accuracy": 0.4814814814814815,
+          "edit_distance": 14,
+          "gold_len": 27,
+          "pred_len": 38
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "وهمنخالقونااهممكمعيافدونبلحتوابيهيعبيلون",
+          "char_accuracy": 0.4838709677419355,
+          "edit_distance": 16,
+          "gold_len": 31,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "قوذللعفقواااؤمروباارفيوااارضاانالجنيلين",
+          "char_accuracy": 0.46875,
+          "edit_distance": 17,
+          "gold_len": 32,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_005_034922",
+          "gold": "كمااخرجكربكمنبيتكبالحقوانفريقامنالمؤمنينلكارهون",
+          "pred": "كمااارجاكربكممبيتكذلحتياينفاريقمانمواؤمنينلكاههون",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "اههيولمناامناامالقيكتمنذينكفاروزفمفلاتونوالااذبررن",
+          "char_accuracy": 0.5555555555555556,
+          "edit_distance": 24,
+          "gold_len": 54,
+          "pred_len": 50
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذالكمموعناللووونكجالكافرين",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 8,
+          "gold_len": 26,
+          "pred_len": 26
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووسياقومانكنتماامنتنبالاهفعليهتوكلومعليهتورككلونانكنتمموالسلمين",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 68
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_097_043803",
+          "gold": "ولوجاءتهمكلايةحتييرواالعذابالاليم",
+          "pred": "ولوجااتتهامكالناايتنحتايرروالعذابالالين",
+          "char_accuracy": 0.6363636363636364,
+          "edit_distance": 12,
+          "gold_len": 33,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_012_058_049594",
+          "gold": "وجاءاخوةيوسففدخلواعليهفعرفهموهملهمنكرون",
+          "pred": "وجاااخوتويووسففدخلوعلييفرفلهموهمملهوممكون",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 12,
+          "gold_len": 39,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_013_029_052054",
+          "gold": "الذينامنواوعملواالصالحاتطوبيلهموحسنماب",
+          "pred": "االذينااامنوعيللصالحاتطقوبالهموحسنمااب",
+          "char_accuracy": 0.6842105263157895,
+          "edit_distance": 12,
+          "gold_len": 38,
+          "pred_len": 38
+        }
+      ]
+    },
+    {
+      "blank_penalty": 2.4,
+      "samples": 608,
+      "exact_match": 0.014802631578947368,
+      "char_accuracy": 0.7063359559857625,
+      "edit_distance": 7.75,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 30.22532894736842,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_242_007440",
+          "gold": "كذلكيبيناللهلكماياتهلعلكمتعقلون",
+          "pred": "جكذالنكيبيلوالالهالكمااياتهيالعللكمتعقعلون",
+          "char_accuracy": 0.6129032258064516,
+          "edit_distance": 12,
+          "gold_len": 31,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_167_019771",
+          "gold": "انالذينكفرواوصدواعنسبيلاللهقدضلواضلالابعيدا",
+          "pred": "اينالذينكفروصاتوعااسبيرالاهقدظرالوضلالامبعيداي",
+          "char_accuracy": 0.627906976744186,
+          "edit_distance": 16,
+          "gold_len": 43,
+          "pred_len": 46
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "اعلالمووانمنللااحبيهوالالقابوااناملمااهرررررواميلن",
+          "char_accuracy": 0.29729729729729726,
+          "edit_distance": 26,
+          "gold_len": 37,
+          "pred_len": 50
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "يبالذيتتارهارنفيسيكمااتدوهانالييهينشياشكماتدوونالهلساااوفاااساامنمااةشركووون",
+          "char_accuracy": 0.0,
+          "edit_distance": 46,
+          "gold_len": 46,
+          "pred_len": 76
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "والذيناكلوووهبياياكنيمسوهاوالعذاابمااكانهايسخون",
+          "char_accuracy": 0.627906976744186,
+          "edit_distance": 16,
+          "gold_len": 43,
+          "pred_len": 47
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "اذلذينااامنوالمميلبلسوايمالاهمبهلمناولاركلهمموالاهنووهنتدومون",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 22,
+          "gold_len": 52,
+          "pred_len": 61
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "ووكذانكولليبعاببوينمينبعااضبمااكاااويتسفون",
+          "char_accuracy": 0.5,
+          "edit_distance": 19,
+          "gold_len": 38,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "يباهمنذلاجيلهكفلاكواممفيصادراكحرجممننولكنذرابهيييواذقراللمومنين",
+          "char_accuracy": 0.45999999999999996,
+          "edit_distance": 27,
+          "gold_len": 50,
+          "pred_len": 63
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_014_029012",
+          "gold": "قالانظرنيالييوميبعثون",
+          "pred": "قالااظيبنياالايمينبععاثمون",
+          "char_accuracy": 0.5238095238095238,
+          "edit_distance": 10,
+          "gold_len": 21,
+          "pred_len": 26
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققسموومااامنيلكامااالاهلنااناصيحين",
+          "char_accuracy": 0.46153846153846156,
+          "edit_distance": 14,
+          "gold_len": 26,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلاوبلاابهولمنافاشذاوواانااتراصفيناناتلحناوالمتفيرلنناتكاللالانكمملينانمنااللقااشين",
+          "char_accuracy": 0.11111111111111116,
+          "edit_distance": 48,
+          "gold_len": 54,
+          "pred_len": 83
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_061_030422",
+          "gold": "قالياقومليسبيضلالةولكنيرسولمنربالعالمين",
+          "pred": "ضااليياقهملسفييقرلاالةوولاكينيرسولممنوربالعامعين",
+          "char_accuracy": 0.5641025641025641,
+          "edit_distance": 17,
+          "gold_len": 39,
+          "pred_len": 48
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فاانييناههواههلعهالاموراتهاكاناتنينانهابرينر",
+          "char_accuracy": 0.6111111111111112,
+          "edit_distance": 14,
+          "gold_len": 36,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_106_031772",
+          "gold": "قالانكنتجئتبايةفاتبهاانكنتمنالصادقين",
+          "pred": "قاعللننكنتجاتباااةنفاااتيبياايننكنتمنالصادقين",
+          "char_accuracy": 0.6388888888888888,
+          "edit_distance": 13,
+          "gold_len": 36,
+          "pred_len": 45
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فاياالقااصاهفجمذااههيثععبالنمعدينن",
+          "char_accuracy": 0.41666666666666663,
+          "edit_distance": 14,
+          "gold_len": 24,
+          "pred_len": 34
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقدااخرنعالكقاللععانبسمينوناضسمنفمراتيلععلاهنميلكوواون",
+          "char_accuracy": 0.44680851063829785,
+          "edit_distance": 26,
+          "gold_len": 47,
+          "pred_len": 55
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "االمماكسخناعمالجيذكلاااجلنرمنبالموهواذااهمنينكصون",
+          "char_accuracy": 0.5116279069767442,
+          "edit_distance": 21,
+          "gold_len": 43,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قالاضيورمهااليذيكمالاهنموافضلكمعلاالعااالممين",
+          "char_accuracy": 0.55,
+          "edit_distance": 18,
+          "gold_len": 40,
+          "pred_len": 45
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "والمينيمسقونقبييكتابوااقااهاصلااكننالالضوااليرالمصلحخين",
+          "char_accuracy": 0.6346153846153846,
+          "edit_distance": 19,
+          "gold_len": 52,
+          "pred_len": 55
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "ووكذاالكنفصصلولاياةيوالععلههاممميرهمجرون",
+          "char_accuracy": 0.40740740740740744,
+          "edit_distance": 16,
+          "gold_len": 27,
+          "pred_len": 40
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "وهمنخالقونااهممكمعياهحفدونبلحتوابيههياعبيلون",
+          "char_accuracy": 0.3870967741935484,
+          "edit_distance": 19,
+          "gold_len": 31,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "قوذللعفقواوااؤممروبالارفيوااارضااناللجنيلين",
+          "char_accuracy": 0.4375,
+          "edit_distance": 18,
+          "gold_len": 32,
+          "pred_len": 43
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_005_034922",
+          "gold": "كمااخرجكربكمنبيتكبالحقوانفريقامنالمؤمنينلكارهون",
+          "pred": "كمااارجاكربكممبيتكذلحتياينفاريقمانلمواؤمنينلاكااهون",
+          "char_accuracy": 0.6595744680851063,
+          "edit_distance": 16,
+          "gold_len": 47,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "اههيوالمناامنواامالقيكتمنذيينكفاروزفمفلاتونوالااذباارارن",
+          "char_accuracy": 0.5185185185185186,
+          "edit_distance": 26,
+          "gold_len": 54,
+          "pred_len": 56
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذالكمموعنالللوووناكجالكافرين",
+          "char_accuracy": 0.6538461538461539,
+          "edit_distance": 9,
+          "gold_len": 26,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووساياقومانكنتماامنتنبالاهفعليهتوكلومعليهتورككلونانكنتمموالسلمين",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 69
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_097_043803",
+          "gold": "ولوجاءتهمكلايةحتييرواالعذابالاليم",
+          "pred": "ولوجااتتهامكالناايتنحتايرروالعذابالالين",
+          "char_accuracy": 0.6363636363636364,
+          "edit_distance": 12,
+          "gold_len": 33,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_011_009_044433",
+          "gold": "ولئناذقناالانسانمنارحمةثمنزعناهامنهانهليئوسكفور",
+          "pred": "وولاماذقنالاسانمنارحمتنثيمنزعحنااهامنهانهوليعاوسمكفورن",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 54
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_011_122_047823",
+          "gold": "وانتظرواانامنتظرون",
+          "pred": "وانتظيروانااممنتظيرومن",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 6,
+          "gold_len": 18,
+          "pred_len": 22
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_012_058_049594",
+          "gold": "وجاءاخوةيوسففدخلواعليهفعرفهموهملهمنكرون",
+          "pred": "وجاااخوتويووسففدخلووعلييفرفلهمولهمملهوممنكون",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 13,
+          "gold_len": 39,
+          "pred_len": 44
+        }
+      ]
+    },
+    {
+      "blank_penalty": 2.8,
+      "samples": 608,
+      "exact_match": 0.009868421052631578,
+      "char_accuracy": 0.6783793936391976,
+      "edit_distance": 8.71875,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 31.685855263157894,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_242_007440",
+          "gold": "كذلكيبيناللهلكماياتهلعلكمتعقلون",
+          "pred": "جكذالنكيبيلوالالهالكمااياتهيالعاللكمتعقعلون",
+          "char_accuracy": 0.5806451612903225,
+          "edit_distance": 13,
+          "gold_len": 31,
+          "pred_len": 43
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_167_019771",
+          "gold": "انالذينكفرواوصدواعنسبيلاللهقدضلواضلالابعيدا",
+          "pred": "اينالذينكفراولصاتوعااسبيرالاهقدظرالوضلالامبعيداي",
+          "char_accuracy": 0.627906976744186,
+          "edit_distance": 16,
+          "gold_len": 43,
+          "pred_len": 48
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "اعلالموواانمنللااحبيهوالالقابوااناملمااهرررررواميلن",
+          "char_accuracy": 0.29729729729729726,
+          "edit_distance": 26,
+          "gold_len": 37,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "يبالذيتتاروهارنافيسيكمااتدوهوانالييهيانشيياشكمااتدووانالهلساااوفاااسااهمنمااةاشركوووون",
+          "char_accuracy": 0.0,
+          "edit_distance": 53,
+          "gold_len": 46,
+          "pred_len": 86
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "والذيناكالوووهبياياكنيمسوهاموالعذاابمااكانهايسخون",
+          "char_accuracy": 0.6046511627906976,
+          "edit_distance": 17,
+          "gold_len": 43,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "اذلذينااامنوالمميلبلسوايمالاهمبهولمناولاركلهمموالاهنووهنتدوومون",
+          "char_accuracy": 0.5384615384615384,
+          "edit_distance": 24,
+          "gold_len": 52,
+          "pred_len": 63
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "ووكذانياكننولليبعابضبوينمينبعااضمبمااكااانويتسفون",
+          "char_accuracy": 0.39473684210526316,
+          "edit_distance": 23,
+          "gold_len": 38,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "يباهمننذلاجيلاهكفلاكواممفيصادراكحرجممننولكنذرابهيييواذقراليلمومنين",
+          "char_accuracy": 0.4,
+          "edit_distance": 30,
+          "gold_len": 50,
+          "pred_len": 66
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_014_029012",
+          "gold": "قالانظرنيالييوميبعثون",
+          "pred": "قالاالظيبنياالايومينبععاثمون",
+          "char_accuracy": 0.5238095238095238,
+          "edit_distance": 10,
+          "gold_len": 21,
+          "pred_len": 28
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققعسموومااامنيلكامااالاهلناالناصيحين",
+          "char_accuracy": 0.46153846153846156,
+          "edit_distance": 14,
+          "gold_len": 26,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قلاوبلاابهوللممنافاشذاوواانااتراصفيناناتالحناوالمتفيرلناناتاكاللالاناكلمملينانمنلااللقااشين",
+          "char_accuracy": 0.0,
+          "edit_distance": 54,
+          "gold_len": 54,
+          "pred_len": 91
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_061_030422",
+          "gold": "قالياقومليسبيضلالةولكنيرسولمنربالعالمين",
+          "pred": "ضظااليياقهملسفييقرلاالةوولاكينيرلسولممنورقبالعامعين",
+          "char_accuracy": 0.4871794871794872,
+          "edit_distance": 20,
+          "gold_len": 39,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فااانييناههواههلعهالامورااتههاكاناتنينانهابرينر",
+          "char_accuracy": 0.5277777777777778,
+          "edit_distance": 17,
+          "gold_len": 36,
+          "pred_len": 47
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_106_031772",
+          "gold": "قالانكنتجئتبايةفاتبهاانكنتمنالصادقين",
+          "pred": "قااعللننكنتجاااتبياااكةنفااااتيبيااينمنكنمتمنالصادقين",
+          "char_accuracy": 0.41666666666666663,
+          "edit_distance": 21,
+          "gold_len": 36,
+          "pred_len": 53
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فاياالقااصاهفجحمذااههيثععبالنمعدينن",
+          "char_accuracy": 0.375,
+          "edit_distance": 15,
+          "gold_len": 24,
+          "pred_len": 35
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقدااخرناعالكقالملععانبسمينوناضسمنافمراتيلععلاهانميالكوواووون",
+          "char_accuracy": 0.34042553191489366,
+          "edit_distance": 31,
+          "gold_len": 47,
+          "pred_len": 62
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "االممااكسخناعمالجيذكلاااجلنرامنبالموهواذااهمنينكصون",
+          "char_accuracy": 0.4651162790697675,
+          "edit_distance": 23,
+          "gold_len": 43,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قالاضيورمضوهيااليذييكمالاهنموافضلاكمعلاالعااالممين",
+          "char_accuracy": 0.475,
+          "edit_distance": 21,
+          "gold_len": 40,
+          "pred_len": 50
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "والمينيمسقونقبييكتابوااقااهاصلااكتننالالضيوااليراللمصلحخين",
+          "char_accuracy": 0.5961538461538461,
+          "edit_distance": 21,
+          "gold_len": 52,
+          "pred_len": 58
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "وكذاالكنفاصصلولاياةيوالععلههاممميرهمجروون",
+          "char_accuracy": 0.37037037037037035,
+          "edit_distance": 17,
+          "gold_len": 27,
+          "pred_len": 41
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "قوهمنخالقونااهممكمعياهحفدونبلحاحتيوابيههياعبيلومن",
+          "char_accuracy": 0.22580645161290325,
+          "edit_distance": 24,
+          "gold_len": 31,
+          "pred_len": 49
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "قوذللعفقواوااؤممواروبالاررفيواااررضاعانالللجنيليين",
+          "char_accuracy": 0.25,
+          "edit_distance": 24,
+          "gold_len": 32,
+          "pred_len": 50
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_005_034922",
+          "gold": "كمااخرجكربكمنبيتكبالحقوانفريقامنالمؤمنينلكارهون",
+          "pred": "كماااارجاكربكمامبريتكذلحتياينفارييقمانلمواؤمنينالاكاايهون",
+          "char_accuracy": 0.5319148936170213,
+          "edit_distance": 22,
+          "gold_len": 47,
+          "pred_len": 57
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "ااههيواالمييناااممنوراامالقيكتمنذيينكفاروزفمفلاتونوالااذبااارارن",
+          "char_accuracy": 0.4629629629629629,
+          "edit_distance": 29,
+          "gold_len": 54,
+          "pred_len": 64
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذالكممواعنالللووووناكجالكافرين",
+          "char_accuracy": 0.6153846153846154,
+          "edit_distance": 10,
+          "gold_len": 26,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_058_042633",
+          "gold": "قلبفضلاللهوبرحمتهفبذلكفليفرحواهوخيرممايجمعون",
+          "pred": "قثالدفضللايوبرحمنتهيفبزالكفيافرحوهوخيرممايجمعوون",
+          "char_accuracy": 0.6818181818181819,
+          "edit_distance": 14,
+          "gold_len": 44,
+          "pred_len": 48
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_080_043293",
+          "gold": "فلماجاءالسحرةقاللهمموسيالقواماانتمملقون",
+          "pred": "فلمماجياااسحرتقاللهموسااالقوماانتممموالقون",
+          "char_accuracy": 0.6923076923076923,
+          "edit_distance": 12,
+          "gold_len": 39,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_084_043413",
+          "gold": "وقالموسيياقومانكنتمامنتمباللهفعليهتوكلواانكنتممسلمين",
+          "pred": "وقالمووساياقومانكنتماامنتانبالاهفعليهتوكلومعليهتورككلونانكنتمموالسلمين",
+          "char_accuracy": 0.5769230769230769,
+          "edit_distance": 22,
+          "gold_len": 52,
+          "pred_len": 70
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_097_043803",
+          "gold": "ولوجاءتهمكلايةحتييرواالعذابالاليم",
+          "pred": "ولوجااتتهامكالناايتنحتايرروالعذابالالين",
+          "char_accuracy": 0.6363636363636364,
+          "edit_distance": 12,
+          "gold_len": 33,
+          "pred_len": 39
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_011_009_044433",
+          "gold": "ولئناذقناالانسانمنارحمةثمنزعناهامنهانهليئوسكفور",
+          "pred": "وولاماذقنالانسانمنارحمتنثيممنزعحنااهامنهانهوليعاوسمكفورن",
+          "char_accuracy": 0.6808510638297872,
+          "edit_distance": 15,
+          "gold_len": 47,
+          "pred_len": 56
+        }
+      ]
+    },
+    {
+      "blank_penalty": 3.2,
+      "samples": 608,
+      "exact_match": 0.006578947368421052,
+      "char_accuracy": 0.6507302643673354,
+      "edit_distance": 9.932565789473685,
+      "avg_gold_len": 27.601973684210527,
+      "avg_pred_len": 33.25986842105263,
+      "examples": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_065_002130",
+          "gold": "ولقدعلمتمالذيناعتدوامنكمفيالسبتفقلنالهمكونواقردةخاسئين",
+          "pred": "ولقدعليامتمالذيناعتكداومننكمفيالسبتكفقانلالهمكقولنواقاردتاالخاساين",
+          "char_accuracy": 0.6851851851851851,
+          "edit_distance": 17,
+          "gold_len": 54,
+          "pred_len": 66
+        },
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_242_007440",
+          "gold": "كذلكيبيناللهلكماياتهلعلكمتعقلون",
+          "pred": "جكذالنكيبيلوالالهالكمااياتهياالعاللكمتعقعلون",
+          "char_accuracy": 0.5483870967741935,
+          "edit_distance": 14,
+          "gold_len": 31,
+          "pred_len": 44
+        },
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_003_082_011220",
+          "gold": "فمنتوليبعدذلكفاولئكهمالفاسقون",
+          "pred": "فمانتوااللابعدذالكفعولائيكهمالفاسقون",
+          "char_accuracy": 0.6896551724137931,
+          "edit_distance": 9,
+          "gold_len": 29,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_003_131_012691",
+          "gold": "واتقواالنارالتياعدتللكافرين",
+          "pred": "وااتقوااناارللتياوااكتترلكيافرين",
+          "char_accuracy": 0.5925925925925926,
+          "edit_distance": 11,
+          "gold_len": 27,
+          "pred_len": 32
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_004_167_019771",
+          "gold": "انالذينكفرواوصدواعنسبيلاللهقدضلواضلالابعيدا",
+          "pred": "ايمناللذينكفراولصاتوعااسبيرالاهقدظرالوضلاالاامبعيداي",
+          "char_accuracy": 0.5348837209302326,
+          "edit_distance": 20,
+          "gold_len": 43,
+          "pred_len": 52
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_005_098_022981",
+          "gold": "اعلموااناللهشديدالعقابواناللهغفوررحيم",
+          "pred": "اعالالموواانمنللااحبيهوالالقابواانمناملمااهررقرررواميلن",
+          "char_accuracy": 0.18918918918918914,
+          "edit_distance": 30,
+          "gold_len": 37,
+          "pred_len": 55
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_041_024872",
+          "gold": "بلاياهتدعونفيكشفماتدعوناليهانشاءوتنسونماتشركون",
+          "pred": "يبالذيتتاروهارنافيتسيكمااتدوهوانالييهيانشيياشكماااتدوواناليهلساااوفاااساااهمنمااةاشريكووووون",
+          "char_accuracy": 0.0,
+          "edit_distance": 59,
+          "gold_len": 46,
+          "pred_len": 92
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_049_025112",
+          "gold": "والذينكذبواباياتنايمسهمالعذاببماكانوايفسقون",
+          "pred": "والذيناكالهوووهبياياكنيماسوهاموالعذاابمااكانهايسخون",
+          "char_accuracy": 0.5581395348837209,
+          "edit_distance": 19,
+          "gold_len": 43,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_082_026102",
+          "gold": "الذينامنواولميلبسواايمانهمبظلماولئكلهمالامنوهممهتدون",
+          "pred": "ااذلذينااامنوووالممييلبلسواييمالاهمبهوللمناولااريكلهممووالااهممنووهنتدهوومون",
+          "char_accuracy": 0.3653846153846154,
+          "edit_distance": 33,
+          "gold_len": 52,
+          "pred_len": 76
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_006_129_027512",
+          "gold": "وكذلكنوليبعضالظالمينبعضابماكانوايكسبون",
+          "pred": "ووكذانياكننولليبعابضابوينمينبعااضممبمااكااانننويتسفوون",
+          "char_accuracy": 0.3157894736842105,
+          "edit_distance": 26,
+          "gold_len": 38,
+          "pred_len": 54
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_002_028652",
+          "gold": "كتابانزلاليكفلايكنفيصدركحرجمنهلتنذربهوذكريللمؤمنين",
+          "pred": "يباهمننننذالاجيلااهكفلاقكوواممفيصادراكحرجممننولكنذرابهيييواذقراليلمومنين",
+          "char_accuracy": 0.30000000000000004,
+          "edit_distance": 35,
+          "gold_len": 50,
+          "pred_len": 72
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_014_029012",
+          "gold": "قالانظرنيالييوميبعثون",
+          "pred": "قالاالظيبنياالايوامينبعععاثمون",
+          "char_accuracy": 0.4285714285714286,
+          "edit_distance": 12,
+          "gold_len": 21,
+          "pred_len": 30
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_021_029222",
+          "gold": "وقاسمهماانيلكمالمنالناصحين",
+          "pred": "ققعسموومااامنيلكامااالاهملناالناصيحين",
+          "char_accuracy": 0.46153846153846156,
+          "edit_distance": 14,
+          "gold_len": 26,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_023_029282",
+          "gold": "قالاربناظلمناانفسناوانلمتغفرلناوترحمنالنكوننمنالخاسرين",
+          "pred": "قالاوبلناابهوللممنانفاشذاووااعنااتراصفيناناتالحنااوالامتافيارللنانااتواكقااللاالاناكلمملينانمنلاالللقااشين",
+          "char_accuracy": 0.0,
+          "edit_distance": 66,
+          "gold_len": 54,
+          "pred_len": 106
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_061_030422",
+          "gold": "قالياقومليسبيضلالةولكنيرسولمنربالعالمين",
+          "pred": "ضظااليياقهملسفييقرلاالةوالاكيمنيرلسولممنورقبالععامعين",
+          "char_accuracy": 0.4358974358974359,
+          "edit_distance": 22,
+          "gold_len": 39,
+          "pred_len": 53
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_083_031082",
+          "gold": "فانجيناهواهلهالاامراتهكانتمنالغابرين",
+          "pred": "فااانييناههواههلعهرالامموراااتههاكاناتنينانهابرينر",
+          "char_accuracy": 0.4722222222222222,
+          "edit_distance": 19,
+          "gold_len": 36,
+          "pred_len": 50
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_106_031772",
+          "gold": "قالانكنتجئتبايةفاتبهاانكنتمنالصادقين",
+          "pred": "قااعلاالننكنتجاااتبياااكةنفااااتيبيااينمنكنمتمنالصادقيين",
+          "char_accuracy": 0.36111111111111116,
+          "edit_distance": 23,
+          "gold_len": 36,
+          "pred_len": 56
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_107_031802",
+          "gold": "فالقيعصاهفاذاهيثعبانمبين",
+          "pred": "فاياالقااصاهفجحمذااههيثعععبالنامعدينن",
+          "char_accuracy": 0.29166666666666663,
+          "edit_distance": 17,
+          "gold_len": 24,
+          "pred_len": 37
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_130_032492",
+          "gold": "ولقداخذناالفرعونبالسنينونقصمنالثمراتلعلهميذكرون",
+          "pred": "ولقادااخرناعالكقالملععامنابسمينوناضسممنافمراتيلععلااهانميالكوواومووون",
+          "char_accuracy": 0.21276595744680848,
+          "edit_distance": 37,
+          "gold_len": 47,
+          "pred_len": 69
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_135_032642",
+          "gold": "فلماكشفناعنهمالرجزالياجلهمبالغوهاذاهمينكثون",
+          "pred": "االممااكساخخناعمامالجيذكلاااجلنرامنبالموهواذااهمنينكصون",
+          "char_accuracy": 0.41860465116279066,
+          "edit_distance": 25,
+          "gold_len": 43,
+          "pred_len": 55
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_140_032792",
+          "gold": "قالاغيراللهابغيكمالهاوهوفضلكمعليالعالمين",
+          "pred": "قالاضيورمضوهيااليبذيكمالاهننموافضلااكمعلاالعااالممين",
+          "char_accuracy": 0.475,
+          "edit_distance": 21,
+          "gold_len": 40,
+          "pred_len": 52
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_170_033692",
+          "gold": "والذينيمسكونبالكتابواقامواالصلاةانالانضيعاجرالمصلحين",
+          "pred": "والمينيومسقونقبيياكتابوااقااهالصلااكتننلنالالضيوااليراللمصلحخين",
+          "char_accuracy": 0.5384615384615384,
+          "edit_distance": 24,
+          "gold_len": 52,
+          "pred_len": 63
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_174_033812",
+          "gold": "وكذلكنفصلالاياتولعلهميرجعون",
+          "pred": "وكذااليكنفاصصصصلولااياةيوالععللههاممميرهمجررووون",
+          "char_accuracy": 0.11111111111111116,
+          "edit_distance": 24,
+          "gold_len": 27,
+          "pred_len": 48
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_181_034022",
+          "gold": "وممنخلقناامةيهدونبالحقوبهيعدلون",
+          "pred": "قوهمنخالقوناااهمممكمعياهحفدونبلحاحتيوابيههياعبيلومن",
+          "char_accuracy": 0.16129032258064513,
+          "edit_distance": 26,
+          "gold_len": 31,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_199_034562",
+          "gold": "خذالعفووامربالعرفواعرضعنالجاهلين",
+          "pred": "قوذللعفقواوااؤممواروبالواررفيوااعاررضاعاناللجنيليين",
+          "char_accuracy": 0.25,
+          "edit_distance": 24,
+          "gold_len": 32,
+          "pred_len": 51
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_003_034862",
+          "gold": "الذينيقيمونالصلاةوممارزقناهمينفقون",
+          "pred": "االهبينيوقيمونالصلاتومماارازقونااهممومفقون",
+          "char_accuracy": 0.6470588235294117,
+          "edit_distance": 12,
+          "gold_len": 34,
+          "pred_len": 42
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_005_034922",
+          "gold": "كمااخرجكربكمنبيتكبالحقوانفريقامنالمؤمنينلكارهون",
+          "pred": "كماااارجاكربكمامباريتكذلحتيواينفارييقمانلمواؤمنينالاكااهيهون",
+          "char_accuracy": 0.4893617021276596,
+          "edit_distance": 24,
+          "gold_len": 47,
+          "pred_len": 60
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_015_035222",
+          "gold": "ياايهاالذينامنوااذالقيتمالذينكفروازحفافلاتولوهمالادبار",
+          "pred": "يااههيوااالمييهينااااممنوراامالقييكتمنذييينكافاروزعفمفلاتوولنووالااذبااارارن",
+          "char_accuracy": 0.33333333333333337,
+          "edit_distance": 36,
+          "gold_len": 54,
+          "pred_len": 76
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_008_018_035312",
+          "gold": "ذلكمواناللهموهنكيدالكافرين",
+          "pred": "ذالكممواعنالللالووووناكجالللكافرييين",
+          "char_accuracy": 0.3846153846153846,
+          "edit_distance": 16,
+          "gold_len": 26,
+          "pred_len": 36
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_008_041133",
+          "gold": "اولئكماواهمالناربماكانوايكسبون",
+          "pred": "الائكماوايوهااااناربماكانوواكسبومن",
+          "char_accuracy": 0.6666666666666667,
+          "edit_distance": 10,
+          "gold_len": 30,
+          "pred_len": 34
+        }
+      ]
+    }
+  ]
+}

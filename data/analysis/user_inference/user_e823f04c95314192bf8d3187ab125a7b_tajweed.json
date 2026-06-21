@@ -1,0 +1,122 @@
+{
+  "sample_id": "quran_tajweed_019_002",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\user_e823f04c95314192bf8d3187ab125a7b.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 2268,
+  "text": "ذكر رحمت ربك عبده زكريا",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": true
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": true
+    },
+    "module_judgments": [
+      {
+        "position": 13,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9279910922050476,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.7126215696334839,
+          "ghunnah": 0.28737834095954895
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.8254152536392212,
+          "madd": 0.8170509338378906
+        },
+        "localized_clip_probability": 0.8170509338378906,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 5,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 390,
+          "end_frame": 549,
+          "start_sec": 3.9,
+          "end_sec": 5.49,
+          "max_prob": 0.8170509338378906,
+          "mean_prob": 0.6376588940620422
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 11,
+        "source_module": "burst",
+        "rule": "qalqalah",
+        "predicted_rule": "none",
+        "is_correct": false,
+        "detail": "expected qalqalah burst but detector did not fire",
+        "confidence": 0.943604588508606
+      }
+    ],
+    "report": {
+      "word": "ذكر رحمت ربك عبده زكريا",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "l"
+      ],
+      "errors": [
+        {
+          "position": 11,
+          "type": "rule_error",
+          "rule": "qalqalah",
+          "detail": "expected qalqalah burst but detector did not fire",
+          "expected": "qalqalah",
+          "predicted": "none",
+          "extra": {
+            "source_module": "burst",
+            "confidence": 0.943604588508606,
+            "char": "ب"
+          }
+        }
+      ]
+    },
+    "weighted_score": {
+      "score": 91.50755870342255,
+      "weighted_error_sum": 2.830813765525818,
+      "scale": 3.0,
+      "num_errors": 1,
+      "severity_counts": {
+        "medium": 1
+      },
+      "errors": [
+        {
+          "module": "burst",
+          "error_type": "missing_qalqalah",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 11,
+          "expected": "qalqalah",
+          "predicted": "none",
+          "confidence": 0.943604588508606,
+          "weight": 3.0,
+          "weighted_penalty": 2.830813765525818,
+          "detail": "expected qalqalah burst but detector did not fire"
+        }
+      ]
+    },
+    "feedback": [
+      "At position 11 (\"ب\"), the rule qalqalah was not applied correctly. expected qalqalah burst but detector did not fire Confidence=0.94."
+    ]
+  },
+  "weighted_score": null
+}

@@ -1,0 +1,83 @@
+{
+  "sample_id": "quran_tajweed_109_001",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\segments\\user_e8fa240d7560430abf7b80d9cb102483\\natural\\user_e8fa240d7560430abf7b80d9cb102483_natural_segment_001.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 6314,
+  "text": "قل يايها الكفرون",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 13,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9863032102584839,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.8596001863479614,
+          "ghunnah": 0.1403997838497162
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.18068088591098785,
+          "madd": 0.7942163944244385
+        },
+        "localized_clip_probability": 0.7942163944244385,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 7,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 215,
+          "end_frame": 249,
+          "start_sec": 2.15,
+          "end_sec": 2.49,
+          "max_prob": 0.7942163944244385,
+          "mean_prob": 0.630327045917511
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      }
+    ],
+    "report": {
+      "word": "قل يايها الكفرون",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "l"
+      ],
+      "errors": []
+    },
+    "weighted_score": {
+      "score": 100.0,
+      "weighted_error_sum": 0,
+      "scale": 3.0,
+      "num_errors": 0,
+      "severity_counts": {},
+      "errors": []
+    },
+    "feedback": [
+      "No errors were detected."
+    ]
+  },
+  "weighted_score": null
+}

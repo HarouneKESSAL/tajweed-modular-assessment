@@ -1,0 +1,25 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6c_old_expanded_full_vocab_hd96_finetuned.pt",
+  "stage_results": [
+    {
+      "stage_name": "expanded_word_chunk",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_word_chunk_rebalance.jsonl",
+      "best_metrics": {
+        "samples": 1389.0,
+        "exact_match": 0.4521238300935925,
+        "char_accuracy": 0.8112646053250815,
+        "edit_distance": 1.3628509719222461
+      }
+    },
+    {
+      "stage_name": "expanded_anchor_refresh",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_stage1_anchor.jsonl",
+      "best_metrics": {
+        "samples": 1000.0,
+        "exact_match": 0.189,
+        "char_accuracy": 0.4429889227810774,
+        "edit_distance": 12.915
+      }
+    }
+  ]
+}

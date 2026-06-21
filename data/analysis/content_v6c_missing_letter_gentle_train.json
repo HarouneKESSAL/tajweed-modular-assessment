@@ -1,0 +1,25 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6c_missing_letter_gentle.pt",
+  "stage_results": [
+    {
+      "stage_name": "preserve_old_chunks",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_word_chunk_rebalance.jsonl",
+      "best_metrics": {
+        "samples": 1389.0,
+        "exact_match": 0.6335493160547156,
+        "char_accuracy": 0.8729120111949489,
+        "edit_distance": 0.8970482361411087
+      }
+    },
+    {
+      "stage_name": "teach_missing_letters",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6c_missing_letter_targets.jsonl",
+      "best_metrics": {
+        "samples": 300.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.15944444444444436,
+        "edit_distance": 4.623333333333333
+      }
+    }
+  ]
+}

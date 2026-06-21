@@ -1,0 +1,15 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_ayah_hf_v2_balanced_hd96.pt",
+  "stage_results": [
+    {
+      "stage_name": "hf_ayah_v2_reciter_balanced_le60",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_ayah_hf_v2_reciter_balanced_le60.jsonl",
+      "best_metrics": {
+        "samples": 760.0,
+        "exact_match": 0.006578947368421052,
+        "char_accuracy": 0.685546887912991,
+        "edit_distance": 5.597368421052631
+      }
+    }
+  ]
+}

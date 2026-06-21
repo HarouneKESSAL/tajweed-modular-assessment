@@ -1,0 +1,25 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6b_word_chunk_full_vocab_hd96.pt",
+  "stage_results": [
+    {
+      "stage_name": "word_chunk_full_vocab",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_word_chunk_rebalance.jsonl",
+      "best_metrics": {
+        "samples": 1389.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.2797826303765822,
+        "edit_distance": 5.221022318214543
+      }
+    },
+    {
+      "stage_name": "word_chunk_refine",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_word_chunk_rebalance.jsonl",
+      "best_metrics": {
+        "samples": 1389.0,
+        "exact_match": 0.004319654427645789,
+        "char_accuracy": 0.3686178352485045,
+        "edit_distance": 4.57451403887689
+      }
+    }
+  ]
+}

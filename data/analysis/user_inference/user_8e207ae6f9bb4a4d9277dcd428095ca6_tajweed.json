@@ -1,0 +1,563 @@
+{
+  "sample_id": "quran_tajweed_002_142",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\user_8e207ae6f9bb4a4d9277dcd428095ca6.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 149,
+  "text": "سيقول السفهاء من الناس ما وليهم عن قبلتهم التي كانوا عليها قل لله المشرق والمغرب يهدي من يشاء الي صرط مستقيم",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": true,
+    "use_transition_localizer": true,
+    "use_burst": true
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": true,
+      "use_transition_localizer": true,
+      "use_burst": true
+    },
+    "module_judgments": [
+      {
+        "position": 9,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.7127881646156311,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.5468875169754028,
+          "ghunnah": 0.45311248302459717
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.7958878874778748,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 4,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1084,
+          "end_frame": 1123,
+          "start_sec": 10.84,
+          "end_sec": 11.23,
+          "max_prob": 0.7958878874778748,
+          "mean_prob": 0.6204666495323181
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 16,
+        "source_module": "duration",
+        "rule": "ghunnah",
+        "predicted_rule": "ghunnah",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.7986297607421875,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": true,
+        "fusion_reason": "learned duration fusion selected ghunnah",
+        "fusion_probabilities": {
+          "madd": 0.011241411790251732,
+          "ghunnah": 0.9887585639953613
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.6024973392486572,
+        "localized_threshold": 0.85,
+        "localized_predicted_span_count": 0,
+        "localized_top_span": null,
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 22,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.8520999550819397,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.5360153317451477,
+          "ghunnah": 0.4639846980571747
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.7958878874778748,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 4,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1084,
+          "end_frame": 1123,
+          "start_sec": 10.84,
+          "end_sec": 11.23,
+          "max_prob": 0.7958878874778748,
+          "mean_prob": 0.6204666495323181
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 68,
+        "source_module": "duration",
+        "rule": "ghunnah",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "ghunnah",
+        "is_correct": false,
+        "detail": "expected ghunnah but got madd",
+        "confidence": 0.6429930329322815,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": true,
+        "fusion_reason": "learned duration fusion selected madd",
+        "fusion_probabilities": {
+          "madd": 0.7422853112220764,
+          "ghunnah": 0.2577146291732788
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.6024973392486572,
+        "localized_threshold": 0.85,
+        "localized_predicted_span_count": 0,
+        "localized_top_span": null,
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 71,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "ghunnah",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.6954265832901001,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": true,
+        "fusion_reason": "learned duration fusion selected madd",
+        "fusion_probabilities": {
+          "madd": 0.6952654719352722,
+          "ghunnah": 0.3047345280647278
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.7958878874778748,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 4,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1084,
+          "end_frame": 1123,
+          "start_sec": 10.84,
+          "end_sec": 11.23,
+          "max_prob": 0.7958878874778748,
+          "mean_prob": 0.6204666495323181
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 78,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "ghunnah",
+        "sequence_predicted_rule": "ghunnah",
+        "is_correct": false,
+        "detail": "expected madd but got ghunnah",
+        "confidence": 0.5879188776016235,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.3726663887500763,
+          "ghunnah": 0.6273336410522461
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.7958878874778748,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 4,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1084,
+          "end_frame": 1123,
+          "start_sec": 10.84,
+          "end_sec": 11.23,
+          "max_prob": 0.7958878874778748,
+          "mean_prob": 0.6204666495323181
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 79,
+        "source_module": "duration",
+        "rule": "ghunnah",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": false,
+        "detail": "expected ghunnah but got madd",
+        "confidence": 0.6524679064750671,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9412700533866882,
+          "ghunnah": 0.05872996151447296
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.6024973392486572,
+        "localized_threshold": 0.85,
+        "localized_predicted_span_count": 0,
+        "localized_top_span": null,
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 82,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.6684088706970215,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9684659242630005,
+          "ghunnah": 0.03153400123119354
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.6024973392486572,
+          "madd": 0.7958878874778748
+        },
+        "localized_clip_probability": 0.7958878874778748,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 4,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 1084,
+          "end_frame": 1123,
+          "start_sec": 10.84,
+          "end_sec": 11.23,
+          "max_prob": 0.7958878874778748,
+          "mean_prob": 0.6204666495323181
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 27,
+        "source_module": "transition",
+        "rule": "ikhfa",
+        "predicted_rule": "none",
+        "is_correct": false,
+        "detail": "expected ikhfa but got none",
+        "confidence": 0.9444181323051453,
+        "decision_source": "whole_verse_with_localized_evidence",
+        "localized_clip_probability": 0.8492883443832397,
+        "localized_threshold": 0.75,
+        "localized_predicted_span_count": 1,
+        "localized_top_span": {
+          "label": "ikhfa",
+          "start_frame": 1476,
+          "end_frame": 1481,
+          "start_sec": 14.76,
+          "end_sec": 14.81,
+          "max_prob": 0.8492883443832397,
+          "mean_prob": 0.8249627947807312
+        },
+        "localized_predicted_labels": [
+          "ikhfa"
+        ]
+      },
+      {
+        "position": 28,
+        "source_module": "burst",
+        "rule": "qalqalah",
+        "predicted_rule": "none",
+        "is_correct": false,
+        "detail": "expected qalqalah burst but detector did not fire",
+        "confidence": 0.5739882588386536
+      }
+    ],
+    "report": {
+      "word": "سيقول السفهاء من الناس ما وليهم عن قبلتهم التي كانوا عليها قل لله المشرق والمغرب يهدي من يشاء الي صرط مستقيم",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m"
+      ],
+      "errors": [
+        {
+          "position": 68,
+          "type": "rule_error",
+          "rule": "ghunnah",
+          "detail": "expected ghunnah but got madd",
+          "expected": "ghunnah",
+          "predicted": "madd",
+          "extra": {
+            "source_module": "duration",
+            "sequence_predicted_rule": "ghunnah",
+            "confidence": 0.6429930329322815,
+            "decision_source": "learned_duration_fusion",
+            "fusion_applied": true,
+            "fusion_reason": "learned duration fusion selected madd",
+            "fusion_probabilities": {
+              "madd": 0.7422853112220764,
+              "ghunnah": 0.2577146291732788
+            },
+            "localized_clip_probabilities": {
+              "ghunnah": 0.6024973392486572,
+              "madd": 0.7958878874778748
+            },
+            "localized_clip_probability": 0.6024973392486572,
+            "localized_threshold": 0.85,
+            "localized_predicted_span_count": 0,
+            "localized_top_span": null,
+            "localized_predicted_labels": [
+              "madd"
+            ],
+            "char": "د"
+          }
+        },
+        {
+          "position": 78,
+          "type": "rule_error",
+          "rule": "madd",
+          "detail": "expected madd but got ghunnah",
+          "expected": "madd",
+          "predicted": "ghunnah",
+          "extra": {
+            "source_module": "duration",
+            "sequence_predicted_rule": "ghunnah",
+            "confidence": 0.5879188776016235,
+            "decision_source": "learned_duration_fusion",
+            "fusion_applied": false,
+            "fusion_reason": null,
+            "fusion_probabilities": {
+              "madd": 0.3726663887500763,
+              "ghunnah": 0.6273336410522461
+            },
+            "localized_clip_probabilities": {
+              "ghunnah": 0.6024973392486572,
+              "madd": 0.7958878874778748
+            },
+            "localized_clip_probability": 0.7958878874778748,
+            "localized_threshold": 0.45,
+            "localized_predicted_span_count": 4,
+            "localized_top_span": {
+              "label": "madd",
+              "start_frame": 1084,
+              "end_frame": 1123,
+              "start_sec": 10.84,
+              "end_sec": 11.23,
+              "max_prob": 0.7958878874778748,
+              "mean_prob": 0.6204666495323181
+            },
+            "localized_predicted_labels": [
+              "madd"
+            ],
+            "char": "ي"
+          }
+        },
+        {
+          "position": 79,
+          "type": "rule_error",
+          "rule": "ghunnah",
+          "detail": "expected ghunnah but got madd",
+          "expected": "ghunnah",
+          "predicted": "madd",
+          "extra": {
+            "source_module": "duration",
+            "sequence_predicted_rule": "madd",
+            "confidence": 0.6524679064750671,
+            "decision_source": "learned_duration_fusion",
+            "fusion_applied": false,
+            "fusion_reason": null,
+            "fusion_probabilities": {
+              "madd": 0.9412700533866882,
+              "ghunnah": 0.05872996151447296
+            },
+            "localized_clip_probabilities": {
+              "ghunnah": 0.6024973392486572,
+              "madd": 0.7958878874778748
+            },
+            "localized_clip_probability": 0.6024973392486572,
+            "localized_threshold": 0.85,
+            "localized_predicted_span_count": 0,
+            "localized_top_span": null,
+            "localized_predicted_labels": [
+              "madd"
+            ],
+            "char": "ص"
+          }
+        },
+        {
+          "position": 27,
+          "type": "rule_error",
+          "rule": "ikhfa",
+          "detail": "expected ikhfa but got none",
+          "expected": "ikhfa",
+          "predicted": "none",
+          "extra": {
+            "source_module": "transition",
+            "confidence": 0.9444181323051453,
+            "decision_source": "whole_verse_with_localized_evidence",
+            "localized_clip_probability": 0.8492883443832397,
+            "localized_threshold": 0.75,
+            "localized_predicted_span_count": 1,
+            "localized_top_span": {
+              "label": "ikhfa",
+              "start_frame": 1476,
+              "end_frame": 1481,
+              "start_sec": 14.76,
+              "end_sec": 14.81,
+              "max_prob": 0.8492883443832397,
+              "mean_prob": 0.8249627947807312
+            },
+            "localized_predicted_labels": [
+              "ikhfa"
+            ],
+            "char": "ن"
+          }
+        },
+        {
+          "position": 28,
+          "type": "rule_error",
+          "rule": "qalqalah",
+          "detail": "expected qalqalah burst but detector did not fire",
+          "expected": "qalqalah",
+          "predicted": "none",
+          "extra": {
+            "source_module": "burst",
+            "confidence": 0.5739882588386536,
+            "char": "ق"
+          }
+        }
+      ]
+    },
+    "weighted_score": {
+      "score": 67.62016749382019,
+      "weighted_error_sum": 10.793277502059937,
+      "scale": 3.0,
+      "num_errors": 5,
+      "severity_counts": {
+        "medium": 5
+      },
+      "errors": [
+        {
+          "module": "duration",
+          "error_type": "ghunnah_duration_error",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 68,
+          "expected": "ghunnah",
+          "predicted": "madd",
+          "confidence": 0.6429930329322815,
+          "weight": 3.0,
+          "weighted_penalty": 1.9289790987968445,
+          "detail": "expected ghunnah but got madd"
+        },
+        {
+          "module": "duration",
+          "error_type": "severe_madd_error",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 78,
+          "expected": "madd",
+          "predicted": "ghunnah",
+          "confidence": 0.5879188776016235,
+          "weight": 4.0,
+          "weighted_penalty": 2.351675510406494,
+          "detail": "expected madd but got ghunnah"
+        },
+        {
+          "module": "duration",
+          "error_type": "ghunnah_duration_error",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 79,
+          "expected": "ghunnah",
+          "predicted": "madd",
+          "confidence": 0.6524679064750671,
+          "weight": 3.0,
+          "weighted_penalty": 1.9574037194252014,
+          "detail": "expected ghunnah but got madd"
+        },
+        {
+          "module": "transition",
+          "error_type": "weak_ikhfa",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 27,
+          "expected": "ikhfa",
+          "predicted": "none",
+          "confidence": 0.9444181323051453,
+          "weight": 3.0,
+          "weighted_penalty": 2.833254396915436,
+          "detail": "expected ikhfa but got none"
+        },
+        {
+          "module": "burst",
+          "error_type": "missing_qalqalah",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 28,
+          "expected": "qalqalah",
+          "predicted": "none",
+          "confidence": 0.5739882588386536,
+          "weight": 3.0,
+          "weighted_penalty": 1.7219647765159607,
+          "detail": "expected qalqalah burst but detector did not fire"
+        }
+      ]
+    },
+    "feedback": [
+      "At position 68 (\"د\"), the rule ghunnah was not applied correctly. expected ghunnah but got madd Confidence=0.64. Localized evidence suggested madd with 0 spans for ghunnah=0.60.",
+      "At position 78 (\"ي\"), the rule madd was not applied correctly. expected madd but got ghunnah Confidence=0.59. Localized evidence suggested madd with 4 spans for madd=0.80.",
+      "At position 79 (\"ص\"), the rule ghunnah was not applied correctly. expected ghunnah but got madd Confidence=0.65. Localized evidence suggested madd with 0 spans for ghunnah=0.60.",
+      "At position 27 (\"ن\"), the rule ikhfa was not applied correctly. expected ikhfa but got none Confidence=0.94. Localized evidence suggested ikhfa with 1 span for ikhfa=0.85.",
+      "At position 28 (\"ق\"), the rule qalqalah was not applied correctly. expected qalqalah burst but detector did not fire Confidence=0.57."
+    ]
+  },
+  "weighted_score": null
+}

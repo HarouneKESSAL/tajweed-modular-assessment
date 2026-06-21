@@ -1,0 +1,126 @@
+{
+  "sample_id": "quran_tajweed_113_002",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\segments\\user_33d96f003105492bb9c362bfc4207ef7\\expected_count\\user_33d96f003105492bb9c362bfc4207ef7_expected_segment_002.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 6337,
+  "text": "من شر ما خلق",
+  "routing_plan": {
+    "use_duration": false,
+    "use_duration_localizer": false,
+    "use_transition": true,
+    "use_transition_localizer": true,
+    "use_burst": true
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": false,
+      "use_duration_localizer": false,
+      "use_transition": true,
+      "use_transition_localizer": true,
+      "use_burst": true
+    },
+    "module_judgments": [
+      {
+        "position": 1,
+        "source_module": "transition",
+        "rule": "ikhfa",
+        "predicted_rule": "none",
+        "is_correct": false,
+        "detail": "expected ikhfa but got none",
+        "confidence": 0.8209227919578552,
+        "decision_source": "whole_verse_with_localized_evidence",
+        "localized_clip_probability": 0.762967586517334,
+        "localized_threshold": 0.75,
+        "localized_predicted_span_count": 1,
+        "localized_top_span": {
+          "label": "ikhfa",
+          "start_frame": 172,
+          "end_frame": 173,
+          "start_sec": 1.72,
+          "end_sec": 1.73,
+          "max_prob": 0.762967586517334,
+          "mean_prob": 0.762967586517334
+        },
+        "localized_predicted_labels": [
+          "idgham",
+          "ikhfa"
+        ]
+      },
+      {
+        "position": 8,
+        "source_module": "burst",
+        "rule": "qalqalah",
+        "predicted_rule": "qalqalah",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9750452637672424
+      }
+    ],
+    "report": {
+      "word": "من شر ما خلق",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [],
+      "errors": [
+        {
+          "position": 1,
+          "type": "rule_error",
+          "rule": "ikhfa",
+          "detail": "expected ikhfa but got none",
+          "expected": "ikhfa",
+          "predicted": "none",
+          "extra": {
+            "source_module": "transition",
+            "confidence": 0.8209227919578552,
+            "decision_source": "whole_verse_with_localized_evidence",
+            "localized_clip_probability": 0.762967586517334,
+            "localized_threshold": 0.75,
+            "localized_predicted_span_count": 1,
+            "localized_top_span": {
+              "label": "ikhfa",
+              "start_frame": 172,
+              "end_frame": 173,
+              "start_sec": 1.72,
+              "end_sec": 1.73,
+              "max_prob": 0.762967586517334,
+              "mean_prob": 0.762967586517334
+            },
+            "localized_predicted_labels": [
+              "idgham",
+              "ikhfa"
+            ],
+            "char": "ن"
+          }
+        }
+      ]
+    },
+    "weighted_score": {
+      "score": 92.6116948723793,
+      "weighted_error_sum": 2.4627683758735657,
+      "scale": 3.0,
+      "num_errors": 1,
+      "severity_counts": {
+        "medium": 1
+      },
+      "errors": [
+        {
+          "module": "transition",
+          "error_type": "weak_ikhfa",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 1,
+          "expected": "ikhfa",
+          "predicted": "none",
+          "confidence": 0.8209227919578552,
+          "weight": 3.0,
+          "weighted_penalty": 2.4627683758735657,
+          "detail": "expected ikhfa but got none"
+        }
+      ]
+    },
+    "feedback": [
+      "At position 1 (\"ن\"), the rule ikhfa was not applied correctly. expected ikhfa but got none Confidence=0.82. Localized evidence suggested idgham, ikhfa with 1 span for ikhfa=0.76."
+    ]
+  },
+  "weighted_score": null
+}

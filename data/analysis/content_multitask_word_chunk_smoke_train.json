@@ -1,0 +1,35 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_multitask_word_chunk_smoke.pt",
+  "stage_results": [
+    {
+      "stage_name": "word_heavy",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_stage1_word_heavy.jsonl",
+      "best_metrics": {
+        "samples": 100.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.0,
+        "edit_distance": 4.68
+      }
+    },
+    {
+      "stage_name": "balanced",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_stage2_balanced.jsonl",
+      "best_metrics": {
+        "samples": 75.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.0,
+        "edit_distance": 6.946666666666666
+      }
+    },
+    {
+      "stage_name": "chunk_heavy",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\multitask_content_stage3_chunk_heavy.jsonl",
+      "best_metrics": {
+        "samples": 100.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.0,
+        "edit_distance": 7.3
+      }
+    }
+  ]
+}

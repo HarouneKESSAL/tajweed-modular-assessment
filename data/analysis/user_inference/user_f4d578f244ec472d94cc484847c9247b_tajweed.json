@@ -1,0 +1,120 @@
+{
+  "sample_id": "quran_tajweed_001_002",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\user_f4d578f244ec472d94cc484847c9247b.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 1,
+  "text": "الحمد لله رب العلمين",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 12,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9716969132423401,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.615901529788971,
+          "ghunnah": 0.38409844040870667
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.1226217970252037,
+          "madd": 0.7972494959831238
+        },
+        "localized_clip_probability": 0.7972494959831238,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 20,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 210,
+          "end_frame": 238,
+          "start_sec": 2.1,
+          "end_sec": 2.38,
+          "max_prob": 0.7972494959831238,
+          "mean_prob": 0.6704745888710022
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 15,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9769593477249146,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9874070882797241,
+          "ghunnah": 0.012592915445566177
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.1226217970252037,
+          "madd": 0.7972494959831238
+        },
+        "localized_clip_probability": 0.7972494959831238,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 20,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 210,
+          "end_frame": 238,
+          "start_sec": 2.1,
+          "end_sec": 2.38,
+          "max_prob": 0.7972494959831238,
+          "mean_prob": 0.6704745888710022
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      }
+    ],
+    "report": {
+      "word": "الحمد لله رب العلمين",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "a",
+        "l"
+      ],
+      "errors": []
+    },
+    "weighted_score": {
+      "score": 100.0,
+      "weighted_error_sum": 0,
+      "scale": 3.0,
+      "num_errors": 0,
+      "severity_counts": {},
+      "errors": []
+    },
+    "feedback": [
+      "No errors were detected."
+    ]
+  },
+  "weighted_score": null
+}

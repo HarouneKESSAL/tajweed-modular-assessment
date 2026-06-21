@@ -1,0 +1,247 @@
+{
+  "sample_id": "quran_tajweed_002_006",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\user_12f8020171194cad8dfe679164459b79.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 13,
+  "text": "ان الذين كفروا سواء عليهم ءانذرتهم ام لم تنذرهم لا يؤمنون",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": true,
+    "use_transition_localizer": true,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": true,
+      "use_transition_localizer": true,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 1,
+        "source_module": "duration",
+        "rule": "ghunnah",
+        "predicted_rule": "ghunnah",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.7978563904762268,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": true,
+        "fusion_reason": "learned duration fusion selected ghunnah",
+        "fusion_probabilities": {
+          "madd": 0.01649593375623226,
+          "ghunnah": 0.983504056930542
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.5766289830207825,
+          "madd": 0.6834739446640015
+        },
+        "localized_clip_probability": 0.5766289830207825,
+        "localized_threshold": 0.85,
+        "localized_predicted_span_count": 0,
+        "localized_top_span": null,
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 14,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9214087128639221,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9811951518058777,
+          "ghunnah": 0.018804920837283134
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.5766289830207825,
+          "madd": 0.6834739446640015
+        },
+        "localized_clip_probability": 0.6834739446640015,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 2,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 934,
+          "end_frame": 967,
+          "start_sec": 9.34,
+          "end_sec": 9.67,
+          "max_prob": 0.6834739446640015,
+          "mean_prob": 0.5785408616065979
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 45,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.9320196509361267,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9303284883499146,
+          "ghunnah": 0.06967158615589142
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.5766289830207825,
+          "madd": 0.6834739446640015
+        },
+        "localized_clip_probability": 0.6834739446640015,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 2,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 934,
+          "end_frame": 967,
+          "start_sec": 9.34,
+          "end_sec": 9.67,
+          "max_prob": 0.6834739446640015,
+          "mean_prob": 0.5785408616065979
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 23,
+        "source_module": "transition",
+        "rule": "ikhfa",
+        "predicted_rule": "none",
+        "is_correct": false,
+        "detail": "expected ikhfa but got none",
+        "confidence": 0.8991986513137817,
+        "decision_source": "whole_verse_with_localized_evidence",
+        "localized_clip_probability": 0.04190332815051079,
+        "localized_threshold": 0.75,
+        "localized_predicted_span_count": 0,
+        "localized_top_span": null,
+        "localized_predicted_labels": []
+      },
+      {
+        "position": 34,
+        "source_module": "transition",
+        "rule": "ikhfa",
+        "predicted_rule": "none",
+        "is_correct": false,
+        "detail": "expected ikhfa but got none",
+        "confidence": 0.8991986513137817,
+        "decision_source": "whole_verse_with_localized_evidence",
+        "localized_clip_probability": 0.04190332815051079,
+        "localized_threshold": 0.75,
+        "localized_predicted_span_count": 0,
+        "localized_top_span": null,
+        "localized_predicted_labels": []
+      }
+    ],
+    "report": {
+      "word": "ان الذين كفروا سواء عليهم ءانذرتهم ام لم تنذرهم لا يؤمنون",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "a",
+        "l"
+      ],
+      "errors": [
+        {
+          "position": 23,
+          "type": "rule_error",
+          "rule": "ikhfa",
+          "detail": "expected ikhfa but got none",
+          "expected": "ikhfa",
+          "predicted": "none",
+          "extra": {
+            "source_module": "transition",
+            "confidence": 0.8991986513137817,
+            "decision_source": "whole_verse_with_localized_evidence",
+            "localized_clip_probability": 0.04190332815051079,
+            "localized_threshold": 0.75,
+            "localized_predicted_span_count": 0,
+            "localized_top_span": null,
+            "localized_predicted_labels": [],
+            "char": "ن"
+          }
+        },
+        {
+          "position": 34,
+          "type": "rule_error",
+          "rule": "ikhfa",
+          "detail": "expected ikhfa but got none",
+          "expected": "ikhfa",
+          "predicted": "none",
+          "extra": {
+            "source_module": "transition",
+            "confidence": 0.8991986513137817,
+            "decision_source": "whole_verse_with_localized_evidence",
+            "localized_clip_probability": 0.04190332815051079,
+            "localized_threshold": 0.75,
+            "localized_predicted_span_count": 0,
+            "localized_top_span": null,
+            "localized_predicted_labels": [],
+            "char": "ن"
+          }
+        }
+      ]
+    },
+    "weighted_score": {
+      "score": 83.81442427635193,
+      "weighted_error_sum": 5.39519190788269,
+      "scale": 3.0,
+      "num_errors": 2,
+      "severity_counts": {
+        "medium": 2
+      },
+      "errors": [
+        {
+          "module": "transition",
+          "error_type": "weak_ikhfa",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 23,
+          "expected": "ikhfa",
+          "predicted": "none",
+          "confidence": 0.8991986513137817,
+          "weight": 3.0,
+          "weighted_penalty": 2.697595953941345,
+          "detail": "expected ikhfa but got none"
+        },
+        {
+          "module": "transition",
+          "error_type": "weak_ikhfa",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 34,
+          "expected": "ikhfa",
+          "predicted": "none",
+          "confidence": 0.8991986513137817,
+          "weight": 3.0,
+          "weighted_penalty": 2.697595953941345,
+          "detail": "expected ikhfa but got none"
+        }
+      ]
+    },
+    "feedback": [
+      "At position 23 (\"ن\"), the rule ikhfa was not applied correctly. expected ikhfa but got none Confidence=0.90. Localized evidence found no ikhfa span (p=0.04).",
+      "At position 34 (\"ن\"), the rule ikhfa was not applied correctly. expected ikhfa but got none Confidence=0.90. Localized evidence found no ikhfa span (p=0.04)."
+    ]
+  },
+  "weighted_score": null
+}

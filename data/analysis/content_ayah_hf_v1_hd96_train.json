@@ -1,0 +1,35 @@
+{
+  "output_checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_ayah_hf_v1_hd96.pt",
+  "stage_results": [
+    {
+      "stage_name": "hf_ayah_le20",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_ayah_hf_le20.jsonl",
+      "best_metrics": {
+        "samples": 249.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.0040052630968927735,
+        "edit_distance": 14.42570281124498
+      }
+    },
+    {
+      "stage_name": "hf_ayah_le40",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_ayah_hf_le40.jsonl",
+      "best_metrics": {
+        "samples": 500.0,
+        "exact_match": 0.0,
+        "char_accuracy": 0.6172530487351585,
+        "edit_distance": 6.014
+      }
+    },
+    {
+      "stage_name": "hf_ayah_le60",
+      "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_ayah_hf_le60.jsonl",
+      "best_metrics": {
+        "samples": 609.0,
+        "exact_match": 0.009852216748768473,
+        "char_accuracy": 0.6934817538673388,
+        "edit_distance": 5.1461412151067325
+      }
+    }
+  ]
+}

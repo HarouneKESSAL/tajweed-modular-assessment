@@ -1,0 +1,51 @@
+{
+  "input_manifest": "data\\manifests\\content_v6a_short_hf_ayah_r1_hf_ayah_clean_no_juhaynee.jsonl",
+  "output_manifest": "data\\manifests\\content_v6a_short_hf_ayah_r1_hf_ayah_clean_no_juhaynee_v2_weighted.jsonl",
+  "original_rows": 2733,
+  "original_train_rows": 2326,
+  "original_non_train_rows": 407,
+  "added_train_duplicates": 3839,
+  "output_rows": 6572,
+  "repeat_distribution": {
+    "0": 1020,
+    "1": 699,
+    "2": 396,
+    "3": 271,
+    "4": 259,
+    "5": 29,
+    "6": 59
+  },
+  "added_by_reciter": {
+    "husary_mujawwad": 631,
+    "hussary.teacher": 603,
+    "muhsin_al_qasim": 521,
+    "minshawy_mujawwad": 380,
+    "banna": 306,
+    "warsh_yassin": 282,
+    "abu_bakr_ash_shaatree": 243,
+    "ghamadi": 155,
+    "abdul_basit_murattal": 144,
+    "warsh_husary": 119,
+    "ibrahim_akhdar": 118,
+    "alafasy": 113,
+    "saood_ash_shuraym": 68,
+    "abdullah_basfar": 62,
+    "ali_jaber": 54,
+    "abdurrahmaan_as_sudais": 40
+  },
+  "added_by_length_bucket": {
+    "001_010": 71,
+    "011_020": 1540,
+    "021_040": 960,
+    "041_060": 1268
+  },
+  "hard_reciter_extra_repeats": {
+    "husary_mujawwad": 4,
+    "minshawy_mujawwad": 4,
+    "muhsin_al_qasim": 3,
+    "warsh_husary": 2,
+    "hussary.teacher": 2,
+    "banna": 1,
+    "warsh_yassin": 1
+  }
+}

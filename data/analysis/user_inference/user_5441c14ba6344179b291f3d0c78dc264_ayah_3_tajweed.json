@@ -1,0 +1,177 @@
+{
+  "sample_id": "quran_tajweed_001_003",
+  "audio_path": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\uploads\\segments\\user_5441c14ba6344179b291f3d0c78dc264\\natural\\user_5441c14ba6344179b291f3d0c78dc264_natural_segment_003.wav",
+  "audio_override_used": true,
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\quran_tajweed_reference_full.jsonl",
+  "sample_index": 2,
+  "text": "الرحمن الرحيم",
+  "routing_plan": {
+    "use_duration": true,
+    "use_duration_localizer": true,
+    "use_transition": false,
+    "use_transition_localizer": false,
+    "use_burst": false
+  },
+  "diagnosis": {
+    "routing_plan": {
+      "use_duration": true,
+      "use_duration_localizer": true,
+      "use_transition": false,
+      "use_transition_localizer": false,
+      "use_burst": false
+    },
+    "module_judgments": [
+      {
+        "position": 4,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "madd",
+        "sequence_predicted_rule": "madd",
+        "is_correct": true,
+        "detail": "",
+        "confidence": 0.8991876840591431,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": false,
+        "fusion_reason": null,
+        "fusion_probabilities": {
+          "madd": 0.9213913679122925,
+          "ghunnah": 0.07860863208770752
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.4944377541542053,
+          "madd": 0.8652551770210266
+        },
+        "localized_clip_probability": 0.8652551770210266,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 3,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 166,
+          "end_frame": 303,
+          "start_sec": 1.6600000000000001,
+          "end_sec": 3.0300000000000002,
+          "max_prob": 0.8652551770210266,
+          "mean_prob": 0.7277804613113403
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      },
+      {
+        "position": 10,
+        "source_module": "duration",
+        "rule": "madd",
+        "predicted_rule": "ghunnah",
+        "sequence_predicted_rule": "madd",
+        "is_correct": false,
+        "detail": "expected madd but got ghunnah",
+        "confidence": 0.9869226217269897,
+        "decision_source": "learned_duration_fusion",
+        "fusion_applied": true,
+        "fusion_reason": "learned duration fusion selected ghunnah",
+        "fusion_probabilities": {
+          "madd": 0.334091454744339,
+          "ghunnah": 0.6659085154533386
+        },
+        "localized_clip_probabilities": {
+          "ghunnah": 0.4944377541542053,
+          "madd": 0.8652551770210266
+        },
+        "localized_clip_probability": 0.8652551770210266,
+        "localized_threshold": 0.45,
+        "localized_predicted_span_count": 3,
+        "localized_top_span": {
+          "label": "madd",
+          "start_frame": 166,
+          "end_frame": 303,
+          "start_sec": 1.6600000000000001,
+          "end_sec": 3.0300000000000002,
+          "max_prob": 0.8652551770210266,
+          "mean_prob": 0.7277804613113403
+        },
+        "localized_predicted_labels": [
+          "madd"
+        ]
+      }
+    ],
+    "report": {
+      "word": "الرحمن الرحيم",
+      "canonical_phonemes": [],
+      "predicted_phonemes": [
+        "m",
+        "a",
+        "l"
+      ],
+      "errors": [
+        {
+          "position": 10,
+          "type": "rule_error",
+          "rule": "madd",
+          "detail": "expected madd but got ghunnah",
+          "expected": "madd",
+          "predicted": "ghunnah",
+          "extra": {
+            "source_module": "duration",
+            "sequence_predicted_rule": "madd",
+            "confidence": 0.9869226217269897,
+            "decision_source": "learned_duration_fusion",
+            "fusion_applied": true,
+            "fusion_reason": "learned duration fusion selected ghunnah",
+            "fusion_probabilities": {
+              "madd": 0.334091454744339,
+              "ghunnah": 0.6659085154533386
+            },
+            "localized_clip_probabilities": {
+              "ghunnah": 0.4944377541542053,
+              "madd": 0.8652551770210266
+            },
+            "localized_clip_probability": 0.8652551770210266,
+            "localized_threshold": 0.45,
+            "localized_predicted_span_count": 3,
+            "localized_top_span": {
+              "label": "madd",
+              "start_frame": 166,
+              "end_frame": 303,
+              "start_sec": 1.6600000000000001,
+              "end_sec": 3.0300000000000002,
+              "max_prob": 0.8652551770210266,
+              "mean_prob": 0.7277804613113403
+            },
+            "localized_predicted_labels": [
+              "madd"
+            ],
+            "char": "ي"
+          }
+        }
+      ]
+    },
+    "weighted_score": {
+      "score": 88.15692853927612,
+      "weighted_error_sum": 3.947690486907959,
+      "scale": 3.0,
+      "num_errors": 1,
+      "severity_counts": {
+        "medium": 1
+      },
+      "errors": [
+        {
+          "module": "duration",
+          "error_type": "severe_madd_error",
+          "severity": "medium",
+          "lahn_type": "khafi",
+          "position": 10,
+          "expected": "madd",
+          "predicted": "ghunnah",
+          "confidence": 0.9869226217269897,
+          "weight": 4.0,
+          "weighted_penalty": 3.947690486907959,
+          "detail": "expected madd but got ghunnah"
+        }
+      ]
+    },
+    "feedback": [
+      "At position 10 (\"ي\"), the rule madd was not applied correctly. expected madd but got ghunnah Confidence=0.99. Localized evidence suggested madd with 3 spans for madd=0.87."
+    ]
+  },
+  "weighted_score": null
+}

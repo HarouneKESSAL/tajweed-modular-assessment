@@ -1,0 +1,2183 @@
+{
+  "checkpoint": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\checkpoints\\content_v6c_old_expanded_full_vocab_hd96.pt",
+  "manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\manifests\\content_v6a_short_hf_ayah_r1_hf_ayah_clean_all.jsonl",
+  "work_manifest": "C:\\Users\\anis\\Desktop\\tajweed-modular-assessment\\data\\interim\\fullverse_as_chunks_w3.jsonl",
+  "split": "val",
+  "limit": 300,
+  "max_words_per_chunk": 3,
+  "min_window_sec": 0.35,
+  "blank_penalty": 0.4,
+  "num_window_rows": 844,
+  "overall": {
+    "samples": 300,
+    "exact_match": 0.0,
+    "char_accuracy": 0.21370540566515264,
+    "edit_distance": 24.283333333333335,
+    "avg_gold_len": 31.29,
+    "avg_pred_len": 16.37,
+    "avg_chunks": 2.8133333333333335
+  },
+  "buckets": {
+    "001_020": {
+      "samples": 72,
+      "exact_match": 0.0,
+      "char_accuracy": 0.16536522180710778,
+      "edit_distance": 12.555555555555555,
+      "avg_gold_len": 14.944444444444445,
+      "avg_pred_len": 9.305555555555555,
+      "avg_chunks": 1.5833333333333333
+    },
+    "021_040": {
+      "samples": 143,
+      "exact_match": 0.0,
+      "char_accuracy": 0.22183050192306306,
+      "edit_distance": 23.146853146853147,
+      "avg_gold_len": 29.804195804195803,
+      "avg_pred_len": 15.405594405594405,
+      "avg_chunks": 2.629370629370629
+    },
+    "041_060": {
+      "samples": 85,
+      "exact_match": 0.0,
+      "char_accuracy": 0.24098310534630607,
+      "edit_distance": 36.129411764705885,
+      "avg_gold_len": 47.63529411764706,
+      "avg_pred_len": 23.976470588235294,
+      "avg_chunks": 4.1647058823529415
+    }
+  },
+  "worst_examples": [
+    {
+      "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_001_000210",
+      "gold": "الم",
+      "pred": "لنعيس",
+      "raw_text": "الم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 6.765714285714286,
+      "gold_len": 3,
+      "pred_len": 5,
+      "edit_distance": 5,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_002_001_000210_win_00",
+          "gold": "الم",
+          "pred": "لنعيس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_saood_ash_shuraym_003_001_008790",
+      "gold": "الم",
+      "pred": "ولكلحعبدس",
+      "raw_text": "الم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 5.746938775510204,
+      "gold_len": 3,
+      "pred_len": 9,
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_saood_ash_shuraym_003_001_008790_win_00",
+          "gold": "الم",
+          "pred": "ولكلحعبدس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_banna_020_034_071435",
+      "gold": "ونذكرككثيرا",
+      "pred": "ملااس",
+      "raw_text": "ونذكرك كثيرا",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 3.500408163265306,
+      "gold_len": 11,
+      "pred_len": 5,
+      "edit_distance": 11,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_banna_020_034_071435_win_00",
+          "gold": "ونذكرككثيرا",
+          "pred": "ملااس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_001_087967",
+      "gold": "طسم",
+      "pred": "مالحين",
+      "raw_text": "طسم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 6.948571428571428,
+      "gold_len": 3,
+      "pred_len": 6,
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_001_087967_win_00",
+          "gold": "طسم",
+          "pred": "مالحين"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_028_001_097568",
+      "gold": "طسم",
+      "pred": "اياكني",
+      "raw_text": "طسم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 9.716507936507936,
+      "gold_len": 3,
+      "pred_len": 6,
+      "edit_distance": 6,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_028_001_097568_win_00",
+          "gold": "طسم",
+          "pred": "اياكني"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_029_001_100208",
+      "gold": "الم",
+      "pred": "لناس",
+      "raw_text": "الم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 9.194195011337868,
+      "gold_len": 3,
+      "pred_len": 4,
+      "edit_distance": 4,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_029_001_100208_win_00",
+          "gold": "الم",
+          "pred": "لناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_030_001_102278",
+      "gold": "الم",
+      "pred": "لكالناس",
+      "raw_text": "الم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 8.280045351473923,
+      "gold_len": 3,
+      "pred_len": 7,
+      "edit_distance": 5,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_001_102278_win_00",
+          "gold": "الم",
+          "pred": "لكالناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_031_001_104078",
+      "gold": "الم",
+      "pred": "لشلناس",
+      "raw_text": "الم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 8.149433106575964,
+      "gold_len": 3,
+      "pred_len": 6,
+      "edit_distance": 5,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_031_001_104078_win_00",
+          "gold": "الم",
+          "pred": "لشلناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_032_001_105098",
+      "gold": "الم",
+      "pred": "لكالناس",
+      "raw_text": "الم",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 8.671746031746032,
+      "gold_len": 3,
+      "pred_len": 7,
+      "edit_distance": 5,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_032_001_105098_win_00",
+          "gold": "الم",
+          "pred": "لكالناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_036_001_111159",
+      "gold": "يس",
+      "pred": "ملكالناس",
+      "raw_text": "يس",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 7.014943310657596,
+      "gold_len": 2,
+      "pred_len": 8,
+      "edit_distance": 7,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_036_001_111159_win_00",
+          "gold": "يس",
+          "pred": "ملكالناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_037_179_118989",
+      "gold": "وابصرفسوفيبصرون",
+      "pred": "ملكالناس",
+      "raw_text": "وابصر فسوف يبصرون",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 7.615759637188209,
+      "gold_len": 15,
+      "pred_len": 8,
+      "edit_distance": 15,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_179_118989_win_00",
+          "gold": "وابصرفسوفيبصرون",
+          "pred": "ملكالناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_alafasy_042_002_128200",
+      "gold": "عسق",
+      "pred": "ملكالنيك",
+      "raw_text": "عسق",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 15.151020408163266,
+      "gold_len": 3,
+      "pred_len": 8,
+      "edit_distance": 8,
+      "char_accuracy": 0.0,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_042_002_128200_win_00",
+          "gold": "عسق",
+          "pred": "ملكالنيك"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ibrahim_akhdar_053_003_143591",
+      "gold": "وماينطقعنالهوي",
+      "pred": "لبدمانبتس",
+      "raw_text": "وما ينطق عن الهوي",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 5.292,
+      "gold_len": 14,
+      "pred_len": 9,
+      "edit_distance": 13,
+      "char_accuracy": 0.0714285714285714,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_053_003_143591_win_00",
+          "gold": "وماينطقعن",
+          "pred": "لبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_053_003_143591_win_01",
+          "gold": "الهوي",
+          "pred": "مانبتس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_037_049_115089",
+      "gold": "كانهنبيضمكنون",
+      "pred": "ملاناس",
+      "raw_text": "كانهن بيض مكنون",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 9.548820861678005,
+      "gold_len": 13,
+      "pred_len": 6,
+      "edit_distance": 12,
+      "char_accuracy": 0.07692307692307687,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_049_115089_win_00",
+          "gold": "كانهنبيضمكنون",
+          "pred": "ملاناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ghamadi_053_051_145032",
+      "gold": "وثمودفماابقي",
+      "pred": "لنا",
+      "raw_text": "وثمود فما ابقي",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 4.037006802721089,
+      "gold_len": 12,
+      "pred_len": 3,
+      "edit_distance": 11,
+      "char_accuracy": 0.08333333333333337,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_053_051_145032_win_00",
+          "gold": "وثمودفماابقي",
+          "pred": "لنا"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_020_122_074076",
+      "gold": "ثماجتباهربهفتابعليهوهدي",
+      "pred": "لالمنولاناس",
+      "raw_text": "ثم اجتباه ربه فتاب عليه وهدي",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 6.4,
+      "gold_len": 23,
+      "pred_len": 11,
+      "edit_distance": 21,
+      "char_accuracy": 0.08695652173913049,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_020_122_074076_win_00",
+          "gold": "ثماجتباهربه",
+          "pred": "لالمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_020_122_074076_win_01",
+          "gold": "فتابعليهوهدي",
+          "pred": "ولاناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_207_094147",
+      "gold": "مااغنيعنهمماكانوايمتعون",
+      "pred": "لبداعد",
+      "raw_text": "ما اغني عنهم ما كانوا يمتعون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 9.639183673469388,
+      "gold_len": 23,
+      "pred_len": 6,
+      "edit_distance": 21,
+      "char_accuracy": 0.08695652173913049,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_207_094147_win_00",
+          "gold": "مااغنيعنهم",
+          "pred": "لبدا"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_207_094147_win_01",
+          "gold": "ماكانوايمتعون",
+          "pred": "عد"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ibrahim_akhdar_053_006_143681",
+      "gold": "ذومرةفاستوي",
+      "pred": "لالدتس",
+      "raw_text": "ذو مرة فاستوي",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 4.824,
+      "gold_len": 11,
+      "pred_len": 6,
+      "edit_distance": 10,
+      "char_accuracy": 0.09090909090909094,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_053_006_143681_win_00",
+          "gold": "ذومرةفاستوي",
+          "pred": "لالدتس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_020_107_073626",
+      "gold": "لاتريفيهاعوجاولاامتا",
+      "pred": "ولخناسلخناس",
+      "raw_text": "لا تري فيها عوجا ولا امتا",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 8.51591836734694,
+      "gold_len": 20,
+      "pred_len": 11,
+      "edit_distance": 18,
+      "char_accuracy": 0.09999999999999998,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_020_107_073626_win_00",
+          "gold": "لاتريفيها",
+          "pred": "ولخناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_020_107_073626_win_01",
+          "gold": "عوجاولاامتا",
+          "pred": "لخناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ghamadi_056_017_149862",
+      "gold": "يطوفعليهمولدانمخلدون",
+      "pred": "لانبدسالرحاس",
+      "raw_text": "يطوف عليهم ولدان مخلدون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 5.547709750566893,
+      "gold_len": 20,
+      "pred_len": 12,
+      "edit_distance": 18,
+      "char_accuracy": 0.09999999999999998,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_056_017_149862_win_00",
+          "gold": "يطوفعليهمولدان",
+          "pred": "لانبدس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_056_017_149862_win_01",
+          "gold": "مخلدون",
+          "pred": "الرحاس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_076_090217",
+      "gold": "انتمواباؤكمالاقدمون",
+      "pred": "لا",
+      "raw_text": "انتم واباؤكم الاقدمون",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 6.9746938775510205,
+      "gold_len": 19,
+      "pred_len": 2,
+      "edit_distance": 17,
+      "char_accuracy": 0.10526315789473684,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_076_090217_win_00",
+          "gold": "انتمواباؤكمالاقدمون",
+          "pred": "لا"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_170_093037",
+      "gold": "فنجيناهواهلهاجمعين",
+      "pred": "ولحبداد",
+      "raw_text": "فنجيناه واهله اجمعين",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 7.209795918367347,
+      "gold_len": 18,
+      "pred_len": 7,
+      "edit_distance": 16,
+      "char_accuracy": 0.11111111111111116,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_170_093037_win_00",
+          "gold": "فنجيناهواهلهاجمعين",
+          "pred": "ولحبداد"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_203_094027",
+      "gold": "فيقولواهلنحنمنظرون",
+      "pred": "معبدونماعبدمد",
+      "raw_text": "فيقولوا هل نحن منظرون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 6.347755102040816,
+      "gold_len": 18,
+      "pred_len": 13,
+      "edit_distance": 16,
+      "char_accuracy": 0.11111111111111116,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_203_094027_win_00",
+          "gold": "فيقولواهلنحن",
+          "pred": "معبدون"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_203_094027_win_01",
+          "gold": "منظرون",
+          "pred": "ماعبدمد"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ghamadi_053_019_144072",
+      "gold": "افرايتماللاتوالعزي",
+      "pred": "لناس",
+      "raw_text": "افرايتم اللات والعزي",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 4.284081632653061,
+      "gold_len": 18,
+      "pred_len": 4,
+      "edit_distance": 16,
+      "char_accuracy": 0.11111111111111116,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_053_019_144072_win_00",
+          "gold": "افرايتماللاتوالعزي",
+          "pred": "لناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_025_029342",
+      "gold": "قالفيهاتحيونوفيهاتموتونومنهاتخرجون",
+      "pred": "لرعبدماعبدمملناس",
+      "raw_text": "قال فيها تحيون وفيها تموتون ومنها تخرجون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 24.372244897959185,
+      "gold_len": 34,
+      "pred_len": 16,
+      "edit_distance": 30,
+      "char_accuracy": 0.11764705882352944,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_025_029342_win_00",
+          "gold": "قالفيهاتحيون",
+          "pred": "لرعبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_025_029342_win_01",
+          "gold": "وفيهاتموتونومنها",
+          "pred": "ماعبدم"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_025_029342_win_02",
+          "gold": "تخرجون",
+          "pred": "ملناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_husary_mujawwad_015_072_056194",
+      "gold": "لعمركانهملفيسكرتهميعمهون",
+      "pred": "الالناةالحم",
+      "raw_text": "لعمرك انهم لفي سكرتهم يعمهون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 13.871020408163265,
+      "gold_len": 24,
+      "pred_len": 11,
+      "edit_distance": 21,
+      "char_accuracy": 0.125,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_015_072_056194_win_00",
+          "gold": "لعمركانهملفي",
+          "pred": "الالناة"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_015_072_056194_win_01",
+          "gold": "سكرتهميعمهون",
+          "pred": "الحم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_080_090337",
+      "gold": "واذامرضتفهويشفين",
+      "pred": "البدمامالرحمن",
+      "raw_text": "واذا مرضت فهو يشفين",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 5.146122448979592,
+      "gold_len": 16,
+      "pred_len": 13,
+      "edit_distance": 14,
+      "char_accuracy": 0.125,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_080_090337_win_00",
+          "gold": "واذامرضتفهو",
+          "pred": "البدما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_080_090337_win_01",
+          "gold": "يشفين",
+          "pred": "مالرحمن"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_alafasy_043_003_129820",
+      "gold": "اناجعلناهقراناعربيالعلكمتعقلون",
+      "pred": "ملنمدباس",
+      "raw_text": "انا جعلناه قرانا عربيا لعلكم تعقلون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 9.586938775510204,
+      "gold_len": 30,
+      "pred_len": 8,
+      "edit_distance": 26,
+      "char_accuracy": 0.1333333333333333,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_003_129820_win_00",
+          "gold": "اناجعلناهقرانا",
+          "pred": "ملنمد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_003_129820_win_01",
+          "gold": "عربيالعلكمتعقلون",
+          "pred": "باس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_023_016_080646",
+      "gold": "ثمانكميومالقيامةتبعثون",
+      "pred": "ولناسلمس",
+      "raw_text": "ثم انكم يوم القيامة تبعثون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 6.922448979591837,
+      "gold_len": 22,
+      "pred_len": 8,
+      "edit_distance": 19,
+      "char_accuracy": 0.13636363636363635,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_016_080646_win_00",
+          "gold": "ثمانكميوم",
+          "pred": "ولناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_016_080646_win_01",
+          "gold": "القيامةتبعثون",
+          "pred": "لمس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_banna_019_089_070145",
+      "gold": "لقدجئتمشيئاادا",
+      "pred": "منشاةالحاس",
+      "raw_text": "لقد جئتم شيئا ادا",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 4.231836734693878,
+      "gold_len": 14,
+      "pred_len": 10,
+      "edit_distance": 12,
+      "char_accuracy": 0.1428571428571429,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_089_070145_win_00",
+          "gold": "لقدجئتمشيئا",
+          "pred": "منشاة"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_089_070145_win_01",
+          "gold": "ادا",
+          "pred": "الحاس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_036_063_113019",
+      "gold": "هذهجهنمالتيكنتمتوعدون",
+      "pred": "الكالنعبدالوحباد",
+      "raw_text": "هذه جهنم التي كنتم توعدون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 13.62392290249433,
+      "gold_len": 21,
+      "pred_len": 16,
+      "edit_distance": 18,
+      "char_accuracy": 0.1428571428571429,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_036_063_113019_win_00",
+          "gold": "هذهجهنمالتي",
+          "pred": "الكالنعبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_036_063_113019_win_01",
+          "gold": "كنتمتوعدون",
+          "pred": "الوحباد"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ibrahim_akhdar_052_041_143261",
+      "gold": "امعندهمالغيبفهميكتبون",
+      "pred": "ملباسلمس",
+      "raw_text": "ام عندهم الغيب فهم يكتبون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 8.352,
+      "gold_len": 21,
+      "pred_len": 8,
+      "edit_distance": 18,
+      "char_accuracy": 0.1428571428571429,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_052_041_143261_win_00",
+          "gold": "امعندهمالغيب",
+          "pred": "ملباس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_052_041_143261_win_01",
+          "gold": "فهميكتبون",
+          "pred": "لمس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_050_081667",
+      "gold": "وجعلناابنمريموامهايةواويناهمااليربوةذاتقرارومعين",
+      "pred": "ولعبدسابدسولاسد",
+      "raw_text": "وجعلنا ابن مريم وامه اية واويناهما الي ربوة ذات قرار ومعين",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 18.729795918367348,
+      "gold_len": 48,
+      "pred_len": 15,
+      "edit_distance": 41,
+      "char_accuracy": 0.14583333333333337,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_050_081667_win_00",
+          "gold": "وجعلناابنمريم",
+          "pred": "ولعبدس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_050_081667_win_01",
+          "gold": "وامهايةواويناهما",
+          "pred": "ابدس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_050_081667_win_02",
+          "gold": "اليربوةذات",
+          "pred": "ولاس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_050_081667_win_03",
+          "gold": "قرارومعين",
+          "pred": "د"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_204_034712",
+      "gold": "واذاقرئالقرانفاستمعوالهوانصتوالعلكمترحمون",
+      "pred": "ولبدعبدتدلامس",
+      "raw_text": "واذا قرئ القران فاستمعوا له وانصتوا لعلكم ترحمون",
+      "bucket": "041_060",
+      "num_chunks": 3,
+      "duration_sec": 23.719183673469388,
+      "gold_len": 41,
+      "pred_len": 13,
+      "edit_distance": 35,
+      "char_accuracy": 0.14634146341463417,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_204_034712_win_00",
+          "gold": "واذاقرئالقران",
+          "pred": "ولبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_204_034712_win_01",
+          "gold": "فاستمعوالهوانصتوا",
+          "pred": "عبدتد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_204_034712_win_02",
+          "gold": "لعلكمترحمون",
+          "pred": "لامس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_023_105_083316",
+      "gold": "المتكناياتيتتليعليكمفكنتمبهاتكذبون",
+      "pred": "ولنماسالرحاةااس",
+      "raw_text": "الم تكن اياتي تتلي عليكم فكنتم بها تكذبون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 9.325714285714286,
+      "gold_len": 34,
+      "pred_len": 15,
+      "edit_distance": 29,
+      "char_accuracy": 0.1470588235294118,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_105_083316_win_00",
+          "gold": "المتكناياتي",
+          "pred": "ولنماس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_105_083316_win_01",
+          "gold": "تتليعليكمفكنتم",
+          "pred": "الرحاة"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_105_083316_win_02",
+          "gold": "بهاتكذبون",
+          "pred": "ااس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_023_004_080286",
+      "gold": "والذينهمللزكاةفاعلون",
+      "pred": "ملنيداحبدمس",
+      "raw_text": "والذين هم للزكاة فاعلون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 5.015510204081632,
+      "gold_len": 20,
+      "pred_len": 11,
+      "edit_distance": 17,
+      "char_accuracy": 0.15000000000000002,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_004_080286_win_00",
+          "gold": "والذينهمللزكاة",
+          "pred": "ملنيد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_004_080286_win_01",
+          "gold": "فاعلون",
+          "pred": "احبدمس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_177_093247",
+      "gold": "اذقاللهمشعيبالاتتقون",
+      "pred": "لرحبدونمواناس",
+      "raw_text": "اذ قال لهم شعيب الا تتقون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 6.922448979591837,
+      "gold_len": 20,
+      "pred_len": 13,
+      "edit_distance": 17,
+      "char_accuracy": 0.15000000000000002,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_177_093247_win_00",
+          "gold": "اذقاللهم",
+          "pred": "لرحبدون"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_177_093247_win_01",
+          "gold": "شعيبالاتتقون",
+          "pred": "مواناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ibrahim_akhdar_051_015_140681",
+      "gold": "انالمتقينفيجناتوعيون",
+      "pred": "ملناةلاناس",
+      "raw_text": "ان المتقين في جنات وعيون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 10.008,
+      "gold_len": 20,
+      "pred_len": 10,
+      "edit_distance": 17,
+      "char_accuracy": 0.15000000000000002,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_051_015_140681_win_00",
+          "gold": "انالمتقينفي",
+          "pred": "ملناة"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_051_015_140681_win_01",
+          "gold": "جناتوعيون",
+          "pred": "لاناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_027_029_095617",
+      "gold": "قالتياايهاالملاانيالقياليكتابكريم",
+      "pred": "ولنبدمدمنعيدامد",
+      "raw_text": "قالت يا ايها الملا اني القي الي كتاب كريم",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 13.479183673469388,
+      "gold_len": 33,
+      "pred_len": 15,
+      "edit_distance": 28,
+      "char_accuracy": 0.1515151515151515,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_027_029_095617_win_00",
+          "gold": "قالتياايها",
+          "pred": "ولنبدمد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_027_029_095617_win_01",
+          "gold": "الملاانيالقي",
+          "pred": "منعيد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_027_029_095617_win_02",
+          "gold": "اليكتابكريم",
+          "pred": "امد"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_216_094417",
+      "gold": "فانعصوكفقلانيبريءمماتعملون",
+      "pred": "منالعبدانمالرحعبدنما",
+      "raw_text": "فان عصوك فقل اني بريء مما تعملون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 11.833469387755102,
+      "gold_len": 26,
+      "pred_len": 20,
+      "edit_distance": 22,
+      "char_accuracy": 0.15384615384615385,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_216_094417_win_00",
+          "gold": "فانعصوكفقل",
+          "pred": "منالعبدان"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_216_094417_win_01",
+          "gold": "انيبريءمما",
+          "pred": "مالرحعبدن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_216_094417_win_02",
+          "gold": "تعملون",
+          "pred": "ما"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_alafasy_043_074_131950",
+      "gold": "انالمجرمينفيعذابجهنمخالدون",
+      "pred": "ملكانباةااس",
+      "raw_text": "ان المجرمين في عذاب جهنم خالدون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 9.325714285714286,
+      "gold_len": 26,
+      "pred_len": 11,
+      "edit_distance": 22,
+      "char_accuracy": 0.15384615384615385,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_074_131950_win_00",
+          "gold": "انالمجرمينفي",
+          "pred": "ملكانباة"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_074_131950_win_01",
+          "gold": "عذابجهنمخالدون",
+          "pred": "ااس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_030_059_104018",
+      "gold": "كذلكيطبعاللهعليقلوبالذينلايعلمون",
+      "pred": "لاندمناعبداااس",
+      "raw_text": "كذلك يطبع الله علي قلوب الذين لا يعلمون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 7.888208616780045,
+      "gold_len": 32,
+      "pred_len": 14,
+      "edit_distance": 27,
+      "char_accuracy": 0.15625,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_059_104018_win_00",
+          "gold": "كذلكيطبعالله",
+          "pred": "لاندمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_059_104018_win_01",
+          "gold": "عليقلوبالذين",
+          "pred": "اعبدا"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_059_104018_win_02",
+          "gold": "لايعلمون",
+          "pred": "ااس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_037_096_116499",
+      "gold": "واللهخلقكموماتعملون",
+      "pred": "ملاناسملرحم",
+      "raw_text": "والله خلقكم وما تعملون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 8.712902494331066,
+      "gold_len": 19,
+      "pred_len": 11,
+      "edit_distance": 16,
+      "char_accuracy": 0.1578947368421053,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_096_116499_win_00",
+          "gold": "واللهخلقكموما",
+          "pred": "ملاناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_096_116499_win_01",
+          "gold": "تعملون",
+          "pred": "ملرحم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_037_152_118179",
+      "gold": "ولداللهوانهملكاذبون",
+      "pred": "اياكنعبدالاس",
+      "raw_text": "ولد الله وانهم لكاذبون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 13.911269841269842,
+      "gold_len": 19,
+      "pred_len": 12,
+      "edit_distance": 16,
+      "char_accuracy": 0.1578947368421053,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_152_118179_win_00",
+          "gold": "ولداللهوانهم",
+          "pred": "اياكنعبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_152_118179_win_01",
+          "gold": "لكاذبون",
+          "pred": "الاس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ibrahim_akhdar_044_054_134021",
+      "gold": "كذلكوزوجناهمبحورعين",
+      "pred": "الالحعيمناشيم",
+      "raw_text": "كذلك وزوجناهم بحور عين",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 8.46,
+      "gold_len": 19,
+      "pred_len": 13,
+      "edit_distance": 16,
+      "char_accuracy": 0.1578947368421053,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_044_054_134021_win_00",
+          "gold": "كذلكوزوجناهمبحور",
+          "pred": "الالحعيمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_044_054_134021_win_01",
+          "gold": "عين",
+          "pred": "اشيم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_199_093907",
+      "gold": "فقراهعليهمماكانوابهمؤمنين",
+      "pred": "لبدونالرحيم",
+      "raw_text": "فقراه عليهم ما كانوا به مؤمنين",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 8.54204081632653,
+      "gold_len": 25,
+      "pred_len": 11,
+      "edit_distance": 21,
+      "char_accuracy": 0.16000000000000003,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_199_093907_win_00",
+          "gold": "فقراهعليهمما",
+          "pred": "لبدون"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_199_093907_win_01",
+          "gold": "كانوابهمؤمنين",
+          "pred": "الرحيم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_025_027_086436",
+      "gold": "ويوميعضالظالمعلييديهيقولياليتنياتخذتمعالرسولسبيلا",
+      "pred": "لربدماارحبدالحاسوانمن",
+      "raw_text": "ويوم يعض الظالم علي يديه يقول يا ليتني اتخذت مع الرسول سبيلا",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 10.057142857142857,
+      "gold_len": 49,
+      "pred_len": 21,
+      "edit_distance": 41,
+      "char_accuracy": 0.16326530612244894,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_027_086436_win_00",
+          "gold": "ويوميعضالظالم",
+          "pred": "لربدما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_027_086436_win_01",
+          "gold": "علييديهيقول",
+          "pred": "ارحبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_027_086436_win_02",
+          "gold": "ياليتنياتخذت",
+          "pred": "الحاس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_025_027_086436_win_03",
+          "gold": "معالرسولسبيلا",
+          "pred": "وانمن"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ibrahim_akhdar_050_039_140051",
+      "gold": "فاصبرعليمايقولونوسبحبحمدربكقبلطلوعالشمسوقبلالغروب",
+      "pred": "لااسماعبدالرحبدمبمد",
+      "raw_text": "فاصبر علي ما يقولون وسبح بحمد ربك قبل طلوع الشمس وقبل الغروب",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 14.688,
+      "gold_len": 49,
+      "pred_len": 19,
+      "edit_distance": 41,
+      "char_accuracy": 0.16326530612244894,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_050_039_140051_win_00",
+          "gold": "فاصبرعليما",
+          "pred": "لااس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_050_039_140051_win_01",
+          "gold": "يقولونوسبحبحمد",
+          "pred": "ماعبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_050_039_140051_win_02",
+          "gold": "ربكقبلطلوع",
+          "pred": "الرحبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ibrahim_akhdar_050_039_140051_win_03",
+          "gold": "الشمسوقبلالغروب",
+          "pred": "مبمد"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_139_032762",
+      "gold": "انهؤلاءمتبرماهمفيهوباطلماكانوايعملون",
+      "pred": "شبدتمسملتعبدسملنعبداسادة",
+      "raw_text": "ان هؤلاء متبر ما هم فيه وباطل ما كانوا يعملون",
+      "bucket": "021_040",
+      "num_chunks": 4,
+      "duration_sec": 28.34285714285714,
+      "gold_len": 36,
+      "pred_len": 24,
+      "edit_distance": 30,
+      "char_accuracy": 0.16666666666666663,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_139_032762_win_00",
+          "gold": "انهؤلاءمتبر",
+          "pred": "شبدتمس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_139_032762_win_01",
+          "gold": "ماهمفيه",
+          "pred": "ملتعبدس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_139_032762_win_02",
+          "gold": "وباطلماكانوا",
+          "pred": "ملنعبداس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_minshawy_mujawwad_007_139_032762_win_03",
+          "gold": "يعملون",
+          "pred": "ادة"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_banna_018_041_065405",
+      "gold": "اويصبحماؤهاغورافلنتستطيعلهطلبا",
+      "pred": "منشالناسملكلنحتانماعمن",
+      "raw_text": "او يصبح ماؤها غورا فلن تستطيع له طلبا",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 12.695510204081632,
+      "gold_len": 30,
+      "pred_len": 22,
+      "edit_distance": 25,
+      "char_accuracy": 0.16666666666666663,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_banna_018_041_065405_win_00",
+          "gold": "اويصبحماؤها",
+          "pred": "منشالناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_018_041_065405_win_01",
+          "gold": "غورافلنتستطيع",
+          "pred": "ملكلنحتان"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_018_041_065405_win_02",
+          "gold": "لهطلبا",
+          "pred": "ماعمن"
+        }
+      ]
+    }
+  ],
+  "best_examples": [
+    {
+      "id": "hf_quran_md_ayah_route_ghamadi_055_004_147132",
+      "gold": "علمهالبيان",
+      "pred": "لالناس",
+      "raw_text": "علمه البيان",
+      "bucket": "001_020",
+      "num_chunks": 1,
+      "duration_sec": 3.9588208616780047,
+      "gold_len": 10,
+      "pred_len": 6,
+      "edit_distance": 6,
+      "char_accuracy": 0.4,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_055_004_147132_win_00",
+          "gold": "علمهالبيان",
+          "pred": "لالناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_alafasy_038_054_120700",
+      "gold": "انهذالرزقنامالهمننفاد",
+      "pred": "لالناسالناسالخنان",
+      "raw_text": "ان هذا لرزقنا ما له من نفاد",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 8.933877551020409,
+      "gold_len": 21,
+      "pred_len": 17,
+      "edit_distance": 13,
+      "char_accuracy": 0.38095238095238093,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_038_054_120700_win_00",
+          "gold": "انهذالرزقنا",
+          "pred": "لالناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_038_054_120700_win_01",
+          "gold": "مالهمن",
+          "pred": "الناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_038_054_120700_win_02",
+          "gold": "نفاد",
+          "pred": "الخنان"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ghamadi_055_039_148182",
+      "gold": "فيومئذلايسالعنذنبهانسولاجان",
+      "pred": "ملكالناسوالناسولااس",
+      "raw_text": "فيومئذ لا يسال عن ذنبه انس ولا جان",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 10.860952380952382,
+      "gold_len": 27,
+      "pred_len": 19,
+      "edit_distance": 17,
+      "char_accuracy": 0.37037037037037035,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_055_039_148182_win_00",
+          "gold": "فيومئذلايسال",
+          "pred": "ملكالناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_055_039_148182_win_01",
+          "gold": "عنذنبهانس",
+          "pred": "والناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ghamadi_055_039_148182_win_02",
+          "gold": "ولاجان",
+          "pred": "ولااس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_037_130_117519",
+      "gold": "سلامعليالياسين",
+      "pred": "ملالناسالم",
+      "raw_text": "سلام علي ال ياسين",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 9.49657596371882,
+      "gold_len": 14,
+      "pred_len": 10,
+      "edit_distance": 9,
+      "char_accuracy": 0.3571428571428571,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_130_117519_win_00",
+          "gold": "سلامعليال",
+          "pred": "ملالناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_130_117519_win_01",
+          "gold": "ياسين",
+          "pred": "الم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_087_090547",
+      "gold": "ولاتخزنييوميبعثون",
+      "pred": "مانادمابون",
+      "raw_text": "ولا تخزني يوم يبعثون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 4.911020408163266,
+      "gold_len": 17,
+      "pred_len": 10,
+      "edit_distance": 11,
+      "char_accuracy": 0.3529411764705882,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_087_090547_win_00",
+          "gold": "ولاتخزنييوم",
+          "pred": "ماناد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_087_090547_win_01",
+          "gold": "يبعثون",
+          "pred": "مابون"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_034_036_109239",
+      "gold": "قلانربييبسطالرزقلمنيشاءويقدرولكناكثرالناسلايعلمون",
+      "pred": "اليانعبادوالنبدمواعبدالناسادمن",
+      "raw_text": "قل ان ربي يبسط الرزق لمن يشاء ويقدر ولكن اكثر الناس لا يعلمون",
+      "bucket": "041_060",
+      "num_chunks": 5,
+      "duration_sec": 25.53575963718821,
+      "gold_len": 49,
+      "pred_len": 30,
+      "edit_distance": 32,
+      "char_accuracy": 0.34693877551020413,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_034_036_109239_win_00",
+          "gold": "قلانربي",
+          "pred": "اليانعباد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_034_036_109239_win_01",
+          "gold": "يبسطالرزقلمن",
+          "pred": "والنبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_034_036_109239_win_02",
+          "gold": "يشاءويقدرولكن",
+          "pred": "مواعبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_034_036_109239_win_03",
+          "gold": "اكثرالناسلا",
+          "pred": "الناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_034_036_109239_win_04",
+          "gold": "يعلمون",
+          "pred": "ادمن"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_025_067_087637",
+      "gold": "والذيناذاانفقوالميسرفواولميقترواوكانبينذلكقواما",
+      "pred": "والناسولحاسوالباسالاا",
+      "raw_text": "والذين اذا انفقوا لم يسرفوا ولم يقتروا وكان بين ذلك قواما",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 12.042448979591837,
+      "gold_len": 47,
+      "pred_len": 21,
+      "edit_distance": 31,
+      "char_accuracy": 0.34042553191489366,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_025_067_087637_win_00",
+          "gold": "والذيناذاانفقوا",
+          "pred": "والناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_025_067_087637_win_01",
+          "gold": "لميسرفواولم",
+          "pred": "ولحاس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_025_067_087637_win_02",
+          "gold": "يقترواوكانبين",
+          "pred": "والباس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_025_067_087637_win_03",
+          "gold": "ذلكقواما",
+          "pred": "الاا"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdullah_basfar_010_008_041133",
+      "gold": "اولئكماواهمالناربماكانوايكسبون",
+      "pred": "ملانماواكالناس",
+      "raw_text": "اولئك ماواهم النار بما كانوا يكسبون",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 10.944,
+      "gold_len": 30,
+      "pred_len": 14,
+      "edit_distance": 20,
+      "char_accuracy": 0.33333333333333337,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_008_041133_win_00",
+          "gold": "اولئكماواهمالنار",
+          "pred": "ملانما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdullah_basfar_010_008_041133_win_01",
+          "gold": "بماكانوايكسبون",
+          "pred": "واكالناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_alafasy_043_009_130000",
+      "gold": "ولئنسالتهممنخلقالسماواتوالارضليقولنخلقهنالعزيزالعليم",
+      "pred": "لنبدتاسمنالناسمالنادالرحيم",
+      "raw_text": "ولئن سالتهم من خلق السماوات والارض ليقولن خلقهن العزيز العليم",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 15.07265306122449,
+      "gold_len": 52,
+      "pred_len": 26,
+      "edit_distance": 35,
+      "char_accuracy": 0.32692307692307687,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_009_130000_win_00",
+          "gold": "ولئنسالتهممن",
+          "pred": "لنبدتاس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_009_130000_win_01",
+          "gold": "خلقالسماواتوالارض",
+          "pred": "منالناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_009_130000_win_02",
+          "gold": "ليقولنخلقهنالعزيز",
+          "pred": "مالناد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_009_130000_win_03",
+          "gold": "العليم",
+          "pred": "الرحيم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_024_005_083856",
+      "gold": "الاالذينتابوامنبعدذلكواصلحوافاناللهغفوررحيم",
+      "pred": "لامامانالخناسالرحيم",
+      "raw_text": "الا الذين تابوا من بعد ذلك واصلحوا فان الله غفور رحيم",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 10.919183673469387,
+      "gold_len": 43,
+      "pred_len": 19,
+      "edit_distance": 29,
+      "char_accuracy": 0.32558139534883723,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_024_005_083856_win_00",
+          "gold": "الاالذينتابوا",
+          "pred": "لاما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_024_005_083856_win_01",
+          "gold": "منبعدذلك",
+          "pred": "مانا"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_024_005_083856_win_02",
+          "gold": "واصلحوافانالله",
+          "pred": "لخناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_024_005_083856_win_03",
+          "gold": "غفوررحيم",
+          "pred": "الرحيم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_053_089527",
+      "gold": "فارسلفرعونفيالمدائنحاشرين",
+      "pred": "مالةوالنين",
+      "raw_text": "فارسل فرعون في المدائن حاشرين",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 6.060408163265306,
+      "gold_len": 25,
+      "pred_len": 10,
+      "edit_distance": 17,
+      "char_accuracy": 0.31999999999999995,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_053_089527_win_00",
+          "gold": "فارسلفرعونفي",
+          "pred": "مالة"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_053_089527_win_01",
+          "gold": "المدائنحاشرين",
+          "pred": "والنين"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_alafasy_043_027_130540",
+      "gold": "الاالذيفطرنيفانهسيهدين",
+      "pred": "الكالنمنالرحي",
+      "raw_text": "الا الذي فطرني فانه سيهدين",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 7.862857142857143,
+      "gold_len": 22,
+      "pred_len": 13,
+      "edit_distance": 15,
+      "char_accuracy": 0.31818181818181823,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_027_130540_win_00",
+          "gold": "الاالذيفطرني",
+          "pred": "الكالنمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_alafasy_043_027_130540_win_01",
+          "gold": "فانهسيهدين",
+          "pred": "الرحي"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_088_090577",
+      "gold": "يوملاينفعمالولابنون",
+      "pred": "ملرنباماا",
+      "raw_text": "يوم لا ينفع مال ولا بنون",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 6.739591836734694,
+      "gold_len": 19,
+      "pred_len": 9,
+      "edit_distance": 13,
+      "char_accuracy": 0.3157894736842105,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_088_090577_win_00",
+          "gold": "يوملاينفع",
+          "pred": "ملرنبا"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_088_090577_win_01",
+          "gold": "مالولابنون",
+          "pred": "ماا"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_banna_016_128_060845",
+      "gold": "اناللهمعالذيناتقواوالذينهممحسنون",
+      "pred": "ملالبادمالنينمالانعبوس",
+      "raw_text": "ان الله مع الذين اتقوا والذين هم محسنون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 11.023673469387756,
+      "gold_len": 32,
+      "pred_len": 22,
+      "edit_distance": 22,
+      "char_accuracy": 0.3125,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_banna_016_128_060845_win_00",
+          "gold": "اناللهمع",
+          "pred": "ملالباد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_016_128_060845_win_01",
+          "gold": "الذيناتقواوالذين",
+          "pred": "مالنين"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_016_128_060845_win_02",
+          "gold": "هممحسنون",
+          "pred": "مالانعبوس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_023_034_081186",
+      "gold": "ولئناطعتمبشرامثلكمانكماذالخاسرون",
+      "pred": "ملاماسعابدتماملاود",
+      "raw_text": "ولئن اطعتم بشرا مثلكم انكم اذا لخاسرون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 14.915918367346938,
+      "gold_len": 32,
+      "pred_len": 18,
+      "edit_distance": 22,
+      "char_accuracy": 0.3125,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_034_081186_win_00",
+          "gold": "ولئناطعتمبشرا",
+          "pred": "ملاماس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_034_081186_win_01",
+          "gold": "مثلكمانكماذا",
+          "pred": "عابدتما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_023_034_081186_win_02",
+          "gold": "لخاسرون",
+          "pred": "ملاود"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_035_021_110409",
+      "gold": "ولاالظلولاالحرور",
+      "pred": "ملانواسالخناس",
+      "raw_text": "ولا الظل ولا الحرور",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 8.63453514739229,
+      "gold_len": 16,
+      "pred_len": 13,
+      "edit_distance": 11,
+      "char_accuracy": 0.3125,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_035_021_110409_win_00",
+          "gold": "ولاالظلولا",
+          "pred": "ملانواس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_035_021_110409_win_01",
+          "gold": "الحرور",
+          "pred": "الخناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_hussary.teacher_037_163_118509",
+      "gold": "الامنهوصالالجحيم",
+      "pred": "ملكاكنعبدمالالناس",
+      "raw_text": "الا من هو صال الجحيم",
+      "bucket": "001_020",
+      "num_chunks": 2,
+      "duration_sec": 9.940657596371882,
+      "gold_len": 16,
+      "pred_len": 17,
+      "edit_distance": 11,
+      "char_accuracy": 0.3125,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_163_118509_win_00",
+          "gold": "الامنهو",
+          "pred": "ملكاكنعبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_hussary.teacher_037_163_118509_win_01",
+          "gold": "صالالجحيم",
+          "pred": "مالالناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_warsh_yassin_022_008_078066",
+      "gold": "ومنالناسمنيجادلفياللهبغيرعلمولاهديولاكتابمنير",
+      "pred": "ملناسالرحيمالانباادماالرحيم",
+      "raw_text": "ومن الناس من يجادل في الله بغير علم ولا هدي ولا كتاب منير",
+      "bucket": "041_060",
+      "num_chunks": 5,
+      "duration_sec": 13.322448979591837,
+      "gold_len": 45,
+      "pred_len": 27,
+      "edit_distance": 31,
+      "char_accuracy": 0.3111111111111111,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_022_008_078066_win_00",
+          "gold": "ومنالناسمن",
+          "pred": "ملناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_022_008_078066_win_01",
+          "gold": "يجادلفيالله",
+          "pred": "الرحيم"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_022_008_078066_win_02",
+          "gold": "بغيرعلمولا",
+          "pred": "الانبا"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_022_008_078066_win_03",
+          "gold": "هديولاكتاب",
+          "pred": "ادما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_warsh_yassin_022_008_078066_win_04",
+          "gold": "منير",
+          "pred": "الرحيم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_banna_019_004_067595",
+      "gold": "قالربانيوهنالعظممنيواشتعلالراسشيباولماكنبدعائكربشقيا",
+      "pred": "ملابدمنالريموالونماعبدوالنبس",
+      "raw_text": "قال رب اني وهن العظم مني واشتعل الراس شيبا ولم اكن بدعائك رب شقيا",
+      "bucket": "041_060",
+      "num_chunks": 5,
+      "duration_sec": 16.666122448979593,
+      "gold_len": 52,
+      "pred_len": 28,
+      "edit_distance": 36,
+      "char_accuracy": 0.3076923076923077,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_004_067595_win_00",
+          "gold": "قالرباني",
+          "pred": "ملابدمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_004_067595_win_01",
+          "gold": "وهنالعظممني",
+          "pred": "الريم"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_004_067595_win_02",
+          "gold": "واشتعلالراسشيبا",
+          "pred": "والون"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_004_067595_win_03",
+          "gold": "ولماكنبدعائك",
+          "pred": "ماعبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_019_004_067595_win_04",
+          "gold": "ربشقيا",
+          "pred": "والنبس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_husary_mujawwad_015_070_056134",
+      "gold": "قالوااولمننهكعنالعالمين",
+      "pred": "والناسالرحيم",
+      "raw_text": "قالوا اولم ننهك عن العالمين",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 16.457142857142856,
+      "gold_len": 23,
+      "pred_len": 12,
+      "edit_distance": 16,
+      "char_accuracy": 0.30434782608695654,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_015_070_056134_win_00",
+          "gold": "قالوااولمننهك",
+          "pred": "والناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_husary_mujawwad_015_070_056134_win_01",
+          "gold": "عنالعالمين",
+          "pred": "الرحيم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_077_090247",
+      "gold": "فانهمعدوليالاربالعالمين",
+      "pred": "معبدلاليم",
+      "raw_text": "فانهم عدو لي الا رب العالمين",
+      "bucket": "021_040",
+      "num_chunks": 2,
+      "duration_sec": 9.456326530612245,
+      "gold_len": 23,
+      "pred_len": 9,
+      "edit_distance": 16,
+      "char_accuracy": 0.30434782608695654,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_077_090247_win_00",
+          "gold": "فانهمعدولي",
+          "pred": "معبد"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_077_090247_win_01",
+          "gold": "الاربالعالمين",
+          "pred": "لاليم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_033_067_107978",
+      "gold": "وقالواربناانااطعناسادتناوكبراءنافاضلوناالسبيلا",
+      "pred": "ملاماالالناسوالناس",
+      "raw_text": "وقالوا ربنا انا اطعنا سادتنا وكبراءنا فاضلونا السبيلا",
+      "bucket": "041_060",
+      "num_chunks": 3,
+      "duration_sec": 12.197913832199546,
+      "gold_len": 46,
+      "pred_len": 18,
+      "edit_distance": 32,
+      "char_accuracy": 0.30434782608695654,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_033_067_107978_win_00",
+          "gold": "وقالواربناانا",
+          "pred": "ملاما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_033_067_107978_win_01",
+          "gold": "اطعناسادتناوكبراءنا",
+          "pred": "الالناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_033_067_107978_win_02",
+          "gold": "فاضلوناالسبيلا",
+          "pred": "والناس"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_061_081997",
+      "gold": "اولئكيسارعونفيالخيراتوهملهاسابقون",
+      "pred": "ولنماسالواسارحمن",
+      "raw_text": "اولئك يسارعون في الخيرات وهم لها سابقون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 9.795918367346939,
+      "gold_len": 33,
+      "pred_len": 16,
+      "edit_distance": 23,
+      "char_accuracy": 0.303030303030303,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_061_081997_win_00",
+          "gold": "اولئكيسارعونفي",
+          "pred": "ولنماس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_061_081997_win_01",
+          "gold": "الخيراتوهملها",
+          "pred": "الواس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_061_081997_win_02",
+          "gold": "سابقون",
+          "pred": "ارحمن"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_005_088087",
+      "gold": "وماياتيهممنذكرمنالرحمنمحدثالاكانواعنهمعرضين",
+      "pred": "مالرعيمنالرنيمارنبدمنايم",
+      "raw_text": "وما ياتيهم من ذكر من الرحمن محدث الا كانوا عنه معرضين",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 11.937959183673469,
+      "gold_len": 43,
+      "pred_len": 24,
+      "edit_distance": 30,
+      "char_accuracy": 0.3023255813953488,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_005_088087_win_00",
+          "gold": "وماياتيهممن",
+          "pred": "مالرعيمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_005_088087_win_01",
+          "gold": "ذكرمنالرحمن",
+          "pred": "الرنيم"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_005_088087_win_02",
+          "gold": "محدثالاكانوا",
+          "pred": "ارنبدمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_005_088087_win_03",
+          "gold": "عنهمعرضين",
+          "pred": "ايم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_ali_jaber_030_035_103298",
+      "gold": "امانزلناعليهمسلطانافهويتكلمبماكانوابهيشركون",
+      "pred": "لشالناسادمنملكانعيمنوايم",
+      "raw_text": "ام انزلنا عليهم سلطانا فهو يتكلم بما كانوا به يشركون",
+      "bucket": "041_060",
+      "num_chunks": 4,
+      "duration_sec": 11.806213151927437,
+      "gold_len": 43,
+      "pred_len": 24,
+      "edit_distance": 30,
+      "char_accuracy": 0.3023255813953488,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_035_103298_win_00",
+          "gold": "امانزلناعليهم",
+          "pred": "لشالناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_035_103298_win_01",
+          "gold": "سلطانافهويتكلم",
+          "pred": "ادمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_035_103298_win_02",
+          "gold": "بماكانوابه",
+          "pred": "ملكانعيمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_ali_jaber_030_035_103298_win_03",
+          "gold": "يشركون",
+          "pred": "وايم"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_187_093547",
+      "gold": "فاسقطعليناكسفامنالسماءانكنتمنالصادقين",
+      "pred": "والنمسوالنعيسماشمن",
+      "raw_text": "فاسقط علينا كسفا من السماء ان كنت من الصادقين",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 13.270204081632652,
+      "gold_len": 37,
+      "pred_len": 18,
+      "edit_distance": 26,
+      "char_accuracy": 0.29729729729729726,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_187_093547_win_00",
+          "gold": "فاسقطعليناكسفا",
+          "pred": "والنمس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_187_093547_win_01",
+          "gold": "منالسماءان",
+          "pred": "والنعيس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_187_093547_win_02",
+          "gold": "كنتمنالصادقين",
+          "pred": "ماشمن"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_banna_016_109_060275",
+      "gold": "لاجرمانهمفيالاخرةهمالخاسرون",
+      "pred": "لالبداسملحنبداالرحين",
+      "raw_text": "لا جرم انهم في الاخرة هم الخاسرون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 7.784489795918367,
+      "gold_len": 27,
+      "pred_len": 20,
+      "edit_distance": 19,
+      "char_accuracy": 0.2962962962962963,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_banna_016_109_060275_win_00",
+          "gold": "لاجرمانهم",
+          "pred": "لالبداس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_016_109_060275_win_01",
+          "gold": "فيالاخرةهم",
+          "pred": "ملحنبدا"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_banna_016_109_060275_win_02",
+          "gold": "الخاسرون",
+          "pred": "الرحين"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_095_083017",
+      "gold": "واناعلياننريكمانعدهملقادرون",
+      "pred": "ولناسلعبدمنالاعبد",
+      "raw_text": "وانا علي ان نريك ما نعدهم لقادرون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 9.613061224489796,
+      "gold_len": 27,
+      "pred_len": 17,
+      "edit_distance": 19,
+      "char_accuracy": 0.2962962962962963,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_095_083017_win_00",
+          "gold": "واناعليان",
+          "pred": "ولناس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_095_083017_win_01",
+          "gold": "نريكمانعدهم",
+          "pred": "لعبدمن"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_023_095_083017_win_02",
+          "gold": "لقادرون",
+          "pred": "الاعبد"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_208_094177",
+      "gold": "ومااهلكنامنقريةالالهامنذرون",
+      "pred": "والندمسمالرحاسالرحيمن",
+      "raw_text": "وما اهلكنا من قرية الا لها منذرون",
+      "bucket": "021_040",
+      "num_chunks": 3,
+      "duration_sec": 10.788571428571428,
+      "gold_len": 27,
+      "pred_len": 21,
+      "edit_distance": 19,
+      "char_accuracy": 0.2962962962962963,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_208_094177_win_00",
+          "gold": "ومااهلكنامن",
+          "pred": "والندمس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_208_094177_win_01",
+          "gold": "قريةالالها",
+          "pred": "مالرحاس"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdul_basit_murattal_026_208_094177_win_02",
+          "gold": "منذرون",
+          "pred": "الرحيمن"
+        }
+      ]
+    },
+    {
+      "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_006_009_023911",
+      "gold": "ولوجعلناهملكالجعلناهرجلاوللبسناعليهممايلبسون",
+      "pred": "لنعبماماكالنماالااس",
+      "raw_text": "ولو جعلناه ملكا لجعلناه رجلا وللبسنا عليهم ما يلبسون",
+      "bucket": "041_060",
+      "num_chunks": 3,
+      "duration_sec": 10.187392290249432,
+      "gold_len": 44,
+      "pred_len": 19,
+      "edit_distance": 31,
+      "char_accuracy": 0.2954545454545454,
+      "chunks": [
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_006_009_023911_win_00",
+          "gold": "ولوجعلناهملكا",
+          "pred": "لنعبما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_006_009_023911_win_01",
+          "gold": "لجعلناهرجلاوللبسنا",
+          "pred": "ماكالنما"
+        },
+        {
+          "id": "hf_quran_md_ayah_route_abdurrahmaan_as_sudais_006_009_023911_win_02",
+          "gold": "عليهممايلبسون",
+          "pred": "الااس"
+        }
+      ]
+    }
+  ]
+}
